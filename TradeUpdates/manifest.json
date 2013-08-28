@@ -10,7 +10,7 @@
     "page": "background.htm"
   },
   "options_page": "options.htm",
-  "browser_action": {
+  "browser_action":{
   },
   "permissions": [
     "tabs",
@@ -19,9 +19,12 @@
   "content_scripts": [
     {
       "matches": ["http://*/*"],
-      "js": ["scripts/contentscript.js"],
+      "js": ["lib/jquery-1.7.1.js", "scripts/contentscript.js"],
       "run_at": "document_end"
     }
   ],
-  "web_accessible_resources": ["scripts/script.js"]
+  "web_accessible_resources": [
+    "lib/jquery-1.7.1.js",
+    "scripts/script.js"
+  ]
 }

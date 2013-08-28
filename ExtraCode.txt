@@ -1,0 +1,565 @@
+background.htm
+---------------
+			<script>
+			function onMessage(request, sender, sendResponse)
+			{
+				alert("onMessage");
+				sendMessage('abelski was found');
+				chrome.pageAction.show(sender.tab.id);
+				alert(request);
+			}
+			
+			var extensionPort = chrome.extension.connect();
+			extensionPort.onMessage.addListener(onMessage);
+      </script>
+      
+script.js
+--------------
+//var numItems = $('.basePosition').length;
+//alert(numItems);
+
+/*
+var regex = /abelski/;
+
+if(regex.test(document.body.innerText))
+{
+	alert("Got here!");
+	//chrome.runtime.sendMessage("request message", function(response_str) {alert(response_str)});
+}*/
+
+/*
+var s = document.createElement('script');
+s.src = chrome.extension.getURL("scripts/script.js");
+
+var script = document.createElement("script");
+script.src = "lib/jquery-1.7.1.js";
+script.onload = script.onreadystatechange = function(){  };
+(document.head||document.documentElement).appendChild(script);
+
+s.onload = function() {
+    this.parentNode.removeChild(this);
+};
+(document.head||document.documentElement).appendChild(s);
+*/
+
+
+
+
+
+document.getElementById('someDiv').className
+profitly_Position_20
+
+----------------------------------------------------------------------------------------------------
+
+
+<html class="dj_quirks dj_webkit dj_chrome dj_contentbox"><head><script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()])</script><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><link href="/static/images/favicon.ico" rel="SHORTCUT ICON"><title>Profit.ly - ProfiDing</title><link href="css/app.css" rel="stylesheet"><link href="dojo/dijit/themes/dijit.css" rel="stylesheet"><link href="dojo/dijit/themes/claro/claro.css" rel="stylesheet"><link href="dojo/dojox/grid/resources/Grid.css" rel="stylesheet"><link href="dojo/dojox/grid/resources/claroGrid.css" rel="stylesheet"><script type="text/javascript" src="http://chat.profit.ly/socket.io/socket.io.js"></script><style type="text/css"></style><link href="dojo/profitly/module.css?v=1.2.11" rel="stylesheet"><script type="text/javascript">
+      var dojoConfig = {
+        parseOnLoad: false
+      };
+    </script><script type="text/javascript" src="js/date.f-0.5.0-min.js"></script><script type="text/javascript" src="js/moo.js"></script><script src="dojo/dojo/dojo.js?v=1.2.11" type="text/javascript"></script><script src="dojo/dijit/dijit.js?v=1.2.11" type="text/javascript"></script></head><body class="claro"><textarea id="dijit._editor.RichText.value" style="display:none;position:absolute;top:-100px;left:-100px;height:3px;width:3px;overflow:hidden;"></textarea><script src="dojo/dojox/dojox.js?v=1.2.11" type="text/javascript"></script><script src="dojo/profitly/module.js?v=1.2.11" type="text/javascript"></script><script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-624937-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script><script type="text/javascript">
+      key="wxYcM";
+      
+      window.profitlyServer = "chat.profit.ly";
+      window.SM2_DEFER = true;
+      var hasTi = typeof(Titanium) != "undefined";
+      dojo.ready(function () {
+        var params = dojo.queryToObject(window.location.search.substr(1));
+        profitly.Profiding.init(params.im != undefined);
+      });
+
+      (function(){
+        var wrapper = dojo.create('div', {
+          id: 'loadingOverlay',
+          'class': 'pageOverlay',
+          innerHTML: '<div class="loadingMessage">Loading...</div>'
+        }, dojo.body());
+      })();
+    </script><div id="loadingOverlay" class="pageOverlay" style="opacity: 0; display: none;"><div class="loadingMessage">Loading...</div></div><script src="soundmanagerv297a-20110801/script/soundmanager2-nodebug-jsmin.js"></script><div id="mainContainer" class="dijitBorderContainer dijitContainer dijitLayoutContainer" widgetid="mainContainer" style="padding: 0px;"><div class="dijitMenuBar dijitMenuPassive dijitBorderContainer-child dijitBorderContainer-dijitMenuBar dijitBorderContainerPane dijitAlignTop" dojoattachpoint="containerNode" role="menubar" tabindex="0" dojoattachevent="onkeypress: _onKeyPress" id="dijit_MenuBar_0" widgetid="dijit_MenuBar_0" style="left: 0px; top: 0px; position: absolute; width: 1438px;"><div class="dijitReset dijitInline dijitMenuItem dijitMenuItemLabel" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_PopupMenuBarItem_0_text" id="dijit_PopupMenuBarItem_0" widgetid="dijit_PopupMenuBarItem_0" aria-haspopup="true">
+	<span dojoattachpoint="containerNode" id="dijit_PopupMenuBarItem_0_text">ProfiDing</span>
+</div><div class="dijitReset dijitInline dijitMenuItem dijitMenuItemLabel" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_PopupMenuBarItem_1_text" id="dijit_PopupMenuBarItem_1" widgetid="dijit_PopupMenuBarItem_1" aria-haspopup="true">
+	<span dojoattachpoint="containerNode" id="dijit_PopupMenuBarItem_1_text">Settings</span>
+</div><div class="dijitReset dijitInline dijitMenuItem dijitMenuItemLabel" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_PopupMenuBarItem_2_text" id="dijit_PopupMenuBarItem_2" widgetid="dijit_PopupMenuBarItem_2" aria-haspopup="true">
+	<span dojoattachpoint="containerNode" id="dijit_PopupMenuBarItem_2_text">Chat Rooms</span>
+</div></div><div class="dijitGutter dijitGutterH dijitAlignTop" role="presentation" id="dijit_MenuBar_0_splitter" widgetid="dijit_MenuBar_0_splitter" style="left: 0px; top: 29px; position: absolute; width: 1440px;"></div><div class="dijitTabContainer dijitTabContainerTop dijitContainer dijitLayoutContainer tabStrip-disabled dijitBorderContainer-child dijitBorderContainer-dijitTabContainerTop dijitBorderContainerPane dijitAlignCenter" role="tabpanel" id="dijit_layout_TabContainer_0" widgetid="dijit_layout_TabContainer_0" style="margin-left: 5px; margin-right: 5px; left: 0px; top: 34px; position: absolute; width: 1430px; height: 386px;">
+	<div class="dijitTabListContainer-top tabStrip-disabled dijitAlignTop dijitLayoutContainer" style="visibility: visible; left: 0px; top: 0px; position: absolute; width: 1430px; height: 31px;" role="tablist" id="dijit_layout_TabContainer_0_tablist" dir="" lang="" widgetid="dijit_layout_TabContainer_0_tablist">
+	<div dojoattachevent="onclick:_onButtonClick" class="dijitTab tabStripButton tabStripButton-top dijitAlignRight" widgetid="dijit_layout_TabContainer_0_tablist_menuBtn" style="display: none; left: 1430px; top: 0px; position: absolute; height: 14px;">
+	<div role="presentation" class="dijitTabInnerDiv dijitbelow-altArrowButton" dojoattachpoint="innerDiv,focusNode" id="dijit_layout_TabContainer_0_tablist_menuBtn" tabindex="-1">
+		<div role="presentation" class="dijitTabContent dijitButtonContents" dojoattachpoint="tabContent">
+			<img role="presentation" alt="" src="dojo/dojo/resources/blank.gif" class="dijitTabStripIcon dijitTabStripMenuIcon" dojoattachpoint="iconNode">
+			<span dojoattachpoint="containerNode,titleNode" class="dijitButtonText dijitDisplayNone" title="?">?</span>
+		</div>
+	</div>
+</div>
+	<div dojoattachevent="onclick:_onButtonClick" class="tabStripButton-top dijitAlignLeft dijitTab tabStripButton dijitTabDisabled tabStripButtonDisabled dijitDisabled" widgetid="dijit_layout_TabContainer_0_tablist_leftBtn" style="display: none; left: 0px; top: 0px; position: absolute; height: 14px;">
+	<div role="presentation" class="dijitTabInnerDiv" dojoattachpoint="innerDiv,focusNode" id="dijit_layout_TabContainer_0_tablist_leftBtn" aria-disabled="true" tabindex="-1">
+		<div role="presentation" class="dijitTabContent dijitButtonContents" dojoattachpoint="tabContent">
+			<img role="presentation" alt="" src="dojo/dojo/resources/blank.gif" class="dijitTabStripIcon dijitTabStripSlideLeftIcon" dojoattachpoint="iconNode">
+			<span dojoattachpoint="containerNode,titleNode" class="dijitButtonText dijitDisplayNone" title="?">?</span>
+		</div>
+	</div>
+</div>
+	<div dojoattachevent="onclick:_onButtonClick" class="tabStripButton-top dijitAlignRight dijitTab tabStripButton dijitTabDisabled tabStripButtonDisabled dijitDisabled" widgetid="dijit_layout_TabContainer_0_tablist_rightBtn" style="display: none; left: 1430px; top: 0px; position: absolute; height: 14px;">
+	<div role="presentation" class="dijitTabInnerDiv" dojoattachpoint="innerDiv,focusNode" id="dijit_layout_TabContainer_0_tablist_rightBtn" aria-disabled="true" tabindex="-1">
+		<div role="presentation" class="dijitTabContent dijitButtonContents" dojoattachpoint="tabContent">
+			<img role="presentation" alt="" src="dojo/dojo/resources/blank.gif" class="dijitTabStripIcon dijitTabStripSlideRightIcon" dojoattachpoint="iconNode">
+			<span dojoattachpoint="containerNode,titleNode" class="dijitButtonText dijitDisplayNone" title="?">?</span>
+		</div>
+	</div>
+</div>
+	<div class="dijitTabListWrapper dijitTabContainerTopNone dijitAlignClient" dojoattachpoint="tablistWrapper" style="height: 31px; left: 0px; top: 0px; position: absolute; width: 1430px;">
+		<div role="tablist" dojoattachevent="onkeypress:onkeypress" dojoattachpoint="containerNode" class="nowrapTabStrip dijitTabContainerTop-tabs" style="width: 50400px;"><div role="presentation" dojoattachpoint="titleNode" dojoattachevent="onclick:onClick" class="dijitTab dijitTabChecked dijitChecked" dir="" lang="" widgetid="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_0">
+    <div role="presentation" class="dijitTabInnerDiv" dojoattachpoint="innerDiv">
+        <div role="presentation" class="dijitTabContent" dojoattachpoint="tabContent">
+        	<div role="tab" dojoattachpoint="focusNode" id="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_0" tabindex="0" title="" aria-selected="true" aria-pressed="true">
+		        <img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitTabButtonIcon dijitNoIcon" dojoattachpoint="iconNode">
+		        <span dojoattachpoint="containerNode" class="tabLabel">Trade Alerts</span>
+		        <span class="dijitInline dijitTabCloseButton dijitTabCloseIcon" dojoattachpoint="closeNode" dojoattachevent="onclick: onClickCloseButton" role="presentation" style="display: none;">
+		            <span dojoattachpoint="closeText" class="dijitTabCloseText">[x]</span></span>
+			</div>
+        </div>
+    </div>
+</div><div role="presentation" dojoattachpoint="titleNode" dojoattachevent="onclick:onClick" class="dijitTab" dir="" lang="" widgetid="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_1">
+    <div role="presentation" class="dijitTabInnerDiv" dojoattachpoint="innerDiv">
+        <div role="presentation" class="dijitTabContent" dojoattachpoint="tabContent">
+        	<div role="tab" dojoattachpoint="focusNode" id="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_1" tabindex="-1" title="" aria-selected="false">
+		        <img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitTabButtonIcon dijitNoIcon" dojoattachpoint="iconNode">
+		        <span dojoattachpoint="containerNode" class="tabLabel">Commentary</span>
+		        <span class="dijitInline dijitTabCloseButton dijitTabCloseIcon" dojoattachpoint="closeNode" dojoattachevent="onclick: onClickCloseButton" role="presentation" style="display: none;">
+		            <span dojoattachpoint="closeText" class="dijitTabCloseText">[x]</span></span>
+			</div>
+        </div>
+    </div>
+</div></div>
+	</div>
+</div>
+	<div dojoattachpoint="tablistSpacer" class="dijitTabSpacer dijitTabContainerTop-spacer dijitAlignTop" style="left: 0px; top: 31px; position: absolute; width: 1430px;"></div>
+	<div class="dijitTabPaneWrapper dijitTabContainerTop-container dijitAlignClient" dojoattachpoint="containerNode" aria-labelledby="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_0" style="left: 0px; top: 31px; position: absolute; width: 1428px; height: 354px;"><div class="dijitContentPane dijitTabPane dijitTabContainerTop-child dijitTabContainerTop-dijitContentPane dijitVisible" title="" role="group" id="dijit_layout_ContentPane_0" widgetid="dijit_layout_ContentPane_0" style="width: 1412px; height: 338px; left: 0px; top: 0px;"><div><div class="basePosition" id="profitly_Position_21" widgetid="profitly_Position_21" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 Bought 5000 shares DGLY at 8.75 - SWING DONT CHASE  downside 8.25 target 10  if works.....- DGLY only 2.1m shares o/s and same product as TASR camera and patent link 
+<a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://www.digitalallyinc.com/body-cams.html</a>
+
+
+<a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://online.wsj.com/article/PR-CO-20130723-906248.html?mg=id-wsj</a><br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkOR</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_20" widgetid="profitly_Position_20" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 Bought 25000 shares SWSH at 0.8816 - TRADE In on bed bug product news ...mental loss .80 targeting 1-1.50 <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkNe</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_19" widgetid="profitly_Position_19" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/27 Bought 50000 shares SKLN at 0.376 - RISKY OTC TRADE - Downside .3 or .25....this company has filing for reverse split and uplisting and they are beating stryker product there is SA article that is old out there.....<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkJE</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_18" widgetid="profitly_Position_18" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/26 Bought 13000 shares DHRM at 2.23 - BREAKING RULE   VERY RISKY - holding into e's tonight - downside may be to 1.80 if e's good will look for .50 scalp or so <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkDJ</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_17" widgetid="profitly_Position_17" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/26 Bought 21500 shares CVV at 13.4735 - CHART - Going to make this a chart play - but profiled this graphene stock in watch list past ..chart rules apply if it works i want 15   ...4ema is stop loss <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkCt</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_16" widgetid="profitly_Position_16" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/22 Bought 9000 shares SVVC at 23.1633 - SWING -- GSVC trading over NAV of $12.87 and SVVC NAV is $24.80 both own twitter.  SVVC moved big with FB IPO ....mental loss 22.....target 25 <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnjoR</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_15" widgetid="profitly_Position_15" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/22 Bought 6000 shares VSCP at 5.9167 - HIGH RISK DONT CHASE - NEw reverse split 2mm float ..downside 5.5 mental loss...looking for 7-8<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnjoO</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_14" widgetid="profitly_Position_14" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/21 Bought 5000 shares CLWT at 4 - RISKY LOW FLOATER DO NOT CHASE - SWING going to hold to see if china pollution momentum gets here...downside 3.5.....upside 5-7 if it works<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnjZ3</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_13" widgetid="profitly_Position_13" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/21 Bought 20000 shares SYMX at 0.93 - SWING...News yday  about china going to throw major $ to clean up coal and environment..this seems like pure play....downside risk for me ia .75 and target would be mid to high 1's or more if works<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnjZ0</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_12" widgetid="profitly_Position_12" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/19 Bought 50000 shares VUZI at 1.99 - MEDIUM TERM HOLD I DO NOT EXPECT QUICK RESULTS.  GOOG glasses competitor....did raise at $2...low float..and said products end of summer .....downside 1.75  ..swing target 3-7 depending on traction <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnjEe</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_11" widgetid="profitly_Position_11" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/16 Bought 8000 shares CGIX at 9.8125 - swing stock.....9.5 mental stop loss....target 11-13 first range if it works  <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1Mnin2</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_10" widgetid="profitly_Position_10" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/12 Bought 5000 shares TNXP at 3.84 - swing trade....From watch list - did offering at 4.25   1.3mm float...downside  3.5 ......target 4-6<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MniJU</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_9" widgetid="profitly_Position_9" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/12 Bought 25000 shares PTIX at 2.8032 - downside low 2's ...upside 3-5<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MniJM</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_8" widgetid="profitly_Position_8" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/07 Bought 15000 shares PNTR at 4.8849 - DONT chase -  off watch list  4ema is downside risk -- target would be 6  before earnings <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnhYp</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_7" widgetid="profitly_Position_7" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">07/26 Bought 400 shares PTSI at 11.3305 - earnings winner 10.75 downside risk upside target 13-15<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1Mng4p</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_6" widgetid="profitly_Position_6" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">07/19 Bought 15000 shares XGTI at 5.4039 - DONT chase take starter position in case dips if one buys....New IPO 1.3mm float addresses wireless spectrum problems...nice backlog.....will add on dips<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1Mnevg</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_5" widgetid="profitly_Position_5" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">07/17 Bought 8000 shares LBIX at 5.125 - love the e's   low float swing <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1Mnegj</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_4" widgetid="profitly_Position_4" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">07/16 Bought 70 contracts PERI CALL at 1.0857, 12.5 strike, Aug 15 exp - Lottery Call OPtions In Case Buy Out Article Is True<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1Mne2q</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_3" widgetid="profitly_Position_3" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">06/24 Bought 7000 shares TRIO at 10.0857 - Starter position - merger closed huge numbers - will lay out research  target 11-15 like MOZR initially <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1Mnbta</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_2" widgetid="profitly_Position_2" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">05/16 Bought 3000 shares VUZI at 6.97 - SMALL POSITION VERY SPECULATIVE  2.5mm float  3.5m o/s working with microsoft on version of google glasses per this article...will risk $1-$1.50 per share loss that is the downside  <a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://www.nypost.com/p/news/business/seeing_the_future_82Zgtyx5uS5IMYDLMoF7AM</a><br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnVPh</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_1" widgetid="profitly_Position_1" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">04/11 Bought 3000 shares EAC at 20.676 - MEDIUM -LONG TERM HOLD NOT A DAYTRADE - STARTER POSITION<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnSBT</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div><div class="basePosition" id="profitly_Position_0" widgetid="profitly_Position_0" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">02/20 Bought 2000 shares IKNX at 8.65 - LOW FLOAT DO NOT CHASE NEw tech mfg play tiny float hot patented tech 3d like but not 3d<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnMXm</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperAlerts, SuperPro</div>
+</div></div></div><div class="dijitContentPane dijitTabPane dijitTabContainerTop-child dijitTabContainerTop-dijitContentPane dijitHidden" title="" role="group" id="dijit_layout_ContentPane_1" widgetid="dijit_layout_ContentPane_1"><div><div class="basePosition" id="profitly_Entry_3" widgetid="profitly_Entry_3" style="background-color: rgb(255, 255, 255); border: 1px solid green;">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 11:56:54AM Sold 10000 shares ADEP at 3.945 - out about flat to small loss i had bad entry and chased - super call from watch list as many got in 3.5-3.7<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkOL</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode"></div>
+</div><div class="basePosition" id="profitly_Entry_2" widgetid="profitly_Entry_2" style="background-color: rgb(255, 255, 255); border: 1px solid green;">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 11:56:08AM Sold 2000 shares QIWI at 32.3 - took small loss was not watching and should have taken profit when i had chance over 33<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkOV</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode"></div>
+</div><div class="basePosition" id="profitly_BasePosition_3" widgetid="profitly_BasePosition_3" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 11:44:08 AM TO HIDE ENTERS AND EXITS GO TO CHAT ROOMS MENU ON TOP LEFT AND CLICK HIDE ROOM MESSAGES</div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperPro</div>
+</div><div class="basePosition" id="profitly_PartialPosition_1" widgetid="profitly_PartialPosition_1" style="background-color: rgb(255, 255, 255); border: 1px solid green;">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 11:10:37AM Added 1500 to CVV long  at 14.4. New average 13.4735, 21500 long total<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkCt</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode"></div>
+</div><div class="basePosition" id="profitly_BasePosition_2" widgetid="profitly_BasePosition_2" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 10:53:16 AM $XGTI we are long from low $5's and as stated took partial high $6's  story just unfolding and if you can trade right (follow rules)  you have options to play it.......</div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperPro</div>
+</div><div class="basePosition" id="profitly_PartialPosition_0" widgetid="profitly_PartialPosition_0" style="background-color: rgb(255, 255, 255); border: 1px solid green;">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 10:22:59AM Sold 5000 of ADEP  at 3.92. <br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkOL</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode"></div>
+</div><div class="basePosition" id="profitly_BasePosition_1" widgetid="profitly_BasePosition_1" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 10:21:48 AM I LAID OUT IN THE SUPER PRO VIDEO THIS MORING HOW TO PLAY THESE QIWI TYPE SITUATIONS.  JUST LIKE PF YESTERDAY.  VIDEO LESSONS AT SUPER PRO</div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperPro</div>
+</div><div class="basePosition" id="profitly_Entry_1" widgetid="profitly_Entry_1" style="background-color: rgb(255, 255, 255); border: 1px solid green;">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 11:56:08AM Sold 2000 shares QIWI at 32.3 - took small loss was not watching and should have taken profit when i had chance over 33<br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkOV</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode"></div>
+</div><div class="basePosition" id="profitly_Entry_0" widgetid="profitly_Entry_0" style="background-color: rgb(255, 255, 255); border: 1px solid green;">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 9:57:49AM Bought 5000 shares DGLY at 8.75 - SWING DONT CHASE  downside 8.25 target 10  if works.....- DGLY only 2.1m shares o/s and same product as TASR camera and patent link 
+<a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://www.digitalallyinc.com/body-cams.html</a>
+
+
+<a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://online.wsj.com/article/PR-CO-20130723-906248.html?mg=id-wsj</a><br><a href="#" onclick="profitly.Profiding.catchClick(this); return false;">http://profit.ly/1MnkOR</a></div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode"></div>
+</div><div class="basePosition" id="profitly_BasePosition_0" widgetid="profitly_BasePosition_0" style="background-color: rgb(255, 255, 255);">
+    <img class="basePositionImage" src="http://a0.twimg.com/profile_images/1150853950/Superman_Standing2_normal.jpg" data-dojo-attach-point="imageNode">
+    <div class="comments" data-dojo-attach-point="msgNode">08/28 9:39:52 AM Please make sure you read entire watch list before entering chat.  If you ask me a question that is on the watch list i will just reply --&gt; WL </div>
+    <div class="newsletter" data-dojo-attach-point="newsletterNode">SuperPro</div>
+</div></div></div></div>
+</div><div class="dijitBorderContainer dijitContainer dijitBorderContainer-child dijitBorderContainer-dijitBorderContainer dijitBorderContainerPane dijitAlignBottom dijitLayoutContainer" id="dijit_layout_BorderContainer_0" widgetid="dijit_layout_BorderContainer_0" style="height: 80px; background-color: white; left: 0px; top: 425px; position: absolute; padding: 0px; width: 1440px;"><div class="dijitContentPane dijitBorderContainer-child dijitBorderContainer-dijitContentPane dijitBorderContainerPane dijitAlignRight" title="" role="group" id="dijit_layout_ContentPane_2" widgetid="dijit_layout_ContentPane_2" style="width: 155px; height: 80px; border: 0px; padding: 0px; left: 1285px; top: 0px; position: absolute;"><img src="./profiding-trans.png" width="155" height="75"></div><div class="dijitGutter dijitGutterV dijitAlignRight" role="presentation" id="dijit_layout_ContentPane_2_splitter" widgetid="dijit_layout_ContentPane_2_splitter" style="left: 1280px; top: 0px; position: absolute; height: 80px;"></div><div class="serverConnectionWidget bottomWidgets dijitBorderContainer-child dijitBorderContainer-serverConnectionWidget dijitBorderContainerPane dijitAlignLeft" id="profitly_ServerConnectionWidget_0" widgetid="profitly_ServerConnectionWidget_0" style="border: 0px; background-color: white; left: 0px; top: 0px; position: absolute; height: 65px;">
+	<div class="serverConnectionWidgetState">
+		<span data-dojo-attach-point="connectedStateNode" class="green">CONNECTED</span>
+	</div>
+	<div data-dojo-attach-point="userHideNode" class="">
+		<span class="serverConnectionWidgetUsernameTitle">User: </span>
+		<span data-dojo-attach-point="usernameNode">robertmaxwell</span>
+	</div>
+</div><div class="dijitGutter dijitGutterV dijitAlignLeft" role="presentation" id="profitly_ServerConnectionWidget_0_splitter" widgetid="profitly_ServerConnectionWidget_0_splitter" style="left: 215px; top: 0px; position: absolute; height: 80px;"></div><div class="newsletterWidgetHide newsletterWidget bottomWidgets dijitBorderContainer-child dijitBorderContainer-newsletterWidget dijitBorderContainerPane dijitAlignCenter" id="profitly_NewsletterWidget_0" widgetid="profitly_NewsletterWidget_0" style="border: 0px; left: 220px; top: 0px; position: absolute; width: 1045px; height: 65px; display: block;">
+	<span class="newsletterWidgetTitle">Newsletters: </span>
+	<span data-dojo-attach-point="newsletterNode">SuperPro</span>
+</div></div><div class="dijitSplitter dijitSplitterH dijitAlignBottom" dojoattachevent="onkeypress:_onKeyPress,onmousedown:_startDrag,onmouseenter:_onMouse,onmouseleave:_onMouse" tabindex="0" role="separator" id="dijit_layout_BorderContainer_0_splitter" widgetid="dijit_layout_BorderContainer_0_splitter" style="left: 0px; top: 420px; position: absolute; width: 1440px;"><div class="dijitSplitterThumb"></div></div></div><div style="display:none;"><a target="_top" href="http://www.sitemeter.com/stats.asp?site=s36profitly" id="idSiteMeterHREF"><img border="0" alt="Site Meter" src="http://s36.sitemeter.com/meter.asp?site=s36profitly&amp;refer=&amp;ip=192.88.168.35&amp;w=1440&amp;h=900&amp;clr=32&amp;tzo=300&amp;lang=en-US&amp;pg=http%3A//profit.ly/profiding/&amp;js=1&amp;rnd=0.4740354963578284&amp;zyxver=1.120524"></a><iframe frameborder="0" width="0" height="0" src="http://dg.specificclick.net/?y=3&amp;t=h&amp;u=http%3A%2F%2Fprofit.ly%2Fprofiding%2F&amp;r=" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 0px 0px;"></iframe><script src="http://s36.sitemeter.com/js/counter.js?site=s36profitly" type="text/javascript"><noscript><a target="_top" href="http://s36.sitemeter.com/stats.asp?site=s36profitly"><img border="0" alt="Site Meter" src="http://s36.sitemeter.com/meter.asp?site=s36profitly"/></a></noscript></div><script type="text/javascript">
+      var _qevents = _qevents || [];
+
+      (function() {
+      var elem = document.createElement('script');
+      elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+      elem.async = true;
+      elem.type = "text/javascript";
+      var scpt = document.getElementsByTagName('script')[0];
+      scpt.parentNode.insertBefore(elem, scpt);
+      })();
+
+      _qevents.push({
+      qacct:"p-b63y_T-Qdjzrs"
+      });
+      </script><noscript>&lt;div style="display:none;"&gt;&lt;img alt="Quantcast" width="1" height="1" border="0" src="//pixel.quantserve.com/pixel/p-b63y_T-Qdjzrs.gif"/&gt;&lt;/div&gt;</noscript><script type="text/javascript">if (!NREUMQ.f) { NREUMQ.f=function() {NREUMQ.push(["load",new Date().getTime()]);var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src="https://js-agent.newrelic.com/nr-100.js";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push(["nrf2","beacon-1.newrelic.com","5c2c111ad9",196768,"MgdXN0JWChUEAhZcVwtNfzBgGDMjJ0wre35KFFwGR0RLFhcOBFxcDAxSPFpEFB4=",0,20,new Date().getTime()])</script></div><div id="sm2-container" class="movieContainer " style="z-index: 10000; position: absolute; width: 6px; height: 6px; top: -9999px; left: -9999px;"><embed name="sm2movie" id="sm2movie" src="soundmanagerv297a-20110801/swf/soundmanager2.swf" width="auto" height="auto" quality="high" allowscriptaccess="always" bgcolor="#ffffff" pluginspage="//www.macromedia.com/go/getflashplayer" title="JS/Flash audio component (SoundManager 2)" type="application/x-shockwave-flash" haspriority="true"></div><table class="dijit dijitMenu dijitMenuPassive dijitReset dijitMenuTable" role="menu" tabindex="0" dojoattachevent="onkeypress:_onKeyPress" cellspacing="0" id="dijit_Menu_0" widgetid="dijit_Menu_0" style="display: none;">
+	<tbody class="dijitReset" dojoattachpoint="containerNode"><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_0_text dijit_MenuItem_0_accel" id="dijit_MenuItem_0" widgetid="dijit_MenuItem_0">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_0_text">Version 1.2.11</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_0_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_1_text dijit_MenuItem_1_accel" id="dijit_MenuItem_1" widgetid="dijit_MenuItem_1">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_1_text">Disconnect</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_1_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr></tbody>
+</table><table class="dijit dijitMenu dijitMenuPassive dijitReset dijitMenuTable" role="menu" tabindex="0" dojoattachevent="onkeypress:_onKeyPress" cellspacing="0" id="dijit_Menu_1" widgetid="dijit_Menu_1" style="display: none;">
+	<tbody class="dijitReset" dojoattachpoint="containerNode"><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_2_text dijit_MenuItem_2_accel" id="dijit_MenuItem_2" widgetid="dijit_MenuItem_2">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_2_text">Sounds</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_2_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitemcheckbox" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_CheckedMenuItem_0_text dijit_CheckedMenuItem_0_accel" id="dijit_CheckedMenuItem_0" aria-checked="false" widgetid="dijit_CheckedMenuItem_0">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuItemIcon dijitCheckedMenuItemIcon" dojoattachpoint="iconNode">
+		<span class="dijitCheckedMenuItemIconChar">?</span>
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode,labelNode" id="dijit_CheckedMenuItem_0_text">Mute Sounds</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_CheckedMenuItem_0_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">&nbsp;</td>
+</tr></tbody>
+</table><script type="text/javascript" async="" src="https://js-agent.newrelic.com/nr-100.js"></script><table class="dijit dijitMenu dijitMenuPassive dijitReset dijitMenuTable" role="menu" tabindex="0" dojoattachevent="onkeypress:_onKeyPress" cellspacing="0" id="dijit_Menu_2" widgetid="dijit_Menu_2" style="display: none;">
+	<tbody class="dijitReset" dojoattachpoint="containerNode"><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_3_text dijit_MenuItem_3_accel" id="dijit_MenuItem_3" widgetid="dijit_MenuItem_3">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_3_text">All In One</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_3_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitMenuSeparator" id="dijit_MenuSeparator_0" widgetid="dijit_MenuSeparator_0">
+	<td class="dijitMenuSeparatorIconCell">
+		<div class="dijitMenuSeparatorTop"></div>
+		<div class="dijitMenuSeparatorBottom"></div>
+	</td>
+	<td colspan="3" class="dijitMenuSeparatorLabelCell">
+		<div class="dijitMenuSeparatorTop dijitMenuSeparatorLabel"></div>
+		<div class="dijitMenuSeparatorBottom"></div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_4_text dijit_MenuItem_4_accel" id="dijit_MenuItem_4" widgetid="dijit_MenuItem_4">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_4_text">SuperAlerts</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_4_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitMenuSeparator" id="dijit_MenuSeparator_1" widgetid="dijit_MenuSeparator_1">
+	<td class="dijitMenuSeparatorIconCell">
+		<div class="dijitMenuSeparatorTop"></div>
+		<div class="dijitMenuSeparatorBottom"></div>
+	</td>
+	<td colspan="3" class="dijitMenuSeparatorLabelCell">
+		<div class="dijitMenuSeparatorTop dijitMenuSeparatorLabel"></div>
+		<div class="dijitMenuSeparatorBottom"></div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitemcheckbox" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_CheckedMenuItem_1_text dijit_CheckedMenuItem_1_accel" id="dijit_CheckedMenuItem_1" aria-checked="false" widgetid="dijit_CheckedMenuItem_1">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuItemIcon dijitCheckedMenuItemIcon" dojoattachpoint="iconNode">
+		<span class="dijitCheckedMenuItemIconChar">?</span>
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode,labelNode" id="dijit_CheckedMenuItem_1_text">Hide Room Messages</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_CheckedMenuItem_1_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">&nbsp;</td>
+</tr><tr class="dijitReset dijitMenuItem dijitCheckedMenuItemChecked dijitMenuItemChecked dijitChecked" dojoattachpoint="focusNode" role="menuitemcheckbox" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_CheckedMenuItem_2_text dijit_CheckedMenuItem_2_accel" id="dijit_CheckedMenuItem_2" aria-checked="true" widgetid="dijit_CheckedMenuItem_2">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuItemIcon dijitCheckedMenuItemIcon" dojoattachpoint="iconNode">
+		<span class="dijitCheckedMenuItemIconChar">?</span>
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode,labelNode" id="dijit_CheckedMenuItem_2_text">Scroll on New Messages</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_CheckedMenuItem_2_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">&nbsp;</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_PopupMenuItem_0_text dijit_PopupMenuItem_0_accel" id="dijit_PopupMenuItem_0" widgetid="dijit_PopupMenuItem_0" aria-haspopup="true">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_PopupMenuItem_0_text">Font Size</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_PopupMenuItem_0_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_PopupMenuItem_1_text dijit_PopupMenuItem_1_accel" id="dijit_PopupMenuItem_1" widgetid="dijit_PopupMenuItem_1" aria-haspopup="true">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_PopupMenuItem_1_text">Font</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_PopupMenuItem_1_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr></tbody>
+</table><table class="dijit dijitMenu dijitMenuPassive dijitReset dijitMenuTable" role="menu" tabindex="0" dojoattachevent="onkeypress:_onKeyPress" cellspacing="0" id="dijit_Menu_3" widgetid="dijit_Menu_3" style="display: none;">
+	<tbody class="dijitReset" dojoattachpoint="containerNode"><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_5_text dijit_MenuItem_5_accel" id="dijit_MenuItem_5" widgetid="dijit_MenuItem_5">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_5_text">Font Bigger</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_5_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_6_text dijit_MenuItem_6_accel" id="dijit_MenuItem_6" widgetid="dijit_MenuItem_6">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_6_text">Font Smaller</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_6_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr></tbody>
+</table><table class="dijit dijitMenu dijitMenuPassive dijitReset dijitMenuTable" role="menu" tabindex="0" dojoattachevent="onkeypress:_onKeyPress" cellspacing="0" id="dijit_Menu_4" widgetid="dijit_Menu_4" style="display: none;">
+	<tbody class="dijitReset" dojoattachpoint="containerNode"><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_7_text dijit_MenuItem_7_accel" id="dijit_MenuItem_7" widgetid="dijit_MenuItem_7">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_7_text">Arial</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_7_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_8_text dijit_MenuItem_8_accel" id="dijit_MenuItem_8" widgetid="dijit_MenuItem_8">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_8_text">Courier New</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_8_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_9_text dijit_MenuItem_9_accel" id="dijit_MenuItem_9" widgetid="dijit_MenuItem_9">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_9_text">Geneva</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_9_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_10_text dijit_MenuItem_10_accel" id="dijit_MenuItem_10" widgetid="dijit_MenuItem_10">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_10_text">Georgia</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_10_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_11_text dijit_MenuItem_11_accel" id="dijit_MenuItem_11" widgetid="dijit_MenuItem_11">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_11_text">Lucida Console</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_11_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_12_text dijit_MenuItem_12_accel" id="dijit_MenuItem_12" widgetid="dijit_MenuItem_12">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_12_text">Tahoma</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_12_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_13_text dijit_MenuItem_13_accel" id="dijit_MenuItem_13" widgetid="dijit_MenuItem_13">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_13_text">Times New Roman</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_13_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr><tr class="dijitReset dijitMenuItem" dojoattachpoint="focusNode" role="menuitem" tabindex="-1" dojoattachevent="onmouseenter:_onHover,onmouseleave:_onUnhover,ondijitclick:_onClick" aria-labelledby="dijit_MenuItem_14_text dijit_MenuItem_14_accel" id="dijit_MenuItem_14" widgetid="dijit_MenuItem_14">
+	<td class="dijitReset dijitMenuItemIconCell" role="presentation">
+		<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitIcon dijitMenuItemIcon" dojoattachpoint="iconNode">
+	</td>
+	<td class="dijitReset dijitMenuItemLabel" colspan="2" dojoattachpoint="containerNode" id="dijit_MenuItem_14_text">Verdana</td>
+	<td class="dijitReset dijitMenuItemAccelKey" style="display: none" dojoattachpoint="accelKeyNode" id="dijit_MenuItem_14_accel"></td>
+	<td class="dijitReset dijitMenuArrowCell" role="presentation">
+		<div dojoattachpoint="arrowWrapper" style="visibility: hidden">
+			<img src="dojo/dojo/resources/blank.gif" alt="" class="dijitMenuExpand">
+			<span class="dijitMenuExpandA11y">+</span>
+		</div>
+	</td>
+</tr></tbody>
+</table></body></html>

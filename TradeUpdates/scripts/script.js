@@ -1,13 +1,10 @@
+var i = 0;
 var numItems = $('.basePosition').length;
-//alert(numItems);
-alert("End of script...");
 
-// To search for text
-/*
-var regex = /abelski/;
-
-if(regex.test(document.body.innerText))
-{
-	alert("Got here!");
+function go () {
+    console.log(i);
+		console.log(numItems);
+    i++;
+    setTimeout(go,1000);
 }
-*/
+go();
