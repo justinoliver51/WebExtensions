@@ -1,0 +1,27 @@
+{
+  "name": "Trade Updates",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Trades stock based on chat room.",
+  "default_locale": "en",
+  "icons": {
+  },
+  "background": {
+    "page": "background.htm"
+  },
+  "options_page": "options.htm",
+  "browser_action": {
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["scripts/contentscript.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": ["scripts/script.js"]
+}

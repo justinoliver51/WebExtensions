@@ -1,0 +1,17 @@
+<html xml:lang="en">
+  <head>
+    <title>Page Monitor Background Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script>
+			function onMessage(request, sender, sendResponse)
+			{
+				alert("onMessage");
+				sendMessage('abelski was found');
+				chrome.pageAction.show(sender.tab.id);
+				alert(request);
+			}
+			chrome.extension.onMessage.addListener(onMessage);
+		</script>
+  </head>
+  <body></body>
+</html>
