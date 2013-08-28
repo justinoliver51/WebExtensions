@@ -1,0 +1,9 @@
+{
+     "name": "Trade Updates",
+     "description": "Trades stock based on chat room.",
+     "version": "1.0.0",
+     "dependencies": {
+        "express": "2.4.6",
+        "socket.io": "0.8.4"
+     }
+}
