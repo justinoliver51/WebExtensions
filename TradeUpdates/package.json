@@ -1,5 +1,5 @@
 {
-     "name": "Trade Updates",
+     "name": "Trade_Updates",
      "description": "Trades stock based on chat room.",
      "version": "1.0.0",
      "dependencies": {

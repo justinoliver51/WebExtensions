@@ -23,6 +23,8 @@
       "run_at": "document_end"
     }
   ],
+  "content_security_policy": "script-src 'self' http://localhost:8080 ; object-src 'self' ",
+  
   "web_accessible_resources": [
     "lib/jquery-1.7.1.js",
     "scripts/script.js"
