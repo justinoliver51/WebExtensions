@@ -15,10 +15,17 @@ chrome.runtime.onMessage.addListener(
 );
 
 function go () {
-    // Get the trade array and update the time
+		// Get the trade array and update the time
 		var tradeArray = $(className);
-    console.log(seconds);
-		
+		console.log(seconds);
+	
+/*	
+		if(numItems == 0)
+		{
+			numItems = tradeArray.length;
+		}
+*/
+	
 		if(tradeArray.length > numItems)
 		{
 			var tradeUpdate;

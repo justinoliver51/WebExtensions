@@ -1,0 +1,47 @@
+package com.IBTrading.servlets;
+
+public class TradeParsers {
+	// Passed parameters
+	private String traderID;
+	private String tradeString;
+	
+	// Parsed trade information
+	public String symbol;
+	public int quantity;
+	
+	// Valid trade - true if parsed correctly, false otherwise
+	boolean isValidTrade;
+	
+	// List of trader identifiers
+	String ROBERTMAXWELL = "robertmaxwell";
+	
+	public TradeParsers(String newTraderID, String newTrade)
+	{
+		traderID = newTraderID;
+		tradeString = newTrade;
+		
+		// Set default values for other variables
+		symbol = null;
+		quantity = 0;
+		isValidTrade = false;
+		
+		// Parse the new trade string
+		if(traderID.equalsIgnoreCase(ROBERTMAXWELL))
+		{
+			RobertMaxwellParser parser = new RobertMaxwellParser();
+			parser.parseTrade(newTrade);
+		}
+	}
+	
+	public class RobertMaxwellParser
+	{
+		
+		
+		public void parseTrade(String newTrade)
+		{
+			symbol = "DGLY";
+			quantity = 10;
+			isValidTrade = true;
+		}
+	}
+}

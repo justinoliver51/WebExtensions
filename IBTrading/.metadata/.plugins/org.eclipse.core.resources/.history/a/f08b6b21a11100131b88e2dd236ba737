@@ -1,0 +1,16 @@
+package com.IBTrading.servlets;
+
+public class TradeParsers {
+	
+	private String tradeString;
+	
+	public TradeParsers(String newTrade)
+	{
+		tradeString = newTrade;
+	}
+	
+	public class RobertMaxwellTradeParser extends TradeParsers
+	{
+		
+	}
+}

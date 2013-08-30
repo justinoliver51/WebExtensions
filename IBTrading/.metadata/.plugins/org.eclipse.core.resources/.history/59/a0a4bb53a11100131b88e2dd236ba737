@@ -1,0 +1,20 @@
+package com.IBTrading.servlets;
+
+public class TradeParsers {
+	
+	private String traderID;
+	private String tradeString;
+	
+	// List of trader identifiers
+	String ROBERTMAXWELL = "robertmaxwell";
+	
+	public TradeParsers(String newTraderID, String newTrade)
+	{
+		tradeString = newTrade;
+	}
+	
+	public class RobertMaxwellTradeParser extends TradeParsers
+	{
+		
+	}
+}

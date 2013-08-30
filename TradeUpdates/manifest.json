@@ -18,12 +18,12 @@
   ],
   "content_scripts": [
     {
-      "matches": ["http://*/*"],
+      "matches": ["http://profit.ly/*"],
       "js": ["lib/jquery-1.7.1.js", "scripts/contentscript.js"],
       "run_at": "document_end"
     }
   ],
-  "content_security_policy": "script-src 'self' http://localhost:8080 ; object-src 'self' ",
+  "content_security_policy": "script-src 'self' http://localhost:8081 ; object-src 'self' ",
   
   "web_accessible_resources": [
     "lib/jquery-1.7.1.js",
