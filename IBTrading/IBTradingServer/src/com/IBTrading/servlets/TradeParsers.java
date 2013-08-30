@@ -72,11 +72,15 @@ public class TradeParsers {
 			
 			isValidTrade = areParamatersValid(date, action, totalQuant, symb, price);
 			
-			// Set the globals
+			// If everything went well, set up the trade
 			if(isValidTrade == true)
 			{
+				// Update the globals
 				symbol = symb;
 				quantity = (Integer.parseInt(totalQuant) * robertMaxwellTradePercentage) / 100;
+				
+				// Save this for next time
+				robertMaxwellLastTraderString = newTrade;
 			}
 		}
 		
