@@ -35,3 +35,8 @@
 127.0.0.1 - - [30/Aug/2013:16:39:21 -0500] "GET / HTTP/1.1" 404 951
 127.0.0.1 - - [30/Aug/2013:16:41:57 -0500] "GET / HTTP/1.1" 404 951
 0:0:0:0:0:0:0:1%0 - - [30/Aug/2013:16:43:37 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=robertmaxwell&newTrade=08/28%20Bought%2015000%20shares%20DGLY%20at%209.6667%20-%20SWING%20DONT%20CHASE%20%20downside%208.25%20target%2010%20%20if%20works.....-%20DGLY%20only%202.1m%20shares%20o/s%20and%20same%20product%20as%20TASR%20camera%20and%20patent%20link HTTP/1.1" 200 13
+127.0.0.1 - - [30/Aug/2013:21:05:55 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [30/Aug/2013:21:05:56 -0500] "GET /IBTradingServer/WEB-INF/classes/com/IBTrading/servlets/TradeParsers.java HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1%0 - - [30/Aug/2013:21:07:01 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=robertmaxwell&newTrade=08/28%20Bought%2015000%20shares%20DGLY%20at%209.6667%20-%20SWING%20DONT%20CHASE%20%20downside%208.25%20target%2010%20%20if%20works.....-%20DGLY%20only%202.1m%20shares%20o/s%20and%20same%20product%20as%20TASR%20camera%20and%20patent%20link HTTP/1.1" 200 15
+127.0.0.1 - - [30/Aug/2013:21:07:17 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [30/Aug/2013:21:07:54 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=robertmaxwell&newTrade=08/28%20Bought%2015000%20shares%20DGLY%20at%209.6667%20-%20SWING%20DONT%20CHASE%20%20downside%208.25%20target%2010%20%20if%20works.....-%20DGLY%20only%202.1m%20shares%20o/s%20and%20same%20product%20as%20TASR%20camera%20and%20patent%20link HTTP/1.1" 200 13

@@ -19,7 +19,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 {
 
 	private EClientSocket   m_client = new EClientSocket( this);
-	private static int orderID = 20;
+	private static int orderID = 2008;	// If this value is not updated, we may simply never get a response...
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
@@ -45,7 +45,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
         m_client.eDisconnect();
     }
 
-    public synchronized void placeOrder(String symbol, int quantity) 
+    public synchronized void placeOrder(String orderAction, String symbol, int quantity) 
     {
 
         Order order = new Order();
@@ -56,6 +56,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
         
         contract.m_symbol = symbol;
         order.m_totalQuantity = quantity;
+        order.m_action = orderAction;
         
         // If we have disconnected, reestablish the connection
         if (m_client.isConnected() == false) {
