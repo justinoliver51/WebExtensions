@@ -55,7 +55,7 @@ public class TradeParsers {
 		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )
 		{
 			System.out.println("Market is closed!");
-			return;
+			//return;  FIXME: We may not want this commented out!
 		}
 		
 		traderID = newTraderID;

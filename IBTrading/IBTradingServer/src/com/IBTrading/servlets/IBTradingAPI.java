@@ -19,7 +19,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 {
 
 	private EClientSocket   m_client = new EClientSocket( this);
-	private static int orderID = 2008;	// If this value is not updated, we may simply never get a response...
+	private static int orderID = 3205;	// If this value is not updated, we may simply never get a response...
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;

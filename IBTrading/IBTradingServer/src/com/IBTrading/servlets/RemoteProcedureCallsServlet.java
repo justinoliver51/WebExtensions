@@ -42,8 +42,6 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
-		
 		HttpSession session = request.getSession(true);
 		PrintWriter out = response.getWriter();
         System.out.println("doGet() called!  :)");
@@ -79,14 +77,14 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		{
 			System.out.println("Valid trade!");
 			out.println("Valid trade!");
-			/*
+			
 			// Make the purchase
 			tradingAPI.placeOrder(BUY, tradeParser.symbol, tradeParser.quantity);
 			
 			// Sleep for 90 seconds, then sell
 			try
 			{
-				Thread.sleep( 90 * SECONDS );
+				Thread.sleep( 60 * SECONDS );
 			}
 			catch ( InterruptedException e )
 			{
@@ -94,7 +92,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			}
 			
 			// Sell the stocks
-			tradingAPI.placeOrder(SELL, tradeParser.symbol, tradeParser.quantity);*/
+			tradingAPI.placeOrder(SELL, tradeParser.symbol, tradeParser.quantity);
 		}
 		else
 		{

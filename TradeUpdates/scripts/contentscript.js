@@ -16,6 +16,9 @@ var numTradeAlerts;
 var lastTradeAlert;
 var lastComment;
 
+// Debug
+var debug = 1;
+
 chrome.runtime.onMessage.addListener(
 	function(request,sender,senderResponse)
 	{
@@ -119,6 +122,16 @@ function go () {
 		{
 			console.log("False alarm!");
 			numComments = numComments + 1;
+		}
+
+		// Print useful debug information
+		if(debug == 1)
+		{
+			console.log("numTradeAlerts = ", numTradeAlerts);
+			console.log("numComments = ", numComments);
+			
+			console.log("The first trade alert is: ", tradeArray[0].innerHTML.split("<a")[0]);
+			console.log("The first comment is: ", tradeArray[numTradeAlerts].innerHTML.split("<a")[0]);
 		}
 	}
 	
