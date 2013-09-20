@@ -17,7 +17,8 @@ var lastTradeAlert;
 var lastComment;
 
 // Debug
-var debug = 1;
+var debug = true;
+var initiateTrade = false;
 
 chrome.runtime.onMessage.addListener(
 	function(request,sender,senderResponse)
@@ -33,7 +34,23 @@ chrome.runtime.onMessage.addListener(
 function go () {
 	// Log number of seconds every five minutes
 	if((seconds % 300) == 0)
+	{
 		console.log(seconds);
+		
+		// Print useful debug information
+		if(debug == true)
+		{
+			console.log("numTradeAlerts = ", numTradeAlerts);
+			console.log("numComments = ", numComments);
+			console.log("lastTradeAlert = ", lastTradeAlert);
+			
+			if(tradeArray != null)
+			{
+				console.log("The first trade alert is: ", tradeArray[0].innerHTML.split("<a")[0]);
+				console.log("The first comment is: ", tradeArray[numTradeAlerts].innerHTML.split("<a")[0]);
+			}
+		}
+	}
 
 	// Get the trade array and update the time
 	var tradeArray = $(commentsClassName);
@@ -61,8 +78,12 @@ function go () {
 		lastTradeAlert = tradeArray[0].innerHTML.split("<a")[0];
 		console.log(lastComment);
 
-		//numItems = 0; // Comment out for production - for instigating an 'Added'
-		//lastTradeAlert = ""; // Comment out for production - for instigating a 'Bought'
+		if(initiateTrade == true)
+		{
+			numItems = 0; // Instigating an 'Added'
+			lastTradeAlert = ""; //Instigating a 'Bought'
+			numTradeAlerts = numTradeAlerts - 1; // Subtracts an alert because there really isn't a new one
+		}
 	}
 
 	// If there has been a new trade alert or comment
@@ -71,14 +92,9 @@ function go () {
 		// local variables
 		var tradeUpdate;
 		var trader = null;
-		
+
 		// Set the trader
-		if (newsArray[0].innerHTML.split("<a")[0].indexOf("Super") >= 0)
-			trader = "superman";
-		else if (newsArray[0].innerHTML.split("<a")[0].indexOf("Tim") >= 0)
-			trader = "sykes";
-		else
-			trader = "unknown";
+		trader = newsArray[0].innerHTML.split("<a")[0];
 
 		// Update the number of items
 		numItems = tradeArray.length;
@@ -93,10 +109,11 @@ function go () {
 			tradeUpdate = splitHTML[0];
 			console.log(tradeUpdate);
 
-			// 
+			// Update the global variables
 			lastTradeAlert = tradeUpdate;
 			numTradeAlerts = numTradeAlerts + 1;
-			
+			numComments = numItems - numTradeAlerts; // Some alerts are posted to both
+
 			// Send message to the background with the data
 			chrome.runtime.sendMessage({msg:trader,text:tradeUpdate},function(response){});
 		}
@@ -113,7 +130,7 @@ function go () {
 			//
 			lastComment = tradeUpdate;
 			numComments = numComments + 1;
-			
+
 			// Send message to the background with the data
 			chrome.runtime.sendMessage({msg:trader,text:tradeUpdate},function(response){});
 		}
@@ -125,17 +142,17 @@ function go () {
 		}
 
 		// Print useful debug information
-		if(debug == 1)
+		if(debug == true)
 		{
 			console.log("numTradeAlerts = ", numTradeAlerts);
 			console.log("numComments = ", numComments);
-			
+
 			console.log("The first trade alert is: ", tradeArray[0].innerHTML.split("<a")[0]);
 			console.log("The first comment is: ", tradeArray[numTradeAlerts].innerHTML.split("<a")[0]);
 		}
 	}
-	
+
 	seconds++;
 	setTimeout(go, numMilliseconds);
 }
-go();
+go()

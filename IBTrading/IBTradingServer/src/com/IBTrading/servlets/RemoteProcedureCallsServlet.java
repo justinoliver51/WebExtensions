@@ -19,11 +19,12 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private IBTradingAPI tradingAPI;
-	
+	private TradeCenter tradeCenter;
+
 	private final int SECONDS = 1000;
 	private final String BUY = "BUY";
 	private final String SELL = "SELL";
-	
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,6 +36,12 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         // Initialize the trading API connection
         tradingAPI = new IBTradingAPI();
         tradingAPI.connect();
+        
+        // Initializes the Trade Center
+        tradeCenter = new TradeCenter(tradingAPI);
+        
+        // Initializes the email monitor
+        //emailMonitor = new EmailMonitor(tradeCenter);
     }
 
 	/**
@@ -54,33 +61,34 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         String startUp = request.getParameter("startUp");
 		String traderID = request.getParameter("traderID");
 		String newTrade = request.getParameter("newTrade");
-		
+
 		if(startUp != null)
 		{
 			System.out.println("System started up!");
 			out.println("System started up!");
+			
 			return;
 		}
-		
+
 		if( (traderID == null) || (newTrade == null) )
 		{
 			System.out.println("Invalid parameters...");
 			out.println("Invalid parameters...");
 			return;
 		}
-		
+
 		// Parse the trade
 		TradeParsers tradeParser = new TradeParsers(traderID, newTrade);
 		System.out.println("traderID: " + traderID + ", symbol: " + tradeParser.symbol + ", quantity: " + tradeParser.quantity);
-		
+
 		if(tradeParser.isValidTrade == true)
 		{
 			System.out.println("Valid trade!");
 			out.println("Valid trade!");
-			
+
 			// Make the purchase
 			tradingAPI.placeOrder(BUY, tradeParser.symbol, tradeParser.quantity);
-			
+
 			// Sleep for 90 seconds, then sell
 			try
 			{
@@ -90,7 +98,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			{
 				System.out.println( "awakened prematurely" );
 			}
-			
+
 			// Sell the stocks
 			tradingAPI.placeOrder(SELL, tradeParser.symbol, tradeParser.quantity);
 		}
@@ -108,7 +116,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 	{
 		doPost(request, response);
 	}
-	
-	
+
+
 
 }

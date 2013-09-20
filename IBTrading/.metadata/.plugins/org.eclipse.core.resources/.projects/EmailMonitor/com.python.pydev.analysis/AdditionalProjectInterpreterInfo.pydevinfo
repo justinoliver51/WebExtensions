@@ -1,0 +1,37 @@
+-- VERSION_3
+-- START DISKCACHE
+/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/.metadata/.plugins/org.eclipse.core.resources/.projects/EmailMonitor/com.python.pydev.analysis/v1_indexcache
+.v1_indexcache
+EmailMonitor|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/EmailMonitor.py
+-- END DISKCACHE
+-- START DICTIONARY
+1
+1=EmailMonitor
+-- END DICTIONARY
+-- START TREE 1
+21
+bod|1|body!11@
+con|1|connect!10@
+cur|1|currentEmail!11@
+dat|2|data1!11@data!11@
+dec|1|decodeSubject!10@
+ema|1|email_message!11@
+enc|1|encodedURL!11@
+get|1|get_emails!10@
+ind|1|index!11@
+lat|3|latestEmail!11@latestEmailTimestamp!11@latest_email_uid!11@
+mai|1|mail!11@
+mes|1|message!11@
+par|1|paramDic!11@
+que|1|query!11@
+raw|1|raw_email!11@
+res|1|result!11@
+sub|1|subject!11@
+tim|1|timestamp!11@
+tra|1|traderID!11@
+url|1|url!11@
+var|0|
+-- END TREE
+-- START TREE 2
+0
+-- END TREE

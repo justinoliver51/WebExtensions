@@ -1,0 +1,6 @@
+{
+  "name": {
+    "message": "Trade Updates",
+    "description": "Trades stock based on chat room."
+  }
+}

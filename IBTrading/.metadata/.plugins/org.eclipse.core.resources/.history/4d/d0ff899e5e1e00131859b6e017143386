@@ -1,0 +1,5 @@
+package TradeParsers;
+
+public class TradeParserInterface {
+
+}

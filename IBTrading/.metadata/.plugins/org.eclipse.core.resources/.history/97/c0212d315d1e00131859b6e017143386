@@ -1,0 +1,5 @@
+package com.IBTrading.servlets;
+
+public class TraderInterface {
+
+}

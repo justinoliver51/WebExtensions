@@ -1,0 +1,7 @@
+package com.IBTrading.tradeparsers;
+
+interface TraderInterface 
+{
+
+}
+

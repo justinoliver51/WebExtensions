@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>WebPageMonitor</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Scripts/background.js</name>
+			<type>1</type>
+			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/TradeUpdates/scripts/background.js</location>
+		</link>
+		<link>
+			<name>src/Scripts/contentscript.js</name>
+			<type>1</type>
+			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/TradeUpdates/scripts/contentscript.js</location>
+		</link>
+		<link>
+			<name>src/Scripts/contentscriptUpdatedWebpage.js</name>
+			<type>1</type>
+			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/TradeUpdates/scripts/contentscriptUpdatedWebpage.js</location>
+		</link>
+	</linkedResources>
+</projectDescription>

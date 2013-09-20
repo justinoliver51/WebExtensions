@@ -24,11 +24,11 @@ public class TradeParsers {
 	private static String lastTraderString;
 	private static int tradePercentage = 0;
 	
-	private String SUPERMAN = "superman";  // Superman
+	private String SUPERMAN = "SuperAlerts";  // Superman
 	private static String supermanLastTraderString;
 	private static int supermanTradePercentage = 25;
 	
-	private String SYKES = "sykes";  // Tim Sykes
+	private String SYKES = "TimAlerts";  // Tim Sykes
 	private static String sykesLastTraderString;
 	private static int sykesTradePercentage = 25;
 	
@@ -136,9 +136,15 @@ public class TradeParsers {
 			{
 				tokensIndex++;
 			}
-			else if( (tokens[tokensIndex + 1].contains("PM")) || (tokens[tokensIndex + 1].contains("PM")) )
+			else if( (tokens[tokensIndex + 1].contains("AM")) || (tokens[tokensIndex + 1].contains("PM")) )
 			{
 				tokensIndex = tokensIndex + 2;
+			}
+			
+			 // Skipping '-'
+			if(tokens[tokensIndex].equalsIgnoreCase("-"))
+			{
+				tokensIndex++;
 			}
 			
 			// Get the action

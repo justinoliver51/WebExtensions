@@ -1,0 +1,47 @@
+package com.IBTrading.Traders;
+
+public class Trader 
+{
+	// Passed parameters
+	private String traderID;
+	private String tradeString;
+	
+	// Parsed trade information
+	public String symbol = null;
+	public int quantity = 0;
+	
+	// Valid trade - true if parsed correctly, false otherwise
+	public boolean isValidTrade = false;
+	
+	// PROFIT.LY
+	// List of trader identifiers and their strings
+	private String trader = null;  // Superman
+	private static String lastTraderString;
+	private static int tradePercentage = 0;
+	
+	private String SUPERMAN = "superman";  // Superman
+	private static String supermanLastTraderString;
+	private static int supermanTradePercentage = 25;
+	
+	private String SYKES = "sykes";  // Tim Sykes
+	private static String sykesLastTraderString;
+	private static int sykesTradePercentage = 25;
+	
+	// Parses the passed trade into the necessary information for the trade
+	public String parseTrade(String newTrade)
+	{
+		return null;
+	}
+	
+	// Determines whether the 
+	public boolean areParamatersValid(String date, String action, String totalQuant, String symb, String price)
+	{
+		return false;
+	}
+
+	// Initiates the trade with TWS
+	public boolean trade()
+	{
+		return false;
+	}
+}

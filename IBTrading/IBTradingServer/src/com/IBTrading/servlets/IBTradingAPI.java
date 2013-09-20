@@ -1,8 +1,12 @@
 package com.IBTrading.servlets;
 
-import javax.swing.JFrame;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Scanner;
 
-import TestJavaClient.ConnectDlg;
+import javax.swing.JFrame;
 
 import com.ib.client.CommissionReport;
 import com.ib.client.Contract;
@@ -17,12 +21,25 @@ import com.ib.client.UnderComp;
 
 public class IBTradingAPI extends JFrame implements EWrapper
 {
-
 	private EClientSocket   m_client = new EClientSocket( this);
-	private static int orderID = 3205;	// If this value is not updated, we may simply never get a response...
+	private static int orderID;	// If this value is not updated, we may simply never get a response...
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
+	
+	public IBTradingAPI()
+	{
+		// Get the current orderID
+		Scanner sc;
+		try {
+			sc = new Scanner(new File("/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt"));
+			orderID = sc.nextInt();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			orderID = 1100000;
+		}
+	}
 	
 	
 	public synchronized void connect() 
@@ -83,7 +100,20 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		System.out.println(msg);
 		
 		// make sure id for next order is at least orderId+1
-		orderID =  orderId + 1;
+		orderID =  orderID + 1;
+		
+		// Set the orderID in the file
+		try {
+			PrintWriter writer = new PrintWriter("/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt", "UTF-8");
+			writer.println(orderID);
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
     
     void setDefaultsContract(Contract m_contract)

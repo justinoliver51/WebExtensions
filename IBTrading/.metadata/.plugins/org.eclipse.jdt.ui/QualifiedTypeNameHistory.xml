@@ -2,4 +2,5 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.util.TimeZone"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
 </qualifiedTypeNameHistroy>
