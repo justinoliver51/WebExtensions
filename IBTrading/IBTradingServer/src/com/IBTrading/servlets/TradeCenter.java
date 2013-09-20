@@ -30,19 +30,20 @@ public class TradeCenter {
 	// Traders
 	private String SUPERMAN = "SuperAlerts";  // Superman
 	private String SYKES = "TimAlerts";  // Tim Sykes
+	private String AWESOMEPENNYSTOCKS = "AwesomePennyStocks"; // AwesomePennyStocks.com
 
 	public TradeCenter(IBTradingAPI newTradingAPI)
 	{
 		tradingAPI = newTradingAPI;
 	}
 	
-	public void newTrade(String newTraderID, String newTrade)
+	public boolean newTrade(String newTraderID, String newTrade)
 	{
 		// If either of the passed values are null, exit
 		if( (newTraderID == null) || (newTrade == null) )
 		{
 			System.out.println("Null arguments...");
-			return;
+			return false;
 		}
 		
 		// If this is an invalid time of day, exit
@@ -64,9 +65,6 @@ public class TradeCenter {
 		traderID = newTraderID;
 		tradeString = newTrade;
 		
-		// Initialize the trading API connection
-		tradingAPI.connect();
-		
 		// Parse the new trade string
 		if(traderID.equalsIgnoreCase(SUPERMAN))
 		{
@@ -75,33 +73,31 @@ public class TradeCenter {
 		}
 		else if(traderID.equalsIgnoreCase(SYKES))
 		{
-			/*
-			trader = SYKES;  // Superman
-			lastTraderString = sykesLastTraderString;
-			tradePercentage = sykesTradePercentage;
-			
-			ProfitLYParser parser = new ProfitLYParser();
-			String temp = parser.parseTrade(newTrade);
-			if(temp != null)
-			{
-				sykesLastTraderString = temp;
-			}*/
+			SykesTrader currentTrader = new SykesTrader(newTrade, tradingAPI);
+			trader = (Trader) currentTrader;
+		}
+		else if(traderID.equalsIgnoreCase(AWESOMEPENNYSTOCKS))
+		{
+			AwesomePennyStocksTrader currentTrader = new AwesomePennyStocksTrader(newTrade, tradingAPI);
+			trader = (Trader) currentTrader;
 		}
 		else
 		{
 			System.out.println(traderID + " is not a valid trader.");
-			return;
+			return false;
 		}
+		
+		return true;
 	}
 	
 	public boolean trade()
 	{
-		SupermanTrader currentTrader = (SupermanTrader) trader;
+		//SupermanTrader currentTrader = (SupermanTrader) trader;
 		
 		if(trader.hasValidTrade == false)
 			return false;
 		
-		currentTrader.trade();
+		trader.trade();
 		
 		return true;
 	}

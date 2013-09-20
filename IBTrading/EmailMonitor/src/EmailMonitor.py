@@ -16,7 +16,7 @@ def connect(retries=5, delay=3):
     while True:
         try:
             mail = imaplib.IMAP4_SSL('imap.gmail.com','993')
-            mail.login('justinoliver51@gmail.com', 'smnSMN!0519')
+            mail.login('justin.tradealerts@gmail.com', 'utredhead51')
             return mail
         except imaplib.IMAP4_SSL.abort:
             if retries > 0:
@@ -31,6 +31,16 @@ def get_emails(email_ids):
         _, response = mail.fetch(e_id, '(UID BODY[TEXT])')
         data.append(response[0][1])
     return data
+
+def getEmailBody(email_message):
+    # Get the important information out of the email
+    message = ""
+    for part in email_message.walk():
+        if part.get_content_type() == "text/plain": # ignore attachments / html
+            body = part.get_payload(decode=True).decode('utf-8')
+            message = message + body
+        else:
+            continue
 
 def decodeSubject(email_message):
     subjectDecoded, encoding = decode_header(email_message['Subject'])[0]
@@ -78,19 +88,9 @@ while True:
                 email_message = email.message_from_string(raw_email)
                 traderID = email.utils.parseaddr(email_message['From'])
                 subject = decodeSubject(email_message)
-                
-                
-                # Get the important information out of the email
-                message = ""
-                for part in email_message.walk():
-                    if part.get_content_type() == "text/plain": # ignore attachments / html
-                        body = part.get_payload(decode=True).decode('utf-8')
-                        message = message + body
-                    else:
-                        continue
 
                 # Build the url
-                paramDic = {'traderID': traderID, 
+                paramDic = {'traderID': traderID[0], 
                             'newTrade': subject
                             }
                 url = "http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?"
