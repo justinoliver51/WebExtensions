@@ -27,6 +27,7 @@
   
   "web_accessible_resources": [
     "lib/jquery-1.7.1.js",
-    "scripts/script.js"
+    "scripts/script.js",
+    "scripts/profitlyInjectedScript.js"
   ]
 }

@@ -1,4 +1,75 @@
-// Element class names
+// Update the log with the desired settings
+//alert('injected');
+
+var initializedJquery = false;
+var url = 'http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?';
+
+// MAIN
+startLoop();
+
+// 
+function example() 
+{
+	alert('injected');
+}
+
+function newConsoleLog()
+{
+    var old_console_log = console.log;
+    var logged = [];
+    console.log = function() 
+    {
+        var args = Array.prototype.slice.call(arguments);
+        
+        passNotification(args);
+        
+        args.unshift('[' + new Date() + '] ');
+        logged.push(args);
+        old_console_log.apply(console, args);
+    }
+}
+
+function passNotification(notification)
+{
+	if( (notification.indexOf("Notification") >= 0) && (initializedJquery == true) )
+	{
+		sendTradeAlert("timothysykes", notification)
+	}
+}
+
+//
+function startLoop() 
+{
+	var jq = document.createElement('script');
+    jq.src = "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
+    document.getElementsByTagName('head')[0].appendChild(jq);
+    
+    newConsoleLog();
+    
+    setTimeout(testURL, 3000);
+    
+    
+    //setTimeout(loop, 2000);
+}
+
+function testURL()
+{
+	var params = 
+	{
+		startUp: 'Start!',
+	};
+	
+	encodedURL = url + $.param(params);
+	
+    $.getJSON( encodedURL ,function(data)
+    	    {
+    			console.log(data);
+    			console.log('Time received response from server: ' + new Date());
+    		});
+}
+
+/*
+//Element class names
 var commentsClassName = '.comments';
 var newsClassName = '.newsletter';
 var connectedClassName = '.green';
@@ -23,63 +94,9 @@ var lastComment;
 var debug = true;
 var initiateTrade = false;
 
-/*
-// Injecting a small amount of code to add the necessary settings to the log
-var updatingLogCode = [	'console.logCopy = console.log.bind(console);',
-                       	' console.log = function(data)',
-                       	' {',
-                       		' var currentDate = \'[\' + new Date().toUTCString() + \'] \';',
-                       		' this.logCopy(currentDate, data);'
-                       	' }'].join('\n');
-
-// Inject the script
-var script = document.createElement('script');
-script.textContent = updatingLogCode;
-(document.head||document.documentElement).appendChild(script);
-script.parentNode.removeChild(script);
-*/
-
-var script = document.createElement('script');
-script.setAttribute("type", "text/javascript");
-script.setAttribute("async", true);
-script.setAttribute("src", chrome.extension.getURL("scripts/profitlyInjectedScript.js")); //Assuming your host supports both http and https
-var head = document.head || document.getElementsByTagName( "head" )[0] || document.documentElement;
-head.insertBefore(script, head.firstChild)
-
-
-// Add a listener for the "Update Received" message
-chrome.runtime.onMessage.addListener(
-		function(request,sender,senderResponse)
-		{
-			// If we've received a trade update, let the server know!
-			if(request.msg==="Update Received")
-			{
-				console.log(request.text);
-			}
-		}
-	);
-
 // Main function
-function go () {
-	// Log number of seconds every five minutes
-	if((tenthSeconds % 3000) == 0)
-	{
-		console.log("Time: " + new Date());
-		
-		// Print useful debug information
-		if(debug == true)
-		{
-			console.log("numTradeAlerts = ", numTradeAlerts);
-			console.log("numComments = ", numComments);
-			console.log("lastTradeAlert = ", lastTradeAlert);
-			
-			if(tradeArray != null)
-			{
-				console.log("The first trade alert is: ", tradeArray[0].innerHTML.split("<a")[0]);
-				console.log("The first comment is: ", tradeArray[numTradeAlerts].innerHTML.split("<a")[0]);
-			}
-		}
-	}
+function loop () {
+	initializedJquery = true;
 
 	// Get the trade array and update the time
 	var tradeArray = $(commentsClassName);
@@ -188,7 +205,7 @@ function go () {
 			console.log(tradeUpdate);
 
 			// Send message to the background with the data
-			chrome.runtime.sendMessage({msg:trader,text:tradeUpdate},function(response){});
+			//chrome.runtime.sendMessage({msg:trader,text:tradeUpdate},function(response){});
 		}
 		// Is this an 'Added' comment
 		else if(tradeArray[numTradeAlerts].innerHTML.split("<a")[0].indexOf("Added") >= 0)
@@ -205,7 +222,7 @@ function go () {
 			numComments = numComments + 1;
 
 			// Send message to the background with the data
-			chrome.runtime.sendMessage({msg:trader,text:tradeUpdate},function(response){});
+			//chrome.runtime.sendMessage({msg:trader,text:tradeUpdate},function(response){});
 		}
 		// This is nothing
 		else
@@ -227,18 +244,26 @@ function go () {
 
 	tenthSeconds++;
 	setTimeout(go, numMilliseconds);
-	
-/*	var connected = $(connectedClassName)[0].innerHTML;
-	
-	
-	console.log($(connectedClassName)[0]);
-	console.log(connected);
 
-	// Monitor the page's connection
-	if(connected.search("NOT CONNECTED") != -1)
+}*/
+
+function sendTradeAlert (traderID, newTrade) 
+{
+	console.log("Time sent to server: " + new Date());
+			
+	var encodedURL;
+	var params = {
+					traderID: request.msg,
+					newTrade: request.text
+				 };
+			
+	encodedURL = url + $.param(params);
+	console.log(encodedURL); 
+
+	// Make the call to the server
+	$.getJSON( encodedURL ,function(data)
 	{
-		chrome.runtime.sendMessage({msg:"Refresh",text:tradeUpdate},function(response){});
-	}
-*/
+		console.log(data);
+		console.log("Time received response from server: " + new Date());
+	});
 }
-go()
