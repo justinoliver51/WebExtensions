@@ -1,0 +1,32 @@
+// Update the log with the desired settings
+//alert('injected');
+
+/*
+console.logCopy = console.log.bind(console);
+
+console.log = function(data)
+{
+	var currentDate = '[' + new Date().toUTCString() + '] ';
+	this.logCopy(currentDate, data);
+}
+*/
+
+// 
+function example() 
+{
+	alert('injected');
+}
+
+function newConsoleLog()
+{
+    var old_console_log = console.log;
+    var logged = [];
+    console.log = function() 
+    {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift('[' + new Date() + '] ');
+        logged.push(args);
+        old_console_log.apply(console, args);
+    }
+}
+

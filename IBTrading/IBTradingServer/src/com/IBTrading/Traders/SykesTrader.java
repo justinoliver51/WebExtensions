@@ -42,12 +42,6 @@ public class SykesTrader extends Trader
 			hasValidTrade = true;
 		}
 	}
-	
-	// Parses the passed trade into the necessary information for the trade
-	public boolean parseTrade(String newTrade)
-	{
-		return false;
-	}
 
 	// Initiates the trade with TWS
 	public boolean trade()

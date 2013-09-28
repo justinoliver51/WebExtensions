@@ -25,8 +25,9 @@
 		<item value="287" key="DIALOG_X_ORIGIN"/>
 	</section>
 	<section name="NewWizardAction">
-		<item value="org.eclipse.m2e.core.wizards.Maven2ProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="org.eclipse.wst.jsdt.ui.NewJSWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.wst.jsdt.ui.java"/>
 			<item value="org.eclipse.m2e"/>
 		</list>
 	</section>

@@ -18,7 +18,6 @@ public class Trader
 	public boolean parseTrade(String newTrade)
 	{
 		System.out.println("Should not have arrived here: Trader.parseTrade()");
-		
 		return true;
 	}
 
@@ -26,7 +25,6 @@ public class Trader
 	public boolean trade()
 	{
 		System.out.println("Should not have arrived here: Trader.trade()");
-		
 		return true;
 	}
 }

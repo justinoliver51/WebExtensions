@@ -1,6 +1,0 @@
-package TradeParsers;
-
-interface TraderInterface 
-{
-
-}

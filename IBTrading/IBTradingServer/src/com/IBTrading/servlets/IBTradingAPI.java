@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -31,13 +34,14 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	{
 		// Get the current orderID
 		Scanner sc;
-		try {
+		try 
+		{
 			sc = new Scanner(new File("/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt"));
-			orderID = sc.nextInt();
+			orderID = sc.nextInt() + 100;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			orderID = 1100000;
+			orderID = 1000000;
 		}
 	}
 	
@@ -86,6 +90,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
         
         // place order
         m_client.placeOrder( orderID, contract, order );
+        
+        // Log time
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+		Date date = new Date();
+		System.out.println("Order placed at: " + dateFormat.format(date));
     }
     
     @Override
@@ -97,7 +106,9 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		String msg = EWrapperMsgGenerator.orderStatus( orderId, status, filled, remaining,
 		avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld);
 		
-		System.out.println(msg);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+		Date date = new Date();
+		System.out.println(msg + " " + dateFormat.format(date));
 		
 		// make sure id for next order is at least orderId+1
 		orderID =  orderID + 1;

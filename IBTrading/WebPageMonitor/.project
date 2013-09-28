@@ -30,5 +30,10 @@
 			<type>1</type>
 			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/TradeUpdates/scripts/contentscriptUpdatedWebpage.js</location>
 		</link>
+		<link>
+			<name>src/Scripts/profitlyInjectedScript.js</name>
+			<type>1</type>
+			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/TradeUpdates/scripts/profitlyInjectedScript.js</location>
+		</link>
 	</linkedResources>
 </projectDescription>

@@ -29,7 +29,9 @@ public class TradeCenter {
 	
 	// Traders
 	private String SUPERMAN = "SuperAlerts";  // Superman
+	private String SUPERMANCHAT = "super_trades";  // Superman
 	private String SYKES = "TimAlerts";  // Tim Sykes
+	private String SYKESCHAT = "timothysykes";  // Tim Sykes
 	private String AWESOMEPENNYSTOCKS = "AwesomePennyStocks"; // AwesomePennyStocks.com
 
 	public TradeCenter(IBTradingAPI newTradingAPI)
@@ -66,12 +68,12 @@ public class TradeCenter {
 		tradeString = newTrade;
 		
 		// Parse the new trade string
-		if(traderID.equalsIgnoreCase(SUPERMAN))
+		if(traderID.equalsIgnoreCase(SUPERMAN) || traderID.equalsIgnoreCase(SUPERMANCHAT))
 		{
 			SupermanTrader currentTrader = new SupermanTrader(newTrade, tradingAPI);
 			trader = (Trader) currentTrader;
 		}
-		else if(traderID.equalsIgnoreCase(SYKES))
+		else if(traderID.equalsIgnoreCase(SYKES) || traderID.equalsIgnoreCase(SYKESCHAT))
 		{
 			SykesTrader currentTrader = new SykesTrader(newTrade, tradingAPI);
 			trader = (Trader) currentTrader;
@@ -95,7 +97,10 @@ public class TradeCenter {
 		//SupermanTrader currentTrader = (SupermanTrader) trader;
 		
 		if(trader.hasValidTrade == false)
+		{
+			System.out.println("Trader has an invalid trade.");
 			return false;
+		}
 		
 		trader.trade();
 		

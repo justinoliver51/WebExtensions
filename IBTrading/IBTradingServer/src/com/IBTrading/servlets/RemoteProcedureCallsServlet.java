@@ -2,6 +2,9 @@ package com.IBTrading.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,6 +46,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 	{
 		HttpSession session = request.getSession(true);
 		PrintWriter out = response.getWriter();
+		response.setHeader("Access-Control-Allow-Origin", "*");
         System.out.println("doGet() called!  :)");
         
         synchronized (session)
@@ -54,7 +58,10 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		String traderID = request.getParameter("traderID");
 		String newTrade = request.getParameter("newTrade");
 		
-		System.out.println("traderID: " + traderID + ", trade: " + newTrade);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+		Date date = new Date();
+		
+		System.out.println("traderID: " + traderID + ", trade: " + newTrade + ", on date: " + dateFormat.format(date));
 		
 		if(startUp != null)
 		{
@@ -81,6 +88,14 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 				System.out.println("Valid trade initiated!");
 				out.println("Valid trade!");
 			}
+			else
+			{
+				System.out.println("Invalid trade!");
+			}
+		}
+		else
+		{
+			System.out.println("Invalid parameters, " + traderID + ", " + newTrade);
 		}
 	}
 

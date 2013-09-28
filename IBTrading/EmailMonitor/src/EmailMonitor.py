@@ -6,7 +6,6 @@ Created on Sep 18, 2013
 
 import imaplib
 import time
-import email
 import email.utils
 import urllib2
 import urllib
@@ -61,30 +60,26 @@ def decodeSubject(email_message):
 ### MAIN ###
 latestEmail = ""
 latestEmailTimestamp = time.mktime(time.gmtime())
-print str(latestEmailTimestamp)
 currentEmail = "currentEmail"
 mail = connect()
 while True:
     try:
-        print 'Connecting to Inbox..'
-        mail.select("INBOX") # connect to inbox.
-        #print str(mail.uid('search', None, 'ALL'))
-        #print str(mail.fetch('1', '(RFC822)'));
+        # Connect to the Inbox
+        mail.select("INBOX") 
 
         result, data = mail.uid('search', None, 'ALL') # search and return uids instead
         for negativeIndex in range(-1, len(data[0].split() * -1)):
             latest_email_uid = data[0].split()[negativeIndex]
             index = negativeIndex + len(data[0].split())
 
-            print str(index)
-            result, data = mail.fetch(index, 'INTERNALDATE')
-            timestamp = time.mktime(imaplib.Internaldate2tuple(data[0]))
-            print str(timestamp)
+            result, data1 = mail.fetch(index, 'INTERNALDATE')
+            timestamp = time.mktime(imaplib.Internaldate2tuple(data1[0]))
 
             # If this email is newer than our latest, get the message and send the alert
             if timestamp > latestEmailTimestamp:
-                result, data1 = mail.uid('fetch', latest_email_uid, '(RFC822)') 
-                raw_email = data1[0][1]
+                print 'New Email!'
+                result, data2 = mail.uid('fetch', latest_email_uid, '(RFC822)') 
+                raw_email = data2[0][1]
                 email_message = email.message_from_string(raw_email)
                 traderID = email.utils.parseaddr(email_message['From'])
                 subject = decodeSubject(email_message)
@@ -107,14 +102,13 @@ while True:
                 break;
 
         # Get the latest email's timestamp
-        result, data = mail.fetch(len(data[0].split()) - 1, 'INTERNALDATE') 
-        latestEmailTimestamp = time.mktime(imaplib.Internaldate2tuple(data[0]))
-        time.sleep(30);
+        result, data3 = mail.fetch(len(data[0].split()) - 1, 'INTERNALDATE') 
+        latestEmailTimestamp = time.mktime(imaplib.Internaldate2tuple(data3[0]))
 
         ## print email_message.items() # print all headers
         #
         ## Poll mailbox after alotted time
-        time.sleep(30)
+        time.sleep(1)
     except:
         print 'Error'
         mail = connect()
