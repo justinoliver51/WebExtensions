@@ -25,18 +25,24 @@ import com.ib.client.UnderComp;
 public class IBTradingAPI extends JFrame implements EWrapper
 {
 	private EClientSocket   m_client = new EClientSocket( this);
+	private final String orderIDPathMac = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
+	private final String orderIDPathPC = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
+
 	private static int orderID;	// If this value is not updated, we may simply never get a response...
+	private String orderIDPath;
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
 	
-	public IBTradingAPI()
+	public IBTradingAPI(boolean macComputer)
 	{
+		orderIDPath = macComputer ? orderIDPathMac : orderIDPathPC;
+		
 		// Get the current orderID
 		Scanner sc;
 		try 
 		{
-			sc = new Scanner(new File("/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt"));
+			sc = new Scanner(new File(orderIDPath));
 			orderID = sc.nextInt() + 100;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -66,7 +72,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
         m_client.eDisconnect();
     }
 
-    public synchronized void placeOrder(String orderAction, String symbol, int quantity) 
+    public synchronized String placeOrder(String orderAction, String symbol, int quantity) 
     {
 
         Order order = new Order();
@@ -84,7 +90,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
         	m_client.eConnect(null, 7496, 0);
             if (m_client.isConnected() == false) {
             	System.out.println("Unable to connect to TWS...");
-            	
+            	return "Unable to connect to TWS...";
             }
         }
         
@@ -95,6 +101,8 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
 		System.out.println("Order placed at: " + dateFormat.format(date));
+		
+		return null;
     }
     
     @Override

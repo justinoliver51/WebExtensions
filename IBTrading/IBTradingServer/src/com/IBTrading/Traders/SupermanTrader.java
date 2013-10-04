@@ -6,8 +6,8 @@ import com.IBTrading.tradeparsers.ProfitlyTradeParser;
 public class SupermanTrader extends Trader
 {
 	// Passed parameters
-	private String traderID;
 	private String tradeString;
+	private boolean isSimulation;
 	
 	// Parsed trade information
 	ProfitlyTradeParser parser;
@@ -22,7 +22,7 @@ public class SupermanTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public SupermanTrader(String newTrade, IBTradingAPI newTradingAPI)
+	public SupermanTrader(String newTrade, IBTradingAPI newTradingAPI, boolean simulation)
 	{	
 		super(newTradingAPI);
 		
@@ -34,6 +34,7 @@ public class SupermanTrader extends Trader
 			return;
 		}
 		
+		isSimulation = simulation;
 		lastTraderString = newTrade;
 		parser = new ProfitlyTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
@@ -45,10 +46,15 @@ public class SupermanTrader extends Trader
 	}
 
 	// Initiates the trade with TWS
-	public boolean trade()
+	public String trade()
 	{
+		int quantity = isSimulation ? ((parser.quantity * TRADERPERCENTAGE) / 100) : 10;
+		
 		// Make the purchase
-		tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
+		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, quantity);
+		
+		if(tradeError != null)
+			return tradeError;
 		
 		// Sleep for 90 seconds, then sell
 		try
@@ -61,8 +67,6 @@ public class SupermanTrader extends Trader
 		}
 		
 		// Sell the stocks
-		tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
-		
-		return true;
+		return tradingAPI.placeOrder(SELL, parser.symbol, quantity);
 	}
 }

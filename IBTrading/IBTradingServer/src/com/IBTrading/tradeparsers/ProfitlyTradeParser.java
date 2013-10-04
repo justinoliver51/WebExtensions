@@ -61,7 +61,7 @@ public class ProfitlyTradeParser
 			}
 			else if(tokens[tokensIndex].equalsIgnoreCase("[Trade]"))
 			{
-				tokensIndex = tokensIndex + 2;
+				tokensIndex++;
 				
 				// Set the date to today's date
 				DateFormat dateFormatBought = new SimpleDateFormat("MM/dd");

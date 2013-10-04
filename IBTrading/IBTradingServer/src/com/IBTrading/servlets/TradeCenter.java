@@ -11,7 +11,7 @@ import com.IBTrading.Traders.*;
 public class TradeCenter {
 	// Passed parameters
 	private String traderID;
-	private String tradeString;
+	private boolean isSimulation;
 	
 	// TWS API
 	private static IBTradingAPI tradingAPI;
@@ -34,18 +34,19 @@ public class TradeCenter {
 	private String SYKESCHAT = "timothysykes";  // Tim Sykes
 	private String AWESOMEPENNYSTOCKS = "AwesomePennyStocks"; // AwesomePennyStocks.com
 
-	public TradeCenter(IBTradingAPI newTradingAPI)
+	public TradeCenter(IBTradingAPI newTradingAPI, boolean simulation)
 	{
 		tradingAPI = newTradingAPI;
+		isSimulation = simulation;
 	}
 	
-	public boolean newTrade(String newTraderID, String newTrade)
+	public String newTrade(String newTraderID, String newTrade)
 	{
 		// If either of the passed values are null, exit
 		if( (newTraderID == null) || (newTrade == null) )
 		{
 			System.out.println("Null arguments...");
-			return false;
+			return "Null arguments...";
 		}
 		
 		// If this is an invalid time of day, exit
@@ -61,49 +62,45 @@ public class TradeCenter {
 		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )
 		{
 			System.out.println("Market is closed!");
-			//return;  FIXME: We may not want this commented out!
+			if(isSimulation == false)
+				return "Market is closed!";  //FIXME: We may not want this commented out!
 		}
 		
 		traderID = newTraderID;
-		tradeString = newTrade;
 		
 		// Parse the new trade string
 		if(traderID.equalsIgnoreCase(SUPERMAN) || traderID.equalsIgnoreCase(SUPERMANCHAT))
 		{
-			SupermanTrader currentTrader = new SupermanTrader(newTrade, tradingAPI);
+			SupermanTrader currentTrader = new SupermanTrader(newTrade, tradingAPI, isSimulation);
 			trader = (Trader) currentTrader;
 		}
 		else if(traderID.equalsIgnoreCase(SYKES) || traderID.equalsIgnoreCase(SYKESCHAT))
 		{
-			SykesTrader currentTrader = new SykesTrader(newTrade, tradingAPI);
+			SykesTrader currentTrader = new SykesTrader(newTrade, tradingAPI, isSimulation);
 			trader = (Trader) currentTrader;
 		}
 		else if(traderID.equalsIgnoreCase(AWESOMEPENNYSTOCKS))
 		{
-			AwesomePennyStocksTrader currentTrader = new AwesomePennyStocksTrader(newTrade, tradingAPI);
+			AwesomePennyStocksTrader currentTrader = new AwesomePennyStocksTrader(newTrade, tradingAPI, isSimulation);
 			trader = (Trader) currentTrader;
 		}
 		else
 		{
 			System.out.println(traderID + " is not a valid trader.");
-			return false;
+			return traderID + " is not a valid trader.";
 		}
 		
-		return true;
+		return null;
 	}
 	
-	public boolean trade()
+	public String trade()
 	{
-		//SupermanTrader currentTrader = (SupermanTrader) trader;
-		
 		if(trader.hasValidTrade == false)
 		{
 			System.out.println("Trader has an invalid trade.");
-			return false;
+			return "Trader has an invalid trade.";
 		}
 		
-		trader.trade();
-		
-		return true;
+		return trader.trade();
 	}
 }

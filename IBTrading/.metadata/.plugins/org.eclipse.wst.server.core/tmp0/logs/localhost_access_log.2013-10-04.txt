@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1%0 - - [04/Oct/2013:08:25:23 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=Start! HTTP/1.1" 200 80
+127.0.0.1 - - [04/Oct/2013:08:31:12 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [04/Oct/2013:08:31:13 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet HTTP/1.1" 200 114
+0:0:0:0:0:0:0:1%0 - - [04/Oct/2013:08:32:03 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=super_trades&newTrade=%5Btrade%5D+Sold+4000+shares+SVVC+at+25+-+supertrade HTTP/1.1" 200 164
+0:0:0:0:0:0:0:1%0 - - [04/Oct/2013:08:32:03 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=SuperAlerts&newTrade=10%2F04+8%3A32%3A03AM+Sold+4000+shares+SVVC+at+25+-+supertrade%3Cbr%3E HTTP/1.1" 200 175

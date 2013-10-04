@@ -22,9 +22,9 @@ public class Trader
 	}
 
 	// Initiates the trade with TWS
-	public boolean trade()
+	public String trade()
 	{
 		System.out.println("Should not have arrived here: Trader.trade()");
-		return true;
+		return "Should not have arrived here: Trader.trade()";
 	}
 }

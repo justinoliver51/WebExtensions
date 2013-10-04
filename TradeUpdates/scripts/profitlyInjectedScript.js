@@ -3,6 +3,7 @@
 
 var initializedJquery = false;
 var url = 'http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?';
+var logFlag = false;
 
 // MAIN
 startLoop();
@@ -19,9 +20,32 @@ function newConsoleLog()
     var logged = [];
     console.log = function() 
     {
-        var args = Array.prototype.slice.call(arguments);
+    	
+    	var args = Array.prototype.slice.call(arguments);
+    	
+        // Determine if we need to start a console group
+    	if( (args[0].indexOf('pre goToLastMessage') >= 0)
+    			|| (args[0].indexOf('chat history') >= 0)
+    			|| (args[0].indexOf('userlist')  >= 0) 
+    			|| (args[0].indexOf('_chatClicked')  >= 0)
+    			|| ((args[0].indexOf('_clientJoin') >= 0)
+    				&& (args[0].indexOf('chat: true') >= 0))
+    		)
+    	{
+    		if(logFlag == false)
+    			console.groupCollapsed('Useless Comments');
+    		
+    		logFlag = true;
+    	}
+    	else 
+    	{
+    		if(logFlag == true)
+    			console.groupEnd();
+    		
+    		logFlag = false;
+    	}
         
-        passNotification(args);
+        //passNotification(args);
         
         args.unshift('[' + new Date() + '] ');
         logged.push(args);
@@ -31,9 +55,9 @@ function newConsoleLog()
 
 function passNotification(notification)
 {
-	if( (notification.indexOf("Notification") >= 0) && (initializedJquery == true) )
+	if( (notification.indexOf('Notification') >= 0) && (initializedJquery == true) )
 	{
-		sendTradeAlert("timothysykes", notification)
+		sendTradeAlert('timothysykes', notification)
 	}
 }
 
@@ -41,13 +65,10 @@ function passNotification(notification)
 function startLoop() 
 {
 	var jq = document.createElement('script');
-    jq.src = "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
+    jq.src = '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js';
     document.getElementsByTagName('head')[0].appendChild(jq);
-    
     newConsoleLog();
-    
     setTimeout(testURL, 3000);
-    
     
     //setTimeout(loop, 2000);
 }
@@ -73,7 +94,7 @@ function testURL()
 var commentsClassName = '.comments';
 var newsClassName = '.newsletter';
 var connectedClassName = '.green';
-var chatGuruClassName = '.chatWidgetText chatWidgetComm'; //class="chatWidgetText chatWidgetGuru"
+var chatGuruClassName = '.chatWidgetText chatWidgetComm'; //class='chatWidgetText chatWidgetGuru'
 var chatRoomClassName = '.dijitContentPane chatWidgetMessages chatWidget-child chatWidget-dijitContentPane chatWidgetPane dijitAlignCenter';
 var chatRoomID = 'dijit_layout_ContentPane_3';
 
@@ -109,14 +130,14 @@ function loop () {
 		numItems = tradeArray.length;
 		numComments = 10;
 		numTradeAlerts = numItems - numComments;
-		lastComment = tradeArray[numTradeAlerts].innerHTML.split("<a")[0];
-		lastTradeAlert = tradeArray[0].innerHTML.split("<a")[0];
+		lastComment = tradeArray[numTradeAlerts].innerHTML.split('<a')[0];
+		lastTradeAlert = tradeArray[0].innerHTML.split('<a')[0];
 		console.log(lastComment);
 
 		if(initiateTrade == true)
 		{
 			numItems = 0; // Instigating an 'Added'
-			lastTradeAlert = ""; //Instigating a 'Bought'
+			lastTradeAlert = ''; //Instigating a 'Bought'
 			numTradeAlerts = numTradeAlerts - 1; // Subtracts an alert because there really isn't a new one
 		}
 	}
@@ -135,7 +156,7 @@ function loop () {
 		// New chat
 		if(chatRoomArray.length != numChats)
 		{
-			//console.log("New chat at time: " + new Date());
+			//console.log('New chat at time: ' + new Date());
 	
 			
 			// When a new chat is posted, it is in the following format:
@@ -159,19 +180,19 @@ function loop () {
 			}
 			
 			// If this was a useful chat, log it and send it to the server
-            if( (username == "timothysykes") || (username == "super_trades") )
+            if( (username == 'timothysykes') || (username == 'super_trades') )
             {
-            	console.log(username + " " + chatText + " at time: " + new Date());
+            	console.log(username + ' ' + chatText + ' at time: ' + new Date());
             	chrome.runtime.sendMessage({msg:username,text:chatText},function(response){});
             }
             
             // Debug
-            if(username == "justinoliver51")
-            	console.log(username + " " + chatText + " at time: " + new Date());
+            if(username == 'justinoliver51')
+            	console.log(username + ' ' + chatText + ' at time: ' + new Date());
 			
 			// Update the length
 			numChats = chatRoomArray.length;
-			//console.log(chatRoom.outerText + " at time: " + new Date());
+			//console.log(chatRoom.outerText + ' at time: ' + new Date());
 		}
 	}
 
@@ -184,23 +205,23 @@ function loop () {
 		var trader = null;
 
 		// Set the trader
-		trader = newsArray[0].innerHTML.split("<a")[0];
+		trader = newsArray[0].innerHTML.split('<a')[0];
 
 		// Update the number of items
 		numItems = tradeArray.length;
 
 		// Is this a new trade
-		if(lastTradeAlert != tradeArray[0].innerHTML.split("<a")[0])
+		if(lastTradeAlert != tradeArray[0].innerHTML.split('<a')[0])
 		{
-			console.log("New trade alert! Time: " + new Date());
+			console.log('New trade alert! Time: ' + new Date());
 
 			// Update the global variables
-			lastTradeAlert = tradeArray[0].innerHTML.split("<a")[0]; // Grabs the newest alert
+			lastTradeAlert = tradeArray[0].innerHTML.split('<a')[0]; // Grabs the newest alert
 			numTradeAlerts = numTradeAlerts + 1;
 			numComments = numItems - numTradeAlerts; // Some alerts are posted to both
 			
 			// Access the latest trade text
-			splitHTML = tradeArray[numTradeAlerts].innerHTML.split("<a"); 
+			splitHTML = tradeArray[numTradeAlerts].innerHTML.split('<a'); 
 			tradeUpdate = splitHTML[0];
 			console.log(tradeUpdate);
 
@@ -208,12 +229,12 @@ function loop () {
 			//chrome.runtime.sendMessage({msg:trader,text:tradeUpdate},function(response){});
 		}
 		// Is this an 'Added' comment
-		else if(tradeArray[numTradeAlerts].innerHTML.split("<a")[0].indexOf("Added") >= 0)
+		else if(tradeArray[numTradeAlerts].innerHTML.split('<a')[0].indexOf('Added') >= 0)
 		{
-			console.log("Added comment! Time: " + new Date());
+			console.log('Added comment! Time: ' + new Date());
 
 			// Access the latest comment text
-			splitHTML = tradeArray[numTradeAlerts].innerHTML.split("<a");
+			splitHTML = tradeArray[numTradeAlerts].innerHTML.split('<a');
 			tradeUpdate = splitHTML[0];
 			console.log(tradeUpdate);
 
@@ -227,18 +248,18 @@ function loop () {
 		// This is nothing
 		else
 		{
-			console.log("False alarm!");
+			console.log('False alarm!');
 			numComments = numComments + 1;
 		}
 
 		// Print useful debug information
 		if(debug == true)
 		{
-			console.log("numTradeAlerts = ", numTradeAlerts);
-			console.log("numComments = ", numComments);
+			console.log('numTradeAlerts = ', numTradeAlerts);
+			console.log('numComments = ', numComments);
 
-			console.log("The first trade alert is: ", tradeArray[0].innerHTML.split("<a")[0]);
-			console.log("The first comment is: ", tradeArray[numTradeAlerts].innerHTML.split("<a")[0]);
+			console.log('The first trade alert is: ', tradeArray[0].innerHTML.split('<a')[0]);
+			console.log('The first comment is: ', tradeArray[numTradeAlerts].innerHTML.split('<a')[0]);
 		}
 	}
 
@@ -249,7 +270,7 @@ function loop () {
 
 function sendTradeAlert (traderID, newTrade) 
 {
-	console.log("Time sent to server: " + new Date());
+	console.log('Time sent to server: ' + new Date());
 			
 	var encodedURL;
 	var params = {
@@ -264,6 +285,6 @@ function sendTradeAlert (traderID, newTrade)
 	$.getJSON( encodedURL ,function(data)
 	{
 		console.log(data);
-		console.log("Time received response from server: " + new Date());
+		console.log('Time received response from server: ' + new Date());
 	});
 }

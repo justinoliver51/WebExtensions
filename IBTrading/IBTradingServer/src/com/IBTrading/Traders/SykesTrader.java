@@ -7,6 +7,7 @@ public class SykesTrader extends Trader
 {
 	// Passed parameters
 	private String tradeString;
+	private boolean isSimulation;
 	
 	// Parsed trade information
 	ProfitlyTradeParser parser;
@@ -21,7 +22,7 @@ public class SykesTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public SykesTrader(String newTrade, IBTradingAPI newTradingAPI)
+	public SykesTrader(String newTrade, IBTradingAPI newTradingAPI, boolean simulation)
 	{	
 		super(newTradingAPI);
 		
@@ -33,6 +34,7 @@ public class SykesTrader extends Trader
 			return;
 		}
 		
+		isSimulation = simulation;
 		lastTraderString = newTrade;
 		parser = new ProfitlyTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
@@ -44,10 +46,16 @@ public class SykesTrader extends Trader
 	}
 
 	// Initiates the trade with TWS
-	public boolean trade()
+	public String trade()
 	{
+		if(isSimulation == false)
+			return "No purchases for Sykes with real money";
+		
 		// Make the purchase
-		tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
+		String tradeError = tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
+		
+		if(tradeError != null)
+			return tradeError;
 		
 		// Sleep for 90 seconds, then sell
 		try
@@ -60,8 +68,6 @@ public class SykesTrader extends Trader
 		}
 		
 		// Sell the stocks
-		tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
-		
-		return true;
+		return tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
 	}
 }
