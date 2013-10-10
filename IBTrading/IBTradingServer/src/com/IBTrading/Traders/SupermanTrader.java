@@ -7,7 +7,6 @@ public class SupermanTrader extends Trader
 {
 	// Passed parameters
 	private String tradeString;
-	private boolean isSimulation;
 	
 	// Parsed trade information
 	ProfitlyTradeParser parser;
@@ -22,7 +21,7 @@ public class SupermanTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public SupermanTrader(String newTrade, IBTradingAPI newTradingAPI, boolean simulation)
+	public SupermanTrader(String newTrade, IBTradingAPI newTradingAPI)
 	{	
 		super(newTradingAPI);
 		
@@ -34,7 +33,6 @@ public class SupermanTrader extends Trader
 			return;
 		}
 		
-		isSimulation = simulation;
 		lastTraderString = newTrade;
 		parser = new ProfitlyTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
@@ -48,15 +46,22 @@ public class SupermanTrader extends Trader
 	// Initiates the trade with TWS
 	public String trade()
 	{
-		int quantity = isSimulation ? ((parser.quantity * TRADERPERCENTAGE) / 100) : 10;
-		
 		// Make the purchase
-		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, quantity);
+		boolean isSimulation = false;
+		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, 10, isSimulation);
 		
 		if(tradeError != null)
 			return tradeError;
 		
-		// Sleep for 90 seconds, then sell
+		// Make the purchase with the Simulator
+		isSimulation = true;
+		tradeError = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100
+				, isSimulation);
+		
+		if(tradeError != null)
+			return tradeError;
+		
+		// Sleep for 60 seconds, then sell
 		try
 		{
 			Thread.sleep( 60 * SECONDS );
@@ -67,6 +72,14 @@ public class SupermanTrader extends Trader
 		}
 		
 		// Sell the stocks
-		return tradingAPI.placeOrder(SELL, parser.symbol, quantity);
+		isSimulation = false;
+		tradeError = tradingAPI.placeOrder(SELL, parser.symbol, 10, isSimulation);
+		
+		if(tradeError != null)
+			return tradeError;
+		
+		// Sell the stocks over the simulator
+		isSimulation = true;
+		return tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
 	}
 }

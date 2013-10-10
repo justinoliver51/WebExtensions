@@ -21,6 +21,7 @@ public class ProfitlyTradeParser
 	public String totalQuant;
 	public String symb;
 	public String price;
+	public String type;
 	
 	public ProfitlyTradeParser(String newTrade)
 	{
@@ -95,14 +96,22 @@ public class ProfitlyTradeParser
 			tokensIndex = tokensIndex + 2;
 			
 			// Get the symbol
-			symb = tokens[tokensIndex];
+			symb = tokens[tokensIndex++];
+			
+			if(tokens[tokensIndex].equalsIgnoreCase("long") || tokens[tokensIndex].equalsIgnoreCase("short"))
+				type = tokens[tokensIndex];
+			else
+				type = "long";
+			
 			tokensIndex = tokensIndex + 2;
 			
 			// Get the price
 			price = tokens[tokensIndex];
+			
+			
 
 			// If everything went well, set up the trade
-			if(areParamatersValid(date, action, totalQuant, symb, price) == true)
+			if(areParamatersValid(date, action, totalQuant, symb, type, price) == true)
 			{
 				// Update the globals
 				symbol = symb;
@@ -132,7 +141,7 @@ public class ProfitlyTradeParser
 		return true;
 	}
 	
-	public boolean areParamatersValid(String date, String action, String totalQuant, String symb, String price)
+	public boolean areParamatersValid(String date, String action, String totalQuant, String symb, String type, String price)
 	{
 		// Get the current date
 		DateFormat dateFormatBought = new SimpleDateFormat("MM/dd");
@@ -165,6 +174,13 @@ public class ProfitlyTradeParser
 			if(symb.length() > 10)
 			{
 				System.out.println("Invalid symbol, " + symb);
+				return false;
+			}
+			
+			// If the type is a short
+			if(type.equalsIgnoreCase("short"))
+			{
+				System.out.println("Invalid type, " + type);
 				return false;
 			}
 			

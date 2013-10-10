@@ -7,7 +7,6 @@ public class SykesTrader extends Trader
 {
 	// Passed parameters
 	private String tradeString;
-	private boolean isSimulation;
 	
 	// Parsed trade information
 	ProfitlyTradeParser parser;
@@ -22,7 +21,7 @@ public class SykesTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public SykesTrader(String newTrade, IBTradingAPI newTradingAPI, boolean simulation)
+	public SykesTrader(String newTrade, IBTradingAPI newTradingAPI)
 	{	
 		super(newTradingAPI);
 		
@@ -33,8 +32,7 @@ public class SykesTrader extends Trader
 			System.out.println("Duplicate trade, " + tradeString);
 			return;
 		}
-		
-		isSimulation = simulation;
+
 		lastTraderString = newTrade;
 		parser = new ProfitlyTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
@@ -48,11 +46,9 @@ public class SykesTrader extends Trader
 	// Initiates the trade with TWS
 	public String trade()
 	{
-		if(isSimulation == false)
-			return "No purchases for Sykes with real money";
-		
 		// Make the purchase
-		String tradeError = tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
+		boolean isSimulation = true;
+		String tradeError = tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
 		
 		if(tradeError != null)
 			return tradeError;
@@ -68,6 +64,6 @@ public class SykesTrader extends Trader
 		}
 		
 		// Sell the stocks
-		return tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
+		return tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
 	}
 }

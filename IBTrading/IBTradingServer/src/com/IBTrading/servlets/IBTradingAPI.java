@@ -24,20 +24,17 @@ import com.ib.client.UnderComp;
 
 public class IBTradingAPI extends JFrame implements EWrapper
 {
-	private EClientSocket   m_client = new EClientSocket( this);
-	private final String orderIDPathMac = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
-	private final String orderIDPathPC = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
+	private EClientSocket m_client = new EClientSocket(this);
+	private EClientSocket m_client_simulation = new EClientSocket(this);
+	private final String orderIDPath = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
 
 	private static int orderID;	// If this value is not updated, we may simply never get a response...
-	private String orderIDPath;
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
 	
-	public IBTradingAPI(boolean macComputer)
+	public IBTradingAPI()
 	{
-		orderIDPath = macComputer ? orderIDPathMac : orderIDPathPC;
-		
 		// Get the current orderID
 		Scanner sc;
 		try 
@@ -51,17 +48,26 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		}
 	}
 	
-	
 	public synchronized void connect() 
 	{
-        m_bIsFAAccount = false;
+		m_bIsFAAccount = false;
 
         // connect to TWS
         m_disconnectInProgress = false;
         
-        m_client.eConnect(null, 7496, 0);
-        if (m_client.isConnected()) {
-            System.out.println("Connected to the TWS server!");
+        if(m_client_simulation.isConnected() == false)
+        {
+        	m_client_simulation.eConnect(null, 7496, 0);
+            if (m_client_simulation.isConnected()) {
+                System.out.println("Connected to the TWS server, simulation!");
+            }
+        }
+        if(m_client.isConnected() == false)
+        {
+        	m_client.eConnect(null, 7495, 0);
+            if (m_client.isConnected()) {
+                System.out.println("Connected to the TWS server!");
+            }
         }
     }
 	
@@ -70,9 +76,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
         // disconnect from TWS
         m_disconnectInProgress = true;
         m_client.eDisconnect();
+        m_client_simulation.eDisconnect();
     }
 
-    public synchronized String placeOrder(String orderAction, String symbol, int quantity) 
+    public synchronized String placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation) 
     {
 
         Order order = new Order();
@@ -85,22 +92,27 @@ public class IBTradingAPI extends JFrame implements EWrapper
         order.m_totalQuantity = quantity;
         order.m_action = orderAction;
         
-        // If we have disconnected, reestablish the connection
-        if (m_client.isConnected() == false) {
-        	m_client.eConnect(null, 7496, 0);
-            if (m_client.isConnected() == false) {
-            	System.out.println("Unable to connect to TWS...");
-            	return "Unable to connect to TWS...";
-            }
+        // Connect to TWS
+    	connect();
+        if( (m_client.isConnected() == false) || (m_client_simulation.isConnected() == false) )
+        {
+        	System.out.println("Unable to connect to TWS...");
+        	return "Unable to connect to TWS...";
         }
         
         // place order
-        m_client.placeOrder( orderID, contract, order );
+        if(isSimulation)
+        	m_client_simulation.placeOrder( orderID, contract, order );
+        else
+        	m_client.placeOrder( orderID, contract, order );
         
         // Log time
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
-		System.out.println("Order placed at: " + dateFormat.format(date));
+		System.out.println("Order number " + orderID + " placed at: " + dateFormat.format(date));
+		
+		// Update the orderID for the next order
+		orderID++;
 		
 		return null;
     }
@@ -119,11 +131,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		System.out.println(msg + " " + dateFormat.format(date));
 		
 		// make sure id for next order is at least orderId+1
-		orderID =  orderID + 1;
+		orderID++;
 		
 		// Set the orderID in the file
 		try {
-			PrintWriter writer = new PrintWriter("/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter(orderIDPath, "UTF-8");
 			writer.println(orderID);
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -141,7 +153,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	m_contract.m_secType = "STK";
     	m_contract.m_strike = 0;
     	m_contract.m_exchange = "SMART";
-    	m_contract.m_primaryExch = "ISLAND"; // FIXME: Justin, what is this?
+    	m_contract.m_primaryExch = "ISLAND"; 
     	m_contract.m_currency = "USD";
     	
     	// Set other fields to 0

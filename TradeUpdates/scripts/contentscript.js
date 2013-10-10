@@ -135,10 +135,14 @@ function go () {
 			{
                 var newChat = chatRoomArray[i];
                 
-                if(counter == 1)
+                if(newChat.className == "chatWidgetComm chatWidgetUserBold")
                 	username = newChat.innerText;
-                else if(counter == 2)
+                else if(newChat.className == "chatWidgetText chatWidgetComm")
                 	chatText = newChat.innerText;
+                
+                // If there has been a new trade, break
+                if( ((username == "timothysykes") || (username == "super_trades")) && (chatText != null)  && ((chatText.indexOf("[trade]") >= 0) || ((chatText.indexOf("[commentary]") >= 0))) )
+                	break;
 			}
 			
 			// If this was a useful chat, log it and send it to the server
@@ -158,6 +162,7 @@ function go () {
 		}
 	}
 
+	/*
 	// TRADE ALERTS
 	// If there has been a new trade alert or comment
 	if(tradeArray.length > numItems)
@@ -223,7 +228,7 @@ function go () {
 			console.log("The first trade alert is: ", tradeArray[0].innerHTML.split("<a")[0]);
 			console.log("The first comment is: ", tradeArray[numTradeAlerts].innerHTML.split("<a")[0]);
 		}
-	}
+	}*/
 
 	tenthSeconds++;
 	setTimeout(go, numMilliseconds);

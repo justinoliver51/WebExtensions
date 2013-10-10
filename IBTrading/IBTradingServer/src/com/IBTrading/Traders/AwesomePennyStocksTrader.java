@@ -7,7 +7,6 @@ public class AwesomePennyStocksTrader extends Trader
 {
 	// Passed parameters
 	private String tradeString;
-	private boolean isSimulation;
 	
 	// Parsed trade information
 	AwesomePennyStocksParser parser;
@@ -22,7 +21,7 @@ public class AwesomePennyStocksTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public AwesomePennyStocksTrader(String newTrade, IBTradingAPI newTradingAPI, boolean simulation)
+	public AwesomePennyStocksTrader(String newTrade, IBTradingAPI newTradingAPI)
 	{	
 		super(newTradingAPI);
 		
@@ -34,7 +33,6 @@ public class AwesomePennyStocksTrader extends Trader
 			return;
 		}
 		
-		isSimulation = simulation;
 		lastTraderString = newTrade;
 		parser = new AwesomePennyStocksParser(newTrade);
 		hasValidTrade = parser.parseTrade();
@@ -48,11 +46,9 @@ public class AwesomePennyStocksTrader extends Trader
 	// Initiates the trade with TWS
 	public String trade()
 	{
-		if(isSimulation == false)
-			return "No purchases for AwesomePennyStocks with real money";
-		
 		// Make the purchase
-		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
+		boolean isSimulation = true;
+		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
 		
 		if(tradeError != null)
 			return tradeError;
@@ -68,6 +64,6 @@ public class AwesomePennyStocksTrader extends Trader
 		}
 		
 		// Sell the stocks
-		return tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100);
+		return tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
 	}
 }

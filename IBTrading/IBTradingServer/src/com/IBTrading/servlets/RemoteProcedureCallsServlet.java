@@ -23,21 +23,21 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	private IBTradingAPI tradingAPI;
 	private TradeCenter tradeCenter;
-	private final boolean macComputer = true;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoteProcedureCallsServlet() 
+	
+	public RemoteProcedureCallsServlet() 
     {
         super();
 
         // Initialize the trading API connection
-        tradingAPI = new IBTradingAPI(macComputer);
+        tradingAPI = new IBTradingAPI();
         tradingAPI.connect();
         
         // Initializes the Trade Center
-        tradeCenter = new TradeCenter(tradingAPI, macComputer);
+        tradeCenter = new TradeCenter(tradingAPI);
     }
 
 	/**
@@ -49,6 +49,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		PrintWriter out = response.getWriter();
 		response.setHeader("Access-Control-Allow-Origin", "*");
         System.out.println("doGet() called!  :)");
+        out.println("doGet() called");
         
         synchronized (session)
         {
