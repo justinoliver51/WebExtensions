@@ -9,6 +9,7 @@ import time
 import email.utils
 import urllib2
 import urllib
+import string
 from email.header import decode_header
 
 def connect(retries=5, delay=3):
@@ -31,27 +32,57 @@ def get_emails(email_ids):
         data.append(response[0][1])
     return data
 
+def getTrade(email_body, startingIndex):
+    spacesCount = 0
+    index = startingIndex
+    
+    # Find the end point
+    while spacesCount < 5:
+        if email_body[index] == ' ':
+            spacesCount = spacesCount + 1
+        index = index + 1
+
+    index = index - 1
+    exclude = set(string.punctuation)
+    tradeList = ''.join(ch for ch in email_body[startingIndex:index] if (ch == '.') or ((ch not in exclude) and (ch != '\r') and (ch != '\n')))  # FIXME: Need to leave in '.'
+    
+    return tradeList
+
 def getEmailBody(email_message):
     # Get the important information out of the email
     message = ""
     for part in email_message.walk():
         if part.get_content_type() == "text/plain": # ignore attachments / html
-            body = part.get_payload(decode=True).decode('utf-8')
+            bodyDecoded, encoding = decode_header(part)[0]
+            if encoding == None:
+                body = bodyDecoded
+            else:
+                body = part.get_payload(decode=True).decode(encoding)
+                
+            if body.find('Bought') >= 0:
+                index = body.find('Bought')
+                return getTrade(body, index)
+            elif body.find('Added') >= 0:
+                index = body.find('Added')
+                return getTrade(body, index)
+            
             message = message + body
         else:
             continue
+        
+        return None
 
 def decodeSubject(email_message):
     subjectDecoded, encoding = decode_header(email_message['Subject'])[0]
     if encoding==None:
         subjectDecodedParsed = email_message['Subject']
-        print 'I am NOT decoding Subject'
+        #print 'I am NOT decoding Subject'
         print subjectDecodedParsed
         
         return subjectDecoded
     else:
         subjectDecodedParsed = subjectDecoded.decode(encoding)
-        print 'I am decoding subject'
+        #print 'I am decoding subject'
         print subjectDecodedParsed.encode('utf8') #<--- Only first line will be presented here
         
         return subjectDecodedParsed
@@ -84,9 +115,16 @@ while True:
                 traderID = email.utils.parseaddr(email_message['From'])
                 subject = decodeSubject(email_message)
 
+                try:
+                    trade = getEmailBody(email_message)
+                except:
+                    trade = subject
+                    print 'Unable to get the body'
+
                 # Build the url
-                paramDic = {'traderID': traderID[0], 
-                            'newTrade': subject
+                paramDic = {'traderID':         traderID[0], 
+                            'newTrade':         trade,
+                            'realTimeSystem':   'email'
                             }
                 url = "http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?"
                 

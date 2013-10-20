@@ -7,6 +7,7 @@ public class SupermanTrader extends Trader
 {
 	// Passed parameters
 	private String tradeString;
+	private boolean websiteMonitorFlag;
 	
 	// Parsed trade information
 	ProfitlyTradeParser parser;
@@ -21,7 +22,7 @@ public class SupermanTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public SupermanTrader(String newTrade, IBTradingAPI newTradingAPI)
+	public SupermanTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
 	{	
 		super(newTradingAPI);
 		
@@ -33,8 +34,9 @@ public class SupermanTrader extends Trader
 			return;
 		}
 		
+		websiteMonitorFlag = newRealTimeSystem;
 		lastTraderString = newTrade;
-		parser = new ProfitlyTradeParser(newTrade);
+		parser = new ProfitlyTradeParser(newTrade, websiteMonitorFlag);
 		hasValidTrade = parser.parseTrade();
 		if(hasValidTrade == true)
 		{
@@ -48,15 +50,27 @@ public class SupermanTrader extends Trader
 	{
 		// Make the purchase
 		boolean isSimulation = false;
-		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, 10, isSimulation);
+		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
+		int quantity;
+		int maxCash = 3000;
+		
+		try
+		{
+			quantity = ( ((int) (maxCash/Double.parseDouble(parser.price))) <= ((parser.quantity * TRADERPERCENTAGE) / 100) ) ? 
+					((int) (maxCash/Double.parseDouble(parser.price))) : ((parser.quantity * TRADERPERCENTAGE) / 100);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			quantity = (parser.quantity * TRADERPERCENTAGE) / 100;
+		}
+		String tradeError = null; // tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
 		
 		if(tradeError != null)
 			return tradeError;
 		
 		// Make the purchase with the Simulator
 		isSimulation = true;
-		tradeError = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100
-				, isSimulation);
+		tradeError = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
 		
 		if(tradeError != null)
 			return tradeError;
@@ -73,13 +87,13 @@ public class SupermanTrader extends Trader
 		
 		// Sell the stocks
 		isSimulation = false;
-		tradeError = tradingAPI.placeOrder(SELL, parser.symbol, 10, isSimulation);
+		//tradeError = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation);
 		
 		if(tradeError != null)
 			return tradeError;
 		
 		// Sell the stocks over the simulator
 		isSimulation = true;
-		return tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		return tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);
 	}
 }

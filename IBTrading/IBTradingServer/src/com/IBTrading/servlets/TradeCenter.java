@@ -32,13 +32,14 @@ public class TradeCenter {
 	private String SYKES = "TimAlerts";  // Tim Sykes
 	private String SYKESCHAT = "timothysykes";  // Tim Sykes
 	private String AWESOMEPENNYSTOCKS = "AwesomePennyStocks"; // AwesomePennyStocks.com
+	private String JASONBONDS = "Jason"; // AwesomePennyStocks.com
 
 	public TradeCenter(IBTradingAPI newTradingAPI)
 	{
 		tradingAPI = newTradingAPI;
 	}
 	
-	public String newTrade(String newTraderID, String newTrade)
+	public String newTrade(String newTraderID, String newTrade, String realTimeSystem)
 	{
 		// If either of the passed values are null, exit
 		if( (newTraderID == null) || (newTrade == null) )
@@ -64,21 +65,28 @@ public class TradeCenter {
 		}
 		
 		traderID = newTraderID;
+		boolean websiteMonitorFlag = realTimeSystem.equalsIgnoreCase("websiteMonitor") ? 
+										true : false;
 		
 		// Parse the new trade string
 		if(traderID.equalsIgnoreCase(SUPERMAN) || traderID.equalsIgnoreCase(SUPERMANCHAT))
 		{
-			SupermanTrader currentTrader = new SupermanTrader(newTrade, tradingAPI);
+			SupermanTrader currentTrader = new SupermanTrader(newTrade, tradingAPI, websiteMonitorFlag);
 			trader = (Trader) currentTrader;
 		}
 		else if(traderID.equalsIgnoreCase(SYKES) || traderID.equalsIgnoreCase(SYKESCHAT))
 		{
-			SykesTrader currentTrader = new SykesTrader(newTrade, tradingAPI);
+			SykesTrader currentTrader = new SykesTrader(newTrade, tradingAPI, websiteMonitorFlag);
 			trader = (Trader) currentTrader;
 		}
 		else if(traderID.equalsIgnoreCase(AWESOMEPENNYSTOCKS))
 		{
-			AwesomePennyStocksTrader currentTrader = new AwesomePennyStocksTrader(newTrade, tradingAPI);
+			AwesomePennyStocksTrader currentTrader = new AwesomePennyStocksTrader(newTrade, tradingAPI, websiteMonitorFlag);
+			trader = (Trader) currentTrader;
+		}
+		else if(traderID.equalsIgnoreCase(JASONBONDS) || traderID.equalsIgnoreCase("Justin Oliver"))
+		{
+			JasonBondsTrader currentTrader = new JasonBondsTrader(newTrade, tradingAPI, websiteMonitorFlag);
 			trader = (Trader) currentTrader;
 		}
 		else

@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/setup.py</name>
+			<type>1</type>
+			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/setupTWS/setup.py</location>
+		</link>
+	</linkedResources>
 </projectDescription>

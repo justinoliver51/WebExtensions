@@ -59,12 +59,13 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         String startUp = request.getParameter("startUp");
 		String traderID = request.getParameter("traderID");
 		String newTrade = request.getParameter("newTrade");
+		String realTimeSystem = request.getParameter("realTimeSystem");
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
 		
-		System.out.println("traderID: " + traderID + ", trade: " + newTrade + ", on date: " + dateFormat.format(date));
-		out.println("traderID: " + traderID + ", trade: " + newTrade + ", on date: " + dateFormat.format(date));
+		System.out.println("traderID: " + traderID + "\ntrade: " + newTrade + "\nrealTimeSystem: " + realTimeSystem + "\non date: " + dateFormat.format(date));
+		out.println("traderID: " + traderID + "\ntrade: " + newTrade + "\nrealTimeSystem: " + realTimeSystem + "\non date: " + dateFormat.format(date));
 		
 		if(startUp != null)
 		{
@@ -73,7 +74,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			return;
 		}
 		
-		if( (traderID == null) || (newTrade == null) )
+		if( (traderID == null) || (newTrade == null) || (realTimeSystem == null) || ((realTimeSystem.equalsIgnoreCase("email") == false) && (realTimeSystem.equalsIgnoreCase("websiteMonitor") == false)) )
 		{
 			System.out.println("Invalid parameters...");
 			out.println("Invalid parameters: \ntraderID = " + traderID 
@@ -82,7 +83,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		}
 		
 		// Send the trade to the TradeCenter to be evaluated
-		String tradeError = tradeCenter.newTrade(traderID, newTrade);
+		String tradeError = tradeCenter.newTrade(traderID, newTrade, realTimeSystem);
 		if(tradeError == null)
 		{
 			// The new trade has found a trader.  

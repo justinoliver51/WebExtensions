@@ -7,6 +7,7 @@ public class SykesTrader extends Trader
 {
 	// Passed parameters
 	private String tradeString;
+	private boolean websiteMonitorFlag;
 	
 	// Parsed trade information
 	ProfitlyTradeParser parser;
@@ -21,7 +22,7 @@ public class SykesTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public SykesTrader(String newTrade, IBTradingAPI newTradingAPI)
+	public SykesTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
 	{	
 		super(newTradingAPI);
 		
@@ -33,8 +34,9 @@ public class SykesTrader extends Trader
 			return;
 		}
 
+		websiteMonitorFlag = newRealTimeSystem;
 		lastTraderString = newTrade;
-		parser = new ProfitlyTradeParser(newTrade);
+		parser = new ProfitlyTradeParser(newTrade, websiteMonitorFlag);
 		hasValidTrade = parser.parseTrade();
 		if(hasValidTrade == true)
 		{

@@ -1,21 +1,14 @@
 package com.IBTrading.tradeparsers;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class JasonBondsTradeParser {
 	// Passed parameters
 	private String tradeString;
 	
 	// Parsed trade information
-	public String symbol = null;
+	public String symbol = "";
 	public int quantity = 0;
-
-	public String action;
-	public String totalQuant;
-	public String symb;
-	public String price;
+	public String action = "";
+	public String price = "";
 	
 	public JasonBondsTradeParser(String newTrade)
 	{
@@ -24,6 +17,8 @@ public class JasonBondsTradeParser {
 	
 	public boolean parseTrade()
 	{
+		String parsedSymbol = null, parsedQuantity = null, parsedAction = null, parsedPrice = null;
+		
 		// If we are given an invalid value, return
 		if(tradeString == null)
 		{
@@ -33,74 +28,46 @@ public class JasonBondsTradeParser {
 		
 		try
 		{
-			// EXAMPLE
-			// Bought 5,000 MM at $7.04
-			
 			// Get the useful information
 			String[] tokens = tradeString.split("[ ]");
-			int tokensIndex = 0;
 			
-			// If this is in response to an email alert, return false
-			if(tokens.length < 7)
-			{
-				System.out.println("Profit.ly is handled by a javascript listener - ignores email alerts.");
+			// If this is not a known format, return false
+			if((tokens.length != 2) && (tokens.length != 5))
 				return false;
-			}
-
 			
-			// Ignore the time if it exists
-			if( (tokens[tokensIndex].contains("AM")) || (tokens[tokensIndex].contains("PM")))
+			// Bought CRRS
+			if(tokens.length == 2)
 			{
-				tokensIndex++;
+				parsedAction = tokens[0];
+				parsedSymbol = tokens[1];
 			}
-			else if( (tokens[tokensIndex + 1].contains("AM")) || (tokens[tokensIndex + 1].contains("PM")) )
+			
+			// Bought 10,000 DMD at $5.19
+			// Added 10,000 CRRS at $3.50
+			if(tokens.length == 5)
 			{
-				tokensIndex = tokensIndex + 2;
+				parsedAction   = tokens[0];
+				parsedQuantity = tokens[1];
+				parsedSymbol   = tokens[2];
+				
+				if(tokens[4].contains("$") == true)
+					parsedPrice = tokens[4].substring(1);
+				else
+					parsedPrice = tokens[4];
 			}
 			
-			 // Skipping '-'
-			if(tokens[tokensIndex].equalsIgnoreCase("-"))
-			{
-				tokensIndex++;
-			}
-			
-			// Get the action
-			action = tokens[tokensIndex++];
-			
-			// Get the quantity
-			totalQuant = tokens[tokensIndex];
-			tokensIndex = tokensIndex + 2;
-			
-			// Get the symbol
-			symb = tokens[tokensIndex];
-			tokensIndex = tokensIndex + 2;
-			
-			// Get the price
-			price = tokens[tokensIndex];
-
 			// If everything went well, set up the trade
-			if(areParamatersValid(action, totalQuant, symb, price) == true)
+			if(areParamatersValid(parsedAction, parsedQuantity, parsedSymbol, parsedPrice) == true)
 			{
 				// Update the globals
-				symbol = symb;
-				quantity = Integer.parseInt(totalQuant);
+				action = parsedAction;
+				quantity = Integer.parseInt(parsedQuantity);
+				symbol = parsedSymbol;
+				price = parsedPrice;
 			}
 			else
-			{
-				System.out.println("Invalid Parameters. "
-						+ "\naction = " + action
-						+ "\ntotalQuant = " + totalQuant
-						+ "\nsymb = " + symb
-						+ "\nprice = " + price);
 				return false;
-			}
-		
-		} catch(ArrayIndexOutOfBoundsException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		catch(Exception e)
+		}catch(Exception e)
 		{
 			e.printStackTrace();
 			return false;
@@ -110,7 +77,7 @@ public class JasonBondsTradeParser {
 	}
 	
 	public boolean areParamatersValid(String action, String totalQuant, String symb, String price)
-	{
+	{	
 		try
 		{
 			// If the action is not 'Bought'
@@ -135,7 +102,7 @@ public class JasonBondsTradeParser {
 			}
 			
 			// If the price is unreasonable
-			if(false)
+			if(Double.parseDouble(price) >= 100)
 			{
 				System.out.println("Invalid Price, " + price);
 				return false;

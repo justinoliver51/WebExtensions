@@ -15,8 +15,9 @@ chrome.runtime.onMessage.addListener(
 			
 			var encodedURL;
 			var params = {
-				traderID: request.msg,
-				newTrade: request.text
+				traderID: 		request.msg,
+				newTrade: 		request.text,
+				realTimeSystem: 'websiteMonitor'
 			};
 			
 			encodedURL = url + $.param(params);

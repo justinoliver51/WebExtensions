@@ -1,0 +1,70 @@
+[debug] SikuliScript: CmdOrg: -r /Users/justinoliver/Desktop/Developer/WebExtensions/setupTWS/setupTWS.skl -f /Users/justinoliver/Desktop/Developer/WebExtensions/setupTWS/dailyLog.log -d 3 -c
+[debug] Running on Java 6 (1.6.0_51-b11-457-11M4509)
+[debug] --- Sikuli parameters ---
+[debug] 1: -r
+[debug] 2: /Users/justinoliver/Desktop/Developer/WebExtensions/setupTWS/setupTWS.skl
+[debug] 3: -f
+[debug] 4: /Users/justinoliver/Desktop/Developer/WebExtensions/setupTWS/dailyLog.log
+[debug] 5: -d
+[debug] 6: 3
+[debug] 7: -c
+[debug] FileManager: tempdir create: /var/folders/j_/yqxyp3qd1q30hz7dhkhnw4xh0000gn/T/justinoliver/tmp-1934454342.sikuli
+[debug] SikuliScript: givenScriptName: /var/folders/j_/yqxyp3qd1q30hz7dhkhnw4xh0000gn/T/justinoliver/tmp-1934454342.sikuli/setupTWS.sikuli
+[debug] SikuliX Jython Support Build: 1.0.1 12SEP2013160248
+[debug] Trying to run script: /var/folders/j_/yqxyp3qd1q30hz7dhkhnw4xh0000gn/T/justinoliver/tmp-1934454342.sikuli/setupTWS.sikuli/setupTWS.py
+[debug] JythonScriptRunner: : executeScriptHeader: adding SikuliX Lib path to sys.path
+/Users/justinoliver/Desktop/Developer/DevTools/Sikuli/sikuli-script.jar/Lib
+[debug] Jython: sikuli: __init__: entering
+[debug] Jython: sikuli: Sikuli: entering
+[debug] Jython: sikuli: Sikuli: constants
+[debug] Jython: sikuli: Sikuli: import Region
+[debug] Jython: sikuli: Sikuli: import Screen
+[debug] Jython: sikuli: Sikuli: Env.addHotkey
+[debug] Jython: sikuli: Sikuli: import Match
+[debug] Jython: sikuli: Sikuli: import Pattern
+[debug] Jython: sikuli: Sikuli: import Location
+[debug] Jython: sikuli: Sikuli: import ScreenUnion
+[debug] Jython: sikuli: Sikuli: import Finder
+[debug] ResourceLoaderBasic: SikuliX Package Build: 1.0.1 12SEP2013160242
+[debug] ResourceLoaderBasic: check: we are running on arch: x86_64
+[debug] ResourceLoaderBasic: check: using Java at: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
+[debug] ResourceLoaderBasic: check: Exists libs folder at location of jar? YES: /Users/justinoliver/Desktop/Developer/DevTools/Sikuli/
+[debug] ResourceLoaderBasic: checkLibsDir: /Users/justinoliver/Desktop/Developer/DevTools/Sikuli/libs
+[debug] ResourceLoaderBasic: loadLib: MacUtil
+[debug] ResourceLoaderBasic: loadLib: Found: MacUtil
+[debug] ResourceLoaderBasic: loadLib: Now loaded: MacUtil
+[debug] ResourceLoaderBasic: checkLibsDir: Using libs at: /Users/justinoliver/Desktop/Developer/DevTools/Sikuli/libs
+[debug] ResourceLoaderBasic: check: Using this as OCR directory (tessdata) too
+[debug] ResourceLoaderBasic: loadLib: VisionProxy
+[debug] ResourceLoaderBasic: loadLib: Found: VisionProxy
+[debug] ResourceLoaderBasic: loadLib: Now loaded: VisionProxy
+[debug] Jython: sikuli: Sikuli: import App
+[debug] ResourceLoaderBasic: loadLib: Is already loaded: MacUtil
+[debug] Screen: initScreens: basic initialization (1 Screen(s) found)
+[debug] *** monitor configuration (primary: 0) ***
+[debug] Screen 0: S(0)[0,0 1920x1080]
+[debug] *** end monitor configuration ***
+[debug] Jython: sikuli: Sikuli: import Key
+[debug] Jython: sikuli: Sikuli: import from Basics
+[debug] Jython: sikuli: Sikuli: import from compare
+[debug] Jython: sikuli: Sikuli: init SikuliImporter
+[debug] Jython: sikuli: Sikuli: import SikuliScript
+[debug] Jython: init SCREEN as ()
+[debug] Sikuli-IDE environment setup: 4175
+[debug] waiting for 1381191081596.png to appear
+[debug] Screen.capture: java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] RobotDesktop: captureScreen: on 0 using java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] ImageLocator: found 1381191081596.png in /var/folders/j_/yqxyp3qd1q30hz7dhkhnw4xh0000gn/T/justinoliver/tmp-1934454342.sikuli/setupTWS.sikuli/
+[debug] Screen.capture: java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] RobotDesktop: captureScreen: on 0 using java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] Screen.capture: java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] RobotDesktop: captureScreen: on 0 using java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] Screen.capture: java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] RobotDesktop: captureScreen: on 0 using java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] Screen.capture: java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] RobotDesktop: captureScreen: on 0 using java.awt.Rectangle[x=0,y=0,width=1920,height=1080]
+[debug] 1381191081596.png has not appeared.
+[error] script stopped with error in line 8
+[error] FindFailed ( can not find 1381191081596.png on the screen. )
+[debug] SikuliXFinal: endNormal: 1
+[debug] SikuliXFinal: cleanUp: 0

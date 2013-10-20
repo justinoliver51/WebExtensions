@@ -22,3 +22,7 @@
 75.13.82.129 - - [09/Oct/2013:23:16:33 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=SuperAlerts&newTrade=10/09%20Added%205000%20to%20VISN%20short%20at%20$7.65.%20New%20average%20$7.42,%2014.3k%20short%20total HTTP/1.1" 200 207
 127.0.0.1 - - [09/Oct/2013:23:17:04 -0500] "GET / HTTP/1.1" 404 951
 0:0:0:0:0:0:0:1%0 - - [09/Oct/2013:23:17:05 -0500] "GET /IBTradingServer/WEB-INF/classes/com/IBTrading/tradeparsers/ProfitlyTradeParser.java HTTP/1.1" 404 949
+127.0.0.1 - - [09/Oct/2013:23:30:59 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [09/Oct/2013:23:31:08 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=Start! HTTP/1.1" 200 95
+0:0:0:0:0:0:0:1%0 - - [09/Oct/2013:23:31:13 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=Start! HTTP/1.1" 200 95
+127.0.0.1 - - [09/Oct/2013:23:36:29 -0500] "GET / HTTP/1.1" 404 951

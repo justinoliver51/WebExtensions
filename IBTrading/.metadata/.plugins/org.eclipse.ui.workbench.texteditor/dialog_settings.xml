@@ -4,7 +4,7 @@
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="97" key="DIALOG_Y_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="1113" key="DIALOG_X_ORIGIN"/>
+		<item value="923" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="    " key="selection"/>
+		<item value="getEmailBody" key="selection"/>
 		<list key="findhistory">
+			<item value="getEmailBody"/>
+			<item value="I am not"/>
+			<item value="drwi"/>
+			<item value="b"/>
+			<item value="bought"/>
 			<item value="  "/>
 			<item value="\t"/>
 			<item value="m_client"/>
-			<item value="supp"/>
-			<item value="&quot;"/>
-			<item value="sendTradeAlert"/>
-			<item value="date"/>
-			<item value="console.log"/>
 		</list>
 		<list key="replacehistory">
 			<item value="    "/>

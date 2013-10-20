@@ -1,0 +1,99 @@
+package com.IBTrading.tradeparsers;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class JasonBondsTradeParser {
+	// Passed parameters
+	private String tradeString;
+	
+	// Parsed trade information
+	public String symbol = "";
+	public int quantity = 0;
+	public String action = "";
+	public String price = "";
+	
+	public JasonBondsTradeParser(String newTrade)
+	{
+		tradeString = newTrade;
+	}
+	
+	public boolean parseTrade()
+	{
+		String parsedSymbol = null, parsedQuantity = null, parsedAction = null, parsedPrice = null;
+		
+		// If we are given an invalid value, return
+		if(tradeString == null)
+		{
+			System.out.println("Null trade string");
+			return false;
+		}
+		
+		try
+		{
+			// Get the useful information
+			String[] tokens = tradeString.split("[ ]");
+			
+			// If this is not a known format, return false
+			if((tokens.length != 2) && (tokens.length != 5))
+				return false;
+			
+			// Bought CRRS
+			if(tokens.length == 2)
+			{
+				parsedAction = tokens[0];
+				parsedSymbol = tokens[1];
+			}
+			
+			// Bought 10,000 DMD at $5.19
+			// Added 10,000 CRRS at $3.50
+			if(tokens.length == 5)
+			{
+				parsedAction   = tokens[0];
+				parsedQuantity = tokens[1];
+				parsedSymbol   = tokens[2];
+				parsedPrice    = tokens[4];
+			}
+			
+			// If everything went well, set up the trade
+			if(areParamatersValid(parsedAction, parsedSymbol, parsedQuantity, parsedPrice) == true)
+			{
+				// Update the globals
+				symbol = parsedSymbol;
+			}
+			else
+				return false;
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean areParamatersValid(String parsedAction, String parsedSymbol, String parsedQuantity, String parsedPrice)
+	{
+		try
+		{
+			if(tokens[0].equalsIgnoreCase("Bought") || tokens[0].equalsIgnoreCase("Added"))
+			{
+				symb = tokens[1];
+			}
+			
+			// If the symbol is not valid
+			if( (symb != null) && (symb.length() > 10) )
+			{
+				System.out.println("Invalid symbol, " + symb);
+				return false;
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+}

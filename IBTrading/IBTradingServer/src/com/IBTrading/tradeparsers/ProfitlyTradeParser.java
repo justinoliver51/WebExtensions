@@ -8,6 +8,7 @@ public class ProfitlyTradeParser
 {
 	// Passed parameters
 	private String tradeString;
+	private boolean websiteMonitorFlag;
 	
 	// Parsed trade information
 	public String symbol = null;
@@ -23,9 +24,10 @@ public class ProfitlyTradeParser
 	public String price;
 	public String type;
 	
-	public ProfitlyTradeParser(String newTrade)
+	public ProfitlyTradeParser(String newTrade, boolean newWebsiteMonitorFlag)
 	{
 		tradeString = newTrade;
+		websiteMonitorFlag = newWebsiteMonitorFlag;
 	}
 	
 	public boolean parseTrade()
@@ -34,6 +36,13 @@ public class ProfitlyTradeParser
 		if(tradeString == null)
 		{
 			System.out.println("Null trade string");
+			return false;
+		}
+		
+		// We are not listening to emails from profit.ly
+		if(websiteMonitorFlag != true)
+		{
+			System.out.println("We are not listening to emails from profit.ly");
 			return false;
 		}
 		
@@ -99,11 +108,11 @@ public class ProfitlyTradeParser
 			symb = tokens[tokensIndex++];
 			
 			if(tokens[tokensIndex].equalsIgnoreCase("long") || tokens[tokensIndex].equalsIgnoreCase("short"))
-				type = tokens[tokensIndex];
+				type = tokens[tokensIndex++];
 			else
 				type = "long";
 			
-			tokensIndex = tokensIndex + 2;
+			tokensIndex = tokensIndex + 1;
 			
 			// Get the price
 			price = tokens[tokensIndex];

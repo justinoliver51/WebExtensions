@@ -7,6 +7,7 @@ public class AwesomePennyStocksTrader extends Trader
 {
 	// Passed parameters
 	private String tradeString;
+	private boolean websiteMonitorFlag;
 	
 	// Parsed trade information
 	AwesomePennyStocksParser parser;
@@ -21,7 +22,7 @@ public class AwesomePennyStocksTrader extends Trader
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 25;
 	
-	public AwesomePennyStocksTrader(String newTrade, IBTradingAPI newTradingAPI)
+	public AwesomePennyStocksTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
 	{	
 		super(newTradingAPI);
 		
@@ -33,6 +34,7 @@ public class AwesomePennyStocksTrader extends Trader
 			return;
 		}
 		
+		websiteMonitorFlag = newRealTimeSystem;
 		lastTraderString = newTrade;
 		parser = new AwesomePennyStocksParser(newTrade);
 		hasValidTrade = parser.parseTrade();

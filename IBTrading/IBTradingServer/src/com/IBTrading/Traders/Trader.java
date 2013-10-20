@@ -27,4 +27,11 @@ public class Trader
 		System.out.println("Should not have arrived here: Trader.trade()");
 		return "Should not have arrived here: Trader.trade()";
 	}
+	
+	//
+	public int setQuantity(int maxCash, double price, int traderPercentage, int maxQuantity)
+	{
+		return ((int) (maxCash/price) <= ((maxQuantity * traderPercentage) / 100) ) ? 
+				((int) (maxCash/price)) : ((maxQuantity * traderPercentage) / 100);
+	}
 }

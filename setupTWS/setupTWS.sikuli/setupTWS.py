@@ -39,3 +39,5 @@ if(exists("1381187496742.png", 60)):
 # Minimize TraderWorkStation
 for button in findAll("1381187908576.png"):
     click(button)
+
+# exists("1381887496521.png")
