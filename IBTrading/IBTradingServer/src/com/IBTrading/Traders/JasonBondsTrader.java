@@ -51,7 +51,7 @@ public class JasonBondsTrader extends Trader{
 		boolean isSimulation = false;
 		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		int quantity;
-		int maxCash = 3000;
+		int maxCash = 12000;
 		
 		try
 		{

@@ -32,7 +32,8 @@ public class TradeCenter {
 	private String SYKES = "TimAlerts";  // Tim Sykes
 	private String SYKESCHAT = "timothysykes";  // Tim Sykes
 	private String AWESOMEPENNYSTOCKS = "AwesomePennyStocks"; // AwesomePennyStocks.com
-	private String JASONBONDS = "Jason"; // AwesomePennyStocks.com
+	private String JASONBONDS = "Jason"; // Jason Bond
+	private String JASONBONDSEMAIL = "Jason Bond"; // Jason Bond
 
 	public TradeCenter(IBTradingAPI newTradingAPI)
 	{
@@ -54,16 +55,6 @@ public class TradeCenter {
 		long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 		long MILLIS_TIMEZONE_DIFF = 5 * 60 * 60 * 1000;
 		
-		Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Central")).getTime();
-		long timePortion = System.currentTimeMillis() % MILLIS_PER_DAY;
-		timePortion = timePortion < MILLIS_TIMEZONE_DIFF ? (MILLIS_PER_DAY - (MILLIS_TIMEZONE_DIFF - timePortion)) : (timePortion - MILLIS_TIMEZONE_DIFF); 
-		
-		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )
-		{
-			System.out.println("Market is closed!");
-			//return "Market is closed!";  //FIXME: We may not want this commented out!
-		}
-		
 		traderID = newTraderID;
 		boolean websiteMonitorFlag = realTimeSystem.equalsIgnoreCase("websiteMonitor") ? 
 										true : false;
@@ -84,7 +75,7 @@ public class TradeCenter {
 			AwesomePennyStocksTrader currentTrader = new AwesomePennyStocksTrader(newTrade, tradingAPI, websiteMonitorFlag);
 			trader = (Trader) currentTrader;
 		}
-		else if(traderID.equalsIgnoreCase(JASONBONDS) || traderID.equalsIgnoreCase("Justin Oliver"))
+		else if(traderID.equalsIgnoreCase(JASONBONDS) || traderID.equalsIgnoreCase(JASONBONDSEMAIL))
 		{
 			JasonBondsTrader currentTrader = new JasonBondsTrader(newTrade, tradingAPI, websiteMonitorFlag);
 			trader = (Trader) currentTrader;
@@ -93,6 +84,16 @@ public class TradeCenter {
 		{
 			System.out.println(traderID + " is not a valid trader.");
 			return traderID + " is not a valid trader.";
+		}
+		
+		Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Central")).getTime();
+		long timePortion = System.currentTimeMillis() % MILLIS_PER_DAY;
+		timePortion = timePortion < MILLIS_TIMEZONE_DIFF ? (MILLIS_PER_DAY - (MILLIS_TIMEZONE_DIFF - timePortion)) : (timePortion - MILLIS_TIMEZONE_DIFF); 
+		
+		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )
+		{
+			System.out.println("Market is closed!");
+			return "Market is closed!";  //FIXME: We may not want this commented out!
 		}
 		
 		return null;

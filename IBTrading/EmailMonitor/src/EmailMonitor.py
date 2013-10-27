@@ -44,33 +44,48 @@ def getTrade(email_body, startingIndex):
 
     index = index - 1
     exclude = set(string.punctuation)
-    tradeList = ''.join(ch for ch in email_body[startingIndex:index] if (ch == '.') or ((ch not in exclude) and (ch != '\r') and (ch != '\n')))  # FIXME: Need to leave in '.'
+    tradeList = ''.join(ch for ch in email_body[startingIndex:index] if (ch == '.') or (ch == '$') or ((ch not in exclude) and (ch != '\r') and (ch != '\n')))  # FIXME: Need to leave in '.'
     
+    if(tradeList.find('$') >= 0):
+        index = tradeList.find('$')
+        price = ''.join(ch for ch in tradeList.split(' ')[4] if (ch == '$') or (ch == '.') or (ch in string.digits))
+        tradeList = tradeList[:index] + price
+        
+    if tradeList[-1] == '.':
+        tradeList = tradeList[:-1]
+        
     return tradeList
 
 def getEmailBody(email_message):
     # Get the important information out of the email
     message = ""
+    price = ""
+    article = ""
+    
     for part in email_message.walk():
-        if part.get_content_type() == "text/plain": # ignore attachments / html
-            bodyDecoded, encoding = decode_header(part)[0]
-            if encoding == None:
-                body = bodyDecoded
-            else:
-                body = part.get_payload(decode=True).decode(encoding)
+        bodyDecoded, encoding = decode_header(part)[0]
+        if encoding == None:
+            body = bodyDecoded
+        else:
+            body = part.get_payload(decode=True).decode(encoding)
                 
-            if body.find('Bought') >= 0:
-                index = body.find('Bought')
-                return getTrade(body, index)
-            elif body.find('Added') >= 0:
-                index = body.find('Added')
-                return getTrade(body, index)
+        if body.lower().find('bought') >= 0:
+            index = body.lower().find('bought')
+            trade = getTrade(body, index)
+            price = trade.split(' ')[4]
+            article = trade.split(' ')[3]
+        elif body.lower().find('added') >= 0:
+            index = body.lower().find('added')
+            trade = getTrade(body, index)
+            price = trade.split(' ')[4]
+            article = trade.split(' ')[3]
+            
+        if(price.find('$') >= 0 and article == 'at'):
+            return trade.replace('$', '')
             
             message = message + body
-        else:
-            continue
         
-        return None
+    return None
 
 def decodeSubject(email_message):
     subjectDecoded, encoding = decode_header(email_message['Subject'])[0]
@@ -90,7 +105,7 @@ def decodeSubject(email_message):
 
 ### MAIN ###
 latestEmail = ""
-latestEmailTimestamp = time.mktime(time.gmtime())
+latestEmailTimestamp = time.mktime(time.gmtime()) # DEBUG: 100 - tests every email
 currentEmail = "currentEmail"
 mail = connect()
 while True:
@@ -99,7 +114,7 @@ while True:
         mail.select("INBOX") 
 
         result, data = mail.uid('search', None, 'ALL') # search and return uids instead
-        for negativeIndex in range(-1, len(data[0].split() * -1)):
+        for negativeIndex in range(-1, (len(data[0].split()) - 1) * -1, -1):
             latest_email_uid = data[0].split()[negativeIndex]
             index = negativeIndex + len(data[0].split())
 
@@ -115,11 +130,17 @@ while True:
                 traderID = email.utils.parseaddr(email_message['From'])
                 subject = decodeSubject(email_message)
 
-                try:
-                    trade = getEmailBody(email_message)
-                except:
+                # DEBUG: Reserved for testing Jason's emails
+                if(traderID[0] == 'Jason' or traderID[0] == 'Jason Bond'):
+                    try:
+                        trade = getEmailBody(email_message)
+                        if trade == None or trade == '':
+                            trade = subject
+                    except:
+                        trade = subject
+                        print 'Unable to get the body'
+                else:
                     trade = subject
-                    print 'Unable to get the body'
 
                 # Build the url
                 paramDic = {'traderID':         traderID[0], 

@@ -48,8 +48,8 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		HttpSession session = request.getSession(true);
 		PrintWriter out = response.getWriter();
 		response.setHeader("Access-Control-Allow-Origin", "*");
-        System.out.println("doGet() called!  :)");
-        out.println("doGet() called");
+        System.out.println("-----------------------\ndoGet() called!  :)");
+        out.println("-----------------------\ndoGet() called");
         
         synchronized (session)
         {

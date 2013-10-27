@@ -3,37 +3,37 @@
 /Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/.metadata/.plugins/org.eclipse.core.resources/.projects/EmailMonitor/com.python.pydev.analysis/v1_indexcache
 .v1_indexcache
 SharedClipboard|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/SharedClipboard.py
+EmailMonitor|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/EmailMonitor.py
 -- END DISKCACHE
 -- START DICTIONARY
-1
+2
 1=SharedClipboard
+2=EmailMonitor
 -- END DICTIONARY
 -- START TREE 1
-24
+22
 cli|1|clipboard_file!11@
-con|0|
-cur|0|
+con|1|connect!18@
+cur|1|currentEmail!19@
 dat|1|data!11@
-dec|0|
-ema|0|
-enc|0|
-get|1|getClipboardData!10@
-ind|0|
-lat|0|
-mai|1|main!10@
+dec|1|decodeSubject!18@
+ema|1|email_message!19@
+enc|1|encodedParams!19@
+get|4|getClipboardData!10@getTrade!18@get_emails!18@getEmailBody!18@
+ind|1|index!19@
+lat|3|latestEmail!19@latestEmailTimestamp!19@latest_email_uid!19@
+mai|2|main!10@mail!19@
 mon|1|monitorClipboard!10@
 p|1|p!11@
-par|0|
-que|0|
-raw|0|
-res|0|
+par|1|paramDic!19@
+que|1|query!19@
+raw|1|raw_email!19@
 ret|1|retcode!11@
-sea|0|
 set|1|setClipboardData!10@
-sub|0|
-tim|0|
-tra|0|
-url|0|
+sub|1|subject!19@
+tim|1|timestamp!19@
+tra|2|traderID!19@trade!19@
+url|1|url!19@
 -- END TREE
 -- START TREE 2
 0
