@@ -69,6 +69,13 @@ def getEmailBody(email_message):
         else:
             body = part.get_payload(decode=True).decode(encoding)
                 
+        #index = 0
+        #while body.lower().find('bought', index + 1) > 0:
+        #    index = body.lower().find('bought', index)
+        #    trade = getTrade(body, index)
+        #    price = trade.split(' ')[4]
+        #    article = trade.split(' ')[3]      
+                
         if body.lower().find('bought') >= 0:
             index = body.lower().find('bought')
             trade = getTrade(body, index)
@@ -76,6 +83,11 @@ def getEmailBody(email_message):
             article = trade.split(' ')[3]
         elif body.lower().find('added') >= 0:
             index = body.lower().find('added')
+            trade = getTrade(body, index)
+            price = trade.split(' ')[4]
+            article = trade.split(' ')[3]
+        elif body.lower().find('taking') >= 0:
+            index = body.lower().find('taking')
             trade = getTrade(body, index)
             price = trade.split(' ')[4]
             article = trade.split(' ')[3]
@@ -131,7 +143,7 @@ while True:
                 subject = decodeSubject(email_message)
 
                 # DEBUG: Reserved for testing Jason's emails
-                if(traderID[0] == 'Jason' or traderID[0] == 'Jason Bond'):
+                if(traderID[0] == 'Jason' or traderID[0] == 'Jason Bond' or traderID[0] == 'Justin Oliver'):
                     try:
                         trade = getEmailBody(email_message)
                         if trade == None or trade == '':
