@@ -1,8 +1,0 @@
-0:0:0:0:0:0:0:1%0 - - [28/Oct/2013:02:33:32 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Monday%27s+watch+list HTTP/1.1" 200 166
-0:0:0:0:0:0:0:1%0 - - [28/Oct/2013:07:54:14 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=asdfsdf+sdf+sdf+sdf+ HTTP/1.1" 200 189
-0:0:0:0:0:0:0:1%0 - - [28/Oct/2013:11:34:15 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=SuperAlerts&newTrade=Bought+more+of+ARCW HTTP/1.1" 200 193
-0:0:0:0:0:0:0:1%0 - - [28/Oct/2013:11:39:49 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=Start! HTTP/1.1" 200 138
-0:0:0:0:0:0:0:1%0 - - [28/Oct/2013:11:41:50 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=Start! HTTP/1.1" 200 138
-0:0:0:0:0:0:0:1%0 - - [28/Oct/2013:11:50:43 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=lsdf+skfds+dlkfjskdf+js+kls HTTP/1.1" 200 196
-67.188.232.215 - - [28/Oct/2013:17:12:26 -0500] "GET /HNAP1/ HTTP/1.1" 404 963
-0:0:0:0:0:0:0:1%0 - - [28/Oct/2013:23:11:33 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=timothysykes&newTrade=%5Bcommentary%5D+David+Ortiz+gave+my+dad+%26+I+his+bat!+http%3A%2F%2Ftim.ly%2F16FT1md+for+supporting+the+Red+Sox+while+evryone+else+in+the+%245k%2B+seats+were+Cardinals+fans...wowowowowow%2C+what+a+night!&realTimeSystem=websiteMonitor HTTP/1.1" 200 342
