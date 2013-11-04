@@ -1,0 +1,39 @@
+-- VERSION_3
+-- START DISKCACHE
+/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/.metadata/.plugins/org.eclipse.core.resources/.projects/EmailMonitor/com.python.pydev.analysis/v1_indexcache
+.v1_indexcache
+SharedClipboard|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/SharedClipboard.py
+-- END DISKCACHE
+-- START DICTIONARY
+1
+1=SharedClipboard
+-- END DICTIONARY
+-- START TREE 1
+23
+cli|1|clipboard_file!11@
+con|0|
+cur|0|
+dat|1|data!11@
+dec|0|
+ema|0|
+enc|0|
+get|1|getClipboardData!10@
+ind|0|
+lat|0|
+mai|1|main!10@
+mon|1|monitorClipboard!10@
+p|1|p!11@
+par|0|
+que|0|
+raw|0|
+res|0|
+ret|1|retcode!11@
+set|1|setClipboardData!10@
+sub|0|
+tim|0|
+tra|0|
+url|0|
+-- END TREE
+-- START TREE 2
+0
+-- END TREE
