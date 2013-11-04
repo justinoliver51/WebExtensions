@@ -1,0 +1,5 @@
+# Ignore specific files
+.DS_Store
+
+# Ignore Eclipse projects
+.metadata/
