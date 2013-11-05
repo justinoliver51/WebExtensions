@@ -34,6 +34,7 @@ public class TradeCenter {
 	private String AWESOMEPENNYSTOCKS = "AwesomePennyStocks"; // AwesomePennyStocks.com
 	private String JASONBONDS = "Jason"; // Jason Bond
 	private String JASONBONDSEMAIL = "Jason Bond"; // Jason Bond
+	private String DEBUGEMAIL = "Justin Oliver"; // My debug trader
 
 	public TradeCenter(IBTradingAPI newTradingAPI)
 	{
@@ -78,6 +79,11 @@ public class TradeCenter {
 		else if(traderID.equalsIgnoreCase(JASONBONDS) || traderID.equalsIgnoreCase(JASONBONDSEMAIL))
 		{
 			JasonBondsTrader currentTrader = new JasonBondsTrader(newTrade, tradingAPI, websiteMonitorFlag);
+			trader = (Trader) currentTrader;
+		}
+		else if(traderID.equalsIgnoreCase(DEBUGEMAIL))
+		{
+			DebugTrader currentTrader = new DebugTrader(newTrade, tradingAPI, websiteMonitorFlag);
 			trader = (Trader) currentTrader;
 		}
 		else

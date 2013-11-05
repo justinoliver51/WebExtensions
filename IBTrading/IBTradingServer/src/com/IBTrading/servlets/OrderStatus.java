@@ -2,16 +2,16 @@ package com.IBTrading.servlets;
 
 public class OrderStatus 
 {
-	int orderId;
-	String status;
-	int filled;
-	int remaining;
-	double avgFillPrice;
-	int permId;
-	int parentId;
-	double lastFillPrice;
-	int clientId;
-	String whyHeld;
+	public int orderId;
+	public String status;
+	public int filled;
+	public int remaining;
+	public double avgFillPrice;
+	public int permId;
+	public int parentId;
+	public double lastFillPrice;
+	public int clientId;
+	public String whyHeld;
 	
 	// Default Constructor
 	public OrderStatus()

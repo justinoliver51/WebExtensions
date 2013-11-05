@@ -81,7 +81,9 @@ public class JasonBondsTradeParser {
 		try
 		{
 			// If the action is not 'Bought'
-			if( (action.equalsIgnoreCase("Bought") == false) && (action.equalsIgnoreCase("Added") == false) )
+			if( (action.equalsIgnoreCase("Bought") == false) 
+					&& (action.equalsIgnoreCase("Added") == false) 
+					&& (action.equalsIgnoreCase("Taking") == false))
 			{
 				System.out.println("Invalid action, " + action + " does not match 'Bought' or 'Added'...");
 				return false;

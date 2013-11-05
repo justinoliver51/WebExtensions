@@ -2,6 +2,7 @@ package com.IBTrading.Traders;
 
 import com.IBTrading.servlets.IBTradingAPI;
 import com.IBTrading.tradeparsers.JasonBondsTradeParser;
+import com.IBTrading.servlets.OrderStatus;
 
 public class JasonBondsTrader extends Trader{
 	// Passed parameters
@@ -52,6 +53,7 @@ public class JasonBondsTrader extends Trader{
 		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		int quantity;
 		int maxCash = 12000;
+		OrderStatus orderStatus;
 		
 		try
 		{
@@ -61,22 +63,26 @@ public class JasonBondsTrader extends Trader{
 			e.printStackTrace();
 			quantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		}
-		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
 		
-		if(tradeError != null)
-			return tradeError;
+		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+		
+		if(orderStatus == null)
+			return "Unable to connect to TWS...";
 		
 		// Make the purchase with the Simulator
 		isSimulation = true;
-		tradeError = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
-		
-		if(tradeError != null)
-			return tradeError;
+		tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
 		
 		// Sleep for 60 seconds, then sell
 		try
 		{
-			Thread.sleep( 60 * SECONDS );
+			// Check the desired information every second for 60 seconds
+			for(int numSeconds = 0; numSeconds < 60; numSeconds++)
+			{
+				numSeconds++;
+				//System.out.println("orderID = " + orderStatus.orderId + ", orderStatus = " + orderStatus.status);
+				Thread.sleep( 1 * SECONDS );
+			}
 		}
 		catch ( InterruptedException e )
 		{
@@ -85,13 +91,15 @@ public class JasonBondsTrader extends Trader{
 		
 		// Sell the stocks
 		isSimulation = false;
-		tradeError = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation);
+		orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation);
 		
-		if(tradeError != null)
-			return tradeError;
+		if(orderStatus == null)
+			return "Unable to connect to TWS...";
 		
 		// Sell the stocks over the simulator
 		isSimulation = true;
-		return tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);
+		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);
+		
+		return null;
 	}
 }

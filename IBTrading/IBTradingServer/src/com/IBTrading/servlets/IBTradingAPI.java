@@ -31,7 +31,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private final String orderIDPath = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
 
 	private static int orderID;	// If this value is not updated, we may simply never get a response...
-	private static HashMap<String,OrderStatus> orderStatusHashMap;
+	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
@@ -87,7 +87,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		return orderStatusHashMap.get(Integer.toString(orderId));
 	}
 
-    public synchronized String placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation) 
+    public synchronized OrderStatus placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation) 
     {
 
         Order order = new Order();
@@ -102,10 +102,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
         
         // Connect to TWS
     	connect();
-        if( (m_client.isConnected() == false) || (m_client_simulation.isConnected() == false) )
+        if( ((m_client.isConnected() == false) && (isSimulation == false)) || ((m_client_simulation.isConnected() == false) && (isSimulation == true)) )
         {
         	System.out.println("Unable to connect to TWS...");
-        	return "Unable to connect to TWS...";
+        	return null;
         }
         
         // place order
@@ -126,7 +126,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// Update the orderID for the next order
 		orderID++;
 		
-		return null;
+		return newOrder;
     }
     
     @Override

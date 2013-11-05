@@ -1,6 +1,7 @@
 package com.IBTrading.Traders;
 
 import com.IBTrading.servlets.IBTradingAPI;
+import com.IBTrading.servlets.OrderStatus;
 import com.IBTrading.tradeparsers.AwesomePennyStocksParser;
 
 public class AwesomePennyStocksTrader extends Trader
@@ -50,10 +51,10 @@ public class AwesomePennyStocksTrader extends Trader
 	{
 		// Make the purchase
 		boolean isSimulation = true;
-		String tradeError = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		OrderStatus orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
 		
-		if(tradeError != null)
-			return tradeError;
+		if(orderStatus == null)
+			return "Unable to connect to TWS...";
 		
 		// Sleep for 90 seconds, then sell
 		try
@@ -66,6 +67,11 @@ public class AwesomePennyStocksTrader extends Trader
 		}
 		
 		// Sell the stocks
-		return tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		
+		if(orderStatus == null)
+			return "Unable to connect to TWS...";
+		
+		return null;
 	}
 }

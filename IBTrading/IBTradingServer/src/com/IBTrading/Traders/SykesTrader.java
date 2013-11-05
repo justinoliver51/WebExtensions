@@ -1,6 +1,7 @@
 package com.IBTrading.Traders;
 
 import com.IBTrading.servlets.IBTradingAPI;
+import com.IBTrading.servlets.OrderStatus;
 import com.IBTrading.tradeparsers.ProfitlyTradeParser;
 
 public class SykesTrader extends Trader
@@ -49,23 +50,48 @@ public class SykesTrader extends Trader
 	public String trade()
 	{
 		// Make the purchase
-		boolean isSimulation = true;
-		String tradeError = tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		boolean isSimulation = false;
+		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
+		int quantity;
+		int maxCash = 12000;
+		OrderStatus orderStatus;
 		
-		if(tradeError != null)
-			return tradeError;
-		
-		// Sleep for 90 seconds, then sell
 		try
 		{
-			Thread.sleep( 60 * SECONDS );
+			quantity = super.setQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			quantity = (parser.quantity * TRADERPERCENTAGE) / 100;
+		}
+
+		// Make the purchase with the Simulator
+		isSimulation = true;
+		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
+		
+		// Sleep for 60 seconds, then sell
+		try
+		{
+			// Check the desired information every second for 60 seconds
+			for(int numSeconds = 0; numSeconds < 60; numSeconds++)
+			{
+				Thread.sleep( 1 * SECONDS );
+				numSeconds++;
+				
+				System.out.println(orderStatus.orderId + "");
+				
+				//OrderStatus orderStatus = tradingAPI.getOrderStatus(orderId)
+			}
 		}
 		catch ( InterruptedException e )
 		{
 			System.out.println( "awakened prematurely" );
 		}
+
+		// Sell the stocks over the simulator
+		isSimulation = true;
+		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);
 		
-		// Sell the stocks
-		return tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		return null;
 	}
 }
