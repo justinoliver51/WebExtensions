@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ import com.ib.client.Execution;
 import com.ib.client.Order;
 import com.ib.client.OrderState;
 import com.ib.client.UnderComp;
+import com.IBTrading.servlets.OrderStatus;
 
 public class IBTradingAPI extends JFrame implements EWrapper
 {
@@ -29,6 +31,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private final String orderIDPath = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
 
 	private static int orderID;	// If this value is not updated, we may simply never get a response...
+	private static HashMap<String,OrderStatus> orderStatusHashMap;
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
@@ -78,6 +81,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
         m_client.eDisconnect();
         m_client_simulation.eDisconnect();
     }
+	
+	public OrderStatus getOrderStatus(int orderId)
+	{
+		return orderStatusHashMap.get(Integer.toString(orderId));
+	}
 
     public synchronized String placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation) 
     {
@@ -111,6 +119,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		Date date = new Date();
 		System.out.println("Order number " + orderID + " placed at: " + dateFormat.format(date));
 		
+		// Add the new order to our hash map
+		OrderStatus newOrder =  new OrderStatus();
+		orderStatusHashMap.put(Integer.toString(orderID), newOrder);
+		
 		// Update the orderID for the next order
 		orderID++;
 		
@@ -123,12 +135,28 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			 double lastFillPrice, int clientId, String whyHeld) 
     {
 		// received order status
-		String msg = EWrapperMsgGenerator.orderStatus( orderId, status, filled, remaining,
+		String msg = EWrapperMsgGenerator.orderStatus(orderId, status, filled, remaining,
 		avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld);
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
 		System.out.println(msg + " " + dateFormat.format(date));
+		
+		// 
+		OrderStatus order;
+		if(orderStatusHashMap.containsKey(Integer.toString(orderId)))
+		{
+			order = orderStatusHashMap.get(Integer.toString(orderId));
+			order.updateOrder(orderId, status, filled, remaining,
+					avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld);
+		}
+		else
+		{
+			System.out.println("Unknown order, orderID: " + orderId);
+			order = new OrderStatus(orderId, status, filled, remaining,
+				avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld);
+			orderStatusHashMap.put(Integer.toString(orderId), order);
+		}
 		
 		// make sure id for next order is at least orderId+1
 		orderID++;
