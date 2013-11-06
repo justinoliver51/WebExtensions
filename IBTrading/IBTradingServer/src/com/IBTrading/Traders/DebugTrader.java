@@ -51,12 +51,17 @@ public class DebugTrader extends Trader{
 		boolean isSimulation = false;
 		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		int quantity;
-		int maxCash = 12000;
+		int maxCash = 18000;
+		int maxCashForAdds = 6000;
+		int totalCash = 5900;
 		OrderStatus orderStatus;
 		
 		try
 		{
-			quantity = super.setQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+			if(parser.action.equalsIgnoreCase("Added"))
+				quantity = super.setQuantity(maxCashForAdds, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+			else
+				quantity = super.setQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 		}catch(Exception e)
 		{
 			e.printStackTrace();

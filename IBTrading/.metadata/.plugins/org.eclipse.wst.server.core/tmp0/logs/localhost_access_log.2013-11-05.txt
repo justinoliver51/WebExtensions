@@ -196,3 +196,12 @@
 0:0:0:0:0:0:0:1%0 - - [05/Nov/2013:08:59:10 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Bought+20000+ZNGA+at+3.63 HTTP/1.1" 200 163
 127.0.0.1 - - [05/Nov/2013:09:11:56 -0600] "GET / HTTP/1.1" 404 951
 127.0.0.1 - - [05/Nov/2013:09:13:14 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [05/Nov/2013:10:04:13 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Added+5000+CRRS+at+3.70 HTTP/1.1" 200 158
+186.195.244.17 - - [05/Nov/2013:10:39:55 -0600] "HEAD / HTTP/1.0" 404 -
+0:0:0:0:0:0:0:1%0 - - [05/Nov/2013:10:41:02 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+20000+RENN+at+3.38 HTTP/1.1" 200 160
+0:0:0:0:0:0:0:1%0 - - [05/Nov/2013:20:45:55 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Wednesday%27s+watch+list HTTP/1.1" 200 169
+127.0.0.1 - - [05/Nov/2013:22:58:28 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [05/Nov/2013:22:59:32 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Added+20000+ZNGA+at+3.63 HTTP/1.1" 200 174
+127.0.0.1 - - [05/Nov/2013:23:00:25 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [05/Nov/2013:23:02:17 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [05/Nov/2013:23:02:21 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Added+20000+ZNGA+at+3.63 HTTP/1.1" 200 174

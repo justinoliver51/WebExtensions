@@ -4,7 +4,7 @@ import com.IBTrading.servlets.IBTradingAPI;
 import com.IBTrading.tradeparsers.JasonBondsTradeParser;
 import com.IBTrading.servlets.OrderStatus;
 
-public class JasonBondsTrader extends Trader{
+public class DebugTrader extends Trader{
 	// Passed parameters
 	private String tradeString;
 	private boolean websiteMonitorFlag;
@@ -12,7 +12,6 @@ public class JasonBondsTrader extends Trader{
 	// Parsed trade information
 	JasonBondsTradeParser parser;
 	
-	// PROFIT.LY
 	// List of trader identifiers and their strings
 	private static String lastTraderString;
 	
@@ -22,7 +21,7 @@ public class JasonBondsTrader extends Trader{
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 100;
 	
-	public JasonBondsTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
+	public DebugTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
 	{	
 		super(newTradingAPI);
 		
@@ -52,54 +51,50 @@ public class JasonBondsTrader extends Trader{
 		boolean isSimulation = false;
 		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		int quantity;
-		int maxCash = 18000;
-		int maxCashAdded = 6000;
+		int maxCash = 12000;
 		OrderStatus orderStatus;
 		
 		try
 		{
-			if(parser.action.equalsIgnoreCase("Added"))
-				quantity = super.setQuantity(maxCashAdded, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
-			else
-				quantity = super.setQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+			quantity = super.setQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 			quantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		}
-		
+		/*
 		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
-		
+		*/
 		// Make the purchase with the Simulator
 		isSimulation = true;
-		tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
+		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
 		
 		// Sleep for 60 seconds, then sell
 		try
 		{
 			// Check the desired information every second for 60 seconds
-			for(int numSeconds = 0; numSeconds < 60; numSeconds++)
+			for(int numSeconds = 0; (numSeconds < 60) || ((numSeconds >= 60) && (orderStatus.status.equalsIgnoreCase("Filled") == false)); numSeconds++)
 			{
-				numSeconds++;
-				//System.out.println("orderID = " + orderStatus.orderId + ", orderStatus = " + orderStatus.status);
 				Thread.sleep( 1 * SECONDS );
+				numSeconds++;
+				System.out.println("orderID = " + orderStatus.orderId + ", orderStatus = " + orderStatus.status);
 			}
 		}
 		catch ( InterruptedException e )
 		{
 			System.out.println( "awakened prematurely" );
 		}
-		
+		/*
 		// Sell the stocks
 		isSimulation = false;
 		orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation);
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
-		
+		*/
 		// Sell the stocks over the simulator
 		isSimulation = true;
 		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);
