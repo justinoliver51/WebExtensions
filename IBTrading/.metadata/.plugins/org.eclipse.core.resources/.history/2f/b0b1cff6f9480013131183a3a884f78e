@@ -341,7 +341,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		String msg = EWrapperMsgGenerator.updateAccountValue(key, value, currency, accountName);
 		
 		if(key.equalsIgnoreCase("AvailableFunds"))
-		{ 
+		{
 			System.out.println(msg);
 		}
 	}
