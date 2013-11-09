@@ -7,12 +7,10 @@ import com.IBTrading.servlets.OrderStatus;
 public class JasonBondsTrader extends Trader{
 	// Passed parameters
 	private String tradeString;
-	private boolean websiteMonitorFlag;
 	
 	// Parsed trade information
 	JasonBondsTradeParser parser;
 	
-	// PROFIT.LY
 	// List of trader identifiers and their strings
 	private static String lastTraderString;
 	
@@ -34,7 +32,6 @@ public class JasonBondsTrader extends Trader{
 			return;
 		}
 		
-		websiteMonitorFlag = newRealTimeSystem;
 		lastTraderString = newTrade;
 		parser = new JasonBondsTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
@@ -49,12 +46,13 @@ public class JasonBondsTrader extends Trader{
 	public String trade()
 	{
 		// Make the purchase
-		boolean isSimulation = false;
-		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
+		boolean isSimulation;
 		int quantity;
-		int maxCash = 18000;
-		int maxCashAdded = 6000;
-		OrderStatus orderStatus;
+		int maxCash = 18000;		// The maximum amount of cash to use on a trade
+		int maxCashAdded = 5500;	// The maximum amount of cash to spend on an 'Add'
+		int totalCash = 5500;		// The total amount of cash in the account
+		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
+		OrderStatus orderStatus = new OrderStatus();
 		
 		try
 		{
@@ -68,7 +66,12 @@ public class JasonBondsTrader extends Trader{
 			quantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		}
 		
-		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+		// Do not buy with real money if this is an 'Add'
+		if(parser.action.equalsIgnoreCase("Added") == false)
+		{
+			isSimulation = false;
+			orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+		}
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
@@ -77,14 +80,36 @@ public class JasonBondsTrader extends Trader{
 		isSimulation = true;
 		tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
 		
-		// Sleep for 60 seconds, then sell
+		// Sleep for 60 seconds, then sell.  If order is rendered "Inactive", try to 
+		// buy using only the available cash in the account.
 		try
-		{
+		{			
+			int timeTilSell = 60;
+			
 			// Check the desired information every second for 60 seconds
-			for(int numSeconds = 0; numSeconds < 60; numSeconds++)
+			for(int numSeconds = 0; numSeconds < timeTilSell; numSeconds++)
 			{
-				numSeconds++;
 				//System.out.println("orderID = " + orderStatus.orderId + ", orderStatus = " + orderStatus.status);
+				
+				// If we were unable to buy due to the stock being not marginable
+				if(orderStatus.status.equalsIgnoreCase("Inactive") == true)
+				{
+					System.out.println("Order was rendered inactive, trying again with our total cash, " + totalCash);
+					
+					// Make the trade using only cash (no leverage)
+					quantity = super.setQuantity(totalCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+					orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+					
+					if(orderStatus == null)
+						return "Unable to connect to TWS...";
+					
+					// Sleep for the remaining time
+					Thread.sleep(timeTilSell - (numSeconds * SECONDS));
+					
+					break;
+				}
+				
+				// Sleep for one second
 				Thread.sleep( 1 * SECONDS );
 			}
 		}
@@ -93,9 +118,13 @@ public class JasonBondsTrader extends Trader{
 			System.out.println( "awakened prematurely" );
 		}
 		
-		// Sell the stocks
-		isSimulation = false;
-		orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation);
+		// SELL THE STOCKS
+		// Do not sell with real money if this is an 'Add'
+		if(parser.action.equalsIgnoreCase("Added") == false)
+		{
+			isSimulation = false;
+			orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation);
+		}
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";

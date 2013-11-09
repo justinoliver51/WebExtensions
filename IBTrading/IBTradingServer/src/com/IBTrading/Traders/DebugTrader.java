@@ -81,7 +81,7 @@ public class DebugTrader extends Trader{
 		try
 		{
 			// Check the desired information every second for 60 seconds
-			for(int numSeconds = 0; (numSeconds < 60) || ((numSeconds >= 60) && (orderStatus.status.equalsIgnoreCase("Filled") == false)); numSeconds++)
+			for(int numSeconds = 0; (numSeconds < 60); numSeconds++) // || ((numSeconds >= 60) && (orderStatus.status.equalsIgnoreCase("Filled") == false))
 			{
 				Thread.sleep( 1 * SECONDS );
 				numSeconds++;

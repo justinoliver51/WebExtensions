@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import com.ib.client.CommissionReport;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
+import com.ib.client.EClientErrors;
 import com.ib.client.EClientSocket;
 import com.ib.client.EWrapper;
 import com.ib.client.EWrapperMsgGenerator;
@@ -249,6 +250,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	*/
     }
     
+    void getAvailableFunds()
+    {
+    	m_client.reqAccountUpdates(true, "U1257707");
+    }
+    
 	@Override
 	public void error(Exception e) {
 		// TODO Auto-generated method stub
@@ -332,7 +338,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public void updateAccountValue(String key, String value, String currency,
 			String accountName) {
 		// TODO Auto-generated method stub
+		String msg = EWrapperMsgGenerator.updateAccountValue(key, value, currency, accountName);
 		
+		if(key.equalsIgnoreCase("AvailableFunds"))
+			System.out.println(msg);
 	}
 
 	@Override
@@ -415,7 +424,8 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	@Override
 	public void managedAccounts(String accountsList) {
 		// TODO Auto-generated method stub
-		
+		String msg = EWrapperMsgGenerator.managedAccounts(accountsList);
+		System.out.println(msg);
 	}
 
 	@Override

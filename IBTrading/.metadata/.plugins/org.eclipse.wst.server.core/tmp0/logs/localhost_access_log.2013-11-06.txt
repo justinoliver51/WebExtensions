@@ -1,0 +1,6 @@
+195.111.92.3 - - [06/Nov/2013:00:54:47 -0600] "HEAD / HTTP/1.0" 404 -
+127.0.0.1 - - [06/Nov/2013:08:04:45 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [06/Nov/2013:09:07:50 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+ROX+at+.84 HTTP/1.1" 200 158
+127.0.0.1 - - [06/Nov/2013:09:53:05 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [06/Nov/2013:09:53:06 -0600] "GET /IBTradingServer/WEB-INF/classes/com/IBTrading/tradeparsers/JasonBondsTradeParser.java HTTP/1.1" 404 949
+61.161.164.77 - - [06/Nov/2013:11:42:24 -0600] "GET /manager/html HTTP/1.1" 404 975
