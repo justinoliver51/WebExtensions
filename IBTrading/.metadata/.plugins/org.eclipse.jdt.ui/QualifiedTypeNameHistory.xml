@@ -10,4 +10,5 @@
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.IBTrading.tradeparsers.JasonBondsTradeParser"/>
+<fullyQualifiedTypeName name="com.IBTrading.servlets.OrderStatus"/>
 </qualifiedTypeNameHistroy>

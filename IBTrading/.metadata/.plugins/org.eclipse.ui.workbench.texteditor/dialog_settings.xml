@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
-		<item value="97" key="DIALOG_Y_ORIGIN"/>
-		<item value="923" key="DIALOG_X_ORIGIN"/>
+		<item value="261" key="DIALOG_Y_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
+		<item value="924" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="MCP" key="selection"/>
+		<item value="update" key="selection"/>
 		<list key="findhistory">
-			<item value="mcp"/>
-			<item value="jrcc"/>
-			<item value="latestEmailTimestamp"/>
-			<item value="getEmailBody"/>
-			<item value="I am not"/>
-			<item value="drwi"/>
-			<item value="b"/>
-			<item value="bought"/>
+			<item value="update"/>
+			<item value="updates"/>
+			<item value="getAvailableFunds"/>
+			<item value="getaval"/>
+			<item value="manageAccoun"/>
+			<item value="manageAccounts"/>
+			<item value="managedAccounts"/>
+			<item value="manag"/>
 		</list>
 		<list key="replacehistory">
 			<item value="    "/>
