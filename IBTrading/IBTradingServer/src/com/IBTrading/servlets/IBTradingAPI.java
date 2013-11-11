@@ -30,12 +30,14 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private EClientSocket m_client = new EClientSocket(this);
 	private EClientSocket m_client_simulation = new EClientSocket(this);
 	private final String orderIDPath = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
-
-	private static int orderID;	// If this value is not updated, we may simply never get a response...
-	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
+
+	// Personal variables
+	private static int orderID;	// If this value is not updated, we may simply never get a response...
+	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
+	private static double totalCash = 0;
 	
 	public IBTradingAPI()
 	{
@@ -250,27 +252,46 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	*/
     }
     
-    void getAvailableFunds()
+    void getAvailableFunds(boolean isSimulation)
     {
-    	m_client.reqAccountUpdates(true, "U1257707");
+    	if(isSimulation)
+    		m_client_simulation.reqAccountUpdates(true, "DU170967");
+    	else
+    		m_client.reqAccountUpdates(true, "U1257707");
+    }
+    
+    void getMarketData(String symbol, boolean isSimulation)
+    {
+    	int tickerId = 0;
+    	Contract contract = new Contract();
+    	String genericTicklist = null;
+    	boolean snapshot = true;
+    	
+    	// Set up the contract
+    	setDefaultsContract(contract);
+    	contract.m_symbol = symbol;
+    	
+    	if(isSimulation)
+    		m_client_simulation.reqMktData(tickerId, contract, genericTicklist, snapshot);
+    	else
+    		m_client.reqMktData(tickerId, contract, genericTicklist, snapshot);
+    	
+    	return;
     }
     
 	@Override
 	public void error(Exception e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.error(e));
 	}
 
 	@Override
 	public void error(String str) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.error(str));
 	}
 
 	@Override
 	public void error(int id, int errorCode, String errorMsg) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.error(id, errorCode, errorMsg));
 	}
 
 	@Override
@@ -279,17 +300,74 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		
 	}
 
+	/*
+		-1	Not applicable.	--
+		0	BID_SIZE	tickSize()
+		1	BID_PRICE	tickPrice()
+		2	ASK_PRICE	tickPrice()
+		3	ASK_SIZE	tickSize()
+		4	LAST_PRICE	tickPrice()
+		5	LAST_SIZE	tickSize()
+		6	HIGH	tickPrice()
+		7	LOW	tickPrice()
+		8	VOLUME	tickSize()
+		9	CLOSE_PRICE	tickPrice()
+		11	ASK_OPTION_COMPUTATION	tickOptionComputation()
+		12	LAST_OPTION_COMPUTATION	tickOptionComputation()
+		13	MODEL_OPTION_COMPUTATION	tickOptionComputation()
+		14	OPEN_TICK	tickPrice()
+		15	LOW_13_WEEK	tickPrice()
+		16	HIGH_13_WEEK	tickPrice()
+		17	LOW_26_WEEK	tickPrice()
+		18	HIGH_26_WEEK	tickPrice()
+		19	LOW_52_WEEK	tickPrice()
+		20	HIGH_52_WEEK	tickPrice()
+		21	AVG_VOLUME	tickSize()
+		22	OPEN_INTEREST	tickSize()
+		23	OPTION_HISTORICAL_VOL	tickGeneric()
+		24	OPTION_IMPLIED_VOL	tickGeneric()
+		25	OPTION_BID_EXCH	NOT USED
+		26	OPTION_ASK_EXCH	NOT USED
+		27	OPTION_CALL_OPEN_INTEREST	tickSize()
+		28	OPTION_PUT_OPEN_INTEREST	tickSize()
+		29	OPTION_CALL_VOLUME	tickSize()
+		30	OPTION_PUT_VOLUME	tickSize()
+		31	INDEX_FUTURE_PREMIUM	tickGeneric()
+		32	BID_EXCH	tickString()
+		33	ASK_EXCH	tickString()
+		34	AUCTION_VOLUME	tickSize()
+		35	AUCTION_PRICE	tickPrice()
+		36	AUCTION_IMBALANCE	tickSize()
+		37	MARK_PRICE	tickPrice()
+		38	BID_EFP_COMPUTATION	tickEFP()
+		39	ASK_EFP_COMPUTATION	tickEFP()
+		40	LAST_EFP_COMPUTATION	tickEFP()
+		41	OPEN_EFP_COMPUTATION	tickEFP()
+		42	HIGH_EFP_COMPUTATION	tickEFP()
+		43	LOW_EFP_COMPUTATION	tickEFP()
+		44	CLOSE_EFP_COMPUTATION	tickEFP()
+		45	LAST_TIMESTAMP	tickString()
+		46	SHORTABLE	tickString()
+		47	FUNDAMENTAL_RATIOS	tickString()
+		48	RT_VOLUME	tickGeneric()
+		49	HALTED	See Note 2 below.
+		50	BIDYIELD	tickPrice()
+		51	ASKYIELD	tickPrice()
+		52	LASTYIELD	tickPrice()
+		53	CUST_OPTION_COMPUTATION	tickOptionComputation()
+		54	TRADE_COUNT	tickGeneric()
+		55	TRADE_RATE	tickGeneric()
+		56	VOLUME_RATE	tickGeneric()
+	*/
 	@Override
 	public void tickPrice(int tickerId, int field, double price,
 			int canAutoExecute) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.tickPrice(tickerId, field, price, canAutoExecute));
 	}
 
 	@Override
 	public void tickSize(int tickerId, int field, int size) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.tickSize(tickerId, field, size));
 	}
 
 	@Override
@@ -297,35 +375,30 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			double impliedVol, double delta, double optPrice,
 			double pvDividend, double gamma, double vega, double theta,
 			double undPrice) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.tickOptionComputation(tickerId, field, impliedVol, delta, optPrice, pvDividend, gamma, vega, theta, undPrice));
 	}
 
 	@Override
 	public void tickGeneric(int tickerId, int tickType, double value) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.tickGeneric(tickerId, tickType, value));
 	}
 
 	@Override
 	public void tickString(int tickerId, int tickType, String value) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.tickString(tickerId, tickType, value));
 	}
 
 	@Override
 	public void tickEFP(int tickerId, int tickType, double basisPoints,
 			String formattedBasisPoints, double impliedFuture, int holdDays,
 			String futureExpiry, double dividendImpact, double dividendsToExpiry) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.tickEFP(tickerId, tickType, basisPoints, formattedBasisPoints, impliedFuture, holdDays, futureExpiry, dividendImpact, dividendsToExpiry));
 	}
 
 	@Override
 	public void openOrder(int orderId, Contract contract, Order order,
 			OrderState orderState) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.openOrder(orderId, contract, order, orderState));
 	}
 
 	@Override
@@ -340,8 +413,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// TODO Auto-generated method stub
 		String msg = EWrapperMsgGenerator.updateAccountValue(key, value, currency, accountName);
 		
+		// Only get the information regarding the current funds in the account
 		if(key.equalsIgnoreCase("AvailableFunds"))
 		{
+			totalCash = Double.parseDouble(value);
 			System.out.println(msg);
 		}
 	}

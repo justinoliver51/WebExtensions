@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;EmailMonitor.py&apos; to &apos;EmailMonitor.py&apos;&#x0A;- Original project: &apos;EmailMonitor&apos;&#x0A;- Destination element: &apos;EmailMonitor.py&apos;&#x0A;- Original element: &apos;EmailMonitor.py&apos;" description="Copy file" element1="src/EmailMonitor.py" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1381194507464" target="/EmailMonitor/src/EmailMonitor.py" units="0" version="1.0"/>
-</session>

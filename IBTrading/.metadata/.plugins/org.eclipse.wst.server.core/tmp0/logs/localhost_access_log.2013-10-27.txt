@@ -1,4 +1,0 @@
-127.0.0.1 - - [27/Oct/2013:21:33:29 -0500] "GET / HTTP/1.1" 404 951
-0:0:0:0:0:0:0:1%0 - - [27/Oct/2013:21:34:17 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=blah+blha+blah HTTP/1.1" 200 183
-0:0:0:0:0:0:0:1%0 - - [27/Oct/2013:22:00:30 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=TimAlerts&newTrade=Posted+a+New+Watchlist%3A+7+Hot+Penny+Stocks+To+Watch+This+Week HTTP/1.1" 200 207
-0:0:0:0:0:0:0:1%0 - - [27/Oct/2013:22:52:08 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=&newTrade=Account+details+for+justinoliver51+at+The+Art+of+Trading+%28approved%29 HTTP/1.1" 200 210

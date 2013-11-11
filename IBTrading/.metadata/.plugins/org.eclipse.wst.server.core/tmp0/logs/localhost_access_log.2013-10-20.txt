@@ -1,2 +1,0 @@
-127.0.0.1 - - [20/Oct/2013:21:07:10 -0500] "GET / HTTP/1.1" 404 951
-127.0.0.1 - - [20/Oct/2013:22:15:14 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Bought+30000+DRWI+at+1.69 HTTP/1.1" 200 176

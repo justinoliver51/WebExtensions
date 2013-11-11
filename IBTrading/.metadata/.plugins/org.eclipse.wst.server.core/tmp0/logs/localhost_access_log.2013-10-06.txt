@@ -1,2 +1,0 @@
-127.0.0.1 - - [06/Oct/2013:22:43:02 -0500] "GET / HTTP/1.1" 404 951
-0:0:0:0:0:0:0:1%0 - - [06/Oct/2013:22:43:30 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=SuperAlerts&newTrade=[trade]%20Bought%204%20shares%20RVLT%20at%203.77%20-%20Bought%20this%20earnings%20winner,%20they%20announced%20great%20 HTTP/1.1" 200 193
