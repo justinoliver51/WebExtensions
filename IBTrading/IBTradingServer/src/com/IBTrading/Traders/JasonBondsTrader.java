@@ -48,9 +48,9 @@ public class JasonBondsTrader extends Trader{
 		// Make the purchase
 		boolean isSimulation;
 		int quantity;
-		int maxCash = 18000;		// The maximum amount of cash to use on a trade
-		int maxCashAdded = 5500;	// The maximum amount of cash to spend on an 'Add'
-		int totalCash = 5500;		// The total amount of cash in the account
+		int maxCash = 23500;		// The maximum amount of cash to use on a trade
+		int maxCashAdded = 6000;	// The maximum amount of cash to spend on an 'Add'
+		int totalCash = 6000;		// The total amount of cash in the account
 		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		OrderStatus orderStatus = new OrderStatus();
 		
