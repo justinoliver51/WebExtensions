@@ -39,8 +39,9 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         // Initializes the Trade Center
         tradeCenter = new TradeCenter(tradingAPI);
         
-        // TEMP
-        tradingAPI.getAvailableFunds(false);
+        // Subscribe to updates from my account
+        boolean isSimulation = true;
+        tradingAPI.initializeAvailableFunds(isSimulation);
         //tradingAPI.getMarketData("DGLY", false);
     }
 

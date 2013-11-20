@@ -99,7 +99,9 @@ public class TradeCenter {
 		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )
 		{
 			System.out.println("Market is closed!");
-			return "Market is closed!";  //FIXME: We may not want this commented out!
+			
+			if(traderID.equalsIgnoreCase(DEBUGEMAIL) == false)
+				return "Market is closed!";  //FIXME: We may not want this commented out!
 		}
 		
 		return null;
