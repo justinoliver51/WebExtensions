@@ -1,0 +1,5 @@
+INDEX VERSION 1.126
+/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2271550867.index
+/webapp/src/main/java
+/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/939023584.index
+/EmailMonitor/src/main/resources

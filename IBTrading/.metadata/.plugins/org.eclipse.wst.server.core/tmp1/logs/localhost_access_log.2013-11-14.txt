@@ -1,0 +1,8 @@
+127.0.0.1 - - [14/Nov/2013:08:51:44 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [14/Nov/2013:08:56:15 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Bought+GOOG HTTP/1.1" 200 187
+127.0.0.1 - - [14/Nov/2013:09:32:15 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [14/Nov/2013:09:39:06 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=TWGP+stop+hit HTTP/1.1" 200 186
+0:0:0:0:0:0:0:1%0 - - [14/Nov/2013:10:00:24 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Sold+NNVC+and+morning+updates HTTP/1.1" 200 202
+0:0:0:0:0:0:0:1%0 - - [14/Nov/2013:11:18:51 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Added+EZPW HTTP/1.1" 200 183
+0:0:0:0:0:0:0:1%0 - - [14/Nov/2013:12:08:41 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+GLUU+and+EXK HTTP/1.1" 200 192
+0:0:0:0:0:0:0:1%0 - - [14/Nov/2013:14:34:57 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Added+GLUU HTTP/1.1" 200 157

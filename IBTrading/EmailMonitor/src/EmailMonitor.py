@@ -117,7 +117,7 @@ def decodeSubject(email_message):
 
 ### MAIN ###
 latestEmail = ""
-latestEmailTimestamp = 100 # time.mktime(time.gmtime()) # DEBUG: 100 - tests every email
+latestEmailTimestamp = time.mktime(time.gmtime()) # DEBUG: 100 - tests every email
 currentEmail = "currentEmail"
 mail = connect()
 while True:
@@ -155,8 +155,8 @@ while True:
                     trade = subject
                     
                 # For debug
-                if((traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or (trade.lower().find('bought') < 0)):
-                    continue
+                #if((traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or (trade.lower().find('bought') < 0)):
+                #    continue
 
                 # Build the url
                 paramDic = {'traderID':         traderID[0], 
