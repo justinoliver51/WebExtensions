@@ -1,5 +1,7 @@
 package com.IBTrading.Traders;
 
+import java.util.HashMap;
+
 import com.IBTrading.servlets.IBTradingAPI;
 import com.IBTrading.tradeparsers.JasonBondsTradeParser;
 import com.IBTrading.servlets.OrderStatus;
@@ -20,18 +22,11 @@ public class DebugTrader extends Trader{
 	private final String BUY = "BUY";
 	private final String SELL = "SELL";
 	private static int TRADERPERCENTAGE = 100;
+	private static int MAXLEVERAGE = 4;
 	
 	public DebugTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
 	{	
 		super(newTradingAPI);
-		
-		// If we have already parsed this string, return
-		if( (newTrade != null) && (newTrade.equalsIgnoreCase(lastTraderString)) )
-		{
-			hasValidTrade = false;
-			System.out.println("Duplicate trade, " + tradeString);
-			return;
-		}
 		
 		websiteMonitorFlag = newRealTimeSystem;
 		lastTraderString = newTrade;
@@ -48,13 +43,36 @@ public class DebugTrader extends Trader{
 	public String trade()
 	{
 		// Make the purchase
-		boolean isSimulation = false;
+		boolean isSimulation = true;
 		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		int quantity;
-		int maxCash = 18000;
-		int maxCashForAdds = 6000;
-		int totalCash = 5900;
-		OrderStatus orderStatus;
+		int maxCash;
+		int maxCashForAdds = 5900;
+		int totalCash;
+		OrderStatus orderStatus, orderStatusSimulation;
+		
+		// Get the cash from our account
+		totalCash = (int) tradingAPI.getAvailableFunds(false); //tradingAPI.getAvailableFunds(isSimulation);
+		
+		// If something went wrong and we were unable to get the cash
+		if(totalCash == 0)
+			totalCash = 5900;
+		
+		// Give a little wiggle room of ~2% for the maxCash
+		maxCash = (totalCash * MAXLEVERAGE) - ((totalCash * MAXLEVERAGE) / 50);
+		
+		// If the price/share of the stock was not supplied, get this information from TWS
+		if(parser.price.equalsIgnoreCase("0.00"))
+		{
+			String marketData = "LAST_PRICE";  
+			int tickerID = tradingAPI.subscribeToMarketData(parser.symbol, false); //tradingAPI.subscribeToMarketData(parser.symbol, isSimulation);
+		
+			// Wait until we have received the market data
+			while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
+			
+			// Get the market price
+			parser.price = tradingAPI.getMarketData(tickerID, marketData) + "";
+		}
 		
 		try
 		{
@@ -67,31 +85,111 @@ public class DebugTrader extends Trader{
 			e.printStackTrace();
 			quantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		}
+		
+		if(quantity <= 0)
+		{
+			System.out.println("Invalid quantity, " + quantity);
+			return "Invalid quantity, " + quantity;
+		}
+		
 		/*
 		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
 		*/
+		
 		// Make the purchase with the Simulator
 		isSimulation = true;
-		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
+		simulationQuantity = quantity;
+		orderStatusSimulation = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);  
+		orderStatus = orderStatusSimulation;  // FIXME: Only useful for DebugTrader
+		
+		if( (orderStatus == null) || (orderStatus.status == null) )
+			return "Unable to connect to TWS...";
 		
 		// Sleep for 60 seconds, then sell
 		try
-		{
+		{			
+			int timeTilSell = 5;  // FIXME: 60 seconds 
+			boolean cashOnlyOrderFlag = false;
+			
 			// Check the desired information every second for 60 seconds
-			for(int numSeconds = 0; (numSeconds < 60); numSeconds++) // || ((numSeconds >= 60) && (orderStatus.status.equalsIgnoreCase("Filled") == false))
+			for(int numSeconds = 0; numSeconds < timeTilSell; numSeconds++)
 			{
+				//System.out.println("orderID = " + orderStatus.orderId + ", orderStatus = " + orderStatus.status);
+				
+				// If we were unable to buy due to the stock being not marginable
+				if( (orderStatus.status.equalsIgnoreCase("Inactive") == true) && (cashOnlyOrderFlag == false) )
+				{
+					System.out.println("Order was rendered inactive, trying again with our total cash, " + totalCash);
+					cashOnlyOrderFlag = true;
+					
+					// Make the trade using only cash (no leverage)
+					quantity = super.setQuantity(totalCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+					orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+					
+					if( (orderStatus == null) || (orderStatus.status == null) )
+						return "Unable to connect to TWS...";
+					
+					// Sleep for the remaining time
+					Thread.sleep(timeTilSell - (numSeconds * SECONDS));
+					
+					// We are done sleeping, sell!
+					break;
+				}
+				
+				// Sleep for one second
 				Thread.sleep( 1 * SECONDS );
-				numSeconds++;
-				System.out.println("orderID = " + orderStatus.orderId + ", orderStatus = " + orderStatus.status);
 			}
+			
+			
+			// If the order was unsuccessful, exit
+			if( (orderStatus == null) || (orderStatus.status == null) || (orderStatus.status.equalsIgnoreCase("Inactive") == true) 
+					|| orderStatus.status.equalsIgnoreCase("Cancelled") || orderStatus.status.equalsIgnoreCase("PendingCancel") )
+			{
+				System.out.println("We were unable to purchase - " + orderStatus.status);
+				return "We were unable to purchase - " + orderStatus.status;
+			}
+			
+			// Cancel the order if we have not purchased any stock
+			if(orderStatus.filled == 0)
+			{
+				System.out.println("Order canceled - we did not buy within the time limit");
+				isSimulation = true;
+				
+				tradingAPI.cancelOrder(orderStatus, isSimulation);
+				
+				return "Order canceled - we did not buy within the time limit";
+			}
+			// If we have not completed the order, complete it
+			else if(orderStatus.status.equalsIgnoreCase("Filled") == false)
+			{
+				isSimulation = true;
+				quantity = orderStatus.filled;
+				orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+				
+				if(orderStatus == null)
+					return "Unable to connect to TWS...";
+			}
+			
+			/*
+			// If we have not completed the order, cancel it
+			if(orderStatus.status.equalsIgnoreCase("Filled") == false)
+			{
+				isSimulation = true;
+				orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+			}
+			*/
+			
+			// FIXME: Wait until we have finished purchasing
+			//while( (orderStatus.remaining > 0) && (orderStatus.status.equalsIgnoreCase("Inactive") == false) ){};
 		}
 		catch ( InterruptedException e )
 		{
 			System.out.println( "awakened prematurely" );
 		}
+		
 		/*
 		// Sell the stocks
 		isSimulation = false;
@@ -100,6 +198,7 @@ public class DebugTrader extends Trader{
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
 		*/
+		
 		// Sell the stocks over the simulator
 		isSimulation = true;
 		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);

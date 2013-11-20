@@ -37,7 +37,7 @@ def getTrade(email_body, startingIndex):
     index = startingIndex
     
     # Find the end point
-    while spacesCount < 5:
+    while spacesCount < 5 and email_body[index] != '\n' and email_body[index] != '\r':
         if email_body[index] == ' ':
             spacesCount = spacesCount + 1
         index = index + 1
@@ -57,12 +57,14 @@ def getTrade(email_body, startingIndex):
     return tradeList
 
 def getEmailBody(email_message):
-    # Get the important information out of the email
-    message = ""
-    price = ""
-    article = ""
     
     for part in email_message.walk():
+        # Get the important information out of the email
+        message = ""
+        price = ""
+        article = ""
+        index = 0
+        
         bodyDecoded, encoding = decode_header(part)[0]
         if encoding == None:
             body = bodyDecoded
@@ -74,21 +76,19 @@ def getEmailBody(email_message):
         #    index = body.lower().find('bought', index)
         #    trade = getTrade(body, index)
         #    price = trade.split(' ')[4]
-        #    article = trade.split(' ')[3]      
+        #    article = trade.split(' ')[3]   
                 
         if body.lower().find('bought') >= 0:
             index = body.lower().find('bought')
-            trade = getTrade(body, index)
-            price = trade.split(' ')[4]
-            article = trade.split(' ')[3]
         elif body.lower().find('added') >= 0:
             index = body.lower().find('added')
-            trade = getTrade(body, index)
-            price = trade.split(' ')[4]
-            article = trade.split(' ')[3]
         elif body.lower().find('taking') >= 0:
             index = body.lower().find('taking')
-            trade = getTrade(body, index)
+        
+        # Get the trade information
+        trade = getTrade(body, index)
+            
+        if(len(trade.split(' ')) == 5):
             price = trade.split(' ')[4]
             article = trade.split(' ')[3]
             
@@ -117,7 +117,7 @@ def decodeSubject(email_message):
 
 ### MAIN ###
 latestEmail = ""
-latestEmailTimestamp = time.mktime(time.gmtime()) # DEBUG: 100 - tests every email
+latestEmailTimestamp = 100 # time.mktime(time.gmtime()) # DEBUG: 100 - tests every email
 currentEmail = "currentEmail"
 mail = connect()
 while True:
@@ -153,6 +153,10 @@ while True:
                         print 'Unable to get the body'
                 else:
                     trade = subject
+                    
+                # For debug
+                if((traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or (trade.lower().find('bought') < 0)):
+                    continue
 
                 # Build the url
                 paramDic = {'traderID':         traderID[0], 
@@ -185,4 +189,3 @@ while True:
         mail = connect()
 
 # vim: ts=8 et sw=4 sts=4 background=light
-

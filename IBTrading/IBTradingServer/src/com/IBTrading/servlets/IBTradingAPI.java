@@ -35,9 +35,13 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private boolean m_disconnectInProgress = false;
 
 	// Personal variables
-	private static int orderID;	// If this value is not updated, we may simply never get a response...
+	private static int orderID;	 // If this value is not updated, we may simply never get a response...
+	private static int tickerID = 0; 
 	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
+	private static HashMap<Integer,HashMap<String,Double>> marketDataHashMap = new HashMap<Integer,HashMap<String,Double>>();
 	private static double totalCash = 0;
+	private static double totalCashSimulation = 0;
+	private static boolean purchasingFlag = false;
 	
 	public IBTradingAPI()
 	{
@@ -92,7 +96,13 @@ public class IBTradingAPI extends JFrame implements EWrapper
 
     public synchronized OrderStatus placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation) 
     {
-
+    	// Check parameters
+    	if( (orderAction == null) || (symbol == null) || (quantity == 0) )
+    	{
+    		System.out.println("Invalid parameters to placeOrder");
+    		return null;
+    	}
+    	
         Order order = new Order();
         Contract contract = new Contract();
         
@@ -111,11 +121,20 @@ public class IBTradingAPI extends JFrame implements EWrapper
         	return null;
         }
         
-        // place order
+        // Place order
         if(isSimulation)
         	m_client_simulation.placeOrder( orderID, contract, order );
         else
         	m_client.placeOrder( orderID, contract, order );
+        
+        // Do not make a new purchase until we have finished selling from our last order
+        while(orderAction.equalsIgnoreCase("BUY") && (purchasingFlag == true)){}
+        
+        // If this is a new BUY order, signal our purchasing flag
+        if(orderAction.equalsIgnoreCase("BUY"))
+        {
+        	purchasingFlag = true;
+        }
         
         // Log time
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
@@ -132,15 +151,29 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		return newOrder;
     }
     
+    public void cancelOrder(OrderStatus order, boolean isSimulation)
+    {
+        // Cancel order
+        if(isSimulation)
+        	m_client_simulation.cancelOrder(order.orderId);
+        else
+        	m_client.cancelOrder(order.orderId);
+    }
+    
     @Override
     public void orderStatus( int orderId, String status, int filled, int remaining,
 			 double avgFillPrice, int permId, int parentId,
 			 double lastFillPrice, int clientId, String whyHeld) 
     {
-		// received order status
+		// Received order status
 		String msg = EWrapperMsgGenerator.orderStatus(orderId, status, filled, remaining,
 		avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld);
 		
+		// FIXME: Signal that we have finished our purchase
+		//if( (remaining == 0) && (status.equalsIgnoreCase("Blah")) && (confirm this is a sell) )
+		purchasingFlag = false;
+		
+		// Get the date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
 		System.out.println(msg + " " + dateFormat.format(date));
@@ -252,17 +285,8 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	*/
     }
     
-    void getAvailableFunds(boolean isSimulation)
+    public int subscribeToMarketData(String symbol, boolean isSimulation)
     {
-    	if(isSimulation)
-    		m_client_simulation.reqAccountUpdates(true, "DU170967");
-    	else
-    		m_client.reqAccountUpdates(true, "U1257707");
-    }
-    
-    void getMarketData(String symbol, boolean isSimulation)
-    {
-    	int tickerId = 0;
     	Contract contract = new Contract();
     	String genericTicklist = null;
     	boolean snapshot = true;
@@ -272,11 +296,45 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	contract.m_symbol = symbol;
     	
     	if(isSimulation)
-    		m_client_simulation.reqMktData(tickerId, contract, genericTicklist, snapshot);
+    		m_client_simulation.reqMktData(tickerID, contract, genericTicklist, snapshot);
     	else
-    		m_client.reqMktData(tickerId, contract, genericTicklist, snapshot);
+    		m_client.reqMktData(tickerID, contract, genericTicklist, snapshot);
     	
-    	return;
+    	// Add a new hash map to market data for this stock
+    	marketDataHashMap.put(tickerID, new HashMap<String,Double>());
+    	
+    	return tickerID++;
+    }
+    
+    public double getAvailableFunds(boolean isSimulation)
+    {
+    	if(isSimulation)
+    		return totalCashSimulation;
+    	else
+    		return totalCash;
+    }
+    
+    public double getMarketData(int tickerId, String marketInfo)
+    {
+    	if(marketDataHashMap.get(tickerId) == null)
+    		return 0.0;
+    	else if(marketDataHashMap.get(tickerId).get(marketInfo) == null)
+    		return 0.0;
+    	else
+    		return marketDataHashMap.get(tickerId).get(marketInfo);
+    }
+    
+    public void initializeAvailableFunds(boolean isSimulation)
+    {
+    	if(isSimulation)
+    		m_client_simulation.reqAccountUpdates(true, "DU170967");
+    	else
+    		m_client.reqAccountUpdates(true, "U1257707");
+    }
+    
+    public boolean isStillPurchasing()
+    {
+    	return purchasingFlag;
     }
     
 	@Override
@@ -363,6 +421,125 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public void tickPrice(int tickerId, int field, double price,
 			int canAutoExecute) {
 		System.out.println(EWrapperMsgGenerator.tickPrice(tickerId, field, price, canAutoExecute));
+		
+		String marketInfo = null;
+		if(field == 0)
+			marketInfo = "BID_SIZE";
+		else if(field == 1)
+			marketInfo = "BID_PRICE";
+		else if(field == 2)
+			marketInfo = "ASK_PRICE";
+		else if(field == 3)
+			marketInfo = "ASK_SIZE";
+		else if(field == 4)
+			marketInfo = "LAST_PRICE";
+		else if(field == 5)
+			marketInfo = "LAST_SIZE";
+		else if(field == 6)
+			marketInfo = "HIGH";
+		else if(field == 7)
+			marketInfo = "LOW";
+		else if(field == 8)
+			marketInfo = "VOLUME";
+		else if(field == 9)
+			marketInfo = "CLOSE_PRICE";
+		else if(field == 11)
+			marketInfo = "ASK_OPTION_COMPUTATION";
+		else if(field == 12)
+			marketInfo = "LAST_OPTION_COMPUTATION";
+		else if(field == 13)
+			marketInfo = "MODEL_OPTION_COMPUTATION";
+		else if(field == 14)
+			marketInfo = "OPEN_TICK";
+		else if(field == 15)
+			marketInfo = "LOW_13_WEEK";
+		else if(field == 16)
+			marketInfo = "HIGH_13_WEEK";
+		else if(field == 17)
+			marketInfo = "LOW_26_WEEK";
+		else if(field == 18)
+			marketInfo = "HIGH_26_WEEK";
+		else if(field == 19)
+			marketInfo = "LOW_52_WEEK";
+		else if(field == 20)
+			marketInfo = "HIGH_52_WEEK";
+		else if(field == 21)
+			marketInfo = "AVG_VOLUME";
+		else if(field == 22)
+			marketInfo = "OPEN_INTEREST";
+		else if(field == 23)
+			marketInfo = "OPTION_HISTORICAL_VOL";
+		else if(field == 24)
+			marketInfo = "OPTION_IMPLIED_VOL";
+		else if(field == 25)
+			marketInfo = "OPTION_BID_EXCH";
+		else if(field == 26)
+			marketInfo = "OPTION_ASK_EXCH";
+		else if(field == 27)
+			marketInfo = "OPTION_CALL_OPEN_INTEREST";
+		else if(field == 28)
+			marketInfo = "OPTION_PUT_OPEN_INTEREST";
+		else if(field == 29)
+			marketInfo = "OPTION_CALL_VOLUME";
+		else if(field == 30)
+			marketInfo = "OPTION_PUT_VOLUME";
+		else if(field == 31)
+			marketInfo = "INDEX_FUTURE_PREMIUM";
+		else if(field == 32)
+			marketInfo = "BID_EXCH";
+		else if(field == 33)
+			marketInfo = "ASK_EXCH";
+		else if(field == 34)
+			marketInfo = "AUCTION_VOLUME";
+		else if(field == 35)
+			marketInfo = "AUCTION_PRICE";
+		else if(field == 36)
+			marketInfo = "AUCTION_IMBALANCE";
+		else if(field == 37)
+			marketInfo = "MARK_PRICE";
+		else if(field == 38)
+			marketInfo = "BID_EFP_COMPUTATION";
+		else if(field == 39)
+			marketInfo = "ASK_EFP_COMPUTATION";
+		else if(field == 40)
+			marketInfo = "LAST_EFP_COMPUTATION";
+		else if(field == 41)
+			marketInfo = "OPEN_EFP_COMPUTATION";
+		else if(field == 42)
+			marketInfo = "HIGH_EFP_COMPUTATION";
+		else if(field == 43)
+			marketInfo = "LOW_EFP_COMPUTATION";
+		else if(field == 44)
+			marketInfo = "CLOSE_EFP_COMPUTATION";
+		else if(field == 45)
+			marketInfo = "LAST_TIMESTAMP";
+		else if(field == 46)
+			marketInfo = "SHORTABLE";
+		else if(field == 47)
+			marketInfo = "FUNDAMENTAL_RATIOS";
+		else if(field == 48)
+			marketInfo = "RT_VOLUME";
+		else if(field == 49)
+			marketInfo = "HALTED";
+		else if(field == 50)
+			marketInfo = "BIDYIELD";
+		else if(field == 51)
+			marketInfo = "ASKYIELD";
+		else if(field == 52)
+			marketInfo = "LASTYIELD";
+		else if(field == 53)
+			marketInfo = "CUST_OPTION_COMPUTATION";
+		else if(field == 54)
+			marketInfo = "TRADE_COUNT";
+		else if(field == 55)
+			marketInfo = "TRADE_RATE";
+		else if(field == 56)
+			marketInfo = "VOLUME_RATE";
+		else
+			marketInfo = "UNKNOWN";
+		
+		HashMap<String,Double> temp = marketDataHashMap.get(tickerId);
+		marketDataHashMap.get(tickerId).put(marketInfo, price);
 	}
 
 	@Override
@@ -416,7 +593,14 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// Only get the information regarding the current funds in the account
 		if(key.equalsIgnoreCase("AvailableFunds"))
 		{
-			totalCash = Double.parseDouble(value);
+			double cash = Double.parseDouble(value);
+			
+			// I do not have more than $50,000 in my account
+			if(cash > 50000.0)
+				totalCashSimulation = cash;
+			else
+				totalCash = cash;
+			
 			System.out.println(msg);
 		}
 	}
@@ -467,7 +651,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
 
 	@Override
 	public void execDetails(int reqId, Contract contract, Execution execution) {
-		// TODO Auto-generated method stub
+		System.out.println(EWrapperMsgGenerator.execDetails(reqId, contract, execution));
+		
+		// execution.m_shares
+		// execution.m_orderId
+		
 		
 	}
 
