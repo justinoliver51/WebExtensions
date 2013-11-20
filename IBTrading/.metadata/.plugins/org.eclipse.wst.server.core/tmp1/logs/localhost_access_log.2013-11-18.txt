@@ -1,0 +1,6 @@
+142.91.43.194 - - [18/Nov/2013:00:20:58 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [18/Nov/2013:08:19:37 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [18/Nov/2013:08:23:36 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Adcc HTTP/1.1" 200 180
+0:0:0:0:0:0:0:1%0 - - [18/Nov/2013:08:56:27 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Cha-CHING%21+Sold+NQ+%2B10%25+%2413.86+%2B%242%2C432+overnight HTTP/1.1" 200 221
+119.164.193.91 - - [18/Nov/2013:21:15:13 -0600] "GET /manager/html HTTP/1.1" 404 975
+119.164.193.91 - - [18/Nov/2013:23:42:35 -0600] "GET /manager/html HTTP/1.1" 404 975

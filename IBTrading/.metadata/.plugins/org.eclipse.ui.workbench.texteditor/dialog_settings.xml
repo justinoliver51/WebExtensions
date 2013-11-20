@@ -3,18 +3,19 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="261" key="DIALOG_Y_ORIGIN"/>
-		<item value="399" key="DIALOG_HEIGHT"/>
 		<item value="924" key="DIALOG_X_ORIGIN"/>
+		<item value="399" key="DIALOG_HEIGHT"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="update" key="selection"/>
+		<item value="trade = getTrade(body, index)&#x0A;            &#x0A;            if(len(trade.split(&apos; &apos;)) == 5):&#x0A;                price = trade.split(&apos; &apos;)[4]&#x0A;                article = trade.split(&apos; &apos;)[3]" key="selection"/>
 		<list key="findhistory">
+			<item value="trade = getTrade(body, index)&#x0A;            &#x0A;            if(len(trade.split(&apos; &apos;)) == 5):&#x0A;                price = trade.split(&apos; &apos;)[4]&#x0A;                article = trade.split(&apos; &apos;)[3]"/>
 			<item value="update"/>
 			<item value="updates"/>
 			<item value="getAvailableFunds"/>
@@ -22,7 +23,6 @@
 			<item value="manageAccoun"/>
 			<item value="manageAccounts"/>
 			<item value="managedAccounts"/>
-			<item value="manag"/>
 		</list>
 		<list key="replacehistory">
 			<item value="    "/>
