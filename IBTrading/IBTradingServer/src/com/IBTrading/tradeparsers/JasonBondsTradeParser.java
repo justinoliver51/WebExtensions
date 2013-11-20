@@ -72,6 +72,22 @@ public class JasonBondsTradeParser {
 					return true;
 			}
 			
+			// Bond Blow Ups bought NQ $13.37
+			if(tokens.length >= 5)
+			{
+				parsedAction = tokens[3];
+				parsedSymbol = tokens[4];
+				
+				parsedQuantity = "0";
+				parsedPrice = "0.00";
+				
+				validParameters = areParamatersValid(parsedAction, parsedQuantity, parsedSymbol, parsedPrice);
+
+				// If we successfully parsed the parameters, return true
+				if(validParameters == true)
+					return true;
+			}
+			
 			// If everything went well, set up the trade
 			System.out.println("Invalid Parameters");
 			return false;
