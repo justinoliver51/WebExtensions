@@ -37,7 +37,7 @@ def getTrade(email_body, startingIndex):
     index = startingIndex
     
     # Find the end point
-    while spacesCount < 5:
+    while spacesCount < 5 and email_body[index] != '\n' and email_body[index] != '\r':
         if email_body[index] == ' ':
             spacesCount = spacesCount + 1
         index = index + 1
@@ -78,17 +78,15 @@ def getEmailBody(email_message):
                 
         if body.lower().find('bought') >= 0:
             index = body.lower().find('bought')
-            trade = getTrade(body, index)
-            price = trade.split(' ')[4]
-            article = trade.split(' ')[3]
         elif body.lower().find('added') >= 0:
             index = body.lower().find('added')
-            trade = getTrade(body, index)
-            price = trade.split(' ')[4]
-            article = trade.split(' ')[3]
         elif body.lower().find('taking') >= 0:
             index = body.lower().find('taking')
-            trade = getTrade(body, index)
+        
+        # Get the trade information
+        trade = getTrade(body, index)
+            
+        if(len(trade.split(' ')) == 5):
             price = trade.split(' ')[4]
             article = trade.split(' ')[3]
             

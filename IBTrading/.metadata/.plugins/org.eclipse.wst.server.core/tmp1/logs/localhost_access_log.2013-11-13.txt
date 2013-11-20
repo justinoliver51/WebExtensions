@@ -1,4 +1,0 @@
-0:0:0:0:0:0:0:1%0 - - [13/Nov/2013:05:49:28 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Wednesday%27s+watch+list HTTP/1.1" 200 169
-0:0:0:0:0:0:0:1%0 - - [13/Nov/2013:08:06:54 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=This+is+a+new+email HTTP/1.1" 200 195
-0:0:0:0:0:0:0:1%0 - - [13/Nov/2013:14:26:03 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+TWGP+at+%244.16 HTTP/1.1" 200 167
-72.36.114.30 - - [13/Nov/2013:19:49:50 -0600] "HEAD / HTTP/1.1" 404 -

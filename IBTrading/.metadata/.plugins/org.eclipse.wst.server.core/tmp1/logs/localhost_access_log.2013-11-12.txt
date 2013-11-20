@@ -1,8 +1,0 @@
-72.130.181.166 - - [12/Nov/2013:00:08:02 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
-0:0:0:0:0:0:0:1%0 - - [12/Nov/2013:06:08:25 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Tuesday%27s+watch+list HTTP/1.1" 200 167
-0:0:0:0:0:0:0:1%0 - - [12/Nov/2013:07:55:50 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=New HTTP/1.1" 200 179
-0:0:0:0:0:0:0:1%0 - - [12/Nov/2013:09:02:36 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=sdfsdf+ HTTP/1.1" 200 183
-216.212.252.21 - - [12/Nov/2013:09:44:04 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
-0:0:0:0:0:0:0:1%0 - - [12/Nov/2013:13:35:10 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Alex+Vo+Brings+Options+Education+And+Alerts+To+The+Jason+Bond+Picks%0D%0A+Family HTTP/1.1" 200 249
-119.164.195.58 - - [12/Nov/2013:18:40:24 -0600] "GET /manager/html HTTP/1.1" 404 975
-12.0.211.145 - - [12/Nov/2013:21:56:41 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
