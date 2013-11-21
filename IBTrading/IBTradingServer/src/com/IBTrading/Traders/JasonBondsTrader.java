@@ -162,7 +162,8 @@ public class JasonBondsTrader extends Trader{
 				return "Order canceled - we did not buy within the time limit";
 			}
 			// If we have not completed the order, complete it
-			else if(orderStatus.status.equalsIgnoreCase("Filled") == false)
+			// FIXME: Bought twice... Need to use the same orderID as the previous order, orderStatus.orderId
+			/*else if(orderStatus.status.equalsIgnoreCase("Filled") == false)
 			{
 				isSimulation = false;
 				quantity = orderStatus.filled;
@@ -170,7 +171,10 @@ public class JasonBondsTrader extends Trader{
 				
 				if(orderStatus == null)
 					return "Unable to connect to TWS...";
-			}
+			}*/
+			
+			// FIXME: Wait until we have finished purchasing
+			while( (orderStatus.remaining > 0) && (orderStatus.status.equalsIgnoreCase("Inactive") == false) ){};
 		}
 		catch ( InterruptedException e )
 		{
@@ -183,7 +187,6 @@ public class JasonBondsTrader extends Trader{
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
-		
 		
 		// Sell the stocks over the simulator
 		isSimulation = true;

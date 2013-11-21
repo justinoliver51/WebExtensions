@@ -41,7 +41,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         
         // Subscribe to updates from my account
         boolean isSimulation = true;
-        tradingAPI.initializeAvailableFunds(isSimulation);
+        tradingAPI.initializeAvailableFunds();
         //tradingAPI.getMarketData("DGLY", false);
     }
 

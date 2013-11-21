@@ -114,6 +114,10 @@ public class TradeCenter {
 			System.out.println("Trader has an invalid trade.");
 			return "Trader has an invalid trade.";
 		}
+		else
+		{
+			System.out.println("Trader has a valid trade.");
+		}
 		
 		return trader.trade();
 	}

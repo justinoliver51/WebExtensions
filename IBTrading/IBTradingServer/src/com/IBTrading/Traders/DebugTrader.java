@@ -183,7 +183,7 @@ public class DebugTrader extends Trader{
 			*/
 			
 			// FIXME: Wait until we have finished purchasing
-			//while( (orderStatus.remaining > 0) && (orderStatus.status.equalsIgnoreCase("Inactive") == false) ){};
+			while( (orderStatus.remaining > 0) && (orderStatus.status.equalsIgnoreCase("Inactive") == false) ){};
 		}
 		catch ( InterruptedException e )
 		{

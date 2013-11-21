@@ -89,7 +89,7 @@ public class JasonBondsTradeParser {
 			}
 			
 			// If everything went well, set up the trade
-			System.out.println("Invalid Parameters");
+			System.out.println("Invalid Parameters - unable to parse " + tokens);
 			return false;
 		}catch(Exception e)
 		{

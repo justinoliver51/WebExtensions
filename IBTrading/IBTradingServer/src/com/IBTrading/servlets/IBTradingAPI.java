@@ -324,12 +324,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
     		return marketDataHashMap.get(tickerId).get(marketInfo);
     }
     
-    public void initializeAvailableFunds(boolean isSimulation)
+    public void initializeAvailableFunds()
     {
-    	if(isSimulation)
-    		m_client_simulation.reqAccountUpdates(true, "DU170967");
-    	else
-    		m_client.reqAccountUpdates(true, "U1257707");
+    	m_client_simulation.reqAccountUpdates(true, "DU170967");
+    	m_client.reqAccountUpdates(true, "U1257707");
     }
     
     public boolean isStillPurchasing()
@@ -595,10 +593,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		{
 			double cash = Double.parseDouble(value);
 			
-			// I do not have more than $50,000 in my account
-			if(cash > 50000.0)
+			// Simulation account
+			if(accountName.equalsIgnoreCase("DU170967"))
 				totalCashSimulation = cash;
-			else
+			// Real money account
+			else if(accountName.equalsIgnoreCase("U1257707"))
 				totalCash = cash;
 			
 			System.out.println(msg);
