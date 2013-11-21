@@ -51,7 +51,7 @@ public class AwesomePennyStocksTrader extends Trader
 	{
 		// Make the purchase
 		boolean isSimulation = true;
-		OrderStatus orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		OrderStatus orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation, null);
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
@@ -67,7 +67,7 @@ public class AwesomePennyStocksTrader extends Trader
 		}
 		
 		// Sell the stocks
-		orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation);
+		orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, (parser.quantity * TRADERPERCENTAGE) / 100, isSimulation, null);
 		
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";

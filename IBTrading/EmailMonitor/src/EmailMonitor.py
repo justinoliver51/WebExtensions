@@ -159,7 +159,7 @@ while True:
                 #    continue
 
                 # Build the url
-                paramDic = {'traderID':         traderID[0], 
+                paramDic = {'traderID':         traderID[0],
                             'newTrade':         trade,
                             'realTimeSystem':   'email'
                             }

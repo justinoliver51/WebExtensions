@@ -102,7 +102,7 @@ public class DebugTrader extends Trader{
 		// Make the purchase with the Simulator
 		isSimulation = true;
 		simulationQuantity = quantity;
-		orderStatusSimulation = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);  
+		orderStatusSimulation = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation, null);  
 		orderStatus = orderStatusSimulation;  // FIXME: Only useful for DebugTrader
 		
 		if( (orderStatus == null) || (orderStatus.status == null) )
@@ -111,7 +111,7 @@ public class DebugTrader extends Trader{
 		// Sleep for 60 seconds, then sell
 		try
 		{			
-			int timeTilSell = 5;  // FIXME: 60 seconds 
+			int timeTilSell = 30;  // FIXME: 60 seconds 
 			boolean cashOnlyOrderFlag = false;
 			
 			// Check the desired information every second for 60 seconds
@@ -127,7 +127,7 @@ public class DebugTrader extends Trader{
 					
 					// Make the trade using only cash (no leverage)
 					quantity = super.setQuantity(totalCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
-					orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+					orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
 					
 					if( (orderStatus == null) || (orderStatus.status == null) )
 						return "Unable to connect to TWS...";
@@ -166,24 +166,16 @@ public class DebugTrader extends Trader{
 			else if(orderStatus.status.equalsIgnoreCase("Filled") == false)
 			{
 				isSimulation = true;
-				quantity = orderStatus.filled;
-				orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+				tradingAPI.cancelOrder(orderStatus, isSimulation);
 				
-				if(orderStatus == null)
-					return "Unable to connect to TWS...";
+				// Wait until we have either completed the order or it is cancelled
+				while( (orderStatus.status.equalsIgnoreCase("Cancelled") == false) &&
+						(orderStatus.status.equalsIgnoreCase("Filled") == false) ){};
+						
+				// Get the quantity to sell
+				simulationQuantity = orderStatus.filled;
 			}
-			
-			/*
-			// If we have not completed the order, cancel it
-			if(orderStatus.status.equalsIgnoreCase("Filled") == false)
-			{
-				isSimulation = true;
-				orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
-			}
-			*/
-			
-			// FIXME: Wait until we have finished purchasing
-			while( (orderStatus.remaining > 0) && (orderStatus.status.equalsIgnoreCase("Inactive") == false) ){};
+
 		}
 		catch ( InterruptedException e )
 		{
@@ -201,7 +193,7 @@ public class DebugTrader extends Trader{
 		
 		// Sell the stocks over the simulator
 		isSimulation = true;
-		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);
+		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation, null);
 		
 		return null;
 	}

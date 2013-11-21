@@ -94,8 +94,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		return orderStatusHashMap.get(Integer.toString(orderId));
 	}
 
-    public synchronized OrderStatus placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation) 
+    public synchronized OrderStatus placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation, OrderStatus orderStatus) 
     {
+    	int orderId = orderStatus == null ? orderID : orderStatus.orderId;
+    	
     	// Check parameters
     	if( (orderAction == null) || (symbol == null) || (quantity == 0) )
     	{
@@ -123,30 +125,38 @@ public class IBTradingAPI extends JFrame implements EWrapper
         
         // Place order
         if(isSimulation)
-        	m_client_simulation.placeOrder( orderID, contract, order );
+        	m_client_simulation.placeOrder( orderId, contract, order );
         else
-        	m_client.placeOrder( orderID, contract, order );
+        	m_client.placeOrder( orderId, contract, order );
         
         // Do not make a new purchase until we have finished selling from our last order
-        while(orderAction.equalsIgnoreCase("BUY") && (purchasingFlag == true)){}
+        // FIXME: May want a timeout
+        //while(orderAction.equalsIgnoreCase("BUY") && (purchasingFlag == true)){}
         
-        // If this is a new BUY order, signal our purchasing flag
-        if(orderAction.equalsIgnoreCase("BUY"))
-        {
-        	purchasingFlag = true;
-        }
+        // Set the purchasing flag which prevents any other orders to occur until this
+        // one is complete
+        purchasingFlag = true;
         
         // Log time
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
-		System.out.println("Order number " + orderID + " placed at: " + dateFormat.format(date));
+		System.out.println("Order number " + orderId + " placed at: " + dateFormat.format(date));
 		
 		// Add the new order to our hash map
-		OrderStatus newOrder =  new OrderStatus();
-		orderStatusHashMap.put(Integer.toString(orderID), newOrder);
-		
-		// Update the orderID for the next order
-		orderID++;
+		OrderStatus newOrder;
+		if(orderStatus == null)
+		{
+			newOrder =  new OrderStatus();
+			orderStatusHashMap.put(Integer.toString(orderID), newOrder);
+			
+			// Update the orderID for the next order
+			orderID++;
+		}
+		// Otherwise, we are modifying an existing order
+		else
+		{
+			newOrder = orderStatus;
+		}
 		
 		return newOrder;
     }
@@ -168,10 +178,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// Received order status
 		String msg = EWrapperMsgGenerator.orderStatus(orderId, status, filled, remaining,
 		avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld);
-		
-		// FIXME: Signal that we have finished our purchase
-		//if( (remaining == 0) && (status.equalsIgnoreCase("Blah")) && (confirm this is a sell) )
-		purchasingFlag = false;
 		
 		// Get the date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
@@ -650,18 +656,28 @@ public class IBTradingAPI extends JFrame implements EWrapper
 
 	@Override
 	public void execDetails(int reqId, Contract contract, Execution execution) {
-		System.out.println(EWrapperMsgGenerator.execDetails(reqId, contract, execution));
-		
+		//System.out.println(EWrapperMsgGenerator.execDetails(reqId, contract, execution));
 		// execution.m_shares
 		// execution.m_orderId
 		
+		System.out.println("Order, " + execution.m_orderId + " executed " + execution.m_cumQty);
 		
+		
+		// FIXME: We want to wait until after both the 
+		OrderStatus orderStatus = orderStatusHashMap.get(Integer.toString(execution.m_orderId));
+		
+		// If we have completed the order, give the signal
+		if( ((orderStatus.status.equalsIgnoreCase("Cancelled") == true) ||
+				(orderStatus.status.equalsIgnoreCase("Filled") == true) )
+			&& execution.m_side.equalsIgnoreCase("SELL"))
+		{
+			purchasingFlag = false;
+		}
 	}
 
 	@Override
 	public void execDetailsEnd(int reqId) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.execDetailsEnd(reqId));
 	}
 
 	@Override

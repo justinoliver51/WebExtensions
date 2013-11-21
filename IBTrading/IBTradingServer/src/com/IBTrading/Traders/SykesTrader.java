@@ -67,7 +67,7 @@ public class SykesTrader extends Trader
 
 		// Make the purchase with the Simulator
 		isSimulation = true;
-		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation);
+		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation, null);
 		
 		// Sleep for 60 seconds, then sell
 		try
@@ -90,7 +90,7 @@ public class SykesTrader extends Trader
 
 		// Sell the stocks over the simulator
 		isSimulation = true;
-		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation);
+		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation, null);
 		
 		return null;
 	}
