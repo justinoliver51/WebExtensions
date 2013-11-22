@@ -92,7 +92,6 @@ public class JasonBondsTrader extends Trader{
 		
 		if(quantity <= 0)
 		{
-			System.out.println("Invalid quantity, " + quantity);
 			return "Invalid quantity, " + quantity;
 		}
 		
@@ -132,7 +131,7 @@ public class JasonBondsTrader extends Trader{
 						return "Unable to connect to TWS...";
 					
 					// Sleep for the remaining time
-					Thread.sleep(timeTilSell - (numSeconds * SECONDS));
+					Thread.sleep((timeTilSell - numSeconds) * SECONDS);
 					
 					// We are done sleeping, sell!
 					break;
@@ -147,18 +146,14 @@ public class JasonBondsTrader extends Trader{
 			if( (orderStatus == null) || (orderStatus.status == null) || (orderStatus.status.equalsIgnoreCase("Inactive") == true) 
 					|| orderStatus.status.equalsIgnoreCase("Cancelled") || orderStatus.status.equalsIgnoreCase("PendingCancel") )
 			{
-				System.out.println("We were unable to purchase - " + orderStatus.status);
 				return "We were unable to purchase - " + orderStatus.status;
 			}
 			
 			// Cancel the order if we have not purchased any stock
 			if(orderStatus.filled == 0)
 			{
-				System.out.println("Order canceled - we did not buy within the time limit");
 				isSimulation = false;
-				
 				tradingAPI.cancelOrder(orderStatus, isSimulation);
-				
 				return "Order canceled - we did not buy within the time limit";
 			}
 			// If we have not completed the order, complete it

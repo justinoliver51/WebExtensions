@@ -55,17 +55,29 @@ public class DebugTrader extends Trader{
 		totalCash = (int) tradingAPI.getAvailableFunds(false); //tradingAPI.getAvailableFunds(isSimulation);
 		
 		// If something went wrong and we were unable to get the cash
+		// then we cannot get the market data either
 		if(totalCash == 0)
+		{
 			totalCash = 5900;
+			isSimulation = true;
+		}
+		else
+		{
+			isSimulation = false;
+		}
 		
 		// Give a little wiggle room of ~2% for the maxCash
 		maxCash = (totalCash * MAXLEVERAGE) - ((totalCash * MAXLEVERAGE) / 50);
 		
 		// If the price/share of the stock was not supplied, get this information from TWS
+		// If isSimulation is true, then we are not logged in to our real money account on TWS
 		if(parser.price.equalsIgnoreCase("0.00"))
 		{
+			if(isSimulation == true)
+				return "Cannot read market data from simulation account.";
+			
 			String marketData = "LAST_PRICE";  
-			int tickerID = tradingAPI.subscribeToMarketData(parser.symbol, false); //tradingAPI.subscribeToMarketData(parser.symbol, isSimulation);
+			int tickerID = tradingAPI.subscribeToMarketData(parser.symbol, isSimulation); 
 		
 			// Wait until we have received the market data
 			while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
@@ -88,7 +100,6 @@ public class DebugTrader extends Trader{
 		
 		if(quantity <= 0)
 		{
-			System.out.println("Invalid quantity, " + quantity);
 			return "Invalid quantity, " + quantity;
 		}
 		
@@ -111,7 +122,7 @@ public class DebugTrader extends Trader{
 		// Sleep for 60 seconds, then sell
 		try
 		{			
-			int timeTilSell = 30;  // FIXME: 60 seconds 
+			int timeTilSell = 5;  // FIXME: 60 seconds 
 			boolean cashOnlyOrderFlag = false;
 			
 			// Check the desired information every second for 60 seconds
@@ -133,7 +144,7 @@ public class DebugTrader extends Trader{
 						return "Unable to connect to TWS...";
 					
 					// Sleep for the remaining time
-					Thread.sleep(timeTilSell - (numSeconds * SECONDS));
+					Thread.sleep((timeTilSell - numSeconds) * SECONDS);
 					
 					// We are done sleeping, sell!
 					break;
@@ -148,18 +159,14 @@ public class DebugTrader extends Trader{
 			if( (orderStatus == null) || (orderStatus.status == null) || (orderStatus.status.equalsIgnoreCase("Inactive") == true) 
 					|| orderStatus.status.equalsIgnoreCase("Cancelled") || orderStatus.status.equalsIgnoreCase("PendingCancel") )
 			{
-				System.out.println("We were unable to purchase - " + orderStatus.status);
 				return "We were unable to purchase - " + orderStatus.status;
 			}
 			
 			// Cancel the order if we have not purchased any stock
 			if(orderStatus.filled == 0)
 			{
-				System.out.println("Order canceled - we did not buy within the time limit");
 				isSimulation = true;
-				
 				tradingAPI.cancelOrder(orderStatus, isSimulation);
-				
 				return "Order canceled - we did not buy within the time limit";
 			}
 			// If we have not completed the order, complete it

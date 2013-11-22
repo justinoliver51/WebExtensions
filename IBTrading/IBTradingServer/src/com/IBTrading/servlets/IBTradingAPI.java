@@ -140,7 +140,8 @@ public class IBTradingAPI extends JFrame implements EWrapper
         // Log time
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
-		System.out.println("Order number " + orderId + " placed at: " + dateFormat.format(date));
+		System.out.println("Order number " + orderId + ", " + orderAction + " " + symbol 
+				+ " placed at: " + dateFormat.format(date));
 		
 		// Add the new order to our hash map
 		OrderStatus newOrder;
@@ -182,7 +183,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// Get the date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
-		System.out.println(msg + " " + dateFormat.format(date));
+		//System.out.println(msg + " " + dateFormat.format(date));
 		
 		// 
 		OrderStatus order;
@@ -542,7 +543,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		else
 			marketInfo = "UNKNOWN";
 		
-		HashMap<String,Double> temp = marketDataHashMap.get(tickerId);
 		marketDataHashMap.get(tickerId).put(marketInfo, price);
 	}
 
@@ -669,7 +669,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// If we have completed the order, give the signal
 		if( ((orderStatus.status.equalsIgnoreCase("Cancelled") == true) ||
 				(orderStatus.status.equalsIgnoreCase("Filled") == true) )
-			&& execution.m_side.equalsIgnoreCase("SELL"))
+			&& execution.m_side.equalsIgnoreCase("SLD"))
 		{
 			purchasingFlag = false;
 		}

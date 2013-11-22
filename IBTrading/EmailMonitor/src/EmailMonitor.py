@@ -116,10 +116,16 @@ def decodeSubject(email_message):
     
 
 ### MAIN ###
+debug = False
 latestEmail = ""
-latestEmailTimestamp = time.mktime(time.gmtime()) # DEBUG: 100 - tests every email
 currentEmail = "currentEmail"
 mail = connect()
+
+if debug == True:
+    latestEmailTimestamp = 100 # Tests every email
+else:
+    latestEmailTimestamp = time.mktime(time.gmtime()) 
+
 while True:
     try:
         # Connect to the Inbox
@@ -142,7 +148,10 @@ while True:
                 traderID = email.utils.parseaddr(email_message['From'])
                 subject = decodeSubject(email_message)
 
-                # DEBUG: Reserved for testing Jason's emails
+                # If the subject does not contain 'Bought' or 'Added', move on
+                if(subject.lower().find('bought') < 0):
+                    continue
+
                 if(traderID[0] == 'Jason' or traderID[0] == 'Jason Bond' or traderID[0] == 'Justin Oliver'):
                     try:
                         trade = getEmailBody(email_message)
@@ -153,10 +162,6 @@ while True:
                         print 'Unable to get the body'
                 else:
                     trade = subject
-                    
-                # For debug
-                #if((traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or (trade.lower().find('bought') < 0)):
-                #    continue
 
                 # Build the url
                 paramDic = {'traderID':         traderID[0],
@@ -164,6 +169,12 @@ while True:
                             'realTimeSystem':   'email'
                             }
                 url = "http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?"
+                
+                if debug == True:
+                    if((traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or (trade.lower().find('bought') < 0)):
+                        continue
+                    
+                    paramDic['traderID'] = 'Justin Oliver'
                 
                 encodedParams = urllib.urlencode(paramDic)
                 query = url + encodedParams
