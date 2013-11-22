@@ -153,8 +153,7 @@ public class DebugTrader extends Trader{
 				// Sleep for one second
 				Thread.sleep( 1 * SECONDS );
 			}
-			
-			
+				
 			// If the order was unsuccessful, exit
 			if( (orderStatus == null) || (orderStatus.status == null) || (orderStatus.status.equalsIgnoreCase("Inactive") == true) 
 					|| orderStatus.status.equalsIgnoreCase("Cancelled") || orderStatus.status.equalsIgnoreCase("PendingCancel") )
