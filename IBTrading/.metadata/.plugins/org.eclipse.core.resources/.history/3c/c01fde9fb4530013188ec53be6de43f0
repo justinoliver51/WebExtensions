@@ -54,7 +54,7 @@ public class TradeCenter {
 		long MILLIS_AT_8_30_AM = (long) (8.5 * 60 * 60 * 1000);
 		long MILLIS_AT_3_00_PM = (long) (15 * 60 * 60 * 1000);
 		long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
-		long MILLIS_TIMEZONE_DIFF = 6 * 60 * 60 * 1000;
+		long MILLIS_TIMEZONE_DIFF = 5 * 60 * 60 * 1000;
 		
 		traderID = newTraderID;
 		boolean websiteMonitorFlag = realTimeSystem.equalsIgnoreCase("websiteMonitor") ? 

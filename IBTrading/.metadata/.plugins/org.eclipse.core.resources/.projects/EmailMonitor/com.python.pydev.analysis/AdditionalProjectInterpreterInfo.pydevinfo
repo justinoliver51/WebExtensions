@@ -11,11 +11,12 @@ EmailMonitor|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/Ema
 2=EmailMonitor
 -- END DICTIONARY
 -- START TREE 1
-22
+23
 cli|1|clipboard_file!11@
 con|1|connect!18@
 cur|1|currentEmail!19@
 dat|1|data!11@
+deb|1|debug!19@
 dec|1|decodeSubject!18@
 ema|1|email_message!19@
 enc|1|encodedParams!19@

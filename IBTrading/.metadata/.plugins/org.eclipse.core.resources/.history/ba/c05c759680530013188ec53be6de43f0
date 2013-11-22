@@ -101,6 +101,7 @@ public class JasonBondsTrader extends Trader{
 		if(orderStatus == null)
 			return "Unable to connect to TWS...";
 		
+		
 		// Make the purchase with the Simulator
 		isSimulation = true;
 		orderStatusSimulation = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation, null);  

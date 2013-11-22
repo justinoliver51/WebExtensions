@@ -96,7 +96,7 @@ public class TradeCenter {
 		long timePortion = System.currentTimeMillis() % MILLIS_PER_DAY;
 		timePortion = timePortion < MILLIS_TIMEZONE_DIFF ? (MILLIS_PER_DAY - (MILLIS_TIMEZONE_DIFF - timePortion)) : (timePortion - MILLIS_TIMEZONE_DIFF); 
 		
-		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )
+		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )55508451
 		{
 			System.out.println("Market is closed!");
 			
