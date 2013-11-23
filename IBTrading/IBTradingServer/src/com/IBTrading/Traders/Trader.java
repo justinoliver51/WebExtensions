@@ -5,6 +5,9 @@ import com.IBTrading.servlets.IBTradingAPI;
 public class Trader 
 {
 	public static IBTradingAPI tradingAPI;	// TWS API
+	private final int MAXLEVERAGE = 4;
+	private final int NOLEVERAGE = 1;
+	private final int MAXCASH = 24000;
 	
 	// Valid trade - true if parsed correctly, false otherwise
 	public boolean hasValidTrade = false;
@@ -29,7 +32,30 @@ public class Trader
 	}
 	
 	//
-	public int setQuantity(int maxCash, double price, int traderPercentage, int maxQuantity)
+	public int getCash(int cash, int leverage)
+	{
+		// Ensure cash is realistic
+		if(cash < 0)
+			return 0;
+		else if(cash > MAXCASH)
+			cash = MAXCASH;
+		
+		// Ensure leverage is realistic
+		if(leverage > MAXLEVERAGE)
+			leverage = MAXLEVERAGE;
+		else if(leverage < 0)
+			leverage = NOLEVERAGE;
+		
+		// 2% wiggle room
+		cash = (cash * leverage) - ((cash * leverage) / 50);
+		if(cash > MAXCASH)
+			cash = MAXCASH;
+		
+		return cash;
+	}
+	
+	//
+	public int getQuantity(int maxCash, double price, int traderPercentage, int maxQuantity)
 	{
 		// If we do not have a maximum amount of cash to spend, buy the maximum number of shares
 		if(maxCash == 0)

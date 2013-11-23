@@ -21,8 +21,9 @@ public class DebugTrader extends Trader{
 	private final int SECONDS = 1000;
 	private final String BUY = "BUY";
 	private final String SELL = "SELL";
-	private static int TRADERPERCENTAGE = 100;
-	private static int MAXLEVERAGE = 4;
+	private final int TRADERPERCENTAGE = 100;
+	private final int MAXLEVERAGE = 4;
+	private final int NOLEVERAGE = 1;
 	
 	public DebugTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
 	{	
@@ -67,7 +68,7 @@ public class DebugTrader extends Trader{
 		}
 		
 		// Give a little wiggle room of ~2% for the maxCash
-		maxCash = (totalCash * MAXLEVERAGE) - ((totalCash * MAXLEVERAGE) / 50);
+		maxCash = super.getCash(totalCash, MAXLEVERAGE);
 		
 		// If the price/share of the stock was not supplied, get this information from TWS
 		// If isSimulation is true, then we are not logged in to our real money account on TWS
@@ -89,9 +90,9 @@ public class DebugTrader extends Trader{
 		try
 		{
 			if(parser.action.equalsIgnoreCase("Added"))
-				quantity = super.setQuantity(maxCashForAdds, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+				quantity = super.getQuantity(maxCashForAdds, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 			else
-				quantity = super.setQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+				quantity = super.getQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -137,7 +138,8 @@ public class DebugTrader extends Trader{
 					cashOnlyOrderFlag = true;
 					
 					// Make the trade using only cash (no leverage)
-					quantity = super.setQuantity(totalCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+					int cash = super.getCash(totalCash, NOLEVERAGE);
+					quantity = super.getQuantity(cash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 					orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
 					
 					if( (orderStatus == null) || (orderStatus.status == null) )

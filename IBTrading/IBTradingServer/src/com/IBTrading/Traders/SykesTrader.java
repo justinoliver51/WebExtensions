@@ -58,7 +58,7 @@ public class SykesTrader extends Trader
 		
 		try
 		{
-			quantity = super.setQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+			quantity = super.getQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
