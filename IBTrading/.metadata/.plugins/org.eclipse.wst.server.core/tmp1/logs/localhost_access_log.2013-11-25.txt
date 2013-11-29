@@ -1,0 +1,5 @@
+127.0.0.1 - - [25/Nov/2013:08:39:05 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [25/Nov/2013:08:40:31 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Bought+abc+123 HTTP/1.1" 200 152
+190.128.161.230 - - [25/Nov/2013:22:09:55 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+198.20.69.74 - - [25/Nov/2013:23:45:10 -0600] "GET / HTTP/1.1" 404 951
+198.20.69.74 - - [25/Nov/2013:23:45:10 -0600] "GET /robots.txt HTTP/1.1" 404 971

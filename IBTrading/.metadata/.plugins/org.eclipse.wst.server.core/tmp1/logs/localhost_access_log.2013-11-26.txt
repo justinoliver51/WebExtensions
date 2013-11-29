@@ -1,0 +1,7 @@
+27.211.113.148 - - [26/Nov/2013:05:42:04 -0600] "GET /manager/html HTTP/1.1" 404 975
+123.233.1.63 - - [26/Nov/2013:07:37:55 -0600] "GET /manager/html HTTP/1.1" 404 975
+109.104.14.34 - - [26/Nov/2013:08:28:37 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+0:0:0:0:0:0:0:1%0 - - [26/Nov/2013:08:57:15 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Bought+15000+HSOL+at+3.56 HTTP/1.1" 200 163
+123.233.1.63 - - [26/Nov/2013:09:21:22 -0600] "GET /manager/html HTTP/1.1" 404 975
+127.0.0.1 - - [26/Nov/2013:19:09:01 -0600] "GET / HTTP/1.1" 404 951
+119.164.204.192 - - [26/Nov/2013:23:03:29 -0600] "GET /manager/html HTTP/1.1" 404 975

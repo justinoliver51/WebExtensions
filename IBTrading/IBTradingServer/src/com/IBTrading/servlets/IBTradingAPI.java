@@ -183,7 +183,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// Get the date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
-		//System.out.println(msg + " " + dateFormat.format(date));
+		System.out.println(msg + " " + dateFormat.format(date));
 		
 		// 
 		OrderStatus order;
@@ -425,7 +425,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	@Override
 	public void tickPrice(int tickerId, int field, double price,
 			int canAutoExecute) {
-		System.out.println(EWrapperMsgGenerator.tickPrice(tickerId, field, price, canAutoExecute));
+		//System.out.println(EWrapperMsgGenerator.tickPrice(tickerId, field, price, canAutoExecute));
 		
 		String marketInfo = null;
 		if(field == 0)
@@ -556,30 +556,30 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			double impliedVol, double delta, double optPrice,
 			double pvDividend, double gamma, double vega, double theta,
 			double undPrice) {
-		System.out.println(EWrapperMsgGenerator.tickOptionComputation(tickerId, field, impliedVol, delta, optPrice, pvDividend, gamma, vega, theta, undPrice));
+		//System.out.println(EWrapperMsgGenerator.tickOptionComputation(tickerId, field, impliedVol, delta, optPrice, pvDividend, gamma, vega, theta, undPrice));
 	}
 
 	@Override
 	public void tickGeneric(int tickerId, int tickType, double value) {
-		System.out.println(EWrapperMsgGenerator.tickGeneric(tickerId, tickType, value));
+		//System.out.println(EWrapperMsgGenerator.tickGeneric(tickerId, tickType, value));
 	}
 
 	@Override
 	public void tickString(int tickerId, int tickType, String value) {
-		System.out.println(EWrapperMsgGenerator.tickString(tickerId, tickType, value));
+		//System.out.println(EWrapperMsgGenerator.tickString(tickerId, tickType, value));
 	}
 
 	@Override
 	public void tickEFP(int tickerId, int tickType, double basisPoints,
 			String formattedBasisPoints, double impliedFuture, int holdDays,
 			String futureExpiry, double dividendImpact, double dividendsToExpiry) {
-		System.out.println(EWrapperMsgGenerator.tickEFP(tickerId, tickType, basisPoints, formattedBasisPoints, impliedFuture, holdDays, futureExpiry, dividendImpact, dividendsToExpiry));
+		//System.out.println(EWrapperMsgGenerator.tickEFP(tickerId, tickType, basisPoints, formattedBasisPoints, impliedFuture, holdDays, futureExpiry, dividendImpact, dividendsToExpiry));
 	}
 
 	@Override
 	public void openOrder(int orderId, Contract contract, Order order,
 			OrderState orderState) {
-		System.out.println(EWrapperMsgGenerator.openOrder(orderId, contract, order, orderState));
+		//System.out.println(EWrapperMsgGenerator.openOrder(orderId, contract, order, orderState));
 	}
 
 	@Override
@@ -604,9 +604,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
 				totalCashSimulation = cash;
 			// Real money account
 			else if(accountName.equalsIgnoreCase("U1257707"))
+			{
 				totalCash = cash;
-			
-			System.out.println(msg);
+				System.out.println(msg);
+			}
 		}
 	}
 
@@ -660,7 +661,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// execution.m_shares
 		// execution.m_orderId
 		
-		System.out.println("Order, " + execution.m_orderId + " executed " + execution.m_cumQty);
+		//System.out.println("Order, " + execution.m_orderId + " executed " + execution.m_cumQty);
 		
 		
 		// FIXME: We want to wait until after both the 
@@ -677,7 +678,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 
 	@Override
 	public void execDetailsEnd(int reqId) {
-		System.out.println(EWrapperMsgGenerator.execDetailsEnd(reqId));
+		//System.out.println(EWrapperMsgGenerator.execDetailsEnd(reqId));
 	}
 
 	@Override
@@ -705,7 +706,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public void managedAccounts(String accountsList) {
 		// TODO Auto-generated method stub
 		String msg = EWrapperMsgGenerator.managedAccounts(accountsList);
-		System.out.println(msg);
+		//System.out.println(msg);
 	}
 
 	@Override

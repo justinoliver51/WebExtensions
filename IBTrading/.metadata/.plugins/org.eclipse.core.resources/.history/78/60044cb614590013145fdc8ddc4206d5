@@ -94,8 +94,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		return orderStatusHashMap.get(Integer.toString(orderId));
 	}
 
-    public synchronized OrderStatus placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation) 
+    public synchronized OrderStatus placeOrder(String orderAction, String symbol, int quantity, boolean isSimulation, OrderStatus orderStatus) 
     {
+    	int orderId = orderStatus == null ? orderID : orderStatus.orderId;
+    	
     	// Check parameters
     	if( (orderAction == null) || (symbol == null) || (quantity == 0) )
     	{
@@ -123,30 +125,39 @@ public class IBTradingAPI extends JFrame implements EWrapper
         
         // Place order
         if(isSimulation)
-        	m_client_simulation.placeOrder( orderID, contract, order );
+        	m_client_simulation.placeOrder( orderId, contract, order );
         else
-        	m_client.placeOrder( orderID, contract, order );
+        	m_client.placeOrder( orderId, contract, order );
         
         // Do not make a new purchase until we have finished selling from our last order
-        while(orderAction.equalsIgnoreCase("BUY") && (purchasingFlag == true)){}
+        // FIXME: May want a timeout
+        //while(orderAction.equalsIgnoreCase("BUY") && (purchasingFlag == true)){}
         
-        // If this is a new BUY order, signal our purchasing flag
-        if(orderAction.equalsIgnoreCase("BUY"))
-        {
-        	purchasingFlag = true;
-        }
+        // Set the purchasing flag which prevents any other orders to occur until this
+        // one is complete
+        purchasingFlag = true;
         
         // Log time
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
-		System.out.println("Order number " + orderID + " placed at: " + dateFormat.format(date));
+		System.out.println("Order number " + orderId + ", " + orderAction + " " + symbol 
+				+ " placed at: " + dateFormat.format(date));
 		
 		// Add the new order to our hash map
-		OrderStatus newOrder =  new OrderStatus();
-		orderStatusHashMap.put(Integer.toString(orderID), newOrder);
-		
-		// Update the orderID for the next order
-		orderID++;
+		OrderStatus newOrder;
+		if(orderStatus == null)
+		{
+			newOrder =  new OrderStatus();
+			orderStatusHashMap.put(Integer.toString(orderID), newOrder);
+			
+			// Update the orderID for the next order
+			orderID++;
+		}
+		// Otherwise, we are modifying an existing order
+		else
+		{
+			newOrder = orderStatus;
+		}
 		
 		return newOrder;
     }
@@ -168,10 +179,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// Received order status
 		String msg = EWrapperMsgGenerator.orderStatus(orderId, status, filled, remaining,
 		avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld);
-		
-		// FIXME: Signal that we have finished our purchase
-		//if( (remaining == 0) && (status.equalsIgnoreCase("Blah")) && (confirm this is a sell) )
-		purchasingFlag = false;
 		
 		// Get the date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
@@ -324,12 +331,10 @@ public class IBTradingAPI extends JFrame implements EWrapper
     		return marketDataHashMap.get(tickerId).get(marketInfo);
     }
     
-    public void initializeAvailableFunds(boolean isSimulation)
+    public void initializeAvailableFunds()
     {
-    	if(isSimulation)
-    		m_client_simulation.reqAccountUpdates(true, "DU170967");
-    	else
-    		m_client.reqAccountUpdates(true, "U1257707");
+    	m_client_simulation.reqAccountUpdates(true, "DU170967");
+    	m_client.reqAccountUpdates(true, "U1257707");
     }
     
     public boolean isStillPurchasing()
@@ -420,7 +425,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	@Override
 	public void tickPrice(int tickerId, int field, double price,
 			int canAutoExecute) {
-		System.out.println(EWrapperMsgGenerator.tickPrice(tickerId, field, price, canAutoExecute));
+		//System.out.println(EWrapperMsgGenerator.tickPrice(tickerId, field, price, canAutoExecute));
 		
 		String marketInfo = null;
 		if(field == 0)
@@ -538,7 +543,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		else
 			marketInfo = "UNKNOWN";
 		
-		HashMap<String,Double> temp = marketDataHashMap.get(tickerId);
 		marketDataHashMap.get(tickerId).put(marketInfo, price);
 	}
 
@@ -552,30 +556,30 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			double impliedVol, double delta, double optPrice,
 			double pvDividend, double gamma, double vega, double theta,
 			double undPrice) {
-		System.out.println(EWrapperMsgGenerator.tickOptionComputation(tickerId, field, impliedVol, delta, optPrice, pvDividend, gamma, vega, theta, undPrice));
+		//System.out.println(EWrapperMsgGenerator.tickOptionComputation(tickerId, field, impliedVol, delta, optPrice, pvDividend, gamma, vega, theta, undPrice));
 	}
 
 	@Override
 	public void tickGeneric(int tickerId, int tickType, double value) {
-		System.out.println(EWrapperMsgGenerator.tickGeneric(tickerId, tickType, value));
+		//System.out.println(EWrapperMsgGenerator.tickGeneric(tickerId, tickType, value));
 	}
 
 	@Override
 	public void tickString(int tickerId, int tickType, String value) {
-		System.out.println(EWrapperMsgGenerator.tickString(tickerId, tickType, value));
+		//System.out.println(EWrapperMsgGenerator.tickString(tickerId, tickType, value));
 	}
 
 	@Override
 	public void tickEFP(int tickerId, int tickType, double basisPoints,
 			String formattedBasisPoints, double impliedFuture, int holdDays,
 			String futureExpiry, double dividendImpact, double dividendsToExpiry) {
-		System.out.println(EWrapperMsgGenerator.tickEFP(tickerId, tickType, basisPoints, formattedBasisPoints, impliedFuture, holdDays, futureExpiry, dividendImpact, dividendsToExpiry));
+		//System.out.println(EWrapperMsgGenerator.tickEFP(tickerId, tickType, basisPoints, formattedBasisPoints, impliedFuture, holdDays, futureExpiry, dividendImpact, dividendsToExpiry));
 	}
 
 	@Override
 	public void openOrder(int orderId, Contract contract, Order order,
 			OrderState orderState) {
-		System.out.println(EWrapperMsgGenerator.openOrder(orderId, contract, order, orderState));
+		//System.out.println(EWrapperMsgGenerator.openOrder(orderId, contract, order, orderState));
 	}
 
 	@Override
@@ -595,13 +599,15 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		{
 			double cash = Double.parseDouble(value);
 			
-			// I do not have more than $50,000 in my account
-			if(cash > 50000.0)
+			// Simulation account
+			if(accountName.equalsIgnoreCase("DU170967"))
 				totalCashSimulation = cash;
-			else
+			// Real money account
+			else if(accountName.equalsIgnoreCase("U1257707"))
+			{
 				totalCash = cash;
-			
-			System.out.println(msg);
+				System.out.println(msg);
+			}
 		}
 	}
 
@@ -651,18 +657,28 @@ public class IBTradingAPI extends JFrame implements EWrapper
 
 	@Override
 	public void execDetails(int reqId, Contract contract, Execution execution) {
-		System.out.println(EWrapperMsgGenerator.execDetails(reqId, contract, execution));
-		
+		//System.out.println(EWrapperMsgGenerator.execDetails(reqId, contract, execution));
 		// execution.m_shares
 		// execution.m_orderId
 		
+		System.out.println("Order, " + execution.m_orderId + " executed " + execution.m_cumQty);
 		
+		
+		// FIXME: We want to wait until after both the 
+		OrderStatus orderStatus = orderStatusHashMap.get(Integer.toString(execution.m_orderId));
+		
+		// If we have completed the order, give the signal
+		if( ((orderStatus.status.equalsIgnoreCase("Cancelled") == true) ||
+				(orderStatus.status.equalsIgnoreCase("Filled") == true) )
+			&& execution.m_side.equalsIgnoreCase("SLD"))
+		{
+			purchasingFlag = false;
+		}
 	}
 
 	@Override
 	public void execDetailsEnd(int reqId) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(EWrapperMsgGenerator.execDetailsEnd(reqId));
 	}
 
 	@Override
