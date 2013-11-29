@@ -124,6 +124,7 @@ public class JasonBondsTrader extends Trader{
 					cashOnlyOrderFlag = true;
 					
 					// Make the trade using only cash (no leverage)
+					isSimulation = false;
 					int cash = super.getCash(totalCash, NOLEVERAGE);
 					quantity = super.getQuantity(cash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 					orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
