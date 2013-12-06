@@ -1,10 +1,15 @@
 package com.IBTrading.Traders;
 
+import java.util.HashMap;
+
 import com.IBTrading.servlets.IBTradingAPI;
 
 public class Trader 
 {
 	public static IBTradingAPI tradingAPI;	// TWS API
+	public HashMap<String,Object> tradeInfo = new HashMap<String,Object>();
+	
+	// Constants
 	private final int MAXLEVERAGE = 4;
 	private final int NOLEVERAGE = 1;
 	private final int MAXCASH = 24000;

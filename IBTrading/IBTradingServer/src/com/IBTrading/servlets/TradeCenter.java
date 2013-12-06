@@ -1,12 +1,16 @@
 package com.IBTrading.servlets;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 
-import com.IBTrading.Traders.*;
+import com.IBTrading.Traders.AwesomePennyStocksTrader;
+import com.IBTrading.Traders.DebugTrader;
+import com.IBTrading.Traders.JasonBondsTrader;
+import com.IBTrading.Traders.SupermanTrader;
+import com.IBTrading.Traders.SykesTrader;
+import com.IBTrading.Traders.Trader;
 
 public class TradeCenter {
 	// Passed parameters
@@ -120,5 +124,10 @@ public class TradeCenter {
 		}
 		
 		return trader.trade();
+	}
+	
+	public HashMap<String,Object> getTradeInfo()
+	{	
+		return trader.tradeInfo;
 	}
 }
