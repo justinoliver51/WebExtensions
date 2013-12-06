@@ -35,7 +35,7 @@ public class Database
 		mysql -u justinoliver51 -p'utredhead51' IBTradingDB
 		
 		GET CREATE TABLE INFO:
-		show create table TradeData
+		show create table TradeData;
 	 */
 	
 	/******* THESE ARE THE STATEMENTS TO CREATE MY TABLES *******/
