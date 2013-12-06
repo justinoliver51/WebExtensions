@@ -40,7 +40,6 @@ public class JasonBondsTrader extends Trader{
 		if(hasValidTrade == true)
 		{
 			lastTraderString = newTrade;
-			hasValidTrade = true;
 		}
 	}
 
@@ -71,7 +70,7 @@ public class JasonBondsTrader extends Trader{
 		if(parser.price.equalsIgnoreCase("0.00"))
 		{
 			String marketData = "LAST_PRICE";  
-			int tickerID = tradingAPI.subscribeToMarketData(parser.symbol, isSimulation);
+			int tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
 		
 			// Wait until we have received the market data
 			while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};

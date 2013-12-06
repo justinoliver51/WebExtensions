@@ -297,7 +297,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	*/
     }
     
-    public int subscribeToMarketData(String symbol, boolean isSimulation)
+    public int subscribeToMarketData(String symbol)
     {
     	Contract contract = new Contract();
     	String genericTicklist = null;
@@ -307,10 +307,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	setDefaultsContract(contract);
     	contract.m_symbol = symbol;
     	
-    	if(isSimulation)
-    		m_client_simulation.reqMktData(tickerID, contract, genericTicklist, snapshot);
-    	else
-    		m_client.reqMktData(tickerID, contract, genericTicklist, snapshot);
+    	m_client.reqMktData(tickerID, contract, genericTicklist, snapshot);
     	
     	// Add a new hash map to market data for this stock
     	marketDataHashMap.put(tickerID, new HashMap<String,Double>());
@@ -699,28 +696,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			&& execution.m_side.equalsIgnoreCase("SLD"))
 		{
 			purchasingFlag = false;
-
-			// Write to the database
-        	HashMap<String,Object> tradeInfo = databaseHashMap.get(execution.m_orderId);
-        	
-        	tradeInfo.put(Database.AVERAGEBUYINGPRICE, new Double(3.33));
-        	tradeInfo.put(Database.AVERAGESELLINGPRICE, new Double(orderStatus.avgFillPrice));
-        	tradeInfo.put(Database.NUMBEROFSHARES, new Double(orderStatus.avgFillPrice));
-        	tradeInfo.put(Database.STARTINGVOLUME, new Integer(30000));
-        	tradeInfo.put(Database.ENDINGVOLUME, new Integer(40000));
-        	tradeInfo.put(Database.AVERAGEVOLUME, new Integer(35000));
-        	
-        	//DB.NewTrade(databaseHashMapTemp);
-		}
-		// Save off useful information for the trade
-		else if( ((orderStatus.status.equalsIgnoreCase("Cancelled") == true) ||
-				(orderStatus.status.equalsIgnoreCase("Filled") == true) )
-			&& execution.m_side.equalsIgnoreCase("BOT"))
-		{
-			// Write to the database
-        	HashMap<String,Object> tradeInfo = databaseHashMap.get(execution.m_orderId);
-        	tradeInfo.put(Database.AVERAGEBUYINGPRICE, orderStatus.avgFillPrice);
-        	tradeInfo.put(Database.NUMBEROFSHARES, new Double(orderStatus.avgFillPrice));
 		}
 	}
 

@@ -181,6 +181,17 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		//tradeCenter.getOrderIds();
 		System.out.println("Valid trade initiated!");
 		out.println("Valid trade!");
+		
+		// If we have trade info, save it to the database
+		HashMap<String,Object> tradeInfo = tradeCenter.getTradeInfo();
+		if(tradeInfo == null)
+		{
+			System.out.println("No tradeInfo to save to database.");
+			return;
+		}
+		
+		// Save the tradeInfo to the database
+		DB.NewTrade(tradeInfo);
 	}
 
 	/**

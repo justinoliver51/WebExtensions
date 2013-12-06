@@ -22,8 +22,9 @@ public class Database
 	public static final String AVERAGEBUYINGPRICE = "AverageBuyingPrice";
 	public static final String AVERAGESELLINGPRICE = "AverageSellingPrice";
 	public static final String NUMBEROFSHARES = "NumberOfShares";
-	public static final String STARTINGVOLUME = "StartingVolume";
-	public static final String ENDINGVOLUME = "EndingVolume";
+	public static final String INITIALVOLUME = "InitialVolume";
+	public static final String VOLUMEAFTERPURCHASE = "VolumeAfterPurchase";
+	public static final String FINALVOLUME = "FinalVolume";
 	public static final String AVERAGEVOLUME = "AverageVolume";
 	
 	private BasicDataSource DBConnection = null;
@@ -43,16 +44,17 @@ public class Database
 		//`MarketDepth` int(11) DEFAULT NULL,  reqMktDepth(), updateMktDepth(), updateMktDepthL2()
 	
 		CREATE TABLE `TradeData` (
-		  `AverageBuyingPrice` DOUBLE PRECISION DEFAULT NULL,
-		  `AverageSellingPrice` DOUBLE PRECISION DEFAULT NULL,
+		  `AverageBuyingPrice` double DEFAULT NULL,
+		  `AverageSellingPrice` double DEFAULT NULL,
 		  `NumberOfShares` int(11) DEFAULT NULL,
-		  `StartingVolume` int(11) DEFAULT NULL,
-		  `EndingVolume` int(11) DEFAULT NULL,
+		  `InitialVolume` int(11) DEFAULT NULL,
+		  `VolumeAfterPurchase` int(11) DEFAULT NULL,
+		  `FinalVolume` int(11) DEFAULT NULL,
 		  `AverageVolume` int(11) DEFAULT NULL,
 		  `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		  `TradeID` int(11) NOT NULL AUTO_INCREMENT,
 		  PRIMARY KEY (`TradeID`)
-		) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1
+		) ENGINE=MyISAM DEFAULT CHARSET=latin1
 	*/
 
 	Database(BasicDataSource BDS) 
@@ -118,8 +120,9 @@ public class Database
 		double averageBuyingPrice = (Double) tradeInfo.get(AVERAGEBUYINGPRICE);
 		double averageSellingPrice = (Double) tradeInfo.get(AVERAGESELLINGPRICE);
 		int numberOfShares = (Integer) tradeInfo.get(NUMBEROFSHARES);
-		int startingVolume = (Integer) tradeInfo.get(STARTINGVOLUME);
-		int endingVolume = (Integer) tradeInfo.get(ENDINGVOLUME);
+		int initialVolume = (Integer) tradeInfo.get(INITIALVOLUME);
+		int volumeAfterPurchase = (Integer) tradeInfo.get(VOLUMEAFTERPURCHASE);
+		int finalVolume = (Integer) tradeInfo.get(FINALVOLUME);
 		int averageVolume = (Integer) tradeInfo.get(AVERAGEVOLUME);
 		
 		Connection con = null;
@@ -129,17 +132,17 @@ public class Database
 			
 			String statement = "INSERT INTO TradeData "
 					+ "(AverageBuyingPrice,AverageSellingPrice,NumberOfShares,"
-					+ "StartingVolume,EndingVolume,AverageVolume)"//,TradeID)"
-					+ " VALUES (?,?,?,?,?,?)";
+					+ "InitialVolume,VolumeAfterPurchase,FinalVolume,"
+					+ "AverageVolume) VALUES (?,?,?,?,?,?,?)";
 				
 				p = con.prepareStatement(statement);
 				p.setDouble(1, averageBuyingPrice);
 				p.setDouble(2, averageSellingPrice);
 				p.setInt(3, numberOfShares);
-				p.setInt(4, startingVolume);
-				p.setInt(5, endingVolume);
-				p.setInt(6, averageVolume);
-				//p.setInt(5, averageVolume);
+				p.setInt(4, initialVolume);
+				p.setInt(5, volumeAfterPurchase);
+				p.setInt(6, finalVolume);
+				p.setInt(7, averageVolume);
 
 				System.out.println(p);
 				p.executeUpdate();
