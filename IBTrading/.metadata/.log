@@ -2177,3 +2177,1062 @@ Binding(ALT+COMMAND+R,
 
 !ENTRY org.eclipse.ui 4 4 2013-11-25 08:36:57.263
 !MESSAGE Unable to find Action Set: org.eclipse.cdt.debug.ui.debugActionSet
+!SESSION 2013-11-29 11:04:44.018 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130605-2000
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-11-29 11:05:02.903
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2013-11-29 11:05:03.687
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-11-29 11:05:03.687
+!MESSAGE A conflict occurred for ALT+COMMAND+R:
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.python.pydev.debug.setnext,Set Next Statement,
+		,
+		Category(org.python.pydev.ui.category.run,PyDev - Run,Python run category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2cca7081,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1ea03c20,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SESSION 2013-12-01 22:38:08.424 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130605-2000
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-12-01 22:38:19.173
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2013-12-01 22:38:20.095
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-12-01 22:38:20.095
+!MESSAGE A conflict occurred for ALT+COMMAND+R:
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.python.pydev.debug.setnext,Set Next Statement,
+		,
+		Category(org.python.pydev.ui.category.run,PyDev - Run,Python run category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@789caeb2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@769165fa,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SESSION 2013-12-02 22:32:39.463 -----------------------------------------------
+eclipse.buildId=M20120914-1800
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2013-12-02 22:32:50.547
+!MESSAGE Unable to load class 'org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon' from bundle '64'
+!STACK 0
+java.lang.ClassNotFoundException: org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:501)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.osgi.internal.loader.BundleLoader.loadClass(BundleLoader.java:340)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.loadClass(BundleHost.java:229)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.loadClass(AbstractBundle.java:1212)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:100)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:71)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:49)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:557)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:543)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+
+!ENTRY org.eclipse.core.net 1 0 2013-12-02 22:32:52.654
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 4 0 2013-12-02 22:33:01.106
+!MESSAGE Unable to resolve plug-in "platform:/plugin/org.python.pydev/icons/python_file.gif".
+!STACK 0
+java.io.IOException: Unable to resolve plug-in "platform:/plugin/org.python.pydev/icons/python_file.gif".
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.parse(PlatformURLPluginConnection.java:64)
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.resolve(PlatformURLPluginConnection.java:75)
+	at org.eclipse.core.internal.boot.PlatformURLHandler.openConnection(PlatformURLHandler.java:67)
+	at org.eclipse.osgi.framework.internal.protocol.URLStreamHandlerProxy.openConnection(URLStreamHandlerProxy.java:112)
+	at java.net.URL.openConnection(URL.java:945)
+	at org.eclipse.core.internal.runtime.PlatformURLConverter.toFileURL(PlatformURLConverter.java:33)
+	at org.eclipse.core.runtime.FileLocator.toFileURL(FileLocator.java:206)
+	at org.eclipse.jface.resource.URLImageDescriptor.getFilePath(URLImageDescriptor.java:137)
+	at org.eclipse.jface.resource.URLImageDescriptor.createImage(URLImageDescriptor.java:157)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:227)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.getImage(SWTPartRenderer.java:178)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.createTab(StackRenderer.java:767)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.processContents(LazyStackRenderer.java:134)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$6.run(PartRenderingEngine.java:518)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:503)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ElementReferenceRenderer.createWidget(ElementReferenceRenderer.java:74)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:896)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:630)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveRenderer.processContents(PerspectiveRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.showTab(PerspectiveStackRenderer.java:103)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer$1.handleEvent(LazyStackRenderer.java:67)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler$1.run(UIEventHandler.java:41)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:180)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:150)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4605)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:187)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:38)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:81)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:58)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+	at org.eclipse.e4.ui.model.application.ui.advanced.impl.PerspectiveStackImpl.setSelectedElement(PerspectiveStackImpl.java:135)
+	at org.eclipse.e4.ui.model.application.ui.advanced.impl.PerspectiveStackImpl.setSelectedElement(PerspectiveStackImpl.java:1)
+	at org.eclipse.ui.internal.WorkbenchPage.setPerspective(WorkbenchPage.java:3584)
+	at org.eclipse.ui.internal.WorkbenchWindow.setup(WorkbenchWindow.java:552)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:859)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.inject(InjectorImpl.java:111)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.inject(InjectorImpl.java:81)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.inject(ContextInjectionFactory.java:72)
+	at org.eclipse.ui.internal.Workbench.createWorkbenchWindow(Workbench.java:1252)
+	at org.eclipse.ui.internal.Workbench.openWorkbenchWindow(Workbench.java:2324)
+	at org.eclipse.ui.internal.Workbench.getWorkbenchPage(Workbench.java:1737)
+	at org.eclipse.ui.internal.Workbench.setReference(Workbench.java:1756)
+	at org.eclipse.ui.internal.Workbench.access$22(Workbench.java:1753)
+	at org.eclipse.ui.internal.Workbench$33.handleEvent(Workbench.java:1693)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler$1.run(UIEventHandler.java:41)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:180)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:150)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4605)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:187)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:38)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:81)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:58)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+	at org.eclipse.e4.ui.model.application.ui.basic.impl.PartImpl.setContext(PartImpl.java:399)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:609)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$6.run(PartRenderingEngine.java:518)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:503)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ElementReferenceRenderer.createWidget(ElementReferenceRenderer.java:74)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:896)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:630)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.showTab(StackRenderer.java:1114)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.postProcess(LazyStackRenderer.java:98)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:646)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveRenderer.processContents(PerspectiveRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.showTab(PerspectiveStackRenderer.java:103)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.postProcess(LazyStackRenderer.java:98)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.postProcess(PerspectiveStackRenderer.java:77)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:646)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.WBWRenderer.processContents(WBWRenderer.java:639)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:968)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:923)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:86)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:588)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:543)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:04.909
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.doc.actionSet
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:04.909
+!MESSAGE Unable to find Action Set: org.eclipse.rse.core.search.searchActionSet
+
+!ENTRY org.eclipse.jface 4 0 2013-12-02 22:33:05.905
+!MESSAGE Unable to resolve plug-in "platform:/plugin/org.eclipse.wst.server.ui/icons/cview16/servers_view.gif".
+!STACK 0
+java.io.IOException: Unable to resolve plug-in "platform:/plugin/org.eclipse.wst.server.ui/icons/cview16/servers_view.gif".
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.parse(PlatformURLPluginConnection.java:64)
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.resolve(PlatformURLPluginConnection.java:75)
+	at org.eclipse.core.internal.boot.PlatformURLHandler.openConnection(PlatformURLHandler.java:67)
+	at org.eclipse.osgi.framework.internal.protocol.URLStreamHandlerProxy.openConnection(URLStreamHandlerProxy.java:112)
+	at java.net.URL.openConnection(URL.java:945)
+	at org.eclipse.core.internal.runtime.PlatformURLConverter.toFileURL(PlatformURLConverter.java:33)
+	at org.eclipse.core.runtime.FileLocator.toFileURL(FileLocator.java:206)
+	at org.eclipse.jface.resource.URLImageDescriptor.getFilePath(URLImageDescriptor.java:137)
+	at org.eclipse.jface.resource.URLImageDescriptor.createImage(URLImageDescriptor.java:157)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:227)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.getImage(SWTPartRenderer.java:178)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.createTab(StackRenderer.java:767)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.processContents(LazyStackRenderer.java:134)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveRenderer.processContents(PerspectiveRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.showTab(PerspectiveStackRenderer.java:103)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.postProcess(LazyStackRenderer.java:98)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.postProcess(PerspectiveStackRenderer.java:77)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:646)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.WBWRenderer.processContents(WBWRenderer.java:639)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:968)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:923)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:86)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:588)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:543)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+
+!ENTRY org.eclipse.jface 4 0 2013-12-02 22:33:05.911
+!MESSAGE Unable to resolve plug-in "platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif".
+!STACK 0
+java.io.IOException: Unable to resolve plug-in "platform:/plugin/org.eclipse.datatools.connectivity.ui.dse/icons/full/cview16/enterprise_explorer.gif".
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.parse(PlatformURLPluginConnection.java:64)
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.resolve(PlatformURLPluginConnection.java:75)
+	at org.eclipse.core.internal.boot.PlatformURLHandler.openConnection(PlatformURLHandler.java:67)
+	at org.eclipse.osgi.framework.internal.protocol.URLStreamHandlerProxy.openConnection(URLStreamHandlerProxy.java:112)
+	at java.net.URL.openConnection(URL.java:945)
+	at org.eclipse.core.internal.runtime.PlatformURLConverter.toFileURL(PlatformURLConverter.java:33)
+	at org.eclipse.core.runtime.FileLocator.toFileURL(FileLocator.java:206)
+	at org.eclipse.jface.resource.URLImageDescriptor.getFilePath(URLImageDescriptor.java:137)
+	at org.eclipse.jface.resource.URLImageDescriptor.createImage(URLImageDescriptor.java:157)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:227)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.getImage(SWTPartRenderer.java:178)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.createTab(StackRenderer.java:767)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.processContents(LazyStackRenderer.java:134)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveRenderer.processContents(PerspectiveRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.showTab(PerspectiveStackRenderer.java:103)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.postProcess(LazyStackRenderer.java:98)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.postProcess(PerspectiveStackRenderer.java:77)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:646)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.WBWRenderer.processContents(WBWRenderer.java:639)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:968)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:923)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:86)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:588)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:543)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+
+!ENTRY org.eclipse.jface 4 0 2013-12-02 22:33:05.916
+!MESSAGE Unable to resolve plug-in "platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif".
+!STACK 0
+java.io.IOException: Unable to resolve plug-in "platform:/plugin/org.eclipse.wst.common.snippets/icons/snippets_view.gif".
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.parse(PlatformURLPluginConnection.java:64)
+	at org.eclipse.core.internal.runtime.PlatformURLPluginConnection.resolve(PlatformURLPluginConnection.java:75)
+	at org.eclipse.core.internal.boot.PlatformURLHandler.openConnection(PlatformURLHandler.java:67)
+	at org.eclipse.osgi.framework.internal.protocol.URLStreamHandlerProxy.openConnection(URLStreamHandlerProxy.java:112)
+	at java.net.URL.openConnection(URL.java:945)
+	at org.eclipse.core.internal.runtime.PlatformURLConverter.toFileURL(PlatformURLConverter.java:33)
+	at org.eclipse.core.runtime.FileLocator.toFileURL(FileLocator.java:206)
+	at org.eclipse.jface.resource.URLImageDescriptor.getFilePath(URLImageDescriptor.java:137)
+	at org.eclipse.jface.resource.URLImageDescriptor.createImage(URLImageDescriptor.java:157)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:227)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:205)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.getImage(SWTPartRenderer.java:178)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.createTab(StackRenderer.java:767)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.processContents(LazyStackRenderer.java:134)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveRenderer.processContents(PerspectiveRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.showTab(PerspectiveStackRenderer.java:103)
+	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.postProcess(LazyStackRenderer.java:98)
+	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.postProcess(PerspectiveStackRenderer.java:77)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:646)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:59)
+	at org.eclipse.e4.ui.workbench.renderers.swt.WBWRenderer.processContents(WBWRenderer.java:639)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:642)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:732)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:703)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:697)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:682)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:968)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:923)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:86)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:588)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:543)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:10.003
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.copy: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$CopyActionHandler@223dd567)} vs {ActionHandler(org.eclipse.ui.actions.TextActionHandler$CopyActionHandler@9856ec1)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:10.003
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.paste: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$PasteActionHandler@5de8256f)} vs {ActionHandler(org.eclipse.ui.actions.TextActionHandler$PasteActionHandler@33f1ca93)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:10.036
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.delete: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$DeleteActionHandler@240e4cbb)} vs {ActionHandler(org.eclipse.ui.actions.TextActionHandler$DeleteActionHandler@26cf9b7b)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:10.039
+!MESSAGE Conflicting handlers for org.eclipse.ui.project.buildProject: {ActionHandler(org.eclipse.ui.actions.BuildAction@4fd385f4)} vs {ActionHandler(org.eclipse.ui.actions.BuildAction@56f26dd8)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:10.040
+!MESSAGE Conflicting handlers for org.eclipse.ui.project.openProject: {ActionHandler(org.eclipse.ui.actions.OpenResourceAction@250970c1)} vs {ActionHandler(org.eclipse.ui.actions.OpenResourceAction@ec9a1e6)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:10.042
+!MESSAGE Conflicting handlers for org.eclipse.ui.project.closeProject: {ActionHandler(org.eclipse.ui.actions.CloseResourceAction@38053dd4)} vs {ActionHandler(org.eclipse.ui.actions.CloseResourceAction@601e4607)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:32.207
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.copy: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$CopyActionHandler@223dd567)} vs {ActionHandler(org.eclipse.ui.actions.TextActionHandler$CopyActionHandler@9856ec1)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:32.270
+!MESSAGE Conflicting handlers for org.eclipse.jdt.ui.edit.text.java.open.editor: {ActionHandler(org.eclipse.jdt.ui.actions.OpenAction@4ea9ed1f)} vs {ActionHandler(org.eclipse.jdt.ui.actions.OpenAction@760eb691)}
+
+!ENTRY org.eclipse.ui 2 2 2013-12-02 22:33:38.283
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:45.230
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.copy: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$CopyActionHandler@223dd567)} vs {ActionHandler(org.eclipse.ui.actions.TextActionHandler$CopyActionHandler@9856ec1)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:45.231
+!MESSAGE Conflicting handlers for org.eclipse.ui.navigate.goToResource: {ActionHandler(org.eclipse.ui.internal.navigator.resources.actions.GotoResourceAction@35de01c9)} vs {ActionHandler(org.eclipse.ui.internal.navigator.resources.actions.GotoResourceAction@2474ec0)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:45.231
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.delete: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$DeleteActionHandler@240e4cbb)} vs {ActionHandler(org.eclipse.ui.actions.TextActionHandler$DeleteActionHandler@26cf9b7b)}
+
+!ENTRY org.eclipse.ui 4 4 2013-12-02 22:33:45.233
+!MESSAGE Conflicting handlers for org.eclipse.ui.file.properties: {ActionHandler(org.eclipse.ui.dialogs.PropertyDialogAction@48dc2d76)} vs {ActionHandler(org.eclipse.ui.dialogs.PropertyDialogAction@2f06820e)}
+!SESSION 2013-12-02 22:33:56.772 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130605-2000
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-12-02 22:34:12.487
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2013-12-02 22:34:13.422
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-12-02 22:34:13.422
+!MESSAGE A conflict occurred for ALT+COMMAND+R:
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.python.pydev.debug.setnext,Set Next Statement,
+		,
+		Category(org.python.pydev.ui.category.run,PyDev - Run,Python run category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6e929b52,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5b135d34,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.eclipse.osgi 2 0 2013-12-02 22:34:42.813
+!MESSAGE While loading class "org.eclipse.pde.internal.core.project.PDEProject", thread "Thread[Worker-4,5,main]" timed out waiting (5006ms) for thread "Thread[Worker-2,5,main]" to finish starting bundle "org.eclipse.pde.core_3.9.0.v20130515-1659 [596]". To avoid deadlock, thread "Thread[Worker-4,5,main]" is proceeding but "org.eclipse.pde.internal.core.project.PDEProject" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: State change in progress for bundle "reference:file:plugins/org.eclipse.pde.core_3.9.0.v20130515-1659.jar" by thread "Worker-2".
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.pde.internal.core.WorkspaceModelManager.isPluginProject(WorkspaceModelManager.java:26)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.isInterestingProject(JavaElementChangeListener.java:110)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:52)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleChildDeltas(JavaElementChangeListener.java:73)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:50)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.elementChanged(JavaElementChangeListener.java:38)
+	at org.eclipse.jdt.internal.core.DeltaProcessor$4.run(DeltaProcessor.java:1682)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.notifyListeners(DeltaProcessor.java:1672)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.firePostChangeDelta(DeltaProcessor.java:1506)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.fire(DeltaProcessor.java:1482)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.resourceChanged(DeltaProcessor.java:2094)
+	at org.eclipse.jdt.internal.core.DeltaProcessingState.resourceChanged(DeltaProcessingState.java:470)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:396)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1531)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2354)
+	at org.eclipse.core.internal.events.NotificationManager$NotifyJob.run(NotificationManager.java:40)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	... 35 more
+Root exception:
+org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.pde.internal.core.WorkspaceModelManager.isPluginProject(WorkspaceModelManager.java:26)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.isInterestingProject(JavaElementChangeListener.java:110)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:52)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleChildDeltas(JavaElementChangeListener.java:73)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:50)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.elementChanged(JavaElementChangeListener.java:38)
+	at org.eclipse.jdt.internal.core.DeltaProcessor$4.run(DeltaProcessor.java:1682)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.notifyListeners(DeltaProcessor.java:1672)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.firePostChangeDelta(DeltaProcessor.java:1506)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.fire(DeltaProcessor.java:1482)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.resourceChanged(DeltaProcessor.java:2094)
+	at org.eclipse.jdt.internal.core.DeltaProcessingState.resourceChanged(DeltaProcessingState.java:470)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:396)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1531)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2354)
+	at org.eclipse.core.internal.events.NotificationManager$NotifyJob.run(NotificationManager.java:40)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.osgi 2 0 2013-12-02 22:34:47.835
+!MESSAGE While loading class "org.eclipse.pde.internal.core.ICoreConstants", thread "Thread[Worker-4,5,main]" timed out waiting (5001ms) for thread "Thread[Worker-2,5,main]" to finish starting bundle "org.eclipse.pde.core_3.9.0.v20130515-1659 [596]". To avoid deadlock, thread "Thread[Worker-4,5,main]" is proceeding but "org.eclipse.pde.internal.core.ICoreConstants" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: State change in progress for bundle "reference:file:plugins/org.eclipse.pde.core_3.9.0.v20130515-1659.jar" by thread "Worker-2".
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.pde.internal.core.project.PDEProject.getManifest(PDEProject.java:144)
+	at org.eclipse.pde.internal.core.WorkspaceModelManager.isPluginProject(WorkspaceModelManager.java:26)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.isInterestingProject(JavaElementChangeListener.java:110)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:52)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleChildDeltas(JavaElementChangeListener.java:73)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:50)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.elementChanged(JavaElementChangeListener.java:38)
+	at org.eclipse.jdt.internal.core.DeltaProcessor$4.run(DeltaProcessor.java:1682)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.notifyListeners(DeltaProcessor.java:1672)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.firePostChangeDelta(DeltaProcessor.java:1506)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.fire(DeltaProcessor.java:1482)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.resourceChanged(DeltaProcessor.java:2094)
+	at org.eclipse.jdt.internal.core.DeltaProcessingState.resourceChanged(DeltaProcessingState.java:470)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:396)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1531)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2354)
+	at org.eclipse.core.internal.events.NotificationManager$NotifyJob.run(NotificationManager.java:40)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	... 36 more
+Root exception:
+org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.pde.internal.core.project.PDEProject.getManifest(PDEProject.java:144)
+	at org.eclipse.pde.internal.core.WorkspaceModelManager.isPluginProject(WorkspaceModelManager.java:26)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.isInterestingProject(JavaElementChangeListener.java:110)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:52)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleChildDeltas(JavaElementChangeListener.java:73)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.handleDelta(JavaElementChangeListener.java:50)
+	at org.eclipse.pde.internal.core.JavaElementChangeListener.elementChanged(JavaElementChangeListener.java:38)
+	at org.eclipse.jdt.internal.core.DeltaProcessor$4.run(DeltaProcessor.java:1682)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.notifyListeners(DeltaProcessor.java:1672)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.firePostChangeDelta(DeltaProcessor.java:1506)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.fire(DeltaProcessor.java:1482)
+	at org.eclipse.jdt.internal.core.DeltaProcessor.resourceChanged(DeltaProcessor.java:2094)
+	at org.eclipse.jdt.internal.core.DeltaProcessingState.resourceChanged(DeltaProcessingState.java:470)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:396)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1531)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2354)
+	at org.eclipse.core.internal.events.NotificationManager$NotifyJob.run(NotificationManager.java:40)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.osgi 2 0 2013-12-02 22:35:09.912
+!MESSAGE While loading class "org.eclipse.jdt.internal.debug.ui.MemberActionFilter", thread "Thread[Worker-0,5,main]" timed out waiting (5001ms) for thread "Thread[Worker-3,5,main]" to finish starting bundle "org.eclipse.jdt.debug.ui_3.6.200.v20130514-0841 [351]". To avoid deadlock, thread "Thread[Worker-0,5,main]" is proceeding but "org.eclipse.jdt.internal.debug.ui.MemberActionFilter" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: State change in progress for bundle "reference:file:plugins/org.eclipse.jdt.debug.ui_3.6.200.v20130514-0841.jar" by thread "Worker-3".
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.jdt.internal.debug.ui.ActionFilterAdapterFactory.getAdapter(ActionFilterAdapterFactory.java:42)
+	at org.eclipse.core.internal.runtime.AdapterManager.getAdapter(AdapterManager.java:295)
+	at org.eclipse.core.runtime.PlatformObject.getAdapter(PlatformObject.java:66)
+	at org.eclipse.ui.internal.util.Util.getAdapter(Util.java:110)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.getActionFilter(ActionExpression.java:471)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.preciselyMatches(ActionExpression.java:524)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.isEnabledFor(ActionExpression.java:499)
+	at org.eclipse.ui.internal.ActionExpression$SingleExpression.isEnabledFor(ActionExpression.java:743)
+	at org.eclipse.ui.internal.ActionExpression.isEnabledFor(ActionExpression.java:1053)
+	at org.eclipse.ui.internal.decorators.DecoratorDefinition.isEnabledFor(DecoratorDefinition.java:281)
+	at org.eclipse.ui.internal.decorators.DecoratorManager.getDecoratorsFor(DecoratorManager.java:382)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecoratorsFor(LightweightDecoratorManager.java:315)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:340)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:371)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:331)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	... 29 more
+Root exception:
+org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.jdt.internal.debug.ui.ActionFilterAdapterFactory.getAdapter(ActionFilterAdapterFactory.java:42)
+	at org.eclipse.core.internal.runtime.AdapterManager.getAdapter(AdapterManager.java:295)
+	at org.eclipse.core.runtime.PlatformObject.getAdapter(PlatformObject.java:66)
+	at org.eclipse.ui.internal.util.Util.getAdapter(Util.java:110)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.getActionFilter(ActionExpression.java:471)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.preciselyMatches(ActionExpression.java:524)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.isEnabledFor(ActionExpression.java:499)
+	at org.eclipse.ui.internal.ActionExpression$SingleExpression.isEnabledFor(ActionExpression.java:743)
+	at org.eclipse.ui.internal.ActionExpression.isEnabledFor(ActionExpression.java:1053)
+	at org.eclipse.ui.internal.decorators.DecoratorDefinition.isEnabledFor(DecoratorDefinition.java:281)
+	at org.eclipse.ui.internal.decorators.DecoratorManager.getDecoratorsFor(DecoratorManager.java:382)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecoratorsFor(LightweightDecoratorManager.java:315)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:340)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:371)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:331)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 09:18:24.766
+!MESSAGE Unable to find Action Set: adt.actionSet.wizards
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 09:18:24.766
+!MESSAGE Unable to find Action Set: adt.actionSet.refactorings
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 09:18:24.767
+!MESSAGE Unable to find Action Set: adt.actionSet.avdManager
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 09:18:24.767
+!MESSAGE Unable to find Action Set: adt.actionSet.lint
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 09:18:24.767
+!MESSAGE Unable to find Action Set: org.eclipse.cdt.debug.ui.debugActionSet
+
+!ENTRY org.eclipse.jface 2 0 2013-12-03 19:26:49.203
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-12-03 19:26:49.203
+!MESSAGE A conflict occurred for COMMAND+SHIFT+3:
+Binding(COMMAND+SHIFT+3,
+	ParameterizedCommand(Command(org.eclipse.wst.jsdt.debug.ui.script.opensource,Open Source,
+		Shows the JavaScript source for the selected script element,
+		Category(org.eclipse.wst.jsdt.debug.ui.category,JavaScript Debug,Tooling for debugging JavaScript,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3efa53f5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.debugging,,,system)
+Binding(COMMAND+SHIFT+3,
+	ParameterizedCommand(Command(org.python.pydev.editor.actions.uncomment,Python Uncomment,
+		Uncomments a python line (Removes # from the beggining of the line),
+		Category(org.python.pydev.ui.category.source,PyDev - Editor,PyDev editor category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@249e1a20,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.python.pydev.ui.editor.scope,,,system)
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2013-12-03 19:39:02.794
+!MESSAGE Several ports (8080, 8089) required by Tomcat v7.0 Server at localhost (2) are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2013-12-03 19:47:26.384
+!MESSAGE Several ports (8080, 8089) required by Tomcat v7.0 Server at localhost (2) are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.ui 4 0 2013-12-03 19:55:18.299
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Failed to execute runnable (java.lang.IllegalArgumentException: Argument not valid)
+	at org.eclipse.swt.SWT.error(SWT.java:4397)
+	at org.eclipse.swt.SWT.error(SWT.java:4312)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:138)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3976)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3653)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1113)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:997)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:138)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:610)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:567)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:354)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:181)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+Caused by: java.lang.IllegalArgumentException: Argument not valid
+	at org.eclipse.swt.SWT.error(SWT.java:4378)
+	at org.eclipse.swt.SWT.error(SWT.java:4312)
+	at org.eclipse.swt.SWT.error(SWT.java:4283)
+	at org.eclipse.swt.custom.StyledText.setStyleRanges(StyledText.java:9734)
+	at org.eclipse.swt.custom.StyledText.setStyleRanges(StyledText.java:9830)
+	at org.eclipse.jface.text.TextPresentation.applyTextPresentation(TextPresentation.java:55)
+	at org.eclipse.jface.text.DefaultInformationControl.setInformation(DefaultInformationControl.java:342)
+	at org.eclipse.jface.text.AbstractInformationControlManager.internalShowInformationControl(AbstractInformationControlManager.java:1183)
+	at org.eclipse.jface.text.AbstractInformationControlManager.presentInformation(AbstractInformationControlManager.java:1150)
+	at org.eclipse.jface.text.AbstractHoverInformationControlManager.presentInformation(AbstractHoverInformationControlManager.java:902)
+	at org.eclipse.jface.text.TextViewerHoverManager.doPresentInformation(TextViewerHoverManager.java:243)
+	at org.eclipse.jface.text.TextViewerHoverManager$5.run(TextViewerHoverManager.java:233)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:135)
+	... 23 more
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:09:38.375
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:09:38.412
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:09:38.413
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:09:38.413
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:09:38.419
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:09:38.419
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:13:09.290
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:13:09.290
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:13:09.290
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:13:09.290
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:13:09.296
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:13:09.296
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+!SESSION 2013-12-03 22:22:05.181 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130605-2000
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-12-03 22:22:15.519
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2013-12-03 22:22:16.215
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2013-12-03 22:22:16.215
+!MESSAGE A conflict occurred for ALT+COMMAND+R:
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.python.pydev.debug.setnext,Set Next Statement,
+		,
+		Category(org.python.pydev.ui.category.run,PyDev - Run,Python run category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@64cd046,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1cfda6e5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:22:16.987
+!MESSAGE Unable to find Action Set: adt.actionSet.wizards
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:22:16.987
+!MESSAGE Unable to find Action Set: adt.actionSet.refactorings
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:22:16.987
+!MESSAGE Unable to find Action Set: adt.actionSet.avdManager
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:22:16.988
+!MESSAGE Unable to find Action Set: adt.actionSet.lint
+
+!ENTRY org.eclipse.ui 4 4 2013-12-03 22:22:16.988
+!MESSAGE Unable to find Action Set: org.eclipse.cdt.debug.ui.debugActionSet

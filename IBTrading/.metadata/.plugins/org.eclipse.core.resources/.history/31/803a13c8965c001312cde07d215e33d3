@@ -1,0 +1,81 @@
+package com.IBTrading.servlets;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
+
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
+
+public class Database 
+{
+	private static final String dbClassName = "com.mysql.jdbc.Driver";
+	private static final String PATH = "jdbc:mysql://127.0.0.1/IBTradingDB";
+	private static final String DEFAULT_USERNAME = "justinoliver51";;
+	private static final String DEFAULT_PASSWORD = "utredhead51";
+	protected static final String ROOT_STORAGE_DIRECTORY = "/home/justin/ServerStorage/";
+	private static int Count = 0;
+	private BasicDataSource DBConnection = null;
+	private static int debug = 20;
+	
+	/*	THESE ARE THE STATEMENTS TO CREATE MY TABLES
+
+	 */
+
+	Database(BasicDataSource BDS) 
+	{
+		DBConnection = BDS;
+	}
+
+	private synchronized Connection Connect(String username, String password) 
+	{
+		// This will load the MySQL driver, each DB has its own driver
+		try {
+			Class.forName(dbClassName);
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
+		Properties p = new Properties();
+		p.put("user", username);
+		p.put("password", password);
+
+		try {
+			return DriverManager.getConnection(PATH, p);
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+
+	private synchronized Connection Connect() 
+	{
+		return Connect(DEFAULT_USERNAME, DEFAULT_PASSWORD);
+	}
+	
+	void closeConnection(PreparedStatement ps, Connection conn, ResultSet rs)
+	{
+	    // A couple of things to note, here:
+	    //   1. Close objects in the proper order: result, then statement,
+	    //      then connection.
+	    //   2. Each close gets its own try/catch block. You don't want
+	    //      the connection to be leaked just because the result set
+	    //      failed to close properly.
+	    //   3. Don't throw any exceptions in a finally block. If there is
+	    //      already an exception "in the air", you'll shoot it down
+	    //      and replace it with a new one. The original exception is
+	    //      almost certainly more useful.
+	    //   4. NEVER swallow an exception. At least log the error.
+	    //   5. This cleanup code has whitespace removed for brevity.
+	    //   6. This cleanup code lends itself to being put into a separate
+	    //      method. I usually have a 'close' method that takes 3 arguments:
+	    //      Connection, Statement, ResultSet and does the same thing.
+
+	    if(null != rs) try { rs.close(); } catch (SQLException sqle)
+	        {  sqle.printStackTrace(); }
+	    if(null != ps) try { ps.close(); } catch (SQLException sqle)
+	        {  sqle.printStackTrace(); }
+	    if(null != conn) try { conn.close(); } catch (SQLException sqle)
+	        {  sqle.printStackTrace(); }
+	}
+}

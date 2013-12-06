@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.IBTrading.servlets.IBTradingAPI;
 import com.IBTrading.tradeparsers.JasonBondsTradeParser;
 import com.IBTrading.servlets.OrderStatus;
+import com.IBTrading.servlets.Database;
 
 public class DebugTrader extends Trader{
 	// Passed parameters
@@ -17,6 +18,9 @@ public class DebugTrader extends Trader{
 	// List of trader identifiers and their strings
 	private static String lastTraderString;
 	
+	// Public variables
+	public int buyOrderID, sellOrderID;
+	
 	// CONSTANTS
 	private final int SECONDS = 1000;
 	private final String BUY = "BUY";
@@ -24,6 +28,8 @@ public class DebugTrader extends Trader{
 	private final int TRADERPERCENTAGE = 100;
 	private final int MAXLEVERAGE = 4;
 	private final int NOLEVERAGE = 1;
+	private final String VOLUME = "VOLUME";
+	private final String AVERAGEVOLUME = "AVG_VOLUME";
 	
 	public DebugTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
 	{	
@@ -45,12 +51,14 @@ public class DebugTrader extends Trader{
 	{
 		// Make the purchase
 		boolean isSimulation = true;
+		boolean simulationOnly = true;
 		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		int quantity;
 		int maxCash;
 		int maxCashForAdds = 5900;
 		int totalCash;
 		OrderStatus orderStatus, orderStatusSimulation;
+		HashMap<String,Object> buyTradeInfo, sellTradeInfo;
 		
 		// Get the cash from our account
 		totalCash = (int) tradingAPI.getAvailableFunds(false); //tradingAPI.getAvailableFunds(isSimulation);
@@ -59,8 +67,7 @@ public class DebugTrader extends Trader{
 		// then we cannot get the market data either
 		if(totalCash == 0)
 		{
-			totalCash = 5900;
-			isSimulation = true;
+			return "Cannot read market data from simulation account.";
 		}
 		else
 		{
@@ -70,19 +77,14 @@ public class DebugTrader extends Trader{
 		// Give a little wiggle room of ~2% for the maxCash
 		maxCash = super.getCash(totalCash, MAXLEVERAGE);
 		
+		// Wait until we have received the market data
+		String marketData = "LAST_PRICE";
+		int tickerID = tradingAPI.subscribeToMarketData(parser.symbol, isSimulation);
+		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
+		
 		// If the price/share of the stock was not supplied, get this information from TWS
-		// If isSimulation is true, then we are not logged in to our real money account on TWS
 		if(parser.price.equalsIgnoreCase("0.00"))
 		{
-			if(isSimulation == true)
-				return "Cannot read market data from simulation account.";
-			
-			String marketData = "LAST_PRICE";  
-			int tickerID = tradingAPI.subscribeToMarketData(parser.symbol, isSimulation); 
-		
-			// Wait until we have received the market data
-			while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
-			
 			// Get the market price
 			parser.price = tradingAPI.getMarketData(tickerID, marketData) + "";
 		}
@@ -104,6 +106,16 @@ public class DebugTrader extends Trader{
 			return "Invalid quantity, " + quantity;
 		}
 		
+		// In some circumstances, we don't want to buy with the real money account
+		// 		- If we have reached our maximum number of day trades
+		//		- If this is an 'Add'
+		//		- If this is a 'Bomb Blow Up'
+		if( (tradingAPI.getNumberOfDayTrades() == 0) || (parser.action.equalsIgnoreCase("Added")) 
+				|| (parser.flagsHashMap.get(parser.BONDBLOWUPS) == true) )
+			simulationOnly = true;
+		else
+			simulationOnly = true;
+		
 		/*
 		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
 		
@@ -116,6 +128,10 @@ public class DebugTrader extends Trader{
 		simulationQuantity = quantity;
 		orderStatusSimulation = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation, null);  
 		orderStatus = orderStatusSimulation;  // FIXME: Only useful for DebugTrader
+		
+		// Initialize our trade info 
+		buyOrderID = orderStatus.orderId;
+		buyTradeInfo = tradingAPI.initializeTradeInfo(buyOrderID);
 		
 		if( (orderStatus == null) || (orderStatus.status == null) )
 			return "Unable to connect to TWS...";
@@ -201,7 +217,34 @@ public class DebugTrader extends Trader{
 		
 		// Sell the stocks over the simulator
 		isSimulation = true;
-		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation, null);
+		orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation, null);
+		
+		// Initialize our sell order
+		sellOrderID = orderStatus.orderId;
+		sellTradeInfo = tradingAPI.initializeTradeInfo(orderStatus.orderId);
+		
+		// Save off useful trade information for the purchase
+		buyTradeInfo.put(IBTradingAPI.BUYORDERID, buyOrderID);
+		buyTradeInfo.put(Database.NUMBEROFSHARES, quantity);
+		buyTradeInfo.put(Database.STARTINGVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
+		buyTradeInfo.put(Database.AVERAGEVOLUME, tradingAPI.getMarketData(tickerID, AVERAGEVOLUME));
+		
+		// Get the updated market data
+		marketData = "VOLUME";
+		tickerID = tradingAPI.subscribeToMarketData(parser.symbol, isSimulation);
+		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
+		
+		// Save the volume now that the purchase is over
+		buyTradeInfo.put(Database.ENDINGVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
+		
+		// Save the market data for the sell order
+		sellTradeInfo.put(IBTradingAPI.BUYORDERID, buyOrderID);
+		sellTradeInfo.put(Database.NUMBEROFSHARES, quantity);
+		sellTradeInfo.put(Database.STARTINGVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
+		sellTradeInfo.put(Database.AVERAGEVOLUME, tradingAPI.getMarketData(tickerID, AVERAGEVOLUME));
+		
+		// Wait for the sell to be complete
+		while(orderStatus.filled != 0){};
 		
 		return null;
 	}

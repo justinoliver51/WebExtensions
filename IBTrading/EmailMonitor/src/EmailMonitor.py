@@ -60,7 +60,6 @@ def getEmailBody(email_message):
     
     for part in email_message.walk():
         # Get the important information out of the email
-        message = ""
         price = ""
         article = ""
         index = 0
@@ -77,7 +76,7 @@ def getEmailBody(email_message):
         #    trade = getTrade(body, index)
         #    price = trade.split(' ')[4]
         #    article = trade.split(' ')[3]   
-                
+        
         if body.lower().find('bought') >= 0:
             index = body.lower().find('bought')
         elif body.lower().find('added') >= 0:
@@ -93,10 +92,14 @@ def getEmailBody(email_message):
             article = trade.split(' ')[3]
             
         if(price.find('$') >= 0 and article == 'at'):
-            return trade.replace('$', '')
+            trade = trade.replace('$', '')
             
-            message = message + body
-        
+            # If this is a bond blow ups, inform the server
+            if(body.lower().find('bond blow ups') >= 0):
+                trade = "Bond Blow Ups " + trade
+                
+            return trade
+
     return None
 
 def decodeSubject(email_message):
@@ -149,7 +152,7 @@ while True:
                 subject = decodeSubject(email_message)
 
                 # If the subject does not contain 'Bought' or 'Added', move on
-                if(subject.lower().find('bought') < 0):
+                if( (subject.lower().find('bought') < 0) and (subject.lower().find('added') < 0) ):
                     continue
 
                 if(traderID[0] == 'Jason' or traderID[0] == 'Jason Bond' or traderID[0] == 'Justin Oliver'):
@@ -171,7 +174,7 @@ while True:
                 url = "http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?"
                 
                 if debug == True:
-                    if((traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or (trade.lower().find('bought') < 0)):
+                    if( (traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or ((trade.lower().find('bought') < 0) and (trade.lower().find('added') < 0) ) ):
                         continue
                     
                     paramDic['traderID'] = 'Justin Oliver'

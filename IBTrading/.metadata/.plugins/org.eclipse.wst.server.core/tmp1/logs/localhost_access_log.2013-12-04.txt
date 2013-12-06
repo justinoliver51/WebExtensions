@@ -1,0 +1,5 @@
+66.66.213.144 - - [04/Dec/2013:01:20:28 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+61.161.164.77 - - [04/Dec/2013:03:31:21 -0600] "GET /manager/html HTTP/1.1" 404 975
+127.0.0.1 - - [04/Dec/2013:09:34:49 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [04/Dec/2013:10:06:38 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bond+Blow+Ups+bought+8000+CAMT+at+4.76 HTTP/1.1" 200 173
+127.0.0.1 - - [04/Dec/2013:22:38:32 -0600] "GET / HTTP/1.1" 404 951

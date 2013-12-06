@@ -29,7 +29,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
 {
 	private EClientSocket m_client = new EClientSocket(this);
 	private EClientSocket m_client_simulation = new EClientSocket(this);
-	private final String orderIDPath = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
 	
 	public boolean  m_bIsFAAccount = false;
 	private boolean m_disconnectInProgress = false;
@@ -39,9 +38,15 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private static int tickerID = 0; 
 	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
 	private static HashMap<Integer,HashMap<String,Double>> marketDataHashMap = new HashMap<Integer,HashMap<String,Double>>();
+	private static HashMap<Integer,HashMap<String,Object>> databaseHashMap = new HashMap<Integer,HashMap<String,Object>>();
 	private static double totalCash = 0;
 	private static double totalCashSimulation = 0;
+	private static int dayTradesRemaining = -1;
 	private static boolean purchasingFlag = false;
+	
+	// Constant strings
+	private final String orderIDPath = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
+	public static final String BUYORDERID = "BuyOrderID";
 	
 	public IBTradingAPI()
 	{
@@ -321,6 +326,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
     		return totalCash;
     }
     
+    public int getNumberOfDayTrades()
+    {
+    	return dayTradesRemaining;
+    }
+    
     public double getMarketData(int tickerId, String marketInfo)
     {
     	if(marketDataHashMap.get(tickerId) == null)
@@ -329,6 +339,17 @@ public class IBTradingAPI extends JFrame implements EWrapper
     		return 0.0;
     	else
     		return marketDataHashMap.get(tickerId).get(marketInfo);
+    }
+    
+    public HashMap<String,Object> initializeTradeInfo(int orderID)
+    {
+    	HashMap<String,Object> tradeInfo = databaseHashMap.get(orderID);
+    	
+    	// Initialize a new trade 
+    	if(tradeInfo == null)
+    		tradeInfo = databaseHashMap.put(orderID, new HashMap<String,Object>());
+    	
+    	return tradeInfo;
     }
     
     public void initializeAvailableFunds()
@@ -609,6 +630,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
 				System.out.println(msg);
 			}
 		}
+		else if(key.equalsIgnoreCase("DayTradesRemaining") && accountName.equalsIgnoreCase("U1257707"))
+		{
+			dayTradesRemaining = Integer.parseInt(value);
+			System.out.println(msg);
+		}
 	}
 
 	@Override
@@ -673,6 +699,28 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			&& execution.m_side.equalsIgnoreCase("SLD"))
 		{
 			purchasingFlag = false;
+
+			// Write to the database
+        	HashMap<String,Object> tradeInfo = databaseHashMap.get(execution.m_orderId);
+        	
+        	tradeInfo.put(Database.AVERAGEBUYINGPRICE, new Double(3.33));
+        	tradeInfo.put(Database.AVERAGESELLINGPRICE, new Double(orderStatus.avgFillPrice));
+        	tradeInfo.put(Database.NUMBEROFSHARES, new Double(orderStatus.avgFillPrice));
+        	tradeInfo.put(Database.STARTINGVOLUME, new Integer(30000));
+        	tradeInfo.put(Database.ENDINGVOLUME, new Integer(40000));
+        	tradeInfo.put(Database.AVERAGEVOLUME, new Integer(35000));
+        	
+        	//DB.NewTrade(databaseHashMapTemp);
+		}
+		// Save off useful information for the trade
+		else if( ((orderStatus.status.equalsIgnoreCase("Cancelled") == true) ||
+				(orderStatus.status.equalsIgnoreCase("Filled") == true) )
+			&& execution.m_side.equalsIgnoreCase("BOT"))
+		{
+			// Write to the database
+        	HashMap<String,Object> tradeInfo = databaseHashMap.get(execution.m_orderId);
+        	tradeInfo.put(Database.AVERAGEBUYINGPRICE, orderStatus.avgFillPrice);
+        	tradeInfo.put(Database.NUMBEROFSHARES, new Double(orderStatus.avgFillPrice));
 		}
 	}
 

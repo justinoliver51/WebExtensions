@@ -1,5 +1,7 @@
 package com.IBTrading.tradeparsers;
 
+import java.util.HashMap;
+
 public class JasonBondsTradeParser {
 	// Passed parameters
 	private String tradeString;
@@ -9,6 +11,9 @@ public class JasonBondsTradeParser {
 	public int quantity = 0;
 	public String action = "";
 	public String price = "";
+	public HashMap<String, Boolean> flagsHashMap = new HashMap<String, Boolean>();
+	
+	public final String BONDBLOWUPS = "Bond Blow Ups";
 	
 	public JasonBondsTradeParser(String newTrade)
 	{
@@ -18,6 +23,9 @@ public class JasonBondsTradeParser {
 	public boolean parseTrade()
 	{
 		String parsedSymbol = null, parsedQuantity = null, parsedAction = null, parsedPrice = null;
+		
+		// Flags
+		flagsHashMap.put(BONDBLOWUPS, false);
 		
 		// If we are given an invalid value, return
 		if(tradeString == null)
@@ -72,8 +80,30 @@ public class JasonBondsTradeParser {
 					return true;
 			}
 			
+			// Bond Blow Ups bought 5000 ZOOM at 5
+			if( (tokens.length == 8) && tokens[0].equalsIgnoreCase("Bond") && tokens[1].equalsIgnoreCase("Blow") && tokens[2].equalsIgnoreCase("Ups") )
+			{
+				parsedAction   = tokens[3];
+				parsedQuantity = tokens[4];
+				parsedSymbol   = tokens[5];
+				
+				if(tokens[4].contains("$") == true)
+					parsedPrice = tokens[7].substring(1);
+				else
+					parsedPrice = tokens[7];
+				
+				validParameters = areParamatersValid(parsedAction, parsedQuantity, parsedSymbol, parsedPrice);
+				
+				// If we successfully parsed the parameters, return true
+				if(validParameters == true)
+				{
+					flagsHashMap.put(BONDBLOWUPS, true);
+					return true;
+				}
+			}
+			
 			// Bond Blow Ups bought NQ $13.37
-			if(tokens.length >= 5)
+			if( (tokens.length >= 5) &&  tokens[0].equalsIgnoreCase("Bond") && tokens[1].equalsIgnoreCase("Blow") && tokens[2].equalsIgnoreCase("Ups"))
 			{
 				parsedAction = tokens[3];
 				parsedSymbol = tokens[4];
@@ -85,7 +115,10 @@ public class JasonBondsTradeParser {
 
 				// If we successfully parsed the parameters, return true
 				if(validParameters == true)
+				{
+					flagsHashMap.put(BONDBLOWUPS, true);
 					return true;
+				}
 			}
 			
 			// If everything went well, set up the trade

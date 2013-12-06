@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 /**
  * Servlet implementation class RemoteProcedureCallsServlet
@@ -23,10 +26,76 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 	private static final long serialVersionUID = 1L;
 	private IBTradingAPI tradingAPI;
 	private TradeCenter tradeCenter;
+	
+	// Database
+	private static final String dbClassName = "com.mysql.jdbc.Driver";
+	private static final String PATH = "jdbc:mysql://127.0.0.1/IBTradingDB";
+	private static final String DEFAULT_USERNAME = "justinoliver51";;
+	private static final String DEFAULT_PASSWORD = "utredhead51";
+	private static final int 	MAX_ACTIVE_CONNECTIONS = 500;
+	private static final int MAX_SESSIONS_PER_USER = 3;
+	private static BasicDataSource ConnPool;
+	private Database DB;
+	
+	public static BasicDataSource setupDataSource() 
+	{
+		ConnPool = new BasicDataSource();
+		ConnPool.setMaxActive(MAX_ACTIVE_CONNECTIONS);
+		ConnPool.setDriverClassName(dbClassName);
+		ConnPool.setUsername(DEFAULT_USERNAME);
+		ConnPool.setPassword(DEFAULT_PASSWORD);
+		ConnPool.setUrl(PATH);
+		ConnPool.setValidationQuery("select 1 as dbcp_connection_test");
+		//ConnPool.setValidationQueryTimeout(2);
+		ConnPool.setTestOnBorrow(true);
+		ConnPool.setTestWhileIdle(true);
+		System.out.println("Max active connections: "+ ConnPool.getMaxActive());
+		
+		return ConnPool;
+	}
+	
+	public static BasicDataSource getConnectionPool() 
+	{
+		if(ConnPool == null)
+			setupDataSource();
+		
+		return ConnPool;
+	}
+	
+	private String getUsername(HttpServletRequest req)
+	{
+		HttpSession s = req.getSession();
+		return (String)s.getAttribute("username");
+	}	
+	
+	private boolean authenticate(HttpServletRequest req)
+	{
+		HttpSession s = req.getSession();
+		Object loggedIn = s.getAttribute("logon.isDone");
+		if(loggedIn == null){
+			return false;
+		}
+		else{
+			return true;
+		}			
+	}
        
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
+	public void init() throws ServletException 
+	{
+		try 
+		{
+			Class.forName(dbClassName);
+		} catch (ClassNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		setupDataSource();		
+	}	
 	
 	public RemoteProcedureCallsServlet() 
     {
@@ -58,7 +127,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         
         synchronized (session)
         {
-        	
+        	DB = new Database(ConnPool);
         }//end session lock
         
         String startUp = request.getParameter("startUp");
@@ -79,7 +148,9 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			return;
 		}
 		
-		if( (traderID == null) || (newTrade == null) || (realTimeSystem == null) || ((realTimeSystem.equalsIgnoreCase("email") == false) && (realTimeSystem.equalsIgnoreCase("websiteMonitor") == false)) )
+		if( (traderID == null) || (newTrade == null) || (realTimeSystem == null) || 
+				((realTimeSystem.equalsIgnoreCase("email") == false) && 
+						(realTimeSystem.equalsIgnoreCase("websiteMonitor") == false)) )
 		{
 			System.out.println("Invalid parameters...");
 			out.println("Invalid parameters: \ntraderID = " + traderID 
@@ -89,27 +160,27 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		
 		// Send the trade to the TradeCenter to be evaluated
 		String tradeError = tradeCenter.newTrade(traderID, newTrade, realTimeSystem);
-		if(tradeError == null)
-		{
-			// The new trade has found a trader.  
-			// If the trade is successful, send the all clear!
-			tradeError = tradeCenter.trade();
-			if(tradeError == null)
-			{
-				System.out.println("Valid trade initiated!");
-				out.println("Valid trade!");
-			}
-			else
-			{
-				System.out.println("Invalid trade!\nError: " + tradeError);
-				out.println("Invalid Trade!\nError: " + tradeError);
-			}
-		}
-		else
+		if(tradeError != null)
 		{
 			System.out.println("Invalid parameters, " + traderID + ", " + newTrade);
 			out.println("Error: " + tradeError);
+			return;
 		}
+
+		// The new trade has found a trader.  
+		// If the trade is successful, send the all clear!
+		tradeError = tradeCenter.trade();
+		if(tradeError != null)
+		{
+			System.out.println("Invalid trade!\nError: " + tradeError);
+			out.println("Invalid Trade!\nError: " + tradeError);
+			return;
+		}
+
+		// Valid trade, write to the database
+		//tradeCenter.getOrderIds();
+		System.out.println("Valid trade initiated!");
+		out.println("Valid trade!");
 	}
 
 	/**

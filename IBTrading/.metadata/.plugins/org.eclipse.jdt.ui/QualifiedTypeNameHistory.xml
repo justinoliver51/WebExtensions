@@ -11,4 +11,7 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.IBTrading.tradeparsers.JasonBondsTradeParser"/>
 <fullyQualifiedTypeName name="com.IBTrading.servlets.OrderStatus"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.apache.tomcat.dbcp.dbcp.BasicDataSource"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>
