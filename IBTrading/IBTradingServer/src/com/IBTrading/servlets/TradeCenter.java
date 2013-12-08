@@ -25,6 +25,9 @@ public class TradeCenter {
 	// The current trader
 	private Trader trader = null;  
 	
+	// True if market is open
+	private boolean marketOpenFlag = false;
+	
 	// CONSTANTS
 	private final int SECONDS = 1000;
 	private final String BUY = "BUY";
@@ -60,6 +63,20 @@ public class TradeCenter {
 		long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 		long MILLIS_TIMEZONE_DIFF = 6 * 60 * 60 * 1000;
 		
+		//Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Central")).getTime();
+		long timePortion = System.currentTimeMillis() % MILLIS_PER_DAY;
+		timePortion = timePortion < MILLIS_TIMEZONE_DIFF ? (MILLIS_PER_DAY - (MILLIS_TIMEZONE_DIFF - timePortion)) : (timePortion - MILLIS_TIMEZONE_DIFF); 
+        Calendar cal = Calendar.getInstance();
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		
+		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) || (dayOfWeek == 7) || (dayOfWeek == 1) )
+		{
+			System.out.println("Market is closed!");
+			marketOpenFlag = false;
+		}
+		else
+			marketOpenFlag = true;
+		
 		traderID = newTraderID;
 		boolean websiteMonitorFlag = realTimeSystem.equalsIgnoreCase("websiteMonitor") ? 
 										true : false;
@@ -87,7 +104,7 @@ public class TradeCenter {
 		}
 		else if(traderID.equalsIgnoreCase(DEBUGEMAIL))
 		{
-			DebugTrader currentTrader = new DebugTrader(newTrade, tradingAPI, websiteMonitorFlag);
+			DebugTrader currentTrader = new DebugTrader(newTrade, tradingAPI, websiteMonitorFlag, marketOpenFlag);
 			trader = (Trader) currentTrader;
 		}
 		else
@@ -96,23 +113,16 @@ public class TradeCenter {
 			return traderID + " is not a valid trader.";
 		}
 		
-		Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Central")).getTime();
-		long timePortion = System.currentTimeMillis() % MILLIS_PER_DAY;
-		timePortion = timePortion < MILLIS_TIMEZONE_DIFF ? (MILLIS_PER_DAY - (MILLIS_TIMEZONE_DIFF - timePortion)) : (timePortion - MILLIS_TIMEZONE_DIFF); 
-		
-		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) )
-		{
-			System.out.println("Market is closed!");
-			
-			if(traderID.equalsIgnoreCase(DEBUGEMAIL) == false)
-				return "Market is closed!";  //FIXME: We may not want this commented out!
-		}
+		// If the market is closed, return an error
+		if( (traderID.equalsIgnoreCase(DEBUGEMAIL) == false) && (marketOpenFlag == false) )
+			return "Market is closed!";  //FIXME: We may not want this commented out!
 		
 		return null;
 	}
 	
 	public String trade()
 	{
+		// Determine if passed parameters are correct
 		if(trader.hasValidTrade == false)
 		{
 			System.out.println("Trader has an invalid trade.");
@@ -121,6 +131,17 @@ public class TradeCenter {
 		else
 		{
 			System.out.println("Trader has a valid trade.");
+		}
+		
+		// Determine if this trade could make a profit
+		if(trader.isTradeable() == false)
+		{
+			System.out.println("Trade could not be validated...");
+			return "Trade could not be validated...";
+		}
+		else
+		{
+			System.out.println("The stock may be tradeable.");
 		}
 		
 		return trader.trade();

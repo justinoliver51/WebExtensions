@@ -3,26 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="247" key="DIALOG_Y_ORIGIN"/>
+		<item value="1129" key="DIALOG_X_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="1527" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="BUYORDERID" key="selection"/>
+		<item value="getMarketData" key="selection"/>
 		<list key="findhistory">
-			<item value="BUYORDERID"/>
-			<item value="marketDataHashMap"/>
-			<item value="getmarketdata"/>
-			<item value="jdbc"/>
-			<item value="setupDataSource"/>
-			<item value="getConnectionPool"/>
-			<item value="ConnPool = new"/>
-			<item value="init"/>
+			<item value="getMarketData"/>
+			<item value="marketdata"/>
+			<item value="starttime"/>
+			<item value="System.currentTimeMillis()"/>
+			<item value="startTime"/>
+			<item value="PRICE&quot;"/>
+			<item value="marketda"/>
+			<item value="getHistoricalData"/>
 		</list>
 		<list key="replacehistory">
 			<item value="    "/>

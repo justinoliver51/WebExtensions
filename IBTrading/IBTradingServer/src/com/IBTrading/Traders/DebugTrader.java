@@ -1,21 +1,37 @@
 package com.IBTrading.Traders;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
-import com.IBTrading.servlets.IBTradingAPI;
-import com.IBTrading.tradeparsers.JasonBondsTradeParser;
-import com.IBTrading.servlets.OrderStatus;
 import com.IBTrading.servlets.Database;
+import com.IBTrading.servlets.HistoricalData;
+import com.IBTrading.servlets.IBTradingAPI;
+import com.IBTrading.servlets.OrderStatus;
+import com.IBTrading.tradeparsers.JasonBondsTradeParser;
 
 public class DebugTrader extends Trader{
 	// Passed parameters
 	private String tradeString;
 	private boolean websiteMonitorFlag;
+	private boolean marketOpenFlag = false;
 	
 	// Parsed trade information
 	JasonBondsTradeParser parser;
 	
 	// Public variables
+	
+	// PRIVATE VARIABLES
+	// Saves off our historical data
+	double totalCashTradedYesterday = 0.0;
+	double totalCashTradedLastWeek = 0.0;
+	double totalCashTradedLastMonth = 0.0;
+	
+	// Timers
+	Timestamp startTime = null;
 	
 	// CONSTANTS
 	private final int SECONDS = 1000;
@@ -27,13 +43,91 @@ public class DebugTrader extends Trader{
 	private final String VOLUME = "VOLUME";
 	private final String AVERAGEVOLUME = "AVG_VOLUME";
 	
-	public DebugTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
+	public DebugTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem, boolean newMarketOpenFlag)
 	{	
 		super(newTradingAPI);
 		
 		websiteMonitorFlag = newRealTimeSystem;
 		parser = new JasonBondsTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
+		marketOpenFlag = newMarketOpenFlag;
+	}
+	
+	private int getHistoricalData(int durationInt, String durationStr, String endDateTime, String barSizeSetting, String whatToShow)
+	{
+		int tickerID = tradingAPI.subscribeToHistoricalData(parser.symbol, endDateTime, durationStr, barSizeSetting, whatToShow);
+		
+		if(tickerID == -1)
+			return tickerID;
+		
+		// Wait until we have received the market data
+		while(tradingAPI.getHistoricalData(tickerID, durationInt) == null){};
+		
+		return tickerID;
+	}
+	
+	// Determines if this trade may be profitable
+	public boolean isTradeable()
+	{
+		startTime = new Timestamp(System.currentTimeMillis());
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar cal = Calendar.getInstance();
+        
+        // Calculate the appropriate endDateTime
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+        
+        // If it is a Sunday or Monday, use Friday's date
+        if(dayOfWeek == 1)
+        	cal.add(Calendar.DATE, -2); 
+        else if(dayOfWeek == 2)
+        	cal.add(Calendar.DATE, -3); 
+        // Use yesterday's date
+        else 
+        	cal.add(Calendar.DATE, -1);    
+        	  
+        String endDateTime = dateFormat.format(cal.getTime()) + " 15:00:00 CST";
+		
+		// Get the data over the last 30 days
+		String barSizeSetting = IBTradingAPI.ONEDAY;
+		String whatToShow = IBTradingAPI.TRADES;
+		
+		// Gets the VWAP of yesterday, last week, and last month
+		String durationStr = IBTradingAPI.ONEDAYINTEGER + IBTradingAPI.DAYS;
+		int tickerID = getHistoricalData(IBTradingAPI.ONEDAYINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
+		ArrayList<HistoricalData> historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEDAYINTEGER);
+		totalCashTradedYesterday = historicalDataArray.get(0).totalCashTradedInInterval;
+		
+		if(tickerID == -1)
+			return false;
+		
+		durationStr = IBTradingAPI.ONEWEEKINTEGER + IBTradingAPI.DAYS;
+		tickerID = getHistoricalData(IBTradingAPI.ONEWEEKINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEWEEKINTEGER);
+		for(int i = 0; i < IBTradingAPI.ONEWEEKINTEGER; i++)
+		{
+			totalCashTradedLastWeek += historicalDataArray.get(i).totalCashTradedInInterval;
+		}
+		
+		if(tickerID == -1)
+			return false;
+		
+		durationStr = IBTradingAPI.ONEMONTHINTEGER + IBTradingAPI.DAYS;
+		tickerID = getHistoricalData(IBTradingAPI.ONEMONTHINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEMONTHINTEGER);
+		for(int i = 0; i < IBTradingAPI.ONEMONTHINTEGER; i++)
+		{
+			totalCashTradedLastMonth += historicalDataArray.get(i).totalCashTradedInInterval;
+		}
+		
+		if(tickerID == -1)
+			return false;
+		
+		// If the total amount of money thrown around is estimated to move the market, go ahead
+		if(totalCashTradedYesterday < 999999999.9)
+			return true;
+		else
+			return false;
 	}
 
 	// Initiates the trade with TWS
@@ -55,21 +149,25 @@ public class DebugTrader extends Trader{
 		// If something went wrong and we were unable to get the cash
 		// then we cannot get the market data either
 		if(totalCash == 0)
-		{
 			return "Cannot read market data from simulation account.";
-		}
 		else
-		{
 			isSimulation = false;
-		}
 		
 		// Give a little wiggle room of ~2% for the maxCash
 		maxCash = super.getCash(totalCash, MAXLEVERAGE);
 		
 		// Wait until we have received the market data
-		String marketData = "LAST_PRICE";
+		String marketData = null;
+		if(marketOpenFlag == true)
+			marketData = "LAST_PRICE";
+		else
+			marketData = "CLOSE_PRICE";	// Should only be using this in debug
+		
 		int tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
 		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
+		
+		// We have finished waiting on all data - time to start the trade!
+		long timeInterval = System.currentTimeMillis() - startTime.getTime();
 		
 		// If the price/share of the stock was not supplied, get this information from TWS
 		if(parser.price.equalsIgnoreCase("0.00"))
@@ -168,7 +266,7 @@ public class DebugTrader extends Trader{
 			{
 				isSimulation = true;
 				tradingAPI.cancelOrder(buyOrderStatus, isSimulation);
-				return "Order canceled - we did not buy within the time limit";
+				//return "Order canceled - we did not buy within the time limit";
 			}
 			// If we have not completed the order, complete it
 			else if(buyOrderStatus.status.equalsIgnoreCase("Filled") == false)
@@ -203,12 +301,22 @@ public class DebugTrader extends Trader{
 		sellOrderStatus = tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation, null);
 		
 		// Save off useful trade information for the purchase
+		tradeInfo = new HashMap<String,Object>();
 		tradeInfo.put(Database.NUMBEROFSHARES, quantity);
 		tradeInfo.put(Database.AVERAGEBUYINGPRICE, buyOrderStatus.avgFillPrice);
 		tradeInfo.put(Database.INITIALVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
 		
+		// Save off historical market data
+		tradeInfo.put(Database.CASHTRADEDYESTERDAY, totalCashTradedYesterday);
+		tradeInfo.put(Database.CASHTRADEDLASTWEEK, totalCashTradedLastWeek);
+		tradeInfo.put(Database.CASHTRADEDLASTMONTH, totalCashTradedLastMonth);
+		
 		// Get the updated market data
-		marketData = "VOLUME";
+		if(marketOpenFlag == true)
+			marketData = "VOLUME";
+		else
+			marketData = "CLOSE_PRICE";	// Only for simulation
+		
 		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
 		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
 		
@@ -216,10 +324,14 @@ public class DebugTrader extends Trader{
 		tradeInfo.put(Database.VOLUMEAFTERPURCHASE, tradingAPI.getMarketData(tickerID, VOLUME));
 		
 		// Wait for the sell to be complete
-		while(sellOrderStatus.filled != 0){};
+		while( (sellOrderStatus.filled != 0) && (marketOpenFlag == true) ){};
 		
-		// Get the updated marketData
-		marketData = "VOLUME";
+		// Get the updated market data
+		if(marketOpenFlag == true)
+			marketData = "VOLUME";
+		else
+			marketData = "CLOSE_PRICE";	// Only for simulation
+		
 		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
 		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
 		
@@ -227,6 +339,18 @@ public class DebugTrader extends Trader{
 		tradeInfo.put(Database.FINALVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
 		tradeInfo.put(Database.AVERAGEVOLUME, tradingAPI.getMarketData(tickerID, AVERAGEVOLUME));
 		tradeInfo.put(Database.AVERAGESELLINGPRICE, sellOrderStatus.avgFillPrice);
+		
+		// Save the debug flag
+		tradeInfo.put(Database.DEBUGFLAG, true);
+		
+		// If the market is closed, overright some of the values, only used in DebugTrader!
+		if(marketOpenFlag == false)
+		{
+			tradeInfo.put(Database.INITIALVOLUME, 0);
+			tradeInfo.put(Database.VOLUMEAFTERPURCHASE, 0);
+			tradeInfo.put(Database.FINALVOLUME, 0);
+			tradeInfo.put(Database.AVERAGEVOLUME, 0);
+		}
 
 		return null;
 	}

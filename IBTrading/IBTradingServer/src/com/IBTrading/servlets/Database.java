@@ -19,14 +19,26 @@ public class Database
 	private static final String DEFAULT_PASSWORD = "utredhead51";
 	
 	// CONSTANT STRINGS FOR TABLE NAMES
+	// Basic trade information
 	public static final String AVERAGEBUYINGPRICE = "AverageBuyingPrice";
 	public static final String AVERAGESELLINGPRICE = "AverageSellingPrice";
 	public static final String NUMBEROFSHARES = "NumberOfShares";
+	
+	// Minute granularity of volume
 	public static final String INITIALVOLUME = "InitialVolume";
 	public static final String VOLUMEAFTERPURCHASE = "VolumeAfterPurchase";
 	public static final String FINALVOLUME = "FinalVolume";
 	public static final String AVERAGEVOLUME = "AverageVolume";
 	
+	// Daily granularity of VWAP
+	public static final String CASHTRADEDYESTERDAY = "CashTradedYesterday";
+	public static final String CASHTRADEDLASTWEEK = "CashTradedLastWeek";
+	public static final String CASHTRADEDLASTMONTH = "CashTradedLastMonth";
+	
+	// Specifies whether this trade was just debug or real
+	public static final String DEBUGFLAG = "DebugFlag";
+	
+	// PRIVATE VARIABLES
 	private BasicDataSource DBConnection = null;
 	
 	
@@ -51,10 +63,14 @@ public class Database
 		  `VolumeAfterPurchase` int(11) DEFAULT NULL,
 		  `FinalVolume` int(11) DEFAULT NULL,
 		  `AverageVolume` int(11) DEFAULT NULL,
+		  `CashTradedYesterday` double DEFAULT NULL,
+		  `CashTradedLastWeek` double DEFAULT NULL,
+		  `CashTradedLastMonth` double DEFAULT NULL,
+		  `DebugFlag` tinyint DEFAULT NULL,
 		  `Time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		  `TradeID` int(11) NOT NULL AUTO_INCREMENT,
 		  PRIMARY KEY (`TradeID`)
-		) ENGINE=MyISAM DEFAULT CHARSET=latin1
+		) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 	*/
 
 	Database(BasicDataSource BDS) 
@@ -124,6 +140,10 @@ public class Database
 		int volumeAfterPurchase = (Integer) tradeInfo.get(VOLUMEAFTERPURCHASE);
 		int finalVolume = (Integer) tradeInfo.get(FINALVOLUME);
 		int averageVolume = (Integer) tradeInfo.get(AVERAGEVOLUME);
+		double cashTradedYesterday = (Double) tradeInfo.get(CASHTRADEDYESTERDAY);
+		double cashTradedLastWeek = (Double) tradeInfo.get(CASHTRADEDLASTWEEK);
+		double cashTradedLastMonth = (Double) tradeInfo.get(CASHTRADEDLASTMONTH);
+		boolean debugFlag = (Boolean) tradeInfo.get(DEBUGFLAG);
 		
 		Connection con = null;
 		PreparedStatement p = null;
@@ -133,7 +153,8 @@ public class Database
 			String statement = "INSERT INTO TradeData "
 					+ "(AverageBuyingPrice,AverageSellingPrice,NumberOfShares,"
 					+ "InitialVolume,VolumeAfterPurchase,FinalVolume,"
-					+ "AverageVolume) VALUES (?,?,?,?,?,?,?)";
+					+ "AverageVolume,CashTradedYesterday,CashTradedLastWeek,"
+					+ "CashTradedLastMonth,DebugFlag) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 				
 				p = con.prepareStatement(statement);
 				p.setDouble(1, averageBuyingPrice);
@@ -143,6 +164,10 @@ public class Database
 				p.setInt(5, volumeAfterPurchase);
 				p.setInt(6, finalVolume);
 				p.setInt(7, averageVolume);
+				p.setDouble(8, cashTradedYesterday);
+				p.setDouble(9, cashTradedLastWeek);
+				p.setDouble(10, cashTradedLastMonth);
+				p.setBoolean(11, debugFlag);
 
 				System.out.println(p);
 				p.executeUpdate();

@@ -7,7 +7,7 @@ import com.IBTrading.servlets.IBTradingAPI;
 public class Trader 
 {
 	public static IBTradingAPI tradingAPI;	// TWS API
-	public HashMap<String,Object> tradeInfo = new HashMap<String,Object>();
+	public HashMap<String,Object> tradeInfo = null;
 	
 	// Constants
 	private final int MAXLEVERAGE = 4;
@@ -26,6 +26,13 @@ public class Trader
 	public boolean parseTrade(String newTrade)
 	{
 		System.out.println("Should not have arrived here: Trader.parseTrade()");
+		return true;
+	}
+	
+	// Determines if this trade may be profitable
+	public boolean isTradeable()
+	{
+		System.out.println("Should not have arrived here: Trader.isTradeable()");
 		return true;
 	}
 

@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -15,7 +16,6 @@ import javax.swing.JFrame;
 import com.ib.client.CommissionReport;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
-import com.ib.client.EClientErrors;
 import com.ib.client.EClientSocket;
 import com.ib.client.EWrapper;
 import com.ib.client.EWrapperMsgGenerator;
@@ -23,7 +23,6 @@ import com.ib.client.Execution;
 import com.ib.client.Order;
 import com.ib.client.OrderState;
 import com.ib.client.UnderComp;
-import com.IBTrading.servlets.OrderStatus;
 
 public class IBTradingAPI extends JFrame implements EWrapper
 {
@@ -38,15 +37,55 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private static int tickerID = 0; 
 	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
 	private static HashMap<Integer,HashMap<String,Double>> marketDataHashMap = new HashMap<Integer,HashMap<String,Double>>();
+	private static HashMap<Integer,ArrayList<HistoricalData>> historicalDataHashMap = new HashMap<Integer,ArrayList<HistoricalData>>();
 	private static HashMap<Integer,HashMap<String,Object>> databaseHashMap = new HashMap<Integer,HashMap<String,Object>>();
 	private static double totalCash = 0;
 	private static double totalCashSimulation = 0;
 	private static int dayTradesRemaining = -1;
 	private static boolean purchasingFlag = false;
 	
-	// Constant strings
+	// CONSTANT STRINGS
+	// Location of orderID.txt
 	private final String orderIDPath = "/Users/justinoliver/Desktop/Developer/WebExtensions/orderID.txt";
+	
+	// Request Historical Data Parameters
+	// whatToShow
+	public static final String TRADES 						= "TRADES"; 
+	public static final String MIDPOINT 					= "MIDPOINT"; 
+	public static final String BID 							= "BID"; 
+	public static final String ASK 							= "ASK"; 
+	public static final String BID_ASK 						= "BID_ASK"; 
+	public static final String HISTORICAL_VOLATILITY 		= "HISTORICAL_VOLATILITY";
+	public static final String OPTION_IMPLIED_VOLATILITY 	= "OPTION_IMPLIED_VOLATILITY";
+			
+	// barSizeSetting
+	public static final String ONESECOND 		= "1 sec";	
+	public static final String FIVESECONDS 		= "5 secs";
+	public static final String FIFTEENSECONDS 	= "15 secs";
+	public static final String THIRTYSECONDS 	= "30 secs";
+	public static final String ONEMINUTE 		= "1 min";
+	public static final String TWOMINUTES 		= "2 mins";
+	public static final String THREEMINUTES 	= "3 mins";
+	public static final String FIVEMINUTES 		= "5 mins";
+	public static final String FIFTEENMINUTES 	= "15 mins";
+	public static final String THIRTYMINUTES 	=  "30 mins";
+	public static final String ONEHOUR 			= "1 hour";
+	public static final String ONEDAY 			= "1 day";
+	
+	// durationString
+	public static final String SECONDS 	= " S";
+	public static final String DAYS 	= " D";
+	public static final String WEEKS 	= " W";
+	public static final String MONTHS 	= " M";
+	public static final String YEARS 	= " Y";
+	
+	// The number of work days in the specified time frame
+	public static final int ONEDAYINTEGER 	= 1;
+	public static final int ONEWEEKINTEGER 	= 5;
+	public static final int ONEMONTHINTEGER = 21;
+	
 	public static final String BUYORDERID = "BuyOrderID";
+	
 	
 	public IBTradingAPI()
 	{
@@ -297,7 +336,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	*/
     }
     
-    public int subscribeToMarketData(String symbol)
+    public synchronized int subscribeToMarketData(String symbol)
     {
     	Contract contract = new Contract();
     	String genericTicklist = null;
@@ -307,10 +346,49 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	setDefaultsContract(contract);
     	contract.m_symbol = symbol;
     	
+    	// Ensure we are connect to TWS
+    	connect();
+        if(m_client.isConnected() == false)
+        {
+        	System.out.println("Unable to connect to TWS...");
+        	return -1;
+        }
+    	
+    	// Request the market data
     	m_client.reqMktData(tickerID, contract, genericTicklist, snapshot);
     	
     	// Add a new hash map to market data for this stock
     	marketDataHashMap.put(tickerID, new HashMap<String,Double>());
+    	
+    	return tickerID++;
+    }
+    
+    // 
+    public synchronized int subscribeToHistoricalData(String symbol, String endDateTime, String durationStr, String barSizeSetting, String whatToShow)
+    {
+    	Contract contract = new Contract();
+    	int useRTH = 1; 			// 0 - all data is returned even where the market in question was outside of its regular trading hours.
+    								// 1 - only data within the regular trading hours is returned, even if the requested time span falls partially or completely outside of the RTH.
+    	int formatDate = 1; 		// 1 - dates applying to bars returned in the format: yyyymmdd{space}{space}hh:mm:dd
+    	
+    	// Set up the contract
+    	setDefaultsContract(contract);
+    	contract.m_symbol = symbol;
+    	//contract.m_marketDepthRows = rows;
+    	
+    	// Ensure we are connect to TWS
+    	connect();
+        if(m_client.isConnected() == false)
+        {
+        	System.out.println("Unable to connect to TWS...");
+        	return -1;
+        }
+    	
+    	// Get the market depth
+    	m_client.reqHistoricalData(tickerID, contract, endDateTime, durationStr, barSizeSetting, whatToShow, useRTH, formatDate);
+    	
+    	// Add a new hash map to market data for this stock
+    	historicalDataHashMap.put(tickerID, new ArrayList<HistoricalData>());
     	
     	return tickerID++;
     }
@@ -336,6 +414,16 @@ public class IBTradingAPI extends JFrame implements EWrapper
     		return 0.0;
     	else
     		return marketDataHashMap.get(tickerId).get(marketInfo);
+    }
+    
+    public ArrayList<HistoricalData> getHistoricalData(int tickerId, int numberOfEntries)
+    {
+    	if(historicalDataHashMap.get(tickerId) == null)
+    		return null;
+    	else if(historicalDataHashMap.get(tickerId).size() < numberOfEntries)
+    		return null;
+    	else
+    		return historicalDataHashMap.get(tickerId);
     }
     
     public HashMap<String,Object> initializeTradeInfo(int orderID)
@@ -381,65 +469,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		
 	}
 
-	/*
-		-1	Not applicable.	--
-		0	BID_SIZE	tickSize()
-		1	BID_PRICE	tickPrice()
-		2	ASK_PRICE	tickPrice()
-		3	ASK_SIZE	tickSize()
-		4	LAST_PRICE	tickPrice()
-		5	LAST_SIZE	tickSize()
-		6	HIGH	tickPrice()
-		7	LOW	tickPrice()
-		8	VOLUME	tickSize()
-		9	CLOSE_PRICE	tickPrice()
-		11	ASK_OPTION_COMPUTATION	tickOptionComputation()
-		12	LAST_OPTION_COMPUTATION	tickOptionComputation()
-		13	MODEL_OPTION_COMPUTATION	tickOptionComputation()
-		14	OPEN_TICK	tickPrice()
-		15	LOW_13_WEEK	tickPrice()
-		16	HIGH_13_WEEK	tickPrice()
-		17	LOW_26_WEEK	tickPrice()
-		18	HIGH_26_WEEK	tickPrice()
-		19	LOW_52_WEEK	tickPrice()
-		20	HIGH_52_WEEK	tickPrice()
-		21	AVG_VOLUME	tickSize()
-		22	OPEN_INTEREST	tickSize()
-		23	OPTION_HISTORICAL_VOL	tickGeneric()
-		24	OPTION_IMPLIED_VOL	tickGeneric()
-		25	OPTION_BID_EXCH	NOT USED
-		26	OPTION_ASK_EXCH	NOT USED
-		27	OPTION_CALL_OPEN_INTEREST	tickSize()
-		28	OPTION_PUT_OPEN_INTEREST	tickSize()
-		29	OPTION_CALL_VOLUME	tickSize()
-		30	OPTION_PUT_VOLUME	tickSize()
-		31	INDEX_FUTURE_PREMIUM	tickGeneric()
-		32	BID_EXCH	tickString()
-		33	ASK_EXCH	tickString()
-		34	AUCTION_VOLUME	tickSize()
-		35	AUCTION_PRICE	tickPrice()
-		36	AUCTION_IMBALANCE	tickSize()
-		37	MARK_PRICE	tickPrice()
-		38	BID_EFP_COMPUTATION	tickEFP()
-		39	ASK_EFP_COMPUTATION	tickEFP()
-		40	LAST_EFP_COMPUTATION	tickEFP()
-		41	OPEN_EFP_COMPUTATION	tickEFP()
-		42	HIGH_EFP_COMPUTATION	tickEFP()
-		43	LOW_EFP_COMPUTATION	tickEFP()
-		44	CLOSE_EFP_COMPUTATION	tickEFP()
-		45	LAST_TIMESTAMP	tickString()
-		46	SHORTABLE	tickString()
-		47	FUNDAMENTAL_RATIOS	tickString()
-		48	RT_VOLUME	tickGeneric()
-		49	HALTED	See Note 2 below.
-		50	BIDYIELD	tickPrice()
-		51	ASKYIELD	tickPrice()
-		52	LASTYIELD	tickPrice()
-		53	CUST_OPTION_COMPUTATION	tickOptionComputation()
-		54	TRADE_COUNT	tickGeneric()
-		55	TRADE_RATE	tickGeneric()
-		56	VOLUME_RATE	tickGeneric()
-	*/
 	@Override
 	public void tickPrice(int tickerId, int field, double price,
 			int canAutoExecute) {
@@ -708,21 +737,23 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public void updateMktDepth(int tickerId, int position, int operation,
 			int side, double price, int size) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("updateMktDepth " + EWrapperMsgGenerator.updateMktDepth(tickerId, position, operation, side, price, size));
+		// At this time, what is the price going for, 2 numbers
 	}
 
 	@Override
 	public void updateMktDepthL2(int tickerId, int position,
 			String marketMaker, int operation, int side, double price, int size) {
 		// TODO Auto-generated method stub
-		
+		// MARKET DEPTH!
+		System.out.println("updateMktDepthL2 " + EWrapperMsgGenerator.updateMktDepthL2(tickerId, position, marketMaker, operation, side, price, size));
 	}
 
 	@Override
 	public void updateNewsBulletin(int msgId, int msgType, String message,
 			String origExchange) {
 		// TODO Auto-generated method stub
-		
+		// MARKET DEPTH!
 	}
 
 	@Override
@@ -743,7 +774,17 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			double high, double low, double close, int volume, int count,
 			double WAP, boolean hasGaps) {
 		// TODO Auto-generated method stub
+		System.out.println(EWrapperMsgGenerator.historicalData(reqId, date, open, high, low, close, volume, count, WAP, hasGaps));
 		
+		// If this is the last entry and null, return
+		if(WAP == -1.0)
+			return;
+		
+		ArrayList<HistoricalData> historicalDataArray = historicalDataHashMap.get(reqId);
+		historicalDataArray.add(new HistoricalData(reqId, date, open, high, low, close, volume, count, WAP, hasGaps));
+		
+		//
+		//if(historicalDataArray.size() == 1)
 	}
 
 	@Override

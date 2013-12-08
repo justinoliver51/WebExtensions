@@ -1,5 +1,7 @@
 package com.IBTrading.Traders;
 
+import java.sql.Timestamp;
+
 import com.IBTrading.servlets.IBTradingAPI;
 import com.IBTrading.tradeparsers.JasonBondsTradeParser;
 import com.IBTrading.servlets.OrderStatus;
@@ -41,6 +43,12 @@ public class JasonBondsTrader extends Trader{
 		{
 			lastTraderString = newTrade;
 		}
+	}
+	
+	// Determines if this trade may be profitable
+	public boolean isTradeable()
+	{
+		return true;
 	}
 
 	// Initiates the trade with TWS
