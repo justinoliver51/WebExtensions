@@ -25,10 +25,6 @@ public class DebugTrader extends Trader{
 	// Public variables
 	
 	// PRIVATE VARIABLES
-	// Saves off our historical data
-	double totalCashTradedYesterday = 0.0;
-	double totalCashTradedLastWeek = 0.0;
-	double totalCashTradedLastMonth = 0.0;
 	
 	// Timers
 	Timestamp startTime = null;
@@ -41,16 +37,15 @@ public class DebugTrader extends Trader{
 	private final int MAXLEVERAGE = 4;
 	private final int NOLEVERAGE = 1;
 	private final String VOLUME = "VOLUME";
-	private final String AVERAGEVOLUME = "AVG_VOLUME";
 	
 	public DebugTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem, boolean newMarketOpenFlag)
 	{	
 		super(newTradingAPI);
 		
 		websiteMonitorFlag = newRealTimeSystem;
+		marketOpenFlag = newMarketOpenFlag;
 		parser = new JasonBondsTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
-		marketOpenFlag = newMarketOpenFlag;
 	}
 	
 	private int getHistoricalData(int durationInt, String durationStr, String endDateTime, String barSizeSetting, String whatToShow)
@@ -164,7 +159,7 @@ public class DebugTrader extends Trader{
 			marketData = "CLOSE_PRICE";	// Should only be using this in debug
 		
 		int tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
-		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
+		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
 		
 		// We have finished waiting on all data - time to start the trade!
 		long timeInterval = System.currentTimeMillis() - startTime.getTime();
@@ -178,10 +173,7 @@ public class DebugTrader extends Trader{
 		
 		try
 		{
-			if(parser.action.equalsIgnoreCase("Added"))
-				quantity = super.getQuantity(maxCashForAdds, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
-			else
-				quantity = super.getQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+			quantity = super.getQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -204,9 +196,9 @@ public class DebugTrader extends Trader{
 			simulationOnly = true;
 		
 		/*
-		orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
+		buyOrderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation);
 		
-		if(orderStatus == null)
+		if(buyOrderStatus == null)
 			return "Unable to connect to TWS...";
 		*/
 		
@@ -292,7 +284,7 @@ public class DebugTrader extends Trader{
 		isSimulation = false;
 		sellOrderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation);
 		
-		if(orderStatus == null)
+		if(sellOrderStatus == null)
 			return "Unable to connect to TWS...";
 		*/
 		
@@ -302,6 +294,7 @@ public class DebugTrader extends Trader{
 		
 		// Save off useful trade information for the purchase
 		tradeInfo = new HashMap<String,Object>();
+		tradeInfo.put(Database.STOCKSYMBOL, parser.symbol);
 		tradeInfo.put(Database.NUMBEROFSHARES, quantity);
 		tradeInfo.put(Database.AVERAGEBUYINGPRICE, buyOrderStatus.avgFillPrice);
 		tradeInfo.put(Database.INITIALVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
@@ -318,26 +311,28 @@ public class DebugTrader extends Trader{
 			marketData = "CLOSE_PRICE";	// Only for simulation
 		
 		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
-		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
+		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
 		
 		// Save the volume now that the purchase is over
 		tradeInfo.put(Database.VOLUMEAFTERPURCHASE, tradingAPI.getMarketData(tickerID, VOLUME));
 		
 		// Wait for the sell to be complete
-		while( (sellOrderStatus.filled != 0) && (marketOpenFlag == true) ){};
+		while( (sellOrderStatus.remaining != 0) && (marketOpenFlag == true) ){};
+		
+		// Cancel the order if we have not purchased any stock
+		if(sellOrderStatus.filled == 0)
+		{
+			isSimulation = true;
+			tradingAPI.cancelOrder(sellOrderStatus, isSimulation);
+			//return "Order canceled - we cannot sell when the market is closed";
+		}
 		
 		// Get the updated market data
-		if(marketOpenFlag == true)
-			marketData = "VOLUME";
-		else
-			marketData = "CLOSE_PRICE";	// Only for simulation
-		
 		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
-		while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
+		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
 		
 		// Save the last bits of information from the sell
 		tradeInfo.put(Database.FINALVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
-		tradeInfo.put(Database.AVERAGEVOLUME, tradingAPI.getMarketData(tickerID, AVERAGEVOLUME));
 		tradeInfo.put(Database.AVERAGESELLINGPRICE, sellOrderStatus.avgFillPrice);
 		
 		// Save the debug flag
@@ -349,7 +344,6 @@ public class DebugTrader extends Trader{
 			tradeInfo.put(Database.INITIALVOLUME, 0);
 			tradeInfo.put(Database.VOLUMEAFTERPURCHASE, 0);
 			tradeInfo.put(Database.FINALVOLUME, 0);
-			tradeInfo.put(Database.AVERAGEVOLUME, 0);
 		}
 
 		return null;

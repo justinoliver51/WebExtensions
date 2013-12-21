@@ -17,6 +17,11 @@ public class Trader
 	// Valid trade - true if parsed correctly, false otherwise
 	public boolean hasValidTrade = false;
 	
+	// Saves off our historical data
+	double totalCashTradedYesterday = 0.0;
+	double totalCashTradedLastWeek = 0.0;
+	double totalCashTradedLastMonth = 0.0;
+	
 	public Trader(IBTradingAPI newTradingAPI)
 	{
 		tradingAPI = newTradingAPI;

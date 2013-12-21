@@ -1,0 +1,4 @@
+127.0.0.1 - - [16/Dec/2013:08:42:04 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [16/Dec/2013:08:42:18 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+86.110.29.19 - - [16/Dec/2013:13:28:55 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+61.176.223.96 - - [16/Dec/2013:17:13:20 -0600] "GET /web-console/ServerInfo.jsp HTTP/1.1" 404 1003

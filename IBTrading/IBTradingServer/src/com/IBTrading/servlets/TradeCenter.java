@@ -99,7 +99,7 @@ public class TradeCenter {
 		}
 		else if(traderID.equalsIgnoreCase(JASONBONDS) || traderID.equalsIgnoreCase(JASONBONDSEMAIL))
 		{
-			JasonBondsTrader currentTrader = new JasonBondsTrader(newTrade, tradingAPI, websiteMonitorFlag);
+			JasonBondsTrader currentTrader = new JasonBondsTrader(newTrade, tradingAPI, websiteMonitorFlag, marketOpenFlag);
 			trader = (Trader) currentTrader;
 		}
 		else if(traderID.equalsIgnoreCase(DEBUGEMAIL))

@@ -1,0 +1,17 @@
+127.0.0.1 - - [09/Dec/2013:08:30:42 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:08:42:09 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:08:47:20 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:08:51:17 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:08:59:30 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:09:01:24 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:09:03:36 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:09:06:44 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Dec/2013:09:10:54 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [09/Dec/2013:09:11:42 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=Justin%20Oliver&newTrade=Bought%2010000%20DMD%20at%20$5.19&realTimeSystem=email HTTP/1.1" 200 163
+127.0.0.1 - - [09/Dec/2013:09:13:21 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [09/Dec/2013:09:13:56 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?traderID=Justin%20Oliver&newTrade=Bought%20DMD&realTimeSystem=email HTTP/1.1" 200 148
+127.0.0.1 - - [09/Dec/2013:09:16:27 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [09/Dec/2013:09:16:29 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true&realTimeSystem=email HTTP/1.1" 200 139
+66.226.109.144 - - [09/Dec/2013:12:17:38 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+202.101.189.111 - - [09/Dec/2013:12:45:12 -0600] "HEAD / HTTP/1.0" 404 -
+93.180.165.156 - - [09/Dec/2013:14:51:51 -0600] "GET /HNAP1/ HTTP/1.1" 404 963

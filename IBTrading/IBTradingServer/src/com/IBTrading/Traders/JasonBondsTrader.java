@@ -1,7 +1,14 @@
 package com.IBTrading.Traders;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
+import com.IBTrading.servlets.Database;
+import com.IBTrading.servlets.HistoricalData;
 import com.IBTrading.servlets.IBTradingAPI;
 import com.IBTrading.tradeparsers.JasonBondsTradeParser;
 import com.IBTrading.servlets.OrderStatus;
@@ -9,6 +16,7 @@ import com.IBTrading.servlets.OrderStatus;
 public class JasonBondsTrader extends Trader{
 	// Passed parameters
 	private String tradeString;
+	private boolean marketOpenFlag = false;
 	
 	// Parsed trade information
 	JasonBondsTradeParser parser;
@@ -23,8 +31,9 @@ public class JasonBondsTrader extends Trader{
 	private static final int TRADERPERCENTAGE = 100;
 	private static final int MAXLEVERAGE = 4;
 	private static final int NOLEVERAGE = 1;
+	private final String VOLUME = "VOLUME";
 	
-	public JasonBondsTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem)
+	public JasonBondsTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem, boolean newMarketOpenFlag)
 	{	
 		super(newTradingAPI);
 		
@@ -37,6 +46,7 @@ public class JasonBondsTrader extends Trader{
 		}
 		
 		lastTraderString = newTrade;
+		marketOpenFlag = newMarketOpenFlag;
 		parser = new JasonBondsTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
 		if(hasValidTrade == true)
@@ -45,10 +55,79 @@ public class JasonBondsTrader extends Trader{
 		}
 	}
 	
+	private int getHistoricalData(int durationInt, String durationStr, String endDateTime, String barSizeSetting, String whatToShow)
+	{
+		int tickerID = tradingAPI.subscribeToHistoricalData(parser.symbol, endDateTime, durationStr, barSizeSetting, whatToShow);
+		
+		if(tickerID == -1)
+			return tickerID;
+		
+		// Wait until we have received the market data
+		while(tradingAPI.getHistoricalData(tickerID, durationInt) == null){};
+		
+		return tickerID;
+	}
+	
 	// Determines if this trade may be profitable
 	public boolean isTradeable()
 	{
-		return true;
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar cal = Calendar.getInstance();
+        
+        // Calculate the appropriate endDateTime
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+        
+        // If it is a Sunday or Monday, use Friday's date
+        if(dayOfWeek == 1)
+        	cal.add(Calendar.DATE, -2); 
+        else if(dayOfWeek == 2)
+        	cal.add(Calendar.DATE, -3); 
+        // Use yesterday's date
+        else 
+        	cal.add(Calendar.DATE, -1);    
+        	  
+        String endDateTime = dateFormat.format(cal.getTime()) + " 15:00:00 CST";
+		
+		// Get the data over the last 30 days
+		String barSizeSetting = IBTradingAPI.ONEDAY;
+		String whatToShow = IBTradingAPI.TRADES;
+		
+		// Gets the VWAP of yesterday, last week, and last month
+		String durationStr = IBTradingAPI.ONEDAYINTEGER + IBTradingAPI.DAYS;
+		int tickerID = getHistoricalData(IBTradingAPI.ONEDAYINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
+		ArrayList<HistoricalData> historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEDAYINTEGER);
+		totalCashTradedYesterday = historicalDataArray.get(0).totalCashTradedInInterval;
+		
+		if(tickerID == -1)
+			return false;
+		
+		durationStr = IBTradingAPI.ONEWEEKINTEGER + IBTradingAPI.DAYS;
+		tickerID = getHistoricalData(IBTradingAPI.ONEWEEKINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEWEEKINTEGER);
+		for(int i = 0; i < IBTradingAPI.ONEWEEKINTEGER; i++)
+		{
+			totalCashTradedLastWeek += historicalDataArray.get(i).totalCashTradedInInterval;
+		}
+		
+		if(tickerID == -1)
+			return false;
+		
+		durationStr = IBTradingAPI.ONEMONTHINTEGER + IBTradingAPI.DAYS;
+		tickerID = getHistoricalData(IBTradingAPI.ONEMONTHINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEMONTHINTEGER);
+		for(int i = 0; i < IBTradingAPI.ONEMONTHINTEGER; i++)
+		{
+			totalCashTradedLastMonth += historicalDataArray.get(i).totalCashTradedInInterval;
+		}
+		
+		if(tickerID == -1)
+			return false;
+		
+		// If the total amount of money thrown around is estimated to move the market, go ahead
+		if(totalCashTradedYesterday < 999999999.9)
+			return true;
+		else
+			return false;
 	}
 
 	// Initiates the trade with TWS
@@ -57,12 +136,10 @@ public class JasonBondsTrader extends Trader{
 		// Make the purchase
 		boolean isSimulation = false;
 		boolean simulationOnly = false;
-		int simulationQuantity = (parser.quantity * TRADERPERCENTAGE) / 100;
 		int quantity;
 		int maxCash;
-		int maxCashForAdds = 5900;
 		int totalCash;
-		OrderStatus orderStatus = null, orderStatusSimulation;
+		OrderStatus buyOrderStatus = null, sellOrderStatus = null;
 		
 		// Get the cash from our account
 		totalCash = (int) tradingAPI.getAvailableFunds(isSimulation);
@@ -74,24 +151,28 @@ public class JasonBondsTrader extends Trader{
 		// Get the cash
 		maxCash = super.getCash(totalCash, MAXLEVERAGE);
 		
+		// Wait until we have received the market data
+		String marketData;
+		if(marketOpenFlag == true)
+			marketData = "LAST_PRICE";  
+		else
+			marketData = "CLOSE_PRICE";	// Should only be using this in debug
+		
+		int tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
+		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
+		
+		// Get the market price
+		parser.price = tradingAPI.getMarketData(tickerID, marketData) + "";
+		
 		// If the price/share of the stock was not supplied, get this information from TWS
 		if(parser.price.equalsIgnoreCase("0.00"))
 		{
-			String marketData = "LAST_PRICE";  
-			int tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
-		
-			// Wait until we have received the market data
-			while(tradingAPI.getMarketData(tickerID, marketData) == 0.0){};
-			
 			// Get the market price
 			parser.price = tradingAPI.getMarketData(tickerID, marketData) + "";
 		}
 		
 		try
 		{
-			//if(parser.action.equalsIgnoreCase("Added"))
-				//quantity = super.getQuantity(maxCashForAdds, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
-			//else
 			quantity = super.getQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
 		}catch(Exception e)
 		{
@@ -109,21 +190,29 @@ public class JasonBondsTrader extends Trader{
 		//		- If this is an 'Add'
 		//		- If this is a 'Bomb Blow Up'
 		if( (tradingAPI.getNumberOfDayTrades() == 0) || (parser.action.equalsIgnoreCase("Added")) 
-				|| (parser.flagsHashMap.get(parser.BONDBLOWUPS) == true) )
+				|| (parser.flagsHashMap.get(parser.BONDBLOWUPS) == true) || (marketOpenFlag == false) )
 			simulationOnly = true;
 		else
 			simulationOnly = false;
 		
 		// Place the order
 		if(simulationOnly == false)
-			orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
+			buyOrderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
 		
-		if(orderStatus == null && simulationOnly == false)
+		if(buyOrderStatus == null && simulationOnly == false)
 			return "Unable to connect to TWS...";
 		
 		// Make the purchase with the Simulator
 		isSimulation = true;
-		orderStatusSimulation = tradingAPI.placeOrder(BUY, parser.symbol, simulationQuantity, isSimulation, null);  
+		if(simulationOnly == true)
+		{
+			buyOrderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);  
+			
+			if(buyOrderStatus == null)
+				return "Unable to connect to TWS...";
+		}
+		else
+			tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);  
 		
 		// Sleep for 60 seconds, then sell
 		try
@@ -138,14 +227,13 @@ public class JasonBondsTrader extends Trader{
 				if(simulationOnly == true)
 				{
 					Thread.sleep( timeTilSell * SECONDS );
-					while(orderStatusSimulation.status.equalsIgnoreCase("Submitted")){};
 					break;
 				}
 				
-				//System.out.println("orderID = " + orderStatus.orderId + ", orderStatus = " + orderStatus.status);
+				//System.out.println("orderID = " + buyOrderStatus.orderId + ", buyOrderStatus = " + buyOrderStatus.status);
 				
 				// If we were unable to buy due to the stock being not marginable
-				if( (orderStatus.status.equalsIgnoreCase("Inactive") == true) && (cashOnlyOrderFlag == false) )
+				if( (buyOrderStatus.status.equalsIgnoreCase("Inactive") == true) && (cashOnlyOrderFlag == false) )
 				{
 					System.out.println("Order was rendered inactive, trying again with our total cash, " + totalCash);
 					cashOnlyOrderFlag = true;
@@ -154,9 +242,9 @@ public class JasonBondsTrader extends Trader{
 					isSimulation = false;
 					int cash = super.getCash(totalCash, NOLEVERAGE);
 					quantity = super.getQuantity(cash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
-					orderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
+					buyOrderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
 					
-					if( (orderStatus == null) || (orderStatus.status == null) )
+					if( (buyOrderStatus == null) || (buyOrderStatus.status == null) )
 						return "Unable to connect to TWS...";
 					
 					// Sleep for the remaining time
@@ -172,33 +260,41 @@ public class JasonBondsTrader extends Trader{
 			
 			
 			// If the order was unsuccessful, exit
-			if( (simulationOnly == false) && ((orderStatus == null) || (orderStatus.status == null) 
-					|| (orderStatus.status.equalsIgnoreCase("Inactive") == true) 
-					|| orderStatus.status.equalsIgnoreCase("Cancelled") 
-					|| orderStatus.status.equalsIgnoreCase("PendingCancel")) )
+			if( (simulationOnly == false) && ((buyOrderStatus == null) || (buyOrderStatus.status == null) 
+					|| (buyOrderStatus.status.equalsIgnoreCase("Inactive") == true) 
+					|| buyOrderStatus.status.equalsIgnoreCase("Cancelled") 
+					|| buyOrderStatus.status.equalsIgnoreCase("PendingCancel")) )
 			{
-				return "We were unable to purchase - " + orderStatus.status;
+				return "We were unable to purchase - " + buyOrderStatus.status;
 			}
 			
 			// Cancel the order if we have not purchased any stock
-			if( (simulationOnly == false) && (orderStatus.filled == 0) )
+			if(buyOrderStatus.filled == 0)
 			{
-				isSimulation = false;
-				tradingAPI.cancelOrder(orderStatus, isSimulation);
+				if(simulationOnly == true)
+					isSimulation = true;
+				else
+					isSimulation = false;
+				
+				tradingAPI.cancelOrder(buyOrderStatus, isSimulation);
 				return "Order canceled - we did not buy within the time limit";
 			}
 			// If we have not completed the order, complete it
-			else if( (simulationOnly == false) && (orderStatus.status.equalsIgnoreCase("Filled") == false) )
+			else if(buyOrderStatus.status.equalsIgnoreCase("Filled") == false)
 			{
-				isSimulation = false;
-				tradingAPI.cancelOrder(orderStatus, isSimulation);
+				if(simulationOnly == true)
+					isSimulation = true;
+				else
+					isSimulation = false;
+				
+				tradingAPI.cancelOrder(buyOrderStatus, isSimulation);
 				
 				// Wait until we have either completed the order or it is cancelled
-				while( (orderStatus.status.equalsIgnoreCase("Cancelled") == false) &&
-						(orderStatus.status.equalsIgnoreCase("Filled") == false) ){};
+				while( (buyOrderStatus.status.equalsIgnoreCase("Cancelled") == false) &&
+						(buyOrderStatus.status.equalsIgnoreCase("Filled") == false) ){};
 						
 				// Get the quantity to sell
-				quantity = orderStatus.filled;
+				quantity = buyOrderStatus.filled;
 			}
 		}
 		catch ( InterruptedException e )
@@ -209,15 +305,78 @@ public class JasonBondsTrader extends Trader{
 		// Sell the stocks
 		isSimulation = false;
 		if(simulationOnly == false)
-			orderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation, null);
+			sellOrderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation, null);
 		
-		if( (simulationOnly == false) && (orderStatus == null) )
+		if( (simulationOnly == false) && (sellOrderStatus == null) )
 			return "Unable to connect to TWS...";
 		
 		// Sell the stocks over the simulator
 		isSimulation = true;
-		tradingAPI.placeOrder(SELL, parser.symbol, simulationQuantity, isSimulation, null);
+		if(simulationOnly == true)
+		{
+			sellOrderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation, null); 
+			
+			if(sellOrderStatus == null)
+				return "Unable to connect to TWS...";
+		}
+		else
+			tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation, null);  
 		
+		// Save off useful trade information for the purchase
+		tradeInfo = new HashMap<String,Object>();
+		tradeInfo.put(Database.STOCKSYMBOL, parser.symbol);
+		tradeInfo.put(Database.NUMBEROFSHARES, quantity);
+		tradeInfo.put(Database.AVERAGEBUYINGPRICE, buyOrderStatus.avgFillPrice);
+		tradeInfo.put(Database.INITIALVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
+		
+		// Save off historical market data
+		tradeInfo.put(Database.CASHTRADEDYESTERDAY, totalCashTradedYesterday);
+		tradeInfo.put(Database.CASHTRADEDLASTWEEK, totalCashTradedLastWeek);
+		tradeInfo.put(Database.CASHTRADEDLASTMONTH, totalCashTradedLastMonth);
+		
+		// Get the updated market data
+		if(marketOpenFlag == true)
+			marketData = "VOLUME";
+		else
+			marketData = "CLOSE_PRICE";	// Only for simulation
+		
+		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
+		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
+		
+		// Save the volume now that the purchase is over
+		tradeInfo.put(Database.VOLUMEAFTERPURCHASE, tradingAPI.getMarketData(tickerID, VOLUME));
+		
+		// Wait for the sell to be complete
+		while( ((sellOrderStatus.remaining != 0) || (sellOrderStatus.status.equalsIgnoreCase("Filled") == false)) && (marketOpenFlag == true) ){};
+		
+		if(marketOpenFlag == false)
+		{
+			isSimulation = false;
+			tradingAPI.cancelOrder(sellOrderStatus, isSimulation);
+			return "Order canceled - we cannot sell when the market is closed";
+		}
+		
+		// Get the updated market data
+		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
+		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
+		
+		// Save the last bits of information from the sell
+		tradeInfo.put(Database.FINALVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
+		tradeInfo.put(Database.AVERAGESELLINGPRICE, sellOrderStatus.avgFillPrice);
+		
+		// Save the debug flag
+		tradeInfo.put(Database.DEBUGFLAG, simulationOnly);
+		
+		// If the market is closed, overright some of the values, only used in DebugTrader!
+		if(marketOpenFlag == false)
+		{
+			tradeInfo.put(Database.INITIALVOLUME, 0);
+			tradeInfo.put(Database.VOLUMEAFTERPURCHASE, 0);
+			tradeInfo.put(Database.FINALVOLUME, 0);
+		}
+
 		return null;
+		
+		
 	}
 }

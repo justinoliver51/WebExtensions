@@ -36,7 +36,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private static int orderID;	 // If this value is not updated, we may simply never get a response...
 	private static int tickerID = 0; 
 	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
-	private static HashMap<Integer,HashMap<String,Double>> marketDataHashMap = new HashMap<Integer,HashMap<String,Double>>();
+	private static HashMap<Integer,HashMap<String,Object>> marketDataHashMap = new HashMap<Integer,HashMap<String,Object>>();
 	private static HashMap<Integer,ArrayList<HistoricalData>> historicalDataHashMap = new HashMap<Integer,ArrayList<HistoricalData>>();
 	private static HashMap<Integer,HashMap<String,Object>> databaseHashMap = new HashMap<Integer,HashMap<String,Object>>();
 	private static double totalCash = 0;
@@ -339,8 +339,8 @@ public class IBTradingAPI extends JFrame implements EWrapper
     public synchronized int subscribeToMarketData(String symbol)
     {
     	Contract contract = new Contract();
-    	String genericTicklist = null;
-    	boolean snapshot = true;
+    	String genericTicklist = null;//"225";//null;
+    	boolean snapshot = true;//false;
     	
     	// Set up the contract
     	setDefaultsContract(contract);
@@ -358,7 +358,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	m_client.reqMktData(tickerID, contract, genericTicklist, snapshot);
     	
     	// Add a new hash map to market data for this stock
-    	marketDataHashMap.put(tickerID, new HashMap<String,Double>());
+    	marketDataHashMap.put(tickerID, new HashMap<String,Object>());
     	
     	return tickerID++;
     }
@@ -406,12 +406,12 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	return dayTradesRemaining;
     }
     
-    public double getMarketData(int tickerId, String marketInfo)
+    public Object getMarketData(int tickerId, String marketInfo)
     {
     	if(marketDataHashMap.get(tickerId) == null)
-    		return 0.0;
+    		return null;
     	else if(marketDataHashMap.get(tickerId).get(marketInfo) == null)
-    		return 0.0;
+    		return null;
     	else
     		return marketDataHashMap.get(tickerId).get(marketInfo);
     }
@@ -595,7 +595,27 @@ public class IBTradingAPI extends JFrame implements EWrapper
 
 	@Override
 	public void tickSize(int tickerId, int field, int size) {
-		System.out.println(EWrapperMsgGenerator.tickSize(tickerId, field, size));
+		String marketInfo = null;
+		if(field == 0)
+			marketInfo = "BID_SIZE";
+		else if(field == 3)
+			marketInfo = "ASK_SIZE";
+		else if(field == 5)
+			marketInfo = "LAST_SIZE";
+		else if(field == 8)
+			marketInfo = "VOLUME";
+		else if(field == 21)
+			marketInfo = "AVG_VOLUME";
+		else if(field == 54)
+			marketInfo = "TRADE_COUNT";
+		else if(field == 55)
+			marketInfo = "TRADE_RATE";
+		else if(field == 56)
+			marketInfo = "VOLUME_RATE";
+		else
+			return;
+		
+		marketDataHashMap.get(tickerId).put(marketInfo, size);
 	}
 
 	@Override
@@ -613,7 +633,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 
 	@Override
 	public void tickString(int tickerId, int tickType, String value) {
-		//System.out.println(EWrapperMsgGenerator.tickString(tickerId, tickType, value));
+		System.out.println(EWrapperMsgGenerator.tickString(tickerId, tickType, value));
 	}
 
 	@Override
