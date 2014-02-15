@@ -1,0 +1,10 @@
+216.9.106.109 - - [23/Jan/2014:05:52:49 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+127.0.0.1 - - [23/Jan/2014:08:22:01 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [23/Jan/2014:08:22:15 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+85.236.226.199 - - [23/Jan/2014:10:25:28 -0600] "HEAD / HTTP/1.0" 404 -
+0:0:0:0:0:0:0:1%0 - - [23/Jan/2014:11:35:32 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=bought+50000+GRNH+at+.44 HTTP/1.1" 200 217
+0:0:0:0:0:0:0:1%0 - - [23/Jan/2014:13:19:37 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+NNVC+at+4.70 HTTP/1.1" 500 1458
+0:0:0:0:0:0:0:1%0 - - [23/Jan/2014:13:19:40 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+NNVC+at+4.70 HTTP/1.1" 200 193
+200.98.140.147 - - [23/Jan/2014:17:00:58 -0600] "HEAD / HTTP/1.0" 404 -
+95.130.155.13 - - [23/Jan/2014:17:18:57 -0600] "GET /admin/config.php HTTP/1.1" 404 983
+223.240.110.230 - - [23/Jan/2014:18:36:40 -0600] "HEAD / HTTP/1.1" 404 -

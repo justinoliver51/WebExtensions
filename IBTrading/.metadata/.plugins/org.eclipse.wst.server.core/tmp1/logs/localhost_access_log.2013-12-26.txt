@@ -1,0 +1,5 @@
+24.229.56.34 - - [26/Dec/2013:04:59:14 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+127.0.0.1 - - [26/Dec/2013:12:57:41 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [26/Dec/2013:12:58:25 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+81.82.227.198 - - [26/Dec/2013:13:03:12 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+0:0:0:0:0:0:0:1%0 - - [26/Dec/2013:14:31:03 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=added+20000+shares+at+1.32 HTTP/1.1" 200 199

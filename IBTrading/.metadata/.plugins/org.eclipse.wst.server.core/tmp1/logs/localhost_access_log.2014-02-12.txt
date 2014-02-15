@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1%0 - - [12/Feb/2014:00:27:09 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+64.233.226.50 - - [12/Feb/2014:01:26:19 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+0:0:0:0:0:0:0:1%0 - - [12/Feb/2014:12:51:01 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+YOD+at+5.33 HTTP/1.1" 200 154
+67.253.92.165 - - [12/Feb/2014:14:39:56 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+111.73.46.227 - - [12/Feb/2014:21:12:38 -0600] "GET / HTTP/1.0" 404 951

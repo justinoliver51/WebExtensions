@@ -1,0 +1,7 @@
+71.86.46.114 - - [10/Jan/2014:00:16:34 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+66.169.161.128 - - [10/Jan/2014:04:41:03 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+127.0.0.1 - - [10/Jan/2014:09:16:49 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [10/Jan/2014:09:16:53 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+0:0:0:0:0:0:0:1%0 - - [10/Jan/2014:09:39:00 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bond+Blow+Ups+bought+100000+PHOT+at+.20 HTTP/1.1" 200 169
+0:0:0:0:0:0:0:1%0 - - [10/Jan/2014:09:59:15 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Added+7000+TVIX+at+7.10 HTTP/1.1" 200 153
+0:0:0:0:0:0:0:1%0 - - [10/Jan/2014:14:04:25 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bond+Blow+Ups+bought+100000+PHOT+at+.217 HTTP/1.1" 200 170

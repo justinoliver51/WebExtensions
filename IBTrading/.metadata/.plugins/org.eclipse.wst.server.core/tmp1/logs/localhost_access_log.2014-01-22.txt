@@ -1,0 +1,16 @@
+77.68.45.49 - - [22/Jan/2014:04:49:02 -0600] "HEAD / HTTP/1.0" 404 -
+178.19.107.26 - - [22/Jan/2014:07:24:20 -0600] "GET / HTTP/1.1" 404 951
+69.67.3.45 - - [22/Jan/2014:08:24:24 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+127.0.0.1 - - [22/Jan/2014:08:32:56 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [22/Jan/2014:08:33:09 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+0:0:0:0:0:0:0:1%0 - - [22/Jan/2014:08:33:17 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+127.0.0.1 - - [22/Jan/2014:08:33:35 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [22/Jan/2014:08:33:42 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+176.34.231.8 - - [22/Jan/2014:11:32:57 -0600] "HEAD / HTTP/1.0" 404 -
+0:0:0:0:0:0:0:1%0 - - [22/Jan/2014:11:38:27 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+100000+PHOT+at+.214 HTTP/1.1" 500 1458
+0:0:0:0:0:0:0:1%0 - - [22/Jan/2014:11:38:30 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+100000+PHOT+at+.214 HTTP/1.1" 200 194
+200.29.15.98 - - [22/Jan/2014:13:14:44 -0600] "HEAD / HTTP/1.0" 404 -
+115.28.169.206 - - [22/Jan/2014:20:46:09 -0600] "HEAD / HTTP/1.0" 404 -
+81.89.48.115 - - [22/Jan/2014:21:31:45 -0600] "HEAD / HTTP/1.0" 404 -
+23.21.143.168 - - [22/Jan/2014:21:31:53 -0600] "HEAD / HTTP/1.0" 404 -
+54.201.233.90 - - [22/Jan/2014:23:50:31 -0600] "HEAD / HTTP/1.0" 404 -

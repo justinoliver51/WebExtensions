@@ -1,0 +1,7 @@
+127.0.0.1 - - [15/Jan/2014:01:03:52 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [15/Jan/2014:01:04:00 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+77.175.118.2 - - [15/Jan/2014:03:44:07 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+0:0:0:0:0:0:0:1%0 - - [15/Jan/2014:09:07:30 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+CDTI HTTP/1.1" 500 1458
+0:0:0:0:0:0:0:1%0 - - [15/Jan/2014:09:07:32 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+CDTI HTTP/1.1" 200 179
+0:0:0:0:0:0:0:1%0 - - [15/Jan/2014:10:52:18 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+20000+PLUG+at+3.67 HTTP/1.1" 200 155
+71.87.27.157 - - [15/Jan/2014:22:38:52 -0600] "GET /HNAP1/ HTTP/1.1" 404 963

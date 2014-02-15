@@ -1,0 +1,4 @@
+127.0.0.1 - - [28/Jan/2014:08:29:10 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [28/Jan/2014:09:10:03 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+5000+WLT+at+11.72 HTTP/1.1" 200 154
+127.0.0.1 - - [28/Jan/2014:22:29:16 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [28/Jan/2014:22:29:43 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138

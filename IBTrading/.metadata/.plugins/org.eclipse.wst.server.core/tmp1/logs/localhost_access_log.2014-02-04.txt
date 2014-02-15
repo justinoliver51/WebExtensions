@@ -1,0 +1,6 @@
+127.0.0.1 - - [04/Feb/2014:09:50:14 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [04/Feb/2014:09:51:58 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+127.0.0.1 - - [04/Feb/2014:12:03:31 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [04/Feb/2014:12:03:46 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+127.0.0.1 - - [04/Feb/2014:22:38:29 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [04/Feb/2014:23:01:08 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138

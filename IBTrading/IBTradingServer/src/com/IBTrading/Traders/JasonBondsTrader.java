@@ -217,7 +217,7 @@ public class JasonBondsTrader extends Trader{
 		// Sleep for 60 seconds, then sell
 		try
 		{			
-			int timeTilSell = 60;  
+			int timeTilSell = 300;  
 			boolean cashOnlyOrderFlag = false;
 			
 			// Check the desired information every second for 60 seconds

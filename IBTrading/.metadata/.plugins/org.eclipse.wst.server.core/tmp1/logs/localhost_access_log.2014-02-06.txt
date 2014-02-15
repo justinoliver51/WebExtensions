@@ -1,0 +1,4 @@
+80.109.196.7 - - [06/Feb/2014:02:12:18 -0600] "GET /HNAP1/ HTTP/1.1" 404 963
+210.40.160.132 - - [06/Feb/2014:03:14:52 -0600] "HEAD / HTTP/1.0" 404 -
+127.0.0.1 - - [06/Feb/2014:23:12:06 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [06/Feb/2014:23:12:16 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
