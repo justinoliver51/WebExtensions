@@ -210,14 +210,7 @@ while True:
 
                 # Send the alert
                 print query
-                response = urllib2.urlopen(query).read()
-                    
-                # If we successfully completed a trade, send the text
-                if response.lower().find('Valid trade') >= 0:
-                    voice.login(email, password)
-                    voice.send_sms(JUSTINS_CELL, response)
-                    voice.send_sms(TYLERS_CELL, response)
-                    voice.logout()
+                urllib2.urlopen(query).read()
                 
             # Otherwise, we are finished looking
             else:

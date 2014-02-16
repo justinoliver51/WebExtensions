@@ -10,6 +10,8 @@ Audio_mac|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7
 Automator.__init__|/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC/Automator/__init__.py
 BaseHTTPServer|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/BaseHTTPServer.py
 Bastion|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/Bastion.py
+BeautifulSoup|/Library/Python/2.7/site-packages/BeautifulSoup.py
+BeautifulSoupTests|/Library/Python/2.7/site-packages/BeautifulSoupTests.py
 CFNetwork.__init__|/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC/CFNetwork/__init__.py
 CFNetwork._manual|/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC/CFNetwork/_manual.so
 CFOpenDirectory.__init__|/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC/CFOpenDirectory/__init__.py
@@ -802,6 +804,12 @@ getopt|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ge
 getpass|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/getpass.py
 gettext|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/gettext.py
 glob|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/glob.py
+googlevoice.__init__|/Library/Python/2.7/site-packages/googlevoice/__init__.py
+googlevoice.conf|/Library/Python/2.7/site-packages/googlevoice/conf.py
+googlevoice.settings|/Library/Python/2.7/site-packages/googlevoice/settings.py
+googlevoice.tests|/Library/Python/2.7/site-packages/googlevoice/tests.py
+googlevoice.util|/Library/Python/2.7/site-packages/googlevoice/util.py
+googlevoice.voice|/Library/Python/2.7/site-packages/googlevoice/voice.py
 grp|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/grp.so
 gzip|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/gzip.py
 hashlib|/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/hashlib.py

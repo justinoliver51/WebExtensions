@@ -2,40 +2,55 @@
 -- START DISKCACHE
 /Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/.metadata/.plugins/org.eclipse.core.resources/.projects/EmailMonitor/com.python.pydev.analysis/v1_indexcache
 .v1_indexcache
+SMSMonitor|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/SMSMonitor.py
 SharedClipboard|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/SharedClipboard.py
-EmailMonitor|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/EmailMonitor.py
+JasonBondsParser|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/EmailMonitor/src/JasonBondsParser.py
 -- END DISKCACHE
 -- START DICTIONARY
-2
+3
+2=SMSMonitor
 1=SharedClipboard
-2=EmailMonitor
+3=JasonBondsParser
 -- END DICTIONARY
 -- START TREE 1
-23
+33
 cli|1|clipboard_file!11@
-con|1|connect!18@
-cur|1|currentEmail!19@
+con|0|
+cur|0|
 dat|1|data!11@
 deb|1|debug!19@
-dec|1|decodeSubject!18@
-ema|1|email_message!19@
+dec|0|
+ema|1|email!19@
 enc|1|encodedParams!19@
-get|4|getClipboardData!10@getTrade!18@get_emails!18@getEmailBody!18@
-ind|1|index!19@
-lat|3|latestEmail!19@latestEmailTimestamp!19@latest_email_uid!19@
-mai|2|main!10@mail!19@
+ext|1|extractsms!18@
+get|1|getClipboardData!10@
+ind|0|
+jas|2|JasonBondsParser!17@JasonBondsParser!25@
+jus|1|JUSTINS_CELL!19@
+las|1|lastReadSMS!19@
+lat|0|
+mai|1|main!10@
+mes|1|messageText!19@
 mon|1|monitorClipboard!10@
+new|3|newMessagesInfo!19@newMessagesArray!19@newTrade!19@
 p|1|p!11@
-par|1|paramDic!19@
+par|2|parser!19@paramDic!19@
+pas|1|password!19@
 que|1|query!19@
-raw|1|raw_email!19@
+raw|0|
+res|1|response!19@
 ret|1|retcode!11@
 set|1|setClipboardData!10@
-sub|1|subject!19@
-tim|1|timestamp!19@
-tra|2|traderID!19@trade!19@
+sub|0|
+tim|0|
+tra|0|
+tyl|1|TYLERS_CELL!19@
 url|1|url!19@
+voi|1|voice!19@
 -- END TREE
 -- START TREE 2
-0
+3
+__i|2|__init__!3&26@__init__!3&18@
+get|2|getTrade!3&26@getTrade!3&18@
+par|2|parseTrade!3&18@parseTrade!3&26@
 -- END TREE

@@ -11,7 +11,6 @@ import urllib2
 import urllib
 import string
 from email.header import decode_header
-from googlevoice import Voice
 
 class JasonBondsParser:
     def __init__(self):
@@ -136,19 +135,9 @@ def decodeSubject(email_message):
 
 ### MAIN ###
 debug = True
-
-# Email Info
 latestEmail = ""
 currentEmail = "currentEmail"
 mail = connect()
-
-#Google Voice Info
-email = "justin.tradealerts@gmail.com"
-password = "utredhead51"
-JUSTINS_CELL = 12144762900
-TYLERS_CELL  = 16302446933
-
-voice = Voice()
 
 if debug == True:
     latestEmailTimestamp = 100 # Tests every email
@@ -210,14 +199,7 @@ while True:
 
                 # Send the alert
                 print query
-                response = urllib2.urlopen(query).read()
-                    
-                # If we successfully completed a trade, send the text
-                if response.lower().find('Valid trade') >= 0:
-                    voice.login(email, password)
-                    voice.send_sms(JUSTINS_CELL, response)
-                    voice.send_sms(TYLERS_CELL, response)
-                    voice.logout()
+                urllib2.urlopen(query).read()
                 
             # Otherwise, we are finished looking
             else:
