@@ -12,6 +12,62 @@ import urllib
 import string
 from email.header import decode_header
 
+class JasonBondsParser:
+    def __init__(self):
+        return
+    def getTrade(self, tradeBody, startingIndex):
+        spacesCount = 0
+        index = startingIndex
+    
+        # Find the end point
+        while spacesCount < 5 and tradeBody[index] != '\n' and tradeBody[index] != '\r':
+            if tradeBody[index] == ' ':
+                spacesCount = spacesCount + 1
+            index = index + 1
+
+        index = index - 1
+        exclude = set(string.punctuation)
+        tradeList = ''.join(ch for ch in tradeBody[startingIndex:index] if (ch == '.') or (ch == '$') or ((ch not in exclude) and (ch != '\r') and (ch != '\n')))  # FIXME: Need to leave in '.'
+    
+        if( (len(tradeList.split(' ')) == 5) and (tradeList.split(' ')[4].find('$') == 0) ):
+            index = tradeList.find('$')
+            price = ''.join(ch for ch in tradeList.split(' ')[4] if (ch == '$') or (ch == '.') or (ch in string.digits))
+            tradeList = tradeList[:index] + price
+        
+        if tradeList[-1] == '.':
+            tradeList = tradeList[:-1]
+        
+        return tradeList
+    def parseTrade(self, tradeString = ""):
+        index = 0
+        
+        if tradeString.lower().find('bought') >= 0:
+            index = tradeString.lower().find('bought')
+        elif tradeString.lower().find('added') >= 0:
+            index = tradeString.lower().find('added')
+        elif tradeString.lower().find('taking') >= 0:
+            index = tradeString.lower().find('taking')
+        else:
+            return None
+        
+        # Get the trade information
+        trade = self.getTrade(tradeString, index)
+            
+        if(len(trade.split(' ')) == 5):
+            price = trade.split(' ')[4]
+            article = trade.split(' ')[3]
+            
+        if(price.find('$') >= 0 and article == 'at'):
+            trade = trade.replace('$', '')
+            
+            # If this is a bond blow ups, inform the server
+            if(tradeString.lower().find('bond blow ups') >= 0):
+                trade = "Bond Blow Ups " + trade
+                
+            return trade
+        return None
+
+### FUNCTIONS ###
 def connect(retries=5, delay=3):
     while True:
         try:
@@ -31,30 +87,6 @@ def get_emails(email_ids):
         _, response = mail.fetch(e_id, '(UID BODY[TEXT])')
         data.append(response[0][1])
     return data
-
-def getTrade(email_body, startingIndex):
-    spacesCount = 0
-    index = startingIndex
-    
-    # Find the end point
-    while spacesCount < 5 and email_body[index] != '\n' and email_body[index] != '\r':
-        if email_body[index] == ' ':
-            spacesCount = spacesCount + 1
-        index = index + 1
-
-    index = index - 1
-    exclude = set(string.punctuation)
-    tradeList = ''.join(ch for ch in email_body[startingIndex:index] if (ch == '.') or (ch == '$') or ((ch not in exclude) and (ch != '\r') and (ch != '\n')))  # FIXME: Need to leave in '.'
-    
-    if( (len(tradeList.split(' ')) == 5) and (tradeList.split(' ')[4].find('$') == 0) ):
-        index = tradeList.find('$')
-        price = ''.join(ch for ch in tradeList.split(' ')[4] if (ch == '$') or (ch == '.') or (ch in string.digits))
-        tradeList = tradeList[:index] + price
-        
-    if tradeList[-1] == '.':
-        tradeList = tradeList[:-1]
-        
-    return tradeList
 
 def getEmailBody(email_message):
     
@@ -77,28 +109,11 @@ def getEmailBody(email_message):
         #    price = trade.split(' ')[4]
         #    article = trade.split(' ')[3]   
         
-        if body.lower().find('bought') >= 0:
-            index = body.lower().find('bought')
-        elif body.lower().find('added') >= 0:
-            index = body.lower().find('added')
-        elif body.lower().find('taking') >= 0:
-            index = body.lower().find('taking')
+        parser = JasonBondsParser()
+        newTrade = parser.parseTrade(body)
         
-        # Get the trade information
-        trade = getTrade(body, index)
-            
-        if(len(trade.split(' ')) == 5):
-            price = trade.split(' ')[4]
-            article = trade.split(' ')[3]
-            
-        if(price.find('$') >= 0 and article == 'at'):
-            trade = trade.replace('$', '')
-            
-            # If this is a bond blow ups, inform the server
-            if(body.lower().find('bond blow ups') >= 0):
-                trade = "Bond Blow Ups " + trade
-                
-            return trade
+        if(newTrade != None):
+            return newTrade
 
     return None
 
@@ -119,7 +134,7 @@ def decodeSubject(email_message):
     
 
 ### MAIN ###
-debug = False
+debug = True
 latestEmail = ""
 currentEmail = "currentEmail"
 mail = connect()

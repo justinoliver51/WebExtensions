@@ -79,6 +79,27 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			return true;
 		}			
 	}
+	
+	private String outputTradeInfo(HashMap<String,Object> tradeInfo)
+	{
+		String output = "";
+		
+		String stockSymbol = (String) tradeInfo.get(Database.STOCKSYMBOL);
+		double averageBuyingPrice = (Double) tradeInfo.get(Database.AVERAGEBUYINGPRICE);
+		double averageSellingPrice = (Double) tradeInfo.get(Database.AVERAGESELLINGPRICE);
+		int numberOfShares = (Integer) tradeInfo.get(Database.NUMBEROFSHARES);
+		boolean debugFlag = (Boolean) tradeInfo.get(Database.DEBUGFLAG);
+		
+		output += "Debug: " + debugFlag
+				+ "\nStock: " + stockSymbol
+				+ "\nShares: " + numberOfShares
+				+ "\nBuying Price: " + averageBuyingPrice
+				+ "\nSelling Price: " + averageSellingPrice
+				+ "\nNet Value: " + numberOfShares * (averageBuyingPrice - averageSellingPrice)
+				+ "\nTotal funds: " + tradingAPI.getAvailableFunds(debugFlag);
+		
+		return output;
+	}
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -191,6 +212,9 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			System.out.println("No tradeInfo to save to database.");
 			return;
 		}
+		
+		// Send the trade info to the client
+		out.println(outputTradeInfo(tradeInfo));
 		
 		// Save the tradeInfo to the database
 		DB.NewTrade(tradeInfo);
