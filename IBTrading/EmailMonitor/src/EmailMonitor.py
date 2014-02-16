@@ -40,6 +40,8 @@ class JasonBondsParser:
         
         return tradeList
     def parseTrade(self, tradeString = ""):
+        price = ""
+        article = ""
         index = 0
         
         if tradeString.lower().find('bought') >= 0:
@@ -92,11 +94,6 @@ def get_emails(email_ids):
 def getEmailBody(email_message):
     
     for part in email_message.walk():
-        # Get the important information out of the email
-        price = ""
-        article = ""
-        index = 0
-        
         bodyDecoded, encoding = decode_header(part)[0]
         if encoding == None:
             body = bodyDecoded
@@ -143,7 +140,7 @@ currentEmail = "currentEmail"
 mail = connect()
 
 #Google Voice Info
-email = "justin.tradealerts@gmail.com"
+personalEmail = "justin.tradealerts@gmail.com"
 password = "utredhead51"
 JUSTINS_CELL = 12144762900
 TYLERS_CELL  = 16302446933
@@ -181,7 +178,7 @@ while True:
                 if( (subject.lower().find('bought') < 0) and (subject.lower().find('added') < 0) ):
                     continue
 
-                if(traderID[0] == 'Jason' or traderID[0] == 'Jason Bond' or traderID[0] == 'Justin Oliver'):
+                if(traderID[0] == 'Jason' or traderID[0] == 'Jason Bond' or traderID[0] == 'Justin Oliver' or traderID[0] == 'Trade Alerts'):
                     try:
                         trade = getEmailBody(email_message)
                         if trade == None or trade == '':
@@ -200,7 +197,7 @@ while True:
                 url = "http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?"
                 
                 if debug == True:
-                    if( (traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or ((trade.lower().find('bought') < 0) and (trade.lower().find('added') < 0) ) ):
+                    if(  ((trade.lower().find('bought') < 0) and (trade.lower().find('added') < 0) ) ): # (traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or
                         continue
                     
                     paramDic['traderID'] = 'Justin Oliver'
@@ -213,8 +210,8 @@ while True:
                 response = urllib2.urlopen(query).read()
                     
                 # If we successfully completed a trade, send the text
-                if response.lower().find('Valid trade') >= 0:
-                    voice.login(email, password)
+                if response.lower().find('valid trade') >= 0 and response.lower().find('invalid trade') < 0:
+                    voice.login(personalEmail, password)
                     voice.send_sms(JUSTINS_CELL, response)
                     voice.send_sms(TYLERS_CELL, response)
                     voice.logout()

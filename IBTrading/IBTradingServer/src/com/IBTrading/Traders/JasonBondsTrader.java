@@ -22,7 +22,7 @@ public class JasonBondsTrader extends Trader{
 	JasonBondsTradeParser parser;
 	
 	// List of trader identifiers and their strings
-	private static String lastTraderString;
+	private static ArrayList<String> lastTradeStrings = new ArrayList<String>();
 	
 	// CONSTANTS
 	private final int SECONDS = 1000;
@@ -38,20 +38,22 @@ public class JasonBondsTrader extends Trader{
 		super(newTradingAPI);
 		
 		// If we have already parsed this string, return
-		if( (newTrade != null) && (newTrade.equalsIgnoreCase(lastTraderString)) )
+		for(String tradeString : lastTradeStrings)
 		{
-			hasValidTrade = false;
-			System.out.println("Duplicate trade, " + tradeString);
-			return;
+			if( (newTrade != null) && (newTrade.equalsIgnoreCase(tradeString)) )
+			{
+				hasValidTrade = false;
+				System.out.println("Duplicate trade, " + tradeString);
+				return;
+			}
 		}
 		
-		lastTraderString = newTrade;
 		marketOpenFlag = newMarketOpenFlag;
 		parser = new JasonBondsTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
 		if(hasValidTrade == true)
 		{
-			lastTraderString = newTrade;
+			lastTradeStrings.add(newTrade);
 		}
 	}
 	

@@ -38,6 +38,8 @@ class JasonBondsParser:
         
         return tradeList
     def parseTrade(self, tradeString = ""):
+        price = ""
+        article = ""
         index = 0
         
         if tradeString.lower().find('bought') >= 0:
@@ -160,7 +162,7 @@ while True:
                     response = urllib2.urlopen(query).read()
                     
                     # If we successfully completed a trade, send the text
-                    if response.lower().find('Valid trade') >= 0:
+                    if response.lower().find('valid trade') >= 0 and response.lower().find('invalid trade') < 0:
                         voice.send_sms(JUSTINS_CELL, response)
                         voice.send_sms(TYLERS_CELL, response)
 

@@ -25,6 +25,7 @@ public class DebugTrader extends Trader{
 	// Public variables
 	
 	// PRIVATE VARIABLES
+	private static ArrayList<String> lastTradeStrings = new ArrayList<String>();
 	
 	// Timers
 	Timestamp startTime = null;
@@ -42,10 +43,26 @@ public class DebugTrader extends Trader{
 	{	
 		super(newTradingAPI);
 		
+		// If we have already parsed this string, return
+		for(String tradeString : lastTradeStrings)
+		{
+			if( (newTrade != null) && (newTrade.equalsIgnoreCase(tradeString)) )
+			{
+				hasValidTrade = false;
+				System.out.println("Duplicate trade, " + tradeString);
+				return;
+			}
+		}
+		
 		websiteMonitorFlag = newRealTimeSystem;
 		marketOpenFlag = newMarketOpenFlag;
 		parser = new JasonBondsTradeParser(newTrade);
 		hasValidTrade = parser.parseTrade();
+		
+		if(hasValidTrade == true)
+		{
+			lastTradeStrings.add(newTrade);
+		}
 	}
 	
 	private int getHistoricalData(int durationInt, String durationStr, String endDateTime, String barSizeSetting, String whatToShow)

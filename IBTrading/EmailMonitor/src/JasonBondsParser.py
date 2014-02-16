@@ -34,6 +34,8 @@ class JasonBondsParser:
         
         return tradeList
     def parseTrade(self, tradeString = ""):
+        price = ""
+        article = ""
         index = 0
         
         if tradeString.lower().find('bought') >= 0:
