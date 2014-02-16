@@ -132,7 +132,7 @@ def decodeSubject(email_message):
     
 
 ### MAIN ###
-debug = True
+debug = False
 
 # Email Info
 latestEmail = ""

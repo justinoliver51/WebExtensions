@@ -102,7 +102,7 @@ def extractsms(htmlsms) :
     return returnMap
 
 ### MAIN ###
-debug = True
+debug = False
 email = "justin.tradealerts@gmail.com"
 password = "utredhead51"
 JUSTINS_CELL = 12144762900
