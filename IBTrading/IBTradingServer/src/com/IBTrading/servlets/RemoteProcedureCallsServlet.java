@@ -90,7 +90,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		int numberOfShares = (Integer) tradeInfo.get(Database.NUMBEROFSHARES);
 		boolean debugFlag = (Boolean) tradeInfo.get(Database.DEBUGFLAG);
 		
-		output += "Debug: " + debugFlag
+		output += "Simulation: " + debugFlag
 				+ "\nStock: " + stockSymbol
 				+ "\nShares: " + numberOfShares
 				+ "\nBuying Price: " + averageBuyingPrice

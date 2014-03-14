@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1%0 - - [20/Feb/2014:09:39:27 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+5000+DGAZ+at+3.05 HTTP/1.1" 200 280
+0:0:0:0:0:0:0:1%0 - - [20/Feb/2014:10:06:30 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Added+5000+DGAZ+at+3.11 HTTP/1.1" 200 281
+186.46.162.194 - - [20/Feb/2014:12:02:48 -0600] "HEAD / HTTP/1.0" 404 -
+93.174.93.51 - - [20/Feb/2014:18:11:13 -0600] "GET /hello/check.txt HTTP/1.1" 404 981
+127.0.0.1 - - [20/Feb/2014:23:29:34 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [20/Feb/2014:23:31:09 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [20/Feb/2014:23:31:23 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+5000+DGAZ+at+3.05 HTTP/1.1" 200 171
+0:0:0:0:0:0:0:1%0 - - [20/Feb/2014:23:31:23 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Added+5000+DGAZ+at+3.11 HTTP/1.1" 200 170

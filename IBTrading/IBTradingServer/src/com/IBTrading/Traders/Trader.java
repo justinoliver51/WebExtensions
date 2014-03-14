@@ -12,7 +12,7 @@ public class Trader
 	// Constants
 	private final int MAXLEVERAGE = 4;
 	private final int NOLEVERAGE = 1;
-	private final int MAXCASH = 24000;
+	private final int MAXCASH = 45000;
 	
 	// Valid trade - true if parsed correctly, false otherwise
 	public boolean hasValidTrade = false;

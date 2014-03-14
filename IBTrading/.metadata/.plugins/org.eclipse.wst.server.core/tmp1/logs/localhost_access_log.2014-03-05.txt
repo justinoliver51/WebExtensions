@@ -1,0 +1,14 @@
+220.225.17.241 - - [05/Mar/2014:02:23:24 -0600] "HEAD / HTTP/1.0" 404 -
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:10:41:06 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+DGAZ+at+3.41 HTTP/1.1" 200 193
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:10:42:47 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+DGAZ+at+3.41 HTTP/1.1" 200 160
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:10:58:30 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+OPTT+at+4.10 HTTP/1.1" 200 198
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:11:01:24 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+OPTT+at+4.10 HTTP/1.1" 200 155
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:12:05:52 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+PLUG+at+6.81 HTTP/1.1" 200 198
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:12:06:05 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+PLUG+at+6.81 HTTP/1.1" 200 198
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:12:06:29 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+PLUG+at+6.81 HTTP/1.1" 200 198
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:12:09:38 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+PLUG+at+6.81 HTTP/1.1" 200 155
+127.0.0.1 - - [05/Mar/2014:20:36:28 -0600] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [05/Mar/2014:20:39:50 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [05/Mar/2014:20:42:16 -0600] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+198.20.69.74 - - [05/Mar/2014:21:54:41 -0600] "GET / HTTP/1.1" 404 951
+198.20.69.74 - - [05/Mar/2014:21:54:41 -0600] "GET /robots.txt HTTP/1.1" 404 971

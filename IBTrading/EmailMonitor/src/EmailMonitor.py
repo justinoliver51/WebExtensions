@@ -16,12 +16,13 @@ from googlevoice import Voice
 class JasonBondsParser:
     def __init__(self):
         return
+    
     def getTrade(self, tradeBody, startingIndex):
         spacesCount = 0
         index = startingIndex
     
         # Find the end point
-        while spacesCount < 5 and tradeBody[index] != '\n' and tradeBody[index] != '\r':
+        while (index < len(tradeBody)) and (spacesCount < 5) and (tradeBody[index] != '\n') and (tradeBody[index] != '\r') :
             if tradeBody[index] == ' ':
                 spacesCount = spacesCount + 1
             index = index + 1
@@ -144,7 +145,7 @@ personalEmail = "justin.tradealerts@gmail.com"
 password = "utredhead51"
 JUSTINS_CELL = 12144762900
 TYLERS_CELL  = 16302446933
-
+DANS_CELL    = 13013999397
 voice = Voice()
 
 if debug == True:
@@ -214,6 +215,7 @@ while True:
                     voice.login(personalEmail, password)
                     voice.send_sms(JUSTINS_CELL, response)
                     voice.send_sms(TYLERS_CELL, response)
+                    voice.send_sms(DANS_CELL, response)
                     voice.logout()
                 
             # Otherwise, we are finished looking

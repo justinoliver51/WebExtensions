@@ -19,7 +19,7 @@ class JasonBondsParser:
         index = startingIndex
     
         # Find the end point
-        while spacesCount < 5 and tradeBody[index] != '\n' and tradeBody[index] != '\r':
+        while (index < len(tradeBody)) and (spacesCount < 5) and (tradeBody[index] != '\n') and (tradeBody[index] != '\r') :
             if tradeBody[index] == ' ':
                 spacesCount = spacesCount + 1
             index = index + 1
@@ -107,6 +107,7 @@ email = "justin.tradealerts@gmail.com"
 password = "utredhead51"
 JUSTINS_CELL = 12144762900
 TYLERS_CELL  = 16302446933
+DANS_CELL    = 13013999397
 lastReadSMS = ""
 
 voice = Voice()
@@ -115,12 +116,12 @@ voice = Voice()
 voice.login(email, password)
 for message in voice.sms().messages:
     message.delete
-voice.logout()
+# voice.logout()
 
 while True:
     try:
         time.sleep(1)
-        voice.login(email, password)
+        # voice.login(email, password)
         
         # Get the latest SMS messages
         for message in voice.sms().messages:
@@ -131,6 +132,7 @@ while True:
                 
                 for newMessage in newMessagesArray:
                     messageText = newMessage['text']
+                    print messageText
                     
                     if(messageText == lastReadSMS):
                         continue
@@ -153,6 +155,12 @@ while True:
                 
                     if debug == True:
                         paramDic['traderID'] = 'Justin Oliver'
+                    elif message.displayNumber == '(214) 476-2900':
+                        tradeList = newTrade.split(' ')
+                        tradeList[1] = '1'
+                        newTrade = " ".join(tradeList)
+                        paramDic['newTrade'] = newTrade
+                        #paramDic['traderID'] = 'Justin Oliver'
                 
                     encodedParams = urllib.urlencode(paramDic)
                     query = url + encodedParams
@@ -165,11 +173,12 @@ while True:
                     if response.lower().find('valid trade') >= 0 and response.lower().find('invalid trade') < 0:
                         voice.send_sms(JUSTINS_CELL, response)
                         voice.send_sms(TYLERS_CELL, response)
+                        voice.send_sms(DANS_CELL, response)
 
                 # Delete the message
                 message.delete()
             
-        voice.logout()
+        # voice.logout()
     except:
         print 'Error'
         voice.login(email, password)
