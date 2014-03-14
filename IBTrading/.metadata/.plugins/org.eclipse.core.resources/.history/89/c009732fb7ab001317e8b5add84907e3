@@ -40,7 +40,6 @@ class JasonBondsParser:
             tradeList = tradeList[:-1]
         
         return tradeList
-    
     def parseTrade(self, tradeString = ""):
         price = ""
         article = ""

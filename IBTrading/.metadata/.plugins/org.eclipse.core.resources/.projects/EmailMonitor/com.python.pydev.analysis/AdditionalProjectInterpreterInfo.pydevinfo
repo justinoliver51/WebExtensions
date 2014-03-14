@@ -47,7 +47,7 @@ ret|1|retcode!11@
 set|1|setClipboardData!10@
 sub|1|subject!19@
 tim|1|timestamp!19@
-tra|2|traderID!19@trade!19@
+tra|3|traderID!19@trade!19@tradeList!27@
 tyl|2|TYLERS_CELL!19@TYLERS_CELL!27@
 url|2|url!27@url!19@
 voi|2|voice!27@voice!19@

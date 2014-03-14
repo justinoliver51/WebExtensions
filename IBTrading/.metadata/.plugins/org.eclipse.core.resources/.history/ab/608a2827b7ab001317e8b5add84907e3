@@ -14,7 +14,6 @@ import urllib
 class JasonBondsParser:
     def __init__(self):
         return
-    
     def getTrade(self, tradeBody, startingIndex):
         spacesCount = 0
         index = startingIndex
@@ -38,7 +37,6 @@ class JasonBondsParser:
             tradeList = tradeList[:-1]
         
         return tradeList
-    
     def parseTrade(self, tradeString = ""):
         price = ""
         article = ""
@@ -117,7 +115,7 @@ voice = Voice()
 # Login and delete all messages
 voice.login(email, password)
 for message in voice.sms().messages:
-    message.delete()
+    message.delete
 # voice.logout()
 
 while True:

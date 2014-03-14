@@ -117,7 +117,7 @@ voice = Voice()
 # Login and delete all messages
 voice.login(email, password)
 for message in voice.sms().messages:
-    message.delete()
+    message.delete
 # voice.logout()
 
 while True:
