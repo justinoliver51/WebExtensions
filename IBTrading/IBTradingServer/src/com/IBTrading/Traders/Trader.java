@@ -1,6 +1,8 @@
 package com.IBTrading.Traders;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import com.IBTrading.servlets.IBTradingAPI;
 
@@ -13,6 +15,7 @@ public class Trader
 	private final int MAXLEVERAGE = 4;
 	private final int NOLEVERAGE = 1;
 	private final int MAXCASH = 45000;
+	private final List<String> blackList = Arrays.asList("tvix","znga");
 	
 	// Valid trade - true if parsed correctly, false otherwise
 	public boolean hasValidTrade = false;
@@ -21,6 +24,8 @@ public class Trader
 	double totalCashTradedYesterday = 0.0;
 	double totalCashTradedLastWeek = 0.0;
 	double totalCashTradedLastMonth = 0.0;
+	int averageVolumeInLast30Minutes = 0;
+	int medianVolumeInLast30Minutes = 0;
 	
 	public Trader(IBTradingAPI newTradingAPI)
 	{
@@ -96,5 +101,10 @@ public class Trader
 		// shares we can purchase with cash
 		return ((int) (maxCash/price) <= ((maxQuantity * traderPercentage) / 100) ) ? 
 					((int) (maxCash/price)) : ((maxQuantity * traderPercentage) / 100);
+	}
+	
+	public boolean isBlackListed(String symbol)
+	{
+		return blackList.contains(symbol.toLowerCase());
 	}
 }

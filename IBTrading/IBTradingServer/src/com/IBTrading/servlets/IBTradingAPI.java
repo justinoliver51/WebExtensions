@@ -68,7 +68,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public static final String THREEMINUTES 	= "3 mins";
 	public static final String FIVEMINUTES 		= "5 mins";
 	public static final String FIFTEENMINUTES 	= "15 mins";
-	public static final String THIRTYMINUTES 	=  "30 mins";
+	public static final String THIRTYMINUTES 	= "30 mins";
 	public static final String ONEHOUR 			= "1 hour";
 	public static final String ONEDAY 			= "1 day";
 	
@@ -80,9 +80,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public static final String YEARS 	= " Y";
 	
 	// The number of work days in the specified time frame
-	public static final int ONEDAYINTEGER 	= 1;
-	public static final int ONEWEEKINTEGER 	= 5;
-	public static final int ONEMONTHINTEGER = 21;
+	public static final int EIGHTEENHUNDREDSECONDINTEGER	= 1800;
+	public static final int THIRTYMINUTEINTEGER				= 30;	
+	public static final int ONEDAYINTEGER 					= 1;
+	public static final int ONEWEEKINTEGER 					= 5;
+	public static final int ONEMONTHINTEGER 				= 21;
 	
 	public static final String BUYORDERID = "BuyOrderID";
 	

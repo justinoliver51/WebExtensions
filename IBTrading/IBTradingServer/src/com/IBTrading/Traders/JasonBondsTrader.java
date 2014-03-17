@@ -125,6 +125,36 @@ public class JasonBondsTrader extends Trader{
 		if(tickerID == -1)
 			return false;
 		
+		// Get the information about the volume of the stock over the last 30 minutes
+        // If it is a Sunday or Monday, use Friday's date
+        if(dayOfWeek != 1 && dayOfWeek != 2)
+        	cal.add(Calendar.DATE, 1);
+		
+		barSizeSetting = IBTradingAPI.ONEMINUTE;
+		dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+		endDateTime = dateFormat.format(cal.getTime()) + " CST";
+
+		// Get the average/medium volume from the last 30 minutes
+		ArrayList<Integer> volumeList = new ArrayList<Integer>();
+		durationStr = IBTradingAPI.EIGHTEENHUNDREDSECONDINTEGER + IBTradingAPI.SECONDS;
+		tickerID = getHistoricalData(IBTradingAPI.THIRTYMINUTEINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.THIRTYMINUTEINTEGER);
+		for(int i = 0; i < IBTradingAPI.THIRTYMINUTEINTEGER; i++)
+		{
+			volumeList.add(historicalDataArray.get(i).volume);
+			averageVolumeInLast30Minutes += historicalDataArray.get(i).volume;
+		}
+		
+		if(tickerID == -1)
+			return false;
+
+		java.util.Collections.sort(volumeList);
+		medianVolumeInLast30Minutes = volumeList.get(IBTradingAPI.THIRTYMINUTEINTEGER/2);
+		averageVolumeInLast30Minutes /= IBTradingAPI.THIRTYMINUTEINTEGER;
+		
+		System.out.println("Median Volume in the last 30 minutes: " + medianVolumeInLast30Minutes);
+		System.out.println("Average Volume in the last 30 minutes: " + averageVolumeInLast30Minutes);
+		
 		// If the total amount of money thrown around is estimated to move the market, go ahead
 		if(totalCashTradedYesterday < 999999999.9)
 			return true;
@@ -192,7 +222,8 @@ public class JasonBondsTrader extends Trader{
 		//		- If this is an 'Add'
 		//		- If this is a 'Bomb Blow Up'
 		if( (tradingAPI.getNumberOfDayTrades() == 0) || (parser.action.equalsIgnoreCase("Added")) 
-				|| (parser.flagsHashMap.get(parser.BONDBLOWUPS) == true) || (marketOpenFlag == false) )
+				|| (parser.flagsHashMap.get(parser.BONDBLOWUPS) == true) || (marketOpenFlag == false) 
+				|| (super.isBlackListed(parser.symbol) == true) )
 			simulationOnly = true;
 		else
 			simulationOnly = false;
