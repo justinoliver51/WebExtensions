@@ -15,7 +15,7 @@ public class Trader
 	private final int MAXLEVERAGE = 4;
 	private final int NOLEVERAGE = 1;
 	private final int MAXCASH = 45000;
-	private final List<String> blackList = Arrays.asList("tvix","znga");
+	private final List<String> blackList = Arrays.asList("tvix","znga","fnma");
 	
 	// Valid trade - true if parsed correctly, false otherwise
 	public boolean hasValidTrade = false;

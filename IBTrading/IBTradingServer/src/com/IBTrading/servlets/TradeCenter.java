@@ -2,6 +2,7 @@ package com.IBTrading.servlets;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.TimeZone;
 
@@ -57,19 +58,28 @@ public class TradeCenter {
 			return "Null arguments...";
 		}
 		
+		// Get the offset from GMT for US/Eastern Time
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("US/Eastern"));
+	    TimeZone z = cal.getTimeZone();
+	    int offset = z.getRawOffset();
+	    if(z.inDaylightTime(new Date())){
+	        offset = offset + z.getDSTSavings();
+	    }
+	    int offsetHrs = offset / 1000 / 60 / 60;
+		
 		// If this is an invalid time of day, exit
-		long MILLIS_AT_8_30_AM = (long) (8.5 * 60 * 60 * 1000);
-		long MILLIS_AT_3_00_PM = (long) (15 * 60 * 60 * 1000);
-		long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
-		long MILLIS_TIMEZONE_DIFF = 6 * 60 * 60 * 1000;
+		final long MILLIS_AT_9_30_AM = (long) (9.5 * 60 * 60 * 1000);
+		final long MILLIS_AT_4_00_PM = (long) (16 * 60 * 60 * 1000);
+		final long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
+		final long MILLIS_TIMEZONE_DIFF = (offsetHrs * -1) * 60 * 60 * 1000;
 		
 		//Date now = Calendar.getInstance(TimeZone.getTimeZone("US/Central")).getTime();
 		long timePortion = System.currentTimeMillis() % MILLIS_PER_DAY;
 		timePortion = timePortion < MILLIS_TIMEZONE_DIFF ? (MILLIS_PER_DAY - (MILLIS_TIMEZONE_DIFF - timePortion)) : (timePortion - MILLIS_TIMEZONE_DIFF); 
-        Calendar cal = Calendar.getInstance();
+        //Calendar cal = Calendar.getInstance();
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 		
-		if( (timePortion < MILLIS_AT_8_30_AM) || (timePortion > MILLIS_AT_3_00_PM) || (dayOfWeek == 7) || (dayOfWeek == 1) )
+		if( (timePortion < MILLIS_AT_9_30_AM) || (timePortion > MILLIS_AT_4_00_PM) || (dayOfWeek == 7) || (dayOfWeek == 1) )
 		{
 			System.out.println("Market is closed!");
 			marketOpenFlag = false;

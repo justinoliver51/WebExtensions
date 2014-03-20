@@ -33,6 +33,13 @@ public class JasonBondsTrader extends Trader{
 	private static final int NOLEVERAGE = 1;
 	private final String VOLUME = "VOLUME";
 	
+	// Trade information
+	public String parsedSymbol = "";
+	public int parsedQuantity = 0;
+	public String parsedAction = "";
+	public String parsedPrice = "";
+	public HashMap<String, Boolean> parsedFlagsHashMap = new HashMap<String, Boolean>();
+	
 	public JasonBondsTrader(String newTrade, IBTradingAPI newTradingAPI, boolean newRealTimeSystem, boolean newMarketOpenFlag)
 	{	
 		super(newTradingAPI);
@@ -55,11 +62,17 @@ public class JasonBondsTrader extends Trader{
 		{
 			lastTradeStrings.add(newTrade);
 		}
+		
+		parsedSymbol = parser.symbol;
+		parsedQuantity = parser.quantity;
+		parsedAction = parser.action;
+		parsedPrice = parser.price;
+		parsedFlagsHashMap = parser.flagsHashMap;
 	}
 	
 	private int getHistoricalData(int durationInt, String durationStr, String endDateTime, String barSizeSetting, String whatToShow)
 	{
-		int tickerID = tradingAPI.subscribeToHistoricalData(parser.symbol, endDateTime, durationStr, barSizeSetting, whatToShow);
+		int tickerID = tradingAPI.subscribeToHistoricalData(parsedSymbol, endDateTime, durationStr, barSizeSetting, whatToShow);
 		
 		if(tickerID == -1)
 			return tickerID;
@@ -127,6 +140,7 @@ public class JasonBondsTrader extends Trader{
 		
 		// Get the information about the volume of the stock over the last 30 minutes
         // If it is a Sunday or Monday, use Friday's date
+		/*
         if(dayOfWeek != 1 && dayOfWeek != 2)
         	cal.add(Calendar.DATE, 1);
 		
@@ -154,7 +168,7 @@ public class JasonBondsTrader extends Trader{
 		
 		System.out.println("Median Volume in the last 30 minutes: " + medianVolumeInLast30Minutes);
 		System.out.println("Average Volume in the last 30 minutes: " + averageVolumeInLast30Minutes);
-		
+		*/
 		// If the total amount of money thrown around is estimated to move the market, go ahead
 		if(totalCashTradedYesterday < 999999999.9)
 			return true;
@@ -190,26 +204,26 @@ public class JasonBondsTrader extends Trader{
 		else
 			marketData = "CLOSE_PRICE";	// Should only be using this in debug
 		
-		int tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
+		int tickerID = tradingAPI.subscribeToMarketData(parsedSymbol);
 		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
 		
 		// Get the market price
-		parser.price = tradingAPI.getMarketData(tickerID, marketData) + "";
+		parsedPrice = tradingAPI.getMarketData(tickerID, marketData) + "";
 		
 		// If the price/share of the stock was not supplied, get this information from TWS
-		if(parser.price.equalsIgnoreCase("0.00"))
+		if(parsedPrice.equalsIgnoreCase("0.00"))
 		{
 			// Get the market price
-			parser.price = tradingAPI.getMarketData(tickerID, marketData) + "";
+			parsedPrice = tradingAPI.getMarketData(tickerID, marketData) + "";
 		}
 		
 		try
 		{
-			quantity = super.getQuantity(maxCash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
+			quantity = super.getQuantity(maxCash, Double.parseDouble(parsedPrice), TRADERPERCENTAGE, parsedQuantity);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-			quantity = (parser.quantity * TRADERPERCENTAGE) / 100;
+			quantity = (parsedQuantity * TRADERPERCENTAGE) / 100;
 		}
 		
 		if(quantity <= 0)
@@ -221,16 +235,16 @@ public class JasonBondsTrader extends Trader{
 		// 		- If we have reached our maximum number of day trades
 		//		- If this is an 'Add'
 		//		- If this is a 'Bomb Blow Up'
-		if( (tradingAPI.getNumberOfDayTrades() == 0) || (parser.action.equalsIgnoreCase("Added")) 
-				|| (parser.flagsHashMap.get(parser.BONDBLOWUPS) == true) || (marketOpenFlag == false) 
-				|| (super.isBlackListed(parser.symbol) == true) )
+		if( (tradingAPI.getNumberOfDayTrades() == 0) || (parsedAction.equalsIgnoreCase("Added")) 
+				|| (parsedFlagsHashMap.get(parser.BONDBLOWUPS) == true) || (marketOpenFlag == false) 
+				|| (super.isBlackListed(parsedSymbol) == true) )
 			simulationOnly = true;
 		else
 			simulationOnly = false;
 		
 		// Place the order
 		if(simulationOnly == false)
-			buyOrderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
+			buyOrderStatus = tradingAPI.placeOrder(BUY, parsedSymbol, quantity, isSimulation, null);
 		
 		if(buyOrderStatus == null && simulationOnly == false)
 			return "Unable to connect to TWS...";
@@ -239,13 +253,13 @@ public class JasonBondsTrader extends Trader{
 		isSimulation = true;
 		if(simulationOnly == true)
 		{
-			buyOrderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);  
+			buyOrderStatus = tradingAPI.placeOrder(BUY, parsedSymbol, quantity, isSimulation, null);  
 			
 			if(buyOrderStatus == null)
 				return "Unable to connect to TWS...";
 		}
 		else
-			tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);  
+			tradingAPI.placeOrder(BUY, parsedSymbol, quantity, isSimulation, null);  
 		
 		// Sleep for 60 seconds, then sell
 		try
@@ -274,8 +288,8 @@ public class JasonBondsTrader extends Trader{
 					// Make the trade using only cash (no leverage)
 					isSimulation = false;
 					int cash = super.getCash(totalCash, NOLEVERAGE);
-					quantity = super.getQuantity(cash, Double.parseDouble(parser.price), TRADERPERCENTAGE, parser.quantity);
-					buyOrderStatus = tradingAPI.placeOrder(BUY, parser.symbol, quantity, isSimulation, null);
+					quantity = super.getQuantity(cash, Double.parseDouble(parsedPrice), TRADERPERCENTAGE, parsedQuantity);
+					buyOrderStatus = tradingAPI.placeOrder(BUY, parsedSymbol, quantity, isSimulation, null);
 					
 					if( (buyOrderStatus == null) || (buyOrderStatus.status == null) )
 						return "Unable to connect to TWS...";
@@ -338,7 +352,7 @@ public class JasonBondsTrader extends Trader{
 		// Sell the stocks
 		isSimulation = false;
 		if(simulationOnly == false)
-			sellOrderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation, null);
+			sellOrderStatus = tradingAPI.placeOrder(SELL, parsedSymbol, quantity, isSimulation, null);
 		
 		if( (simulationOnly == false) && (sellOrderStatus == null) )
 			return "Unable to connect to TWS...";
@@ -347,17 +361,17 @@ public class JasonBondsTrader extends Trader{
 		isSimulation = true;
 		if(simulationOnly == true)
 		{
-			sellOrderStatus = tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation, null); 
+			sellOrderStatus = tradingAPI.placeOrder(SELL, parsedSymbol, quantity, isSimulation, null); 
 			
 			if(sellOrderStatus == null)
 				return "Unable to connect to TWS...";
 		}
 		else
-			tradingAPI.placeOrder(SELL, parser.symbol, quantity, isSimulation, null);  
+			tradingAPI.placeOrder(SELL, parsedSymbol, quantity, isSimulation, null);  
 		
 		// Save off useful trade information for the purchase
 		tradeInfo = new HashMap<String,Object>();
-		tradeInfo.put(Database.STOCKSYMBOL, parser.symbol);
+		tradeInfo.put(Database.STOCKSYMBOL, parsedSymbol);
 		tradeInfo.put(Database.NUMBEROFSHARES, quantity);
 		tradeInfo.put(Database.AVERAGEBUYINGPRICE, buyOrderStatus.avgFillPrice);
 		tradeInfo.put(Database.INITIALVOLUME, tradingAPI.getMarketData(tickerID, VOLUME));
@@ -373,7 +387,7 @@ public class JasonBondsTrader extends Trader{
 		else
 			marketData = "CLOSE_PRICE";	// Only for simulation
 		
-		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
+		tickerID = tradingAPI.subscribeToMarketData(parsedSymbol);
 		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
 		
 		// Save the volume now that the purchase is over
@@ -390,7 +404,7 @@ public class JasonBondsTrader extends Trader{
 		}
 		
 		// Get the updated market data
-		tickerID = tradingAPI.subscribeToMarketData(parser.symbol);
+		tickerID = tradingAPI.subscribeToMarketData(parsedSymbol);
 		while(tradingAPI.getMarketData(tickerID, marketData) == null){};
 		
 		// Save the last bits of information from the sell
