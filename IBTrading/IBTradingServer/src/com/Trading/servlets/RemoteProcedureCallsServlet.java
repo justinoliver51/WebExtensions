@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
+import com.Trading.ib.IBTradingAPI;
+
 /**
  * Servlet implementation class RemoteProcedureCallsServlet
  */

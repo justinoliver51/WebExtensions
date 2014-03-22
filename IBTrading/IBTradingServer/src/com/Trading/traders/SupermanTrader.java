@@ -1,7 +1,7 @@
 package com.Trading.traders;
 
-import com.Trading.servlets.IBTradingAPI;
-import com.Trading.servlets.OrderStatus;
+import com.Trading.ib.IBTradingAPI;
+import com.Trading.ib.OrderStatus;
 import com.Trading.tradeparsers.ProfitlyTradeParser;
 
 public class SupermanTrader extends Trader

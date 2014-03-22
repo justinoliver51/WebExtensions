@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import com.Trading.ib.HistoricalData;
+import com.Trading.ib.IBTradingAPI;
+import com.Trading.ib.OrderStatus;
 import com.Trading.servlets.Database;
-import com.Trading.servlets.HistoricalData;
-import com.Trading.servlets.IBTradingAPI;
-import com.Trading.servlets.OrderStatus;
 import com.Trading.tradeparsers.JasonBondsTradeParser;
 
 public class JasonBondsTrader extends Trader{

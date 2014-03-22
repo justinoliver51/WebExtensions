@@ -9,10 +9,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.TimeZone;
 
+import com.Trading.ib.HistoricalData;
+import com.Trading.ib.IBTradingAPI;
+import com.Trading.ib.OrderStatus;
 import com.Trading.servlets.Database;
-import com.Trading.servlets.HistoricalData;
-import com.Trading.servlets.IBTradingAPI;
-import com.Trading.servlets.OrderStatus;
 import com.Trading.tradeparsers.JasonBondsTradeParser;
 
 public class DebugTrader extends Trader

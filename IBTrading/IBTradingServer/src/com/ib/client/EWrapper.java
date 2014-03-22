@@ -4,7 +4,7 @@
  */
 package com.ib.client;
 
-import com.Trading.servlets.OrderStatus;
+import com.Trading.ib.OrderStatus;
 
 public interface EWrapper extends AnyWrapper {
 

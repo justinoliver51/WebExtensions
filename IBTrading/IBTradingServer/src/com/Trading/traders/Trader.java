@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.Trading.servlets.IBTradingAPI;
+import com.Trading.ib.IBTradingAPI;
 
 public class Trader 
 {
