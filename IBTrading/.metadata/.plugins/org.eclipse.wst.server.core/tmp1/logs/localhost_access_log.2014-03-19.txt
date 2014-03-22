@@ -170,3 +170,15 @@
 1.245.107.254 - - [19/Mar/2014:13:36:47 -0500] "GET /Yang/index.jsp HTTP/1.1" 404 979
 1.245.107.254 - - [19/Mar/2014:13:36:48 -0500] "GET /pax/index.jsp HTTP/1.1" 404 977
 1.245.107.254 - - [19/Mar/2014:13:36:48 -0500] "GET /CMD/index.jsp HTTP/1.1" 404 977
+127.0.0.1 - - [19/Mar/2014:22:49:56 -0500] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [19/Mar/2014:22:50:06 -0500] "GET / HTTP/1.1" 404 951
+204.14.190.6 - - [19/Mar/2014:22:50:56 -0500] "GET /HNAP1/ HTTP/1.1" 404 963
+0:0:0:0:0:0:0:1%0 - - [19/Mar/2014:22:51:15 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+0:0:0:0:0:0:0:1%0 - - [19/Mar/2014:22:51:39 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+1+MEET+at+3.5 HTTP/1.1" 200 167
+127.0.0.1 - - [19/Mar/2014:22:53:58 -0500] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [19/Mar/2014:22:54:30 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [19/Mar/2014:22:55:15 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Bought+MEET HTTP/1.1" 200 267
+127.0.0.1 - - [19/Mar/2014:22:56:17 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [19/Mar/2014:23:01:29 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+1+MEET+at+3.5 HTTP/1.1" 200 218
+127.0.0.1 - - [19/Mar/2014:23:05:06 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [19/Mar/2014:23:05:09 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
