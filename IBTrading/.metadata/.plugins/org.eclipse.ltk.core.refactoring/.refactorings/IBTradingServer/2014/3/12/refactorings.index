@@ -1,1 +1,7 @@
 1395510017315	Move compilation unit
+1395515466489	Rename package 'com.IBTrading.servlets'
+1395515490433	Rename package 'com.IBTrading.Traders'
+1395515526828	Rename package 'com.IBTrading.tradeparsers'
+1395515646850	Move compilation units
+1395515656702	Delete element
+1395515796879	Rename package 'com.Trading.Traders'
