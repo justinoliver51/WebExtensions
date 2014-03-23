@@ -66,7 +66,7 @@ class TDAmeritradeAPI:
         tree = self.initiatePostRequest(url, postData)
 
         # Verify results
-        return
+        return True
 
 # Initialize TDAmeritrade API
 api = TDAmeritradeAPI()

@@ -1,5 +1,6 @@
 package com.Trading.tdameritrade;
 
-public class TDAmeritradeAPI {
-
+public interface TDAmeritradeAPI 
+{
+    public boolean loginRequest();
 }

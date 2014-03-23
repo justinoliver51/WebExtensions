@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 import com.Trading.ib.IBTradingAPI;
+import com.Trading.tdameritrade.JythonObjectFactory;
+import com.Trading.tdameritrade.TDAmeritradeAPI;
 
 /**
  * Servlet implementation class RemoteProcedureCallsServlet
@@ -151,11 +153,12 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         synchronized (session)
         {
         	DB = new Database(ConnPool);
-        }//end session lock
+        }
         
-        String startUp = request.getParameter("startUp");
+        String startUp 	= request.getParameter("startUp");
 		String traderID = request.getParameter("traderID");
 		String newTrade = request.getParameter("newTrade");
+		String debug 	= request.getParameter("debug");
 		String realTimeSystem = request.getParameter("realTimeSystem");
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
@@ -169,6 +172,15 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		{
 			System.out.println("System started up!");
 			out.println("System started up!");
+			return;
+		}
+		
+		if(debug != null)
+		{
+			JythonObjectFactory factory = JythonObjectFactory.getInstance();
+			TDAmeritradeAPI api = (TDAmeritradeAPI) factory.createObject(
+					TDAmeritradeAPI.class, "TD Ameritrade API");
+			api.loginRequest();
 			return;
 		}
 		
