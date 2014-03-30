@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 import com.Trading.ib.IBTradingAPI;
-import com.Trading.tdameritrade.JythonObjectFactory;
 import com.Trading.tdameritrade.TDAmeritradeAPI;
 
 /**
@@ -175,7 +174,9 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			return;
 		}
 		
+		/*
 		if(debug != null)
+		
 		{
 			JythonObjectFactory factory = JythonObjectFactory.getInstance();
 			TDAmeritradeAPI api = (TDAmeritradeAPI) factory.createObject(
@@ -183,6 +184,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			api.loginRequest();
 			return;
 		}
+		*/
 		
 		// Invalid parameters
 		if( (traderID == null) || (newTrade == null) || (realTimeSystem == null) || 

@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1%0 - - [24/Mar/2014:08:51:57 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+BLDP+at+4.33 HTTP/1.1" 200 193
+0:0:0:0:0:0:0:1%0 - - [24/Mar/2014:08:52:41 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+BLDP+at+4.33 HTTP/1.1" 200 160
+0:0:0:0:0:0:0:1%0 - - [24/Mar/2014:10:18:19 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Added+10000+BLDP+at+4.03 HTTP/1.1" 200 197
+0:0:0:0:0:0:0:1%0 - - [24/Mar/2014:10:22:40 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Added+10000+BLDP+at+4.03 HTTP/1.1" 200 154
+93.174.93.51 - - [24/Mar/2014:13:24:29 -0500] "GET /hello/check.txt HTTP/1.1" 404 981
+127.0.0.1 - - [24/Mar/2014:22:40:59 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [24/Mar/2014:22:43:52 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+0:0:0:0:0:0:0:1%0 - - [24/Mar/2014:22:46:39 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Justin+Oliver&newTrade=Bought+MEET HTTP/1.1" 200 266
