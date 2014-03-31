@@ -134,7 +134,8 @@ def decodeSubject(email_message):
     
 
 ### MAIN ###
-debug = False
+debug = True
+serverName = 'TradingServer' # 'IBTradingServer'
 
 # Email Info
 latestEmail = ""
@@ -196,7 +197,7 @@ while True:
                             'newTrade':         trade,
                             'realTimeSystem':   'email'
                             }
-                url = "http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?"
+                url = 'http://localhost:8080/' + serverName + '/RemoteProcedureCallsServlet?'
                 
                 if debug == True:
                     if(  ((trade.lower().find('bought') < 0) and (trade.lower().find('added') < 0) ) ): # (traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or
@@ -212,7 +213,7 @@ while True:
                 response = urllib2.urlopen(query).read()
                     
                 # If we successfully completed a trade, send the text
-                if response.lower().find('valid trade') >= 0 and response.lower().find('invalid trade') < 0:
+                if response.lower().find('valid trade') >= 0 and response.lower().find('invalid trade') < 0 and debug == False:
                     voice.login(personalEmail, password)
                     voice.send_sms(JUSTINS_CELL, response)
                     voice.send_sms(TYLERS_CELL, response)
