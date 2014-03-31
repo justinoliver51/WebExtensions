@@ -134,8 +134,10 @@ def decodeSubject(email_message):
     
 
 ### MAIN ###
-debug = True
-serverName = 'TradingServer' # 'IBTradingServer'
+debug = False
+serverName = 'IBTradingServer' # 'TradingServer'
+url = 'http://localhost:8080/' + serverName + '/RemoteProcedureCallsServlet?'
+print url
 
 # Email Info
 latestEmail = ""
@@ -197,7 +199,6 @@ while True:
                             'newTrade':         trade,
                             'realTimeSystem':   'email'
                             }
-                url = 'http://localhost:8080/' + serverName + '/RemoteProcedureCallsServlet?'
                 
                 if debug == True:
                     if(  ((trade.lower().find('bought') < 0) and (trade.lower().find('added') < 0) ) ): # (traderID[0] != 'Jason Bond' and traderID[0] != 'Jason') or

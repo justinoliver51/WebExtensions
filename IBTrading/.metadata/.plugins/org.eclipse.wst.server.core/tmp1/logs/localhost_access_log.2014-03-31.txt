@@ -1,0 +1,7 @@
+127.0.0.1 - - [31/Mar/2014:08:24:17 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [31/Mar/2014:08:24:40 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 138
+0:0:0:0:0:0:0:1%0 - - [31/Mar/2014:10:11:14 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+10000+YOD+at+4.52 HTTP/1.1" 200 197
+0:0:0:0:0:0:0:1%0 - - [31/Mar/2014:10:16:11 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+YOD+at+4.52 HTTP/1.1" 200 154
+0:0:0:0:0:0:0:1%0 - - [31/Mar/2014:13:48:15 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+20000+MVIS+at+1.84 HTTP/1.1" 200 198
+0:0:0:0:0:0:0:1%0 - - [31/Mar/2014:13:52:43 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+20000+MVIS+at+1.84 HTTP/1.1" 200 203
+0:0:0:0:0:0:0:1%0 - - [31/Mar/2014:13:52:45 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+20000+MVIS+at+1.84 HTTP/1.1" 200 193

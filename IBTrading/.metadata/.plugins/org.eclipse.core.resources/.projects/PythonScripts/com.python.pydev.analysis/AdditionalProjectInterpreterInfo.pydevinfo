@@ -19,7 +19,7 @@ JasonBondsParser|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading
 1=tdameritradeapi
 -- END DICTIONARY
 -- START TREE 1
-37
+38
 api|1|api!11@
 cli|1|clipboard_file!19@
 con|1|connect!26@
@@ -49,6 +49,7 @@ que|2|query!35@query!27@
 raw|1|raw_email!27@
 res|2|response!35@response!27@
 ret|1|retcode!19@
+ser|1|serverName!27@
 set|1|setClipboardData!18@
 sub|1|subject!27@
 tda|1|TDAmeritradeAPI!9@

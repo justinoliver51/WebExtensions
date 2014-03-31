@@ -9,7 +9,7 @@ import java.net.URLEncoder;
 
 public class TDAmeritradeAPI 
 {
-	/*
+	
 	static long lastlogintime;
 	static Config config = Config.readConfig();
 
@@ -78,5 +78,5 @@ public class TDAmeritradeAPI
 		//Sending information through HTTPS: POST
 	}
 	
-	*/
+	
 }
