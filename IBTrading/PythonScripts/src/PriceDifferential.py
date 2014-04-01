@@ -3,135 +3,6 @@ Created on March 31, 2014
 
 @author: justinoliver
 '''
-from HTMLParser import HTMLParser
-from BeautifulSoup import BeautifulSoup
-
-class IbReportParser(HTMLParser):
-    def __init__(self):
-        HTMLParser.HTMLParser.__init__(self)
-        self.recording = 0
-        self.data = []
-
-    def handle_starttag(self, tag, attributes):
-        if tag != 'div':
-            return
-        if self.recording:
-            self.recording += 1
-            return
-        for name, value in attributes:
-            if name == 'id' and value == 'tblTransactions_U1257707Body':
-                break
-        else:
-            return
-        self.recording = 1
-        
-    def handle_endtag(self, tag):
-        if tag == 'div' and self.recording:
-            self.recording -= 1
-    
-    def handle_data(self, data):
-        if self.recording:
-            self.data.append(data)
-
-# <TH align="left" class="nobottomborder">Symbol</TH>
-# <TH align="left" class="nobottomborder">Date/Time</TH>
-# <TH align="left" class="nobottomborder">Exchange</TH>
-# <TH align="right" class="nobottomborder">Quantity</TH>
-# <TH align="right" class="nobottomborder">T. Price</TH>
-# <TH align="right" class="nobottomborder">C. Price</TH>
-# <TH align="right" class="nobottomborder">Proceeds</TH>
-# <TH align="right" class="nobottomborder">Comm/Tax</TH>
-# <TH align="right" class="nobottomborder">Basis</TH>
-# <TH align="right" class="nobottomborder">Realized P/L</TH>
-# <TH align="right" class="nobottomborder">MTM P/L</TH>
-# <TH align="right" class="nobottomborder">Code</TH>
-
-
-
-### MAIN ###
-tradingData = ''
-recording = False
-ibStartingLine = '<DIV id="tblTransactions_U1257707Body" style="position: absolute; display: none">'
-ibEndingLine = 'grid_12'
-
-# Open the Interactive Brokers Trading report and save the trades information
-with open('/Users/justinoliver/Desktop/Developer/WebExtensions/TradesData/U1257707 Activity Statement September 24, 2013 - March 28, 2014 - Interactive Brokers.html') as fp:
-    for line in fp:
-        if line.find(ibStartingLine) >= 0:
-            recording = True
-        elif line.find(ibEndingLine) >= 0:
-            recording = False
-        
-        if recording == True:
-            tradingData += line
-
-soup = BeautifulSoup(tradingData)
-
-#print soup('tr', {'class': 'summaryRow'})
-
-# <TBODY>
-# <TR class="summaryRow">
-# <TD class="noleftborder"><span>+</span>ANR</TD>
-# <TD>2013-12-02, 15:15:09</TD>
-# <TD>-</TD>
-# <TD align="right">3,508</TD>
-# <TD align="right">6.8700</TD>
-# <TD align="right">6.8000</TD>
-# <TD align="right">-24,099.96</TD>
-# <TD align="right">-17.24</TD>
-# <TD align="right">24,117.20</TD>
-# <TD align="right">0.00</TD>
-# <TD align="right">-245.56</TD>
-# <TD align="right">P;O</TD>
-# </TR>
-# </TBODY>
-
-for tradeData in soup('tr', {'class': 'summaryRow'}):
-    print tradeData('td', {'class': 'noleftborder'})[0]
-    for row in tradeData:
-        print row
-    break
-
-for row in soup('tr', {'class': 'summaryRow'}):#[0].tbody(''):
-    stuff = BeautifulSoup(str(row('td', {'class': 'noleftborder'})[0]))#.tr.string
-    print stuff
-    print '----'
-    print stuff.td.string
-    print '===='
-    tds = row('td')
-    print tds[0].string, tds[1].string
-    # will print date and sunrise
-
-
-
-
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2013 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""Command-line skeleton application for Drive API.
-Usage:
-  $ python sample.py
-
-You can also get help on all the command-line flags the program understands
-by running:
-
-  $ python sample.py --help
-
-"""
-
 import argparse
 import httplib2
 import os
@@ -139,7 +10,11 @@ import sys
 import json
 
 import csv
-import MySQLdb
+import time
+import datetime
+import pytz
+import calendar
+from decimal import Decimal
 
 from apiclient import discovery
 from oauth2client import file
@@ -262,13 +137,13 @@ def get_files_in_folder(service, folder_id):
 
 def insertIntoDatabase(database_table, csv_data):
     csv_data = csv_data.split('\n')
-    
+    print csv_data
     mydb = MySQLdb.connect(host='scenecheckdb.ccwd1ptkptjf.us-east-1.rds.amazonaws.com',
                            user='justinoliver51',
                            passwd='annais2AWESOME!',
                            db='SceneCheckDB')
     cursor = mydb.cursor()
-
+    
     # The first row contains the columns
     firstRow = True
     columns = ""
@@ -298,6 +173,74 @@ def insertIntoDatabase(database_table, csv_data):
     
     return
 
+def cleanUpTradingData(tradingData):
+    removeEntries = []
+    copyOfTradingData = list(tradingData)
+    for trade in tradingData:
+        try:
+            # Make sure the price is legal
+            tempPrice = float(trade['T. Price'])
+            
+            # If the quantity is negative, remove it
+            if int(trade['Quantity']) <= 0:
+                removeEntries.append(trade)
+            # Otherwise, find the corresponding seller and save the P/L
+            else:
+                for correspondingTrade in copyOfTradingData:
+                    if ( correspondingTrade['Symbol'] == trade['Symbol'] ) and \
+                        ( float(correspondingTrade['Basis']) == (-1 * float(trade['Basis'] )) ) and \
+                        ( int(correspondingTrade['Quantity']) == (-1 * int(trade['Quantity'])) ):
+                            trade['Realized P/L'] = correspondingTrade['Realized P/L']
+                            break
+                
+            # Remove the '+' from the symbols
+            trade['Symbol'] = trade['Symbol'].replace('+', '')
+            
+            # if this data is too old, remove it
+            fmt = '%Y-%m-%d, %H:%M:%S'
+            timeString = trade['Date/Time']
+            theDate = datetime.datetime.strptime(timeString, fmt)
+            eastern = pytz.timezone('US/Eastern')
+            eastern_time = eastern.localize(theDate)
+            utc_time = eastern_time.astimezone(pytz.utc)
+            trade['Timestamp'] = calendar.timegm(utc_time.utctimetuple())
+            
+            #print time
+        except Exception as inst:
+            print type(inst)     # the exception instance
+            print inst           # __str__ allows args to printed directly
+            removeEntries.append(trade)
+            
+    for badTradeData in removeEntries:
+        tradingData.remove(badTradeData)
+        
+    return tradingData
+
+def getTradingData(csv_data):
+    csvReader = csv.reader(csv_data.split('\n'), delimiter=',', quotechar='"')
+    firstRow = True
+    columns = []
+    tradingData = []
+
+    for row in csvReader:
+        newTrade = {}
+        
+        # Get the names of the columns
+        if firstRow:
+            firstRow = False
+            columns = row
+            
+            continue
+        
+        for index in range(len(columns)):
+            newTrade[columns[index]] = row[index]
+        
+        if newTrade['Symbol'].find('+') >= 0:
+            tradingData.append(newTrade)
+            
+    tradingData = cleanUpTradingData(tradingData)
+    
+    return tradingData
 
 def main(argv):
   # Parse the command-line flags.
@@ -306,7 +249,7 @@ def main(argv):
   # If the credentials don't exist or are invalid run through the native client
   # flow. The Storage object will ensure that if successful the good
   # credentials will get written back to the file.
-  storage = file.Storage('sample.dat')
+  storage = file.Storage('trading_storage.dat')
   credentials = storage.get()
   if credentials is None or credentials.invalid:
     credentials = tools.run_flow(FLOW, storage, flags)
@@ -323,16 +266,18 @@ def main(argv):
     print "Success! Now add code here."    
 
     files = retrieve_all_files(service)
+    spreadsheets = []
+    #print json.dumps(files, indent=2)
 
     for theFile in files:
         if( (theFile['mimeType'] == 'application/vnd.google-apps.folder') and
-           (theFile['title'] == 'DallasTX') ):
+           (theFile['title'] == 'IBTrading') ):
             
             # Gets the files
-            newVenueFiles = get_files_in_folder(service, theFile['id'])
+            spreadsheets = get_files_in_folder(service, theFile['id'])
             break
 
-    for spreadsheet in newVenueFiles:
+    for spreadsheet in spreadsheets:
         theFile = service.files().get(fileId=spreadsheet['id']).execute()
         
         #print json.dumps(theFile, indent=2)
@@ -343,31 +288,24 @@ def main(argv):
             continue
         
         # If the files name doesn't match
-        if( (theFile['title'] != 'Venues') and (theFile['title'] != 'VenueOwners') 
-            and (theFile['title'] != 'VenueScenes') and (theFile['title'] != 'VenueTags')):
-            continue
-        
-        # TEMP FIXME!
-        if(theFile['title'] != 'Venues'):
+        if(theFile['title'] != 'Updated Trade Data'):
             continue
         
         url = theFile['exportLinks']['application/pdf']
         url = url[:-4] + "=csv" + "&gid=0"
-        #print url
         response, content = http.request(url)
-        #print str(content)
 
-        # Verify content
+        # Build the trading data list
+        tradingData = getTradingData(str(content))
         
-        
-        # Insert into databse
-        insertIntoDatabase('Temp', str(content))
+        print json.dumps(tradingData, indent=2)
 
   except client.AccessTokenRefreshError:
     print ("The credentials have been revoked or expired, please re-run"
       "the application to re-authorize")
 
-
+if __name__ == '__main__':
+  main(sys.argv)
 
 # Search my latest downloaded statement.  Get the following data for each trade:
 # - Date/Time
