@@ -39,6 +39,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private static HashMap<Integer,HashMap<String,Object>> marketDataHashMap = new HashMap<Integer,HashMap<String,Object>>();
 	private static HashMap<Integer,ArrayList<HistoricalData>> historicalDataHashMap = new HashMap<Integer,ArrayList<HistoricalData>>();
 	private static HashMap<Integer,HashMap<String,Object>> databaseHashMap = new HashMap<Integer,HashMap<String,Object>>();
+	private static HashMap<Integer,Boolean> finishedLoadingHistoricalData = new HashMap<Integer,Boolean>();
 	private static double totalCash = 0;
 	private static double totalCashSimulation = 0;
 	private static int dayTradesRemaining = -1;
@@ -391,6 +392,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	
     	// Add a new hash map to market data for this stock
     	historicalDataHashMap.put(tickerID, new ArrayList<HistoricalData>());
+    	finishedLoadingHistoricalData.put(tickerID, false);
     	
     	return tickerID++;
     }
@@ -418,11 +420,12 @@ public class IBTradingAPI extends JFrame implements EWrapper
     		return marketDataHashMap.get(tickerId).get(marketInfo);
     }
     
-    public ArrayList<HistoricalData> getHistoricalData(int tickerId, int numberOfEntries)
-    {
+    public ArrayList<HistoricalData> getHistoricalData(int tickerId)
+    {	
     	if(historicalDataHashMap.get(tickerId) == null)
     		return null;
-    	else if(historicalDataHashMap.get(tickerId).size() < numberOfEntries)
+    	//else if(historicalDataHashMap.get(tickerId).size() < numberOfEntries)
+    	else if(finishedLoadingHistoricalData.get(tickerId) == false)
     		return null;
     	else
     		return historicalDataHashMap.get(tickerId);
@@ -795,15 +798,19 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public void historicalData(int reqId, String date, double open,
 			double high, double low, double close, int volume, int count,
 			double WAP, boolean hasGaps) {
-		// TODO Auto-generated method stub
 		System.out.println(EWrapperMsgGenerator.historicalData(reqId, date, open, high, low, close, volume, count, WAP, hasGaps));
+		ArrayList<HistoricalData> historicalDataArray = historicalDataHashMap.get(reqId);
 		
 		// If this is the last entry and null, return
 		if(WAP == -1.0)
+		{
+			finishedLoadingHistoricalData.put(reqId, true);
 			return;
-		
-		ArrayList<HistoricalData> historicalDataArray = historicalDataHashMap.get(reqId);
-		historicalDataArray.add(new HistoricalData(reqId, date, open, high, low, close, volume, count, WAP, hasGaps));
+		}
+		else
+		{
+			historicalDataArray.add(new HistoricalData(reqId, date, open, high, low, close, volume, count, WAP, hasGaps));
+		}
 		
 		//
 		//if(historicalDataArray.size() == 1)

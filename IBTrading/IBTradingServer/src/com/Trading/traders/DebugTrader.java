@@ -68,7 +68,7 @@ public class DebugTrader extends Trader
 		}
 	}
 	
-	private int getHistoricalData(int durationInt, String durationStr, String endDateTime, String barSizeSetting, String whatToShow)
+	private int getHistoricalData(String durationStr, String endDateTime, String barSizeSetting, String whatToShow)
 	{
 		int tickerID = tradingAPI.subscribeToHistoricalData(parser.symbol, endDateTime, durationStr, barSizeSetting, whatToShow);
 		
@@ -76,7 +76,7 @@ public class DebugTrader extends Trader
 			return tickerID;
 		
 		// Wait until we have received the market data
-		while(tradingAPI.getHistoricalData(tickerID, durationInt) == null){};
+		while(tradingAPI.getHistoricalData(tickerID) == null){};
 		
 		return tickerID;
 	}
@@ -109,17 +109,17 @@ public class DebugTrader extends Trader
 		
 		// Gets the VWAP of yesterday, last week, and last month
 		String durationStr = IBTradingAPI.ONEDAYINTEGER + IBTradingAPI.DAYS;
-		int tickerID = getHistoricalData(IBTradingAPI.ONEDAYINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
-		ArrayList<HistoricalData> historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEDAYINTEGER);
+		int tickerID = getHistoricalData(durationStr, endDateTime, barSizeSetting, whatToShow);
+		ArrayList<HistoricalData> historicalDataArray = tradingAPI.getHistoricalData(tickerID);
 		totalCashTradedYesterday = historicalDataArray.get(0).totalCashTradedInInterval;
 		
 		if(tickerID == -1)
 			return false;
 		
 		durationStr = IBTradingAPI.ONEWEEKINTEGER + IBTradingAPI.DAYS;
-		tickerID = getHistoricalData(IBTradingAPI.ONEWEEKINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
-		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEWEEKINTEGER);
-		for(int i = 0; i < IBTradingAPI.ONEWEEKINTEGER; i++)
+		tickerID = getHistoricalData(durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID);
+		for(int i = 0; i < historicalDataArray.size(); i++)
 		{
 			totalCashTradedLastWeek += historicalDataArray.get(i).totalCashTradedInInterval;
 		}
@@ -128,9 +128,9 @@ public class DebugTrader extends Trader
 			return false;
 		
 		durationStr = IBTradingAPI.ONEMONTHINTEGER + IBTradingAPI.DAYS;
-		tickerID = getHistoricalData(IBTradingAPI.ONEMONTHINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
-		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.ONEMONTHINTEGER);
-		for(int i = 0; i < IBTradingAPI.ONEMONTHINTEGER; i++)
+		tickerID = getHistoricalData(durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID);
+		for(int i = 0; i < historicalDataArray.size(); i++)
 		{
 			totalCashTradedLastMonth += historicalDataArray.get(i).totalCashTradedInInterval;
 		}
@@ -140,27 +140,28 @@ public class DebugTrader extends Trader
 		
 		// Get the information about the volume of the stock over the last 30 minutes
         // If it is a Sunday or Monday, use Friday's date
-        if(dayOfWeek != 1 && dayOfWeek != 2)
-        	cal.add(Calendar.DATE, 1);
+        //if(dayOfWeek != 1 && dayOfWeek != 2)
+        cal = Calendar.getInstance();
 		
 		barSizeSetting = IBTradingAPI.ONEMINUTE;
 		dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
 		endDateTime = dateFormat.format(cal.getTime()) + " CST";
+		endDateTime = "20140331 2:10:00 CST"; // DEBUG TIME
 
 		// Get the average/medium volume from the last 30 minutes
 		ArrayList<Integer> volumeList = new ArrayList<Integer>();
 		durationStr = IBTradingAPI.EIGHTEENHUNDREDSECONDINTEGER + IBTradingAPI.SECONDS;
-		tickerID = getHistoricalData(IBTradingAPI.THIRTYMINUTEINTEGER, durationStr, endDateTime, barSizeSetting, whatToShow);
-		historicalDataArray = tradingAPI.getHistoricalData(tickerID,IBTradingAPI.THIRTYMINUTEINTEGER);
-		for(int i = 0; i < IBTradingAPI.THIRTYMINUTEINTEGER; i++)
+		tickerID = getHistoricalData(durationStr, endDateTime, barSizeSetting, whatToShow);
+		historicalDataArray = tradingAPI.getHistoricalData(tickerID);
+		for(int i = 0; i < historicalDataArray.size(); i++)
 		{
 			volumeList.add(historicalDataArray.get(i).volume);
 			averageVolumeInLast30Minutes += historicalDataArray.get(i).volume;
 		}
 
 		java.util.Collections.sort(volumeList);
-		medianVolumeInLast30Minutes = volumeList.get(IBTradingAPI.THIRTYMINUTEINTEGER/2);
-		averageVolumeInLast30Minutes /= IBTradingAPI.THIRTYMINUTEINTEGER;
+		medianVolumeInLast30Minutes = volumeList.get(volumeList.size()/2);
+		averageVolumeInLast30Minutes /= volumeList.size();
 		
 		System.out.println("Median Volume in the last 30 minutes: " + medianVolumeInLast30Minutes);
 		System.out.println("Average Volume in the last 30 minutes: " + averageVolumeInLast30Minutes);
