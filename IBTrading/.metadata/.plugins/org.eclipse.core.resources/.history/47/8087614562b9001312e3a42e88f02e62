@@ -140,7 +140,7 @@ public class JasonBondsTrader extends Trader{
 		
 		// Get the information about the volume of the stock over the last 30 minutes
         // If it is a Sunday or Monday, use Friday's date
-		/*
+		
         if(dayOfWeek != 1 && dayOfWeek != 2)
         	cal.add(Calendar.DATE, 1);
 		
@@ -168,7 +168,7 @@ public class JasonBondsTrader extends Trader{
 		
 		System.out.println("Median Volume in the last 30 minutes: " + medianVolumeInLast30Minutes);
 		System.out.println("Average Volume in the last 30 minutes: " + averageVolumeInLast30Minutes);
-		*/
+		
 		// If the total amount of money thrown around is estimated to move the market, go ahead
 		if(totalCashTradedYesterday < 999999999.9)
 			return true;

@@ -134,8 +134,8 @@ def decodeSubject(email_message):
     
 
 ### MAIN ###
-debug = False
-serverName = 'IBTradingServer' # 'TradingServer'
+debug = True
+serverName = 'TradingServer' # 'IBTradingServer' 
 url = 'http://localhost:8080/' + serverName + '/RemoteProcedureCallsServlet?'
 print url
 
