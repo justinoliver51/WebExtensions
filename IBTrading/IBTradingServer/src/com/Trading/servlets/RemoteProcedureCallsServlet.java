@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -16,14 +17,18 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
+import com.Trading.ib.HistoricalData;
+import com.Trading.ib.HistoricalDataCollector;
 import com.Trading.ib.IBTradingAPI;
-import com.Trading.tdameritrade.TDAmeritradeAPI;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class RemoteProcedureCallsServlet
  */
 @WebServlet("/RemoteProcedureCallsServlet")
-//http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet
+//http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?startUp=true
+//http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?historicalDataSym=GOOG&historicalDataTimestamp=1395316152
+
 public class RemoteProcedureCallsServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -154,11 +159,13 @@ public class RemoteProcedureCallsServlet extends HttpServlet
         	DB = new Database(ConnPool);
         }
         
-        String startUp 	= request.getParameter("startUp");
-		String traderID = request.getParameter("traderID");
-		String newTrade = request.getParameter("newTrade");
-		String debug 	= request.getParameter("debug");
-		String realTimeSystem = request.getParameter("realTimeSystem");
+        String startUp 					= request.getParameter("startUp");
+        String historicalDataSym 		= request.getParameter("historicalDataSym");
+        String historicalDataTimestamp	= request.getParameter("historicalDataTimestamp");
+		String traderID 				= request.getParameter("traderID");
+		String newTrade 				= request.getParameter("newTrade");
+		String debug 					= request.getParameter("debug");
+		String realTimeSystem 			= request.getParameter("realTimeSystem");
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
@@ -171,6 +178,19 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		{
 			System.out.println("System started up!");
 			out.println("System started up!");
+			return;
+		}
+		
+		// If historical data has been requested, return it
+		if( (historicalDataSym != null) && (historicalDataTimestamp != null) )
+		{
+			System.out.println("Historical Data requested!");
+			
+			Gson gson = new Gson();
+			HistoricalDataCollector dataCollector = new HistoricalDataCollector(tradingAPI);
+			ArrayList<HistoricalData> data = dataCollector.collectHistoricalData(historicalDataSym, historicalDataTimestamp);
+			
+			out.println(gson.toJson(data));
 			return;
 		}
 		
