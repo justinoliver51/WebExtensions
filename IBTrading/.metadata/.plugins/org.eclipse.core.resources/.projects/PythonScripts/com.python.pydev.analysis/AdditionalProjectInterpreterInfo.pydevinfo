@@ -21,24 +21,26 @@ JasonBondsParser|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading
 1=tdameritradeapi
 -- END DICTIONARY
 -- START TREE 1
-41
+43
 api|1|api!11@
+bui|1|buildPlot!18@
 cle|1|cleanUpTradingData!18@
 cli|2|clipboard_file!27@CLIENT_SECRETS!19@
-con|1|connect!34@
+con|2|connect!34@connect!18@
 cur|1|currentEmail!35@
 dan|2|DANS_CELL!35@DANS_CELL!43@
 dat|1|data!27@
 deb|2|debug!43@debug!35@
-dec|1|decodeSubject!34@
+dec|2|decodeSubject!18@decodeSubject!34@
 ema|2|email_message!35@email!43@
 enc|2|encodedParams!43@encodedParams!35@
 ext|1|extractsms!42@
 flo|1|FLOW!19@
-get|5|getClipboardData!26@get_files_in_folder!18@getTradingData!18@get_emails!34@getEmailBody!34@
+get|9|getClipboardData!26@get_files_in_folder!18@getTradingData!18@getAlertHistory!18@getTradeHistory!18@get_emails!34@getEmailBody!18@get_emails!18@getEmailBody!34@
+his|1|HISTORY_TIMESTAMP!19@
 ind|1|index!35@
 ins|1|insertIntoDatabase!18@
-jas|3|JasonBondsParser!33@JasonBondsParser!41@JasonBondsParser!49@
+jas|4|JasonBondsParser!17@JasonBondsParser!33@JasonBondsParser!41@JasonBondsParser!49@
 jus|2|JUSTINS_CELL!43@JUSTINS_CELL!35@
 las|1|lastReadSMS!43@
 lat|3|latestEmail!35@latestEmailTimestamp!35@latest_email_uid!35@
@@ -66,14 +68,14 @@ voi|2|voice!43@voice!35@
 -- END TREE
 -- START TREE 2
 12
-__i|4|__init__!6&50@__init__!6&42@__init__!6&34@__init__!7&10@
+__i|5|__init__!6&50@__init__!6&18@__init__!6&42@__init__!6&34@__init__!7&10@
 bas|1|bassURL!8&11@
 coo|1|cookies!8&11@
 deb|1|debugFlag!8&11@
-get|3|getTrade!6&34@getTrade!6&50@getTrade!6&42@
+get|4|getTrade!6&34@getTrade!6&50@getTrade!6&18@getTrade!6&42@
 ini|2|initiateGetRequest!7&10@initiatePostRequest!7&10@
 log|1|loginRequest!7&10@
-par|3|parseTrade!6&42@parseTrade!6&34@parseTrade!6&50@
+par|4|parseTrade!6&42@parseTrade!6&34@parseTrade!6&18@parseTrade!6&50@
 pas|1|password!8&11@
 sou|1|sourceID!8&11@
 use|1|userID!8&11@
