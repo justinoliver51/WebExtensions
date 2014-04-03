@@ -20,11 +20,11 @@ public class HistoricalDataCollector
 		Long timestampLong = Long.parseLong(timestampString);
 		Timestamp timestamp = new Timestamp(timestampLong);
 		
-		String barSizeSetting = IBTradingAPI.ONEMINUTE;
+		String barSizeSetting = IBTradingAPI.ONESECOND;
 		String whatToShow = IBTradingAPI.TRADES;
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
 		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-		String endDateTime = dateFormat.format(timestamp) + " GMT";
+		String endDateTime = dateFormat.format(timestamp) ; //+ " GMT";
 		String durationStr = IBTradingAPI.EIGHTEENHUNDREDSECONDINTEGER + IBTradingAPI.SECONDS;
 		
 		// Get the historical data

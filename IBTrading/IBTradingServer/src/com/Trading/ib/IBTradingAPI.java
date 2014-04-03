@@ -60,7 +60,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public static final String OPTION_IMPLIED_VOLATILITY 	= "OPTION_IMPLIED_VOLATILITY";
 			
 	// barSizeSetting
-	public static final String ONESECOND 		= "1 sec";	
+	public static final String ONESECOND 		= "1 secs";	
 	public static final String FIVESECONDS 		= "5 secs";
 	public static final String FIFTEENSECONDS 	= "15 secs";
 	public static final String THIRTYSECONDS 	= "30 secs";

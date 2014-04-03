@@ -4,6 +4,7 @@ import email.utils
 import urllib2
 import urllib
 import string
+import MySQLdb
 
 import httplib2
 import os
@@ -190,6 +191,37 @@ def getAlertHistory():
     
     return alertHistory
 
+################# DATABASE #################
+def insertHistoricalData(historicalData):
+    mydb = MySQLdb.connect(host='127.0.0.1',
+                           user='justinoliver51',
+                           passwd='utredhead51',
+                           db='IBTradingDB')
+    cursor = mydb.cursor()
+    tableName = 'HistoricalData'
+    columns = ''
+
+    for dataPoint in historicalData:
+        values = ''
+        
+        # Build values list
+        
+        # Build query
+        query = 'INSERT INTO ' + tableName + ' (' + columns + ') \
+              VALUES(' + row + ')'
+        print query
+        
+        try:
+            cursor.execute(query)
+        except:
+            self.connection.rollback()
+    #close the connection to the database.
+    mydb.commit()
+    cursor.close()
+    print "Done"
+    
+    return
+
 ################# MAIN FUNCTION #################
 def main():
     # Search through emails. Get the following data for each Jason Bonds trade:
@@ -208,3 +240,6 @@ def main():
     
 if __name__ == '__main__':
   main()
+
+
+
