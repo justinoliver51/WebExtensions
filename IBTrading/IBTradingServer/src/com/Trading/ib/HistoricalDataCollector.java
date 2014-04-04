@@ -23,8 +23,8 @@ public class HistoricalDataCollector
 		String barSizeSetting = IBTradingAPI.ONESECOND;
 		String whatToShow = IBTradingAPI.TRADES;
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-		String endDateTime = dateFormat.format(timestamp) ; //+ " GMT";
+		dateFormat.setTimeZone(TimeZone.getTimeZone("CST"));
+		String endDateTime = dateFormat.format(timestamp) + " CST";
 		String durationStr = IBTradingAPI.EIGHTEENHUNDREDSECONDINTEGER + IBTradingAPI.SECONDS;
 		
 		// Get the historical data

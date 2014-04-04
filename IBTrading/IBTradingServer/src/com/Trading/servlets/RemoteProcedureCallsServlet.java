@@ -152,7 +152,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		PrintWriter out = response.getWriter();
 		response.setHeader("Access-Control-Allow-Origin", "*");
         System.out.println("-----------------------\ndoGet() called!  :)");
-        out.println("-----------------------\ndoGet() called");
+        //out.println("-----------------------\ndoGet() called");
         
         synchronized (session)
         {
@@ -171,7 +171,6 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		Date date = new Date();
 		
 		System.out.println("traderID: " + traderID + "\ntrade: " + newTrade + "\nrealTimeSystem: " + realTimeSystem + "\non date: " + dateFormat.format(date));
-		out.println("traderID: " + traderID + "\ntrade: " + newTrade + "\nrealTimeSystem: " + realTimeSystem + "\non date: " + dateFormat.format(date));
 		
 		// If we are just starting up, exit!
 		if(startUp != null)
@@ -205,6 +204,8 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			return;
 		}
 		*/
+		
+		out.println("traderID: " + traderID + "\ntrade: " + newTrade + "\nrealTimeSystem: " + realTimeSystem + "\non date: " + dateFormat.format(date));
 		
 		// Invalid parameters
 		if( (traderID == null) || (newTrade == null) || (realTimeSystem == null) || 
