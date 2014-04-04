@@ -1,0 +1,5 @@
+package com.Trading.traders;
+
+public class HistoricalDataCollector {
+
+}

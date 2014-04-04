@@ -27,7 +27,7 @@ import com.google.gson.Gson;
  */
 @WebServlet("/RemoteProcedureCallsServlet")
 //http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?startUp=true
-//http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?historicalDataSym=GOOG&historicalDataTimestamp=1395316152000
+//http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?historicalDataSym=GOOG&historicalDataTimestamp=1395316152
 
 public class RemoteProcedureCallsServlet extends HttpServlet 
 {

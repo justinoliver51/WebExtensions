@@ -1,0 +1,5 @@
+package com.Trading.ib;
+
+public class HistoricalDataCollector {
+
+}
