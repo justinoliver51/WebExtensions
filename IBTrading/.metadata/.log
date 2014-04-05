@@ -11103,3 +11103,101 @@ Binding(ALT+COMMAND+R,
 
 !ENTRY org.eclipse.ui 4 4 2014-04-03 12:27:12.007
 !MESSAGE Unable to find Action Set: org.eclipse.cdt.debug.ui.debugActionSet
+!SESSION 2014-04-04 00:22:59.945 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130605-2000
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.jee.product -keyring /Users/justinoliver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-04-04 00:23:17.717
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2014-04-04 00:23:18.493
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-04 00:23:18.493
+!MESSAGE A conflict occurred for ALT+COMMAND+R:
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.python.pydev.debug.setnext,Set Next Statement,
+		,
+		Category(org.python.pydev.ui.category.run,PyDev - Run,Python run category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@b25f027,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@67b99628,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.eclipse.osgi 2 0 2014-04-04 00:27:08.700
+!MESSAGE While loading class "org.eclipse.jdt.internal.debug.ui.MemberActionFilter", thread "Thread[Worker-1,5,main]" timed out waiting (5004ms) for thread "Thread[Worker-7,5,main]" to finish starting bundle "org.eclipse.jdt.debug.ui_3.6.200.v20130514-0841 [351]". To avoid deadlock, thread "Thread[Worker-1,5,main]" is proceeding but "org.eclipse.jdt.internal.debug.ui.MemberActionFilter" may not be fully initialized.
+!STACK 0
+org.osgi.framework.BundleException: State change in progress for bundle "reference:file:plugins/org.eclipse.jdt.debug.ui_3.6.200.v20130514-0841.jar" by thread "Worker-7".
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.jdt.internal.debug.ui.ActionFilterAdapterFactory.getAdapter(ActionFilterAdapterFactory.java:42)
+	at org.eclipse.core.internal.runtime.AdapterManager.getAdapter(AdapterManager.java:295)
+	at org.eclipse.core.runtime.PlatformObject.getAdapter(PlatformObject.java:66)
+	at org.eclipse.ui.internal.util.Util.getAdapter(Util.java:110)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.getActionFilter(ActionExpression.java:471)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.preciselyMatches(ActionExpression.java:524)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.isEnabledFor(ActionExpression.java:499)
+	at org.eclipse.ui.internal.ActionExpression$SingleExpression.isEnabledFor(ActionExpression.java:743)
+	at org.eclipse.ui.internal.ActionExpression.isEnabledFor(ActionExpression.java:1053)
+	at org.eclipse.ui.internal.decorators.DecoratorDefinition.isEnabledFor(DecoratorDefinition.java:281)
+	at org.eclipse.ui.internal.decorators.DecoratorManager.getDecoratorsFor(DecoratorManager.java:382)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecoratorsFor(LightweightDecoratorManager.java:315)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:340)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:371)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:331)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	... 29 more
+Root exception:
+org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.beginStateChange(AbstractBundle.java:1088)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.start(AbstractBundle.java:298)
+	at org.eclipse.osgi.framework.util.SecureAction.start(SecureAction.java:478)
+	at org.eclipse.osgi.internal.loader.BundleLoader.setLazyTrigger(BundleLoader.java:263)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseLazyStarter.postFindLocalClass(EclipseLazyStarter.java:109)
+	at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.findLocalClass(ClasspathManager.java:469)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.findLocalClass(DefaultClassLoader.java:216)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findLocalClass(BundleLoader.java:395)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClassInternal(BundleLoader.java:464)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:421)
+	at org.eclipse.osgi.internal.loader.BundleLoader.findClass(BundleLoader.java:412)
+	at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.loadClass(DefaultClassLoader.java:107)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	at org.eclipse.jdt.internal.debug.ui.ActionFilterAdapterFactory.getAdapter(ActionFilterAdapterFactory.java:42)
+	at org.eclipse.core.internal.runtime.AdapterManager.getAdapter(AdapterManager.java:295)
+	at org.eclipse.core.runtime.PlatformObject.getAdapter(PlatformObject.java:66)
+	at org.eclipse.ui.internal.util.Util.getAdapter(Util.java:110)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.getActionFilter(ActionExpression.java:471)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.preciselyMatches(ActionExpression.java:524)
+	at org.eclipse.ui.internal.ActionExpression$ObjectStateExpression.isEnabledFor(ActionExpression.java:499)
+	at org.eclipse.ui.internal.ActionExpression$SingleExpression.isEnabledFor(ActionExpression.java:743)
+	at org.eclipse.ui.internal.ActionExpression.isEnabledFor(ActionExpression.java:1053)
+	at org.eclipse.ui.internal.decorators.DecoratorDefinition.isEnabledFor(DecoratorDefinition.java:281)
+	at org.eclipse.ui.internal.decorators.DecoratorManager.getDecoratorsFor(DecoratorManager.java:382)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecoratorsFor(LightweightDecoratorManager.java:315)
+	at org.eclipse.ui.internal.decorators.LightweightDecoratorManager.getDecorations(LightweightDecoratorManager.java:340)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.ensureResultCached(DecorationScheduler.java:371)
+	at org.eclipse.ui.internal.decorators.DecorationScheduler$1.run(DecorationScheduler.java:331)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)

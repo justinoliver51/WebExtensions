@@ -11,16 +11,18 @@ PriceDifferential|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTradin
 JasonBondsParser|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/JasonBondsParser.py
 -- END DISKCACHE
 -- START DICTIONARY
-9
+11
 6=SMSMonitor
 3=SharedClipboard
+8=Database
 5=HistoricalDataCollector
 4=EmailMonitor
-9=TDAmeritradeAPI.__init__
-8=TDAmeritradeAPI
+10=TDAmeritradeAPI.__init__
+9=TDAmeritradeAPI
 7=JasonBondsParser
 2=PriceDifferential
 1=tdameritradeapi
+11=Database.__init__
 -- END DICTIONARY
 -- START TREE 1
 43
@@ -31,7 +33,7 @@ cli|2|clipboard_file!27@CLIENT_SECRETS!19@
 con|3|connect!34@connect!42@connect!18@
 cur|1|currentEmail!35@
 dan|2|DANS_CELL!35@DANS_CELL!51@
-dat|1|data!27@
+dat|2|Database!41@data!27@
 deb|2|debug!51@debug!35@
 dec|3|decodeSubject!18@decodeSubject!42@decodeSubject!34@
 ema|2|email_message!35@email!51@
@@ -41,7 +43,7 @@ flo|1|FLOW!19@
 get|12|getClipboardData!26@get_files_in_folder!18@getTradingData!18@getAlertHistory!18@getTradeHistory!18@get_emails!34@get_emails!42@getEmailBody!18@getEmailBody!42@get_emails!18@getEmailBody!34@getAlertHistory!42@
 his|2|HISTORY_TIMESTAMP!43@HISTORY_TIMESTAMP!19@
 ind|1|index!35@
-ins|2|insertIntoDatabase!18@insertHistoricalData!42@
+ins|3|insertIntoDatabase!18@insertHistoricalData!42@insertTradeAlert!42@
 jas|5|JasonBondsParser!17@JasonBondsParser!33@JasonBondsParser!49@JasonBondsParser!41@JasonBondsParser!57@
 jus|2|JUSTINS_CELL!51@JUSTINS_CELL!35@
 las|1|lastReadSMS!51@
@@ -65,21 +67,28 @@ tda|1|TDAmeritradeAPI!9@
 tim|1|timestamp!35@
 tra|3|traderID!35@trade!35@tradeList!51@
 tyl|2|TYLERS_CELL!35@TYLERS_CELL!51@
-url|2|url!51@url!35@
+url|3|url!51@url!43@url!35@
 voi|2|voice!51@voice!35@
 -- END TREE
 -- START TREE 2
-12
-__i|6|__init__!7&58@__init__!7&18@__init__!7&50@__init__!7&42@__init__!7&34@__init__!8&10@
-bas|1|bassURL!9&11@
-coo|1|cookies!9&11@
-deb|1|debugFlag!9&11@
-get|5|getTrade!7&34@getTrade!7&58@getTrade!7&42@getTrade!7&18@getTrade!7&50@
-ini|2|initiateGetRequest!8&10@initiatePostRequest!8&10@
-log|1|loginRequest!8&10@
+19
+__d|1|__del__!8&42@
+__i|7|__init__!7&58@__init__!7&18@__init__!7&50@__init__!8&42@__init__!7&42@__init__!7&34@__init__!9&10@
+bas|1|bassURL!10&11@
+con|1|connection!11&43@
+coo|1|cookies!10&11@
+cur|1|cursor!11&43@
+db|1|db!8&43@
+deb|1|debugFlag!10&11@
+get|6|getTrade!7&34@getTrade!7&58@getTrade!7&42@getTrade!7&18@getTrade!7&50@getLastRowID!8&42@
+hos|1|host!8&43@
+ini|2|initiateGetRequest!9&10@initiatePostRequest!9&10@
+ins|1|insert!8&42@
+log|1|loginRequest!9&10@
 par|5|parseTrade!7&50@parseTrade!7&34@parseTrade!7&42@parseTrade!7&18@parseTrade!7&58@
-pas|1|password!9&11@
-sou|1|sourceID!9&11@
-use|1|userID!9&11@
-ver|1|versionID!9&11@
+pas|2|password!10&11@password!8&43@
+que|1|query!8&42@
+sou|1|sourceID!10&11@
+use|2|user!8&43@userID!10&11@
+ver|1|versionID!10&11@
 -- END TREE

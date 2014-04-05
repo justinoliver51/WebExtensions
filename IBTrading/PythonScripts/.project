@@ -16,6 +16,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>src/HistoricalDataCollector.py</name>
+			<type>1</type>
+			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/HistoricalDataCollector.py</location>
+		</link>
+		<link>
 			<name>src/setup.py</name>
 			<type>1</type>
 			<location>/Users/justinoliver/Desktop/Developer/WebExtensions/setupTWS/setup.py</location>
