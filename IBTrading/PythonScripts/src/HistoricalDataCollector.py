@@ -183,7 +183,7 @@ def getAlertHistory():
                     # Get the data from the alert
                     tradeData = trade.split(' ')
                     alertData = {
-                                 'Date':        date,
+                                 'Date':        str(date),
                                  'Timestamp':   arrivedTimestamp,
                                  'Quantity':    tradeData[1],
                                  'Price':       tradeData[4],
@@ -267,16 +267,16 @@ def main():
     # - Number of shares 
     # - Price
     # - Symbol
-    tradeAlertsHistory = getAlertHistory()
-    print json.dumps(tradeAlertsHistory, indent=2)
+    #tradeAlertsHistory = getAlertHistory()
+    #print json.dumps(tradeAlertsHistory, indent=2)
     
-    f = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt','w')
-    f.write(json.dumps(tradeAlertsHistory, indent=2)) # python will convert \n to os.linesep
-    f.close() # you can omit in most cases as the destructor will call if
+    #f = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt','w')
+    #f.write(json.dumps(tradeAlertsHistory, indent=2)) # python will convert \n to os.linesep
+    #f.close() # you can omit in most cases as the destructor will call if
     
-    #theFile = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt', 'r')
-    #tradeAlertsHistory =json.loads(theFile.read())
-    #theFile.close()
+    theFile = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt', 'r')
+    tradeAlertsHistory =json.loads(theFile.read())
+    theFile.close()
     
     db = Database()
     twentyMinutes = 60 * 20

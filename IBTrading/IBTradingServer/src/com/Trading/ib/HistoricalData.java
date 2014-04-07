@@ -23,6 +23,7 @@ public class HistoricalData
 		open = newOpen;
 		high = newHigh;
 		low = newLow;
+		close = newClose;
 		barCount = newCount;
 		volume = newVolume;
 		WAP = newWAP;
