@@ -18,7 +18,7 @@ from email.header import decode_header
 
 # GLOBALS
 HISTORY_TIMESTAMP = 0 # 1388534400 --- New Year         # Starting time for email searching
-url = 'http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?'
+url = 'http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?'
 
 ################# EMAIL CLASSES/FUNCTIONS #################
 class JasonBondsParser:
@@ -88,13 +88,6 @@ def connect(retries=5, delay=3):
                 time.sleep(delay)
             else:
                 raise
-
-def get_emails(email_ids):
-    data = []
-    for e_id in email_ids:
-        _, response = mail.fetch(e_id, '(UID BODY[TEXT])')
-        data.append(response[0][1])
-    return data
 
 def getEmailBody(email_message):
     
@@ -251,6 +244,8 @@ def insertTradeAlert(database, tradeAlert):
     return id
 
 def insertHistoricalData(database, historicalData, tradeID):
+    historicalData = historicalData['HistoricalData']
+    
     for data in historicalData:
         query = ('''INSERT INTO HistoricalData (TradeID, Date, Open, High, Low, Close, BarCount, Volume, WAP, HasGaps) 
               VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''', \
@@ -274,14 +269,12 @@ def main():
     #f.write(json.dumps(tradeAlertsHistory, indent=2)) # python will convert \n to os.linesep
     #f.close() # you can omit in most cases as the destructor will call if
     
-    theFile = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt', 'r')
+    theFile = open('/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/Resources/AlertHistoryRemaining.txt', 'r')
     tradeAlertsHistory =json.loads(theFile.read())
     theFile.close()
     
     db = Database()
     twentyMinutes = 60 * 20
-    
-    sys.exit()
     
     for tradeAlert in tradeAlertsHistory:
         

@@ -9,3 +9,5 @@
 /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload
 /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC
 /Library/Python/2.7/site-packages
+/Library/Python/2.7/site-packages/MySQL_python-1.2.3-py2.7-macosx-10.8-intel.egg
+/Library/Python/2.7/site-packages/httplib2-0.8-py2.7.egg-info

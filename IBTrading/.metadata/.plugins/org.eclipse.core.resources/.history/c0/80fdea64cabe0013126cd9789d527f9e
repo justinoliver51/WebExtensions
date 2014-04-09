@@ -1,0 +1,765 @@
+[
+  {
+    "Date": "2014-03-31 14:47:36-04:00", 
+    "Timestamp": 1396545720, 
+    "Price": "3.45", 
+    "Symbol": "DGAZ", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-04-02 23:12:49-05:00", 
+    "Timestamp": 1396498369, 
+    "Price": "7.52", 
+    "Symbol": "PLUG", 
+    "Quantity": "7000"
+  }, 
+  {
+    "Date": "2014-03-31 11:11:04-04:00", 
+    "Timestamp": 1396278664, 
+    "Price": "4.52", 
+    "Symbol": "YOD", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-28 11:30:48-04:00", 
+    "Timestamp": 1396020648, 
+    "Price": "1.05", 
+    "Symbol": "TRTC", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2014-03-27 17:46:03-04:00", 
+    "Timestamp": 1395956763, 
+    "Price": "4.56", 
+    "Symbol": "ZNGA", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-27 10:35:09-04:00", 
+    "Timestamp": 1395930909, 
+    "Price": "3.22", 
+    "Symbol": "END", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-27 09:58:10-04:00", 
+    "Timestamp": 1395928690, 
+    "Price": "8.50", 
+    "Symbol": "MOBI", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2014-03-27 9:11:36 CST", 
+    "Timestamp": 1395929460, 
+    "Price": "3.58", 
+    "Symbol": "DGAZ", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-24 09:51:50-04:00", 
+    "Timestamp": 1395669110, 
+    "Price": "4.33", 
+    "Symbol": "BLDP", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-20 09:44:32-04:00", 
+    "Timestamp": 1395323072, 
+    "Price": "6.10", 
+    "Symbol": "PLUG", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-19 13:51:08-04:00", 
+    "Timestamp": 1395251468, 
+    "Price": "4.37", 
+    "Symbol": "OPTT", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-19 10:59:40-04:00", 
+    "Timestamp": 1395241180, 
+    "Price": "3.55", 
+    "Symbol": "MEET", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-19 10:27:03-04:00", 
+    "Timestamp": 1395239223, 
+    "Price": "3.23", 
+    "Symbol": "FNMA", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-18 09:58:05-04:00", 
+    "Timestamp": 1395151085, 
+    "Price": "4.65", 
+    "Symbol": "EKSO", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-17 10:41:40-04:00", 
+    "Timestamp": 1395067300, 
+    "Price": ".083", 
+    "Symbol": "FITX", 
+    "Quantity": "200000"
+  }, 
+  {
+    "Date": "2014-03-17 10:23:28-04:00", 
+    "Timestamp": 1395066208, 
+    "Price": "5.30", 
+    "Symbol": "YOD", 
+    "Quantity": "7000"
+  }, 
+  {
+    "Date": "2014-03-17 09:43:23-04:00", 
+    "Timestamp": 1395063803, 
+    "Price": "3.98", 
+    "Symbol": "HILL", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-14 10:41:26-04:00", 
+    "Timestamp": 1394808086, 
+    "Price": "4.90", 
+    "Symbol": "VEND", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2014-03-13 12:32:52-04:00", 
+    "Timestamp": 1394728372, 
+    "Price": "5.30", 
+    "Symbol": "YOD", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2014-03-13 10:46:17-04:00", 
+    "Timestamp": 1394721977, 
+    "Price": "5.03", 
+    "Symbol": "YOD", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-12 15:27:26-04:00", 
+    "Timestamp": 1394652446, 
+    "Price": "3.89", 
+    "Symbol": "RENN", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-10 14:58:45-04:00", 
+    "Timestamp": 1394477925, 
+    "Price": "9.89", 
+    "Symbol": "SKUL", 
+    "Quantity": "3000"
+  }, 
+  {
+    "Date": "2014-03-06 13:26:38-05:00", 
+    "Timestamp": 1394130398, 
+    "Price": "7.12", 
+    "Symbol": "TVIX", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-06 10:51:04-05:00", 
+    "Timestamp": 1394121064, 
+    "Price": "24", 
+    "Symbol": "ZDPY", 
+    "Quantity": "1000"
+  }, 
+  {
+    "Date": "2014-03-05 13:04:30-05:00", 
+    "Timestamp": 1394042670, 
+    "Price": "6.81", 
+    "Symbol": "PLUG", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-05 11:55:58-05:00", 
+    "Timestamp": 1394038558, 
+    "Price": "4.10", 
+    "Symbol": "OPTT", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-05 11:41:01-05:00", 
+    "Timestamp": 1394037661, 
+    "Price": "3.41", 
+    "Symbol": "DGAZ", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-04 10:10:07-05:00", 
+    "Timestamp": 1393945807, 
+    "Price": "3.83", 
+    "Symbol": "VIMC", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-03-04 09:42:36-05:00", 
+    "Timestamp": 1393944156, 
+    "Price": "5.05", 
+    "Symbol": "YOD", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-02-27 15:10:39-05:00", 
+    "Timestamp": 1393531839, 
+    "Price": "8.74", 
+    "Symbol": "ARIA", 
+    "Quantity": "3000"
+  }, 
+  {
+    "Date": "2014-02-27 12:29:47-05:00", 
+    "Timestamp": 1393522187, 
+    "Price": "1.39", 
+    "Symbol": "GEVO", 
+    "Quantity": "30000"
+  }, 
+  {
+    "Date": "2014-02-27 10:21:00-05:00", 
+    "Timestamp": 1393514460, 
+    "Price": "5.43", 
+    "Symbol": "YOD", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-02-26 12:16:16-05:00", 
+    "Timestamp": 1393434976, 
+    "Price": "4.07", 
+    "Symbol": "OPTT", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-02-26 11:52:08-05:00", 
+    "Timestamp": 1393433528, 
+    "Price": ".37", 
+    "Symbol": "PHOT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-02-24 11:05:32-05:00", 
+    "Timestamp": 1393257932, 
+    "Price": ".144", 
+    "Symbol": "HEMP", 
+    "Quantity": "200000"
+  }, 
+  {
+    "Date": "2014-02-24 09:53:04-05:00", 
+    "Timestamp": 1393253584, 
+    "Price": "3.67", 
+    "Symbol": "PLUG", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2014-02-20 10:34:17-05:00", 
+    "Timestamp": 1392910457, 
+    "Price": "3.05", 
+    "Symbol": "DGAZ", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2014-02-18 15:03:41-05:00", 
+    "Timestamp": 1392753821, 
+    "Price": ".84", 
+    "Symbol": "ROX", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2014-02-18 10:34:16-05:00", 
+    "Timestamp": 1392737656, 
+    "Price": "5.77", 
+    "Symbol": "YOD", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-02-14 14:14:30-05:00", 
+    "Timestamp": 1392405270, 
+    "Price": ".355", 
+    "Symbol": "PHOT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-02-14 12:29:35-05:00", 
+    "Timestamp": 1392398975, 
+    "Price": ".23", 
+    "Symbol": "LQMT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-02-12 13:49:54-05:00", 
+    "Timestamp": 1392230994, 
+    "Price": "5.33", 
+    "Symbol": "YOD", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-02-11 12:06:00-05:00", 
+    "Timestamp": 1392138360, 
+    "Price": ".315", 
+    "Symbol": "PHOT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-02-07 13:38:59-05:00", 
+    "Timestamp": 1391798339, 
+    "Price": "15.79", 
+    "Symbol": "LIVE", 
+    "Quantity": "2000"
+  }, 
+  {
+    "Date": "2014-02-04 15:29:17-05:00", 
+    "Timestamp": 1391545757, 
+    "Price": "2.66", 
+    "Symbol": "ARTX", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-02-04 12:30:29-05:00", 
+    "Timestamp": 1391535029, 
+    "Price": "4.72", 
+    "Symbol": "HILL", 
+    "Quantity": "7000"
+  }, 
+  {
+    "Date": "2014-02-04 09:43:30-05:00", 
+    "Timestamp": 1391525010, 
+    "Price": "3.48", 
+    "Symbol": "DGAZ", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-01-31 14:37:20-05:00", 
+    "Timestamp": 1391197040, 
+    "Price": ".30", 
+    "Symbol": "PHOT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-01-31 12:04:10-05:00", 
+    "Timestamp": 1391187850, 
+    "Price": "2.20", 
+    "Symbol": "KOOL", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-01-31 10:04:45-05:00", 
+    "Timestamp": 1391180685, 
+    "Price": "6.13", 
+    "Symbol": "YGE", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-01-28 10:08:46-05:00", 
+    "Timestamp": 1390921726, 
+    "Price": "11.72", 
+    "Symbol": "WLT", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2014-01-27 15:23:36-05:00", 
+    "Timestamp": 1390854216, 
+    "Price": ".47", 
+    "Symbol": "GRNH", 
+    "Quantity": "50000"
+  }, 
+  {
+    "Date": "2014-01-27 13:22:00-05:00", 
+    "Timestamp": 1390846920, 
+    "Price": "5.10", 
+    "Symbol": "DGAZ", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2014-01-27 09:37:39-05:00", 
+    "Timestamp": 1390833459, 
+    "Price": "4.90", 
+    "Symbol": "DGAZ", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2014-01-23 14:18:29-05:00", 
+    "Timestamp": 1390504709, 
+    "Price": "4.70", 
+    "Symbol": "NNVC", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2014-01-23 12:34:26-05:00", 
+    "Timestamp": 1390498466, 
+    "Price": ".44", 
+    "Symbol": "GRNH", 
+    "Quantity": "50000"
+  }, 
+  {
+    "Date": "2014-01-22 12:35:50-05:00", 
+    "Timestamp": 1390412150, 
+    "Price": ".214", 
+    "Symbol": "PHOT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-01-16 09:38:07-05:00", 
+    "Timestamp": 1389883087, 
+    "Price": "2.44", 
+    "Symbol": "BLDP", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2014-01-15 11:51:10-05:00", 
+    "Timestamp": 1389804670, 
+    "Price": "3.67", 
+    "Symbol": "PLUG", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2014-01-10 15:03:05-05:00", 
+    "Timestamp": 1389384185, 
+    "Price": ".217", 
+    "Symbol": "PHOT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-01-10 10:37:53-05:00", 
+    "Timestamp": 1389368273, 
+    "Price": ".20", 
+    "Symbol": "PHOT", 
+    "Quantity": "100000"
+  }, 
+  {
+    "Date": "2014-01-09 12:26:38-05:00", 
+    "Timestamp": 1389288398, 
+    "Price": "7.17", 
+    "Symbol": "TVIX", 
+    "Quantity": "3000"
+  }, 
+  {
+    "Date": "2014-01-07 13:09:38-05:00", 
+    "Timestamp": 1389118178, 
+    "Price": "6.84", 
+    "Symbol": "MILL", 
+    "Quantity": "7000"
+  }, 
+  {
+    "Date": "2013-12-30 14:32:50-05:00", 
+    "Timestamp": 1388431970, 
+    "Price": ".1346", 
+    "Symbol": "PHOT", 
+    "Quantity": "150000"
+  }, 
+  {
+    "Date": "2013-12-27 15:12:15-05:00", 
+    "Timestamp": 1388175135, 
+    "Price": "4.72", 
+    "Symbol": "YGE", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-12-20 09:37:06-05:00", 
+    "Timestamp": 1387550226, 
+    "Price": "2.54", 
+    "Symbol": "NIHD", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-12-19 15:12:01-05:00", 
+    "Timestamp": 1387483921, 
+    "Price": "1.25", 
+    "Symbol": "GEVO", 
+    "Quantity": "30000"
+  }, 
+  {
+    "Date": "2013-12-19 11:20:40-05:00", 
+    "Timestamp": 1387470040, 
+    "Price": "4.13", 
+    "Symbol": "ZNGA", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-12-19 10:54:14-05:00", 
+    "Timestamp": 1387468454, 
+    "Price": ".80", 
+    "Symbol": "ROX", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-12-17 10:01:12-05:00", 
+    "Timestamp": 1387292472, 
+    "Price": "4.57", 
+    "Symbol": "MCP", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-12-12 10:00:07-05:00", 
+    "Timestamp": 1386860407, 
+    "Price": "5.30", 
+    "Symbol": "SD", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2013-12-10 13:42:46-05:00", 
+    "Timestamp": 1386700966, 
+    "Price": "4.34", 
+    "Symbol": "YGE", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-12-10 09:45:01-05:00", 
+    "Timestamp": 1386686701, 
+    "Price": "4.05", 
+    "Symbol": "ZNGA", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-12-05 11:37:05-05:00", 
+    "Timestamp": 1386261425, 
+    "Price": "2.65", 
+    "Symbol": "RSOL", 
+    "Quantity": "30000"
+  }, 
+  {
+    "Date": "2013-12-04 11:05:32-05:00", 
+    "Timestamp": 1386173132, 
+    "Price": "4.76", 
+    "Symbol": "CAMT", 
+    "Quantity": "8000"
+  }, 
+  {
+    "Date": "2013-12-04 09:54:13-05:00", 
+    "Timestamp": 1386168853, 
+    "Price": "2.77", 
+    "Symbol": "HL", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-12-03 10:10:40-05:00", 
+    "Timestamp": 1386083440, 
+    "Price": "5", 
+    "Symbol": "ZOOM", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2013-12-02 15:15:04-05:00", 
+    "Timestamp": 1386015304, 
+    "Price": "6.84", 
+    "Symbol": "ANR", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-12-02 12:32:06-05:00", 
+    "Timestamp": 1386005526, 
+    "Price": "2.79", 
+    "Symbol": "FNMA", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-12-02 09:46:08-05:00", 
+    "Timestamp": 1385995568, 
+    "Price": "1.09", 
+    "Symbol": "MDDD", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-11-29 10:36:27-05:00", 
+    "Timestamp": 1385739387, 
+    "Price": "4.03", 
+    "Symbol": "CAMT", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2013-11-29 09:45:03-05:00", 
+    "Timestamp": 1385736303, 
+    "Price": "13.1", 
+    "Symbol": "NQ", 
+    "Quantity": "2000"
+  }, 
+  {
+    "Date": "2013-11-22 11:28:35-05:00", 
+    "Timestamp": 1385137715, 
+    "Price": "3.56", 
+    "Symbol": "HSOL", 
+    "Quantity": "15000"
+  }, 
+  {
+    "Date": "2013-11-21 09:46:34-05:00", 
+    "Timestamp": 1385045194, 
+    "Price": "2.59", 
+    "Symbol": "RSOL", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-11-19 11:24:42-05:00", 
+    "Timestamp": 1384878282, 
+    "Price": "13.37", 
+    "Symbol": "NQ", 
+    "Quantity": "2000"
+  }, 
+  {
+    "Date": "2013-11-19 10:22:33-05:00", 
+    "Timestamp": 1384874553, 
+    "Price": "2.63", 
+    "Symbol": "FNMA", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-11-15 13:12:11-05:00", 
+    "Timestamp": 1384539131, 
+    "Price": "12.6", 
+    "Symbol": "NQ", 
+    "Quantity": "2000"
+  }, 
+  {
+    "Date": "2013-11-15 12:09:22-05:00", 
+    "Timestamp": 1384535362, 
+    "Price": "12.76", 
+    "Symbol": "TTS", 
+    "Quantity": "2000"
+  }, 
+  {
+    "Date": "2013-11-14 13:08:33-05:00", 
+    "Timestamp": 1384452513, 
+    "Price": "3.23", 
+    "Symbol": "GLUU", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-11-13 15:25:56-05:00", 
+    "Timestamp": 1384374356, 
+    "Price": "4.16", 
+    "Symbol": "TWGP", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-11-11 09:54:20-05:00", 
+    "Timestamp": 1384181660, 
+    "Price": "11.73", 
+    "Symbol": "EZPW", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2013-11-08 09:57:32-05:00", 
+    "Timestamp": 1383922652, 
+    "Price": "3.13", 
+    "Symbol": "GLUU", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-11-06 10:07:13-05:00", 
+    "Timestamp": 1383750433, 
+    "Price": ".84", 
+    "Symbol": "ROX", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-11-05 11:40:26-05:00", 
+    "Timestamp": 1383669626, 
+    "Price": "3.38", 
+    "Symbol": "RENN", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-11-04 09:56:28-05:00", 
+    "Timestamp": 1383576988, 
+    "Price": "3.63", 
+    "Symbol": "ZNGA", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-10-31 12:46:59-04:00", 
+    "Timestamp": 1383238019, 
+    "Price": "5.23", 
+    "Symbol": "CECO", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-10-30 10:17:06-04:00", 
+    "Timestamp": 1383142626, 
+    "Price": "3.55", 
+    "Symbol": "RSOL", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-10-29 11:50:37-04:00", 
+    "Timestamp": 1383061837, 
+    "Price": "11.31", 
+    "Symbol": "TVIX", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2013-10-23 11:14:17-04:00", 
+    "Timestamp": 1382541257, 
+    "Price": ".144", 
+    "Symbol": "MJNA", 
+    "Quantity": "70000"
+  }, 
+  {
+    "Date": "2013-10-22 13:09:15-04:00", 
+    "Timestamp": 1382461755, 
+    "Price": "5.22", 
+    "Symbol": "MCP", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-10-18 12:48:20-04:00", 
+    "Timestamp": 1382114900, 
+    "Price": "3.50", 
+    "Symbol": "CRRS", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-10-18 10:04:11-04:00", 
+    "Timestamp": 1382105051, 
+    "Price": "5.19", 
+    "Symbol": "DMD", 
+    "Quantity": "10000"
+  }, 
+  {
+    "Date": "2013-10-16 13:42:56-04:00", 
+    "Timestamp": 1381945376, 
+    "Price": "4.01", 
+    "Symbol": "CO", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2013-10-16 10:14:22-04:00", 
+    "Timestamp": 1381932862, 
+    "Price": "3.29", 
+    "Symbol": "CRRS", 
+    "Quantity": "15000"
+  }, 
+  {
+    "Date": "2013-10-14 13:19:57-04:00", 
+    "Timestamp": 1381771197, 
+    "Price": "1.9", 
+    "Symbol": "JRCC", 
+    "Quantity": "20000"
+  }, 
+  {
+    "Date": "2013-10-11 14:29:45-04:00", 
+    "Timestamp": 1381516185, 
+    "Price": "1.69", 
+    "Symbol": "DRWI", 
+    "Quantity": "30000"
+  }, 
+  {
+    "Date": "2013-10-11 11:14:03-04:00", 
+    "Timestamp": 1381504443, 
+    "Price": "5.66", 
+    "Symbol": "ANR", 
+    "Quantity": "7000"
+  }, 
+  {
+    "Date": "2013-10-07 14:29:37-04:00", 
+    "Timestamp": 1381170577, 
+    "Price": "7.04", 
+    "Symbol": "MM", 
+    "Quantity": "5000"
+  }, 
+  {
+    "Date": "2013-10-07 09:45:47-04:00", 
+    "Timestamp": 1381153547, 
+    "Price": "3.09", 
+    "Symbol": "HL", 
+    "Quantity": "10000"
+  }
+]

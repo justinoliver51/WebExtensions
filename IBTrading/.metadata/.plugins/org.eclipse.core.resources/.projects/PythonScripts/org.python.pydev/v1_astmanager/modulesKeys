@@ -1,5 +1,7 @@
 MODULES_MANAGER_V2
 EmailMonitor|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/EmailMonitor.py
+GraphExample|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/GraphExample.py
+GraphHistoricalData|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/GraphHistoricalData.py
 HistoricalDataCollector|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/HistoricalDataCollector.py
 JasonBondsParser|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/JasonBondsParser.py
 PriceDifferential|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/PriceDifferential.py
