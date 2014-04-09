@@ -18,7 +18,7 @@ from email.header import decode_header
 
 # GLOBALS
 HISTORY_TIMESTAMP = 0 # 1388534400 --- New Year         # Starting time for email searching
-url = 'http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?'
+url = 'http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?'
 
 ################# EMAIL CLASSES/FUNCTIONS #################
 class JasonBondsParser:
@@ -201,7 +201,7 @@ def getAlertHistory():
 
 ################# DATABASE #################
 class Database:
-    host        = '127.0.0.1'
+    host        = '192.168.1.20' #'127.0.0.1'
     user        = 'justinoliver51'
     password    = 'utredhead51'
     db          = 'IBTradingDB'
@@ -221,9 +221,9 @@ class Database:
         
         return self.cursor.lastrowid
 
-    def query(self, query):
+    def query(self, query, values):
         cursor = self.connection.cursor( MySQLdb.cursors.DictCursor )
-        cursor.execute(query)
+        cursor.execute(query, values)
 
         return cursor.fetchall()
 
@@ -232,6 +232,15 @@ class Database:
 
     def __del__(self):
         self.connection.close()
+
+def tradeExists(database, tradeAlert):
+    query = ('''SELECT TradeID FROM TradeAlerts WHERE Time=%s AND Symbol=%s''', \
+          (datetime.datetime.fromtimestamp(int(tradeAlert['Timestamp'])).strftime('%Y-%m-%d %H:%M:%S'), tradeAlert['Symbol']))
+    
+    print query
+    id = database.query(*query)
+    
+    return id
 
 def insertTradeAlert(database, tradeAlert):
     query = ('''INSERT INTO TradeAlerts (PredictorName, Time, Symbol, Quantity, Price) 
@@ -277,6 +286,9 @@ def main():
     twentyMinutes = 60 * 20
     
     for tradeAlert in tradeAlertsHistory:
+        # If we have already entered this data, skip it
+        if tradeExists(db, tradeAlert):
+            continue
         
         # Build the URL
         timestamp = (int(tradeAlert['Timestamp']) + twentyMinutes) * 1000
@@ -299,6 +311,3 @@ def main():
     
 if __name__ == '__main__':
   main()
-
-
-

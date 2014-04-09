@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
+import com.Trading.servlets.GoogleVoice;
 import com.ib.client.CommissionReport;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
@@ -187,8 +188,9 @@ public class IBTradingAPI extends JFrame implements EWrapper
         // Log time
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
-		System.out.println("Order number " + orderId + ", " + orderAction + " " + symbol 
-				+ " placed at: " + dateFormat.format(date));
+		String message = "Order number " + orderId + ", " + orderAction + " " + symbol 
+				+ " placed at: " + dateFormat.format(date) + "\n\nSimulation = " + isSimulation;
+		System.out.println(message);
 		
 		// Add the new order to our hash map
 		OrderStatus newOrder;
@@ -205,6 +207,9 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		{
 			newOrder = orderStatus;
 		}
+		
+		// Send text to let users know of order
+		(new Thread(new GoogleVoice(message))).start();
 		
 		return newOrder;
     }

@@ -19,5 +19,12 @@
     "Price": "3.55", 
     "Symbol": "RSOL", 
     "Quantity": "20000"
+  },
+  {
+    "Date": "2013-10-29 11:50:37-04:00", 
+    "Timestamp": 1383061837, 
+    "Price": "11.31", 
+    "Symbol": "TVIX", 
+    "Quantity": "5000"
   }
 ]

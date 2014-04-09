@@ -173,6 +173,15 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		System.out.println("traderID: " + traderID + "\ntrade: " + newTrade + "\nrealTimeSystem: " + realTimeSystem + "\non date: " + dateFormat.format(date));
 		
 		// If we are just starting up, exit!
+		if(debug != null)
+		{
+			System.out.println("Debug called!");
+			(new Thread(new GoogleVoice("This is a text from an asynchronous thread... It worked!  :)"))).start();
+			
+			return;
+		}
+		
+		// If we are just starting up, exit!
 		if(startUp != null)
 		{
 			System.out.println("System started up!");
