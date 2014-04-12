@@ -107,3 +107,5 @@
 0:0:0:0:0:0:0:1%0 - - [08/Apr/2014:13:58:16 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?historicalDataSym=RENN&historicalDataTimestamp=1383670826000 HTTP/1.1" 200 6726
 0:0:0:0:0:0:0:1%0 - - [08/Apr/2014:14:00:17 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?historicalDataSym=ZNGA&historicalDataTimestamp=1383578188000 HTTP/1.1" 200 6824
 0:0:0:0:0:0:0:1%0 - - [08/Apr/2014:14:02:17 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?historicalDataSym=CECO&historicalDataTimestamp=1383239219000 HTTP/1.1" 200 6784
+127.0.0.1 - - [08/Apr/2014:23:19:15 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [08/Apr/2014:23:19:29 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?debug=true HTTP/1.1" 200 -

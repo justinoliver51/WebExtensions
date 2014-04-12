@@ -73,26 +73,55 @@
 <span class="kw">from</span> datetime <span class="kw">import</span> datetime, date, timedelta
 <span class="kw">import</span> time
 
+<span class="kw">def</span> newAlert():
+    <span class="kw">print</span> <span class="str">'new alert!'</span>
+
+    <span class="cmt"># Copy the alert to the clipboard
+</span>    <span class="skw">click</span>(Pattern(<img src="1397192275376.png" />).targetOffset(-<span class="dig">83</span>,<span class="dig">19</span>))
+    <span class="skw">rightClick</span>(Pattern(<img src="1397192275376.png" />).targetOffset(-<span class="dig">83</span>,<span class="dig">19</span>))
+    <span class="skw">click</span>(<img src="SelectAll-1.png" />)
+    <span class="skw">rightClick</span>(Pattern(<img src="1397192275376.png" />).targetOffset(-<span class="dig">83</span>,<span class="dig">19</span>))
+    <span class="skw">click</span>(<img src="Copy.png" />)
+
+    <span class="cmt"># Exit the announcement
+</span>    <span class="skw">click</span>(<img src="1397191952703.png" />)
+
 <span class="cmt"># Make sure we are in the chat room
 </span><span class="skw">click</span>(<img src="1381195946550.png" />)
 
 <span class="cmt"># Infinite loop looking at chat room
-</span><span class="kw">print</span> datetime.now().time()
-<span class="kw">print</span>
+</span>region = Region(<span class="dig">245</span>,<span class="dig">644</span>,<span class="dig">1372</span>,<span class="dig">256</span>)
+
+<span class="kw">print</span> datetime.now().time()
+<span class="kw">print</span> <span class="str">'a'</span>
 <span class="kw">while</span> datetime.now().strftime(<span class="str">'%H:%M'</span>) &lt; <span class="str">'20:00'</span>:
     time.<span class="skw">sleep</span>(<span class="dig">1</span>)
 
     <span class="kw">try</span>:
+        <span class="cmt"># Make sure we're in 'omniTweet'
+</span>        <span class="cmt"># If an announcement has appeared
+</span>        <span class="kw">if</span> exists(<img src="1397191707592.png" />):
+            newAlert()
 
-        <span class="kw">if</span> exists(<img src="1381358636912.png" />):
-            <span class="skw">click</span>(Pattern(<img src="1381358937054.png" />).targetOffset(<span class="dig">0</span>,<span class="dig">35</span>))
-            <span class="skw">rightClick</span>(Pattern(<img src="1381358937054.png" />).targetOffset(<span class="dig">0</span>,<span class="dig">35</span>))
-            <span class="skw">click</span>(<img src="SelectAll-1.png" />)
-            <span class="skw">rightClick</span>(Pattern(<img src="1381358937054.png" />).targetOffset(<span class="dig">0</span>,<span class="dig">35</span>))
-            <span class="skw">click</span>(<img src="Copy.png" />)
+        <span class="cmt"># Look for the announcement not from Jason Bonds
+</span>        <span class="kw">if</span> exists(<img src="1397191952703.png" />):
+            <span class="cmt"># If this happens to be from Jason, call the alert 
+</span>            <span class="kw">if</span> exists(<img src="1397191707592.png" />):
+                newAlert()
+           <span class="cmt"># Otherwise, close the alert 
+</span>            <span class="kw">else</span>:
+               <span class="skw">click</span>(<img src="1397191952703.png" />)
 
-            <span class="kw">print</span> <span class="str">'Clicked copy'</span>
 
+<span class="cmt">#        if exists("1381358636912.png"):
+</span><span class="cmt">#            click(Pattern("1381358937054.png").targetOffset(0,35))
+</span><span class="cmt">#            rightClick(Pattern("1381358937054.png").targetOffset(0,35))
+</span><span class="cmt">#            click("SelectAll-1.png")
+</span><span class="cmt">#            rightClick(Pattern("1381358937054.png").targetOffset(0,35))
+</span><span class="cmt">#            click("Copy.png")
+</span>
+<span class="cmt">#            print 'Clicked copy'
+</span>
     <span class="kw">except</span>:
         <span class="kw">print</span> <span class="str">'Error'</span>
 </pre>

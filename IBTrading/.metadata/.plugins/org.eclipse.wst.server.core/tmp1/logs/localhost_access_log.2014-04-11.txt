@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1%0 - - [11/Apr/2014:00:07:10 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
+183.60.202.49 - - [11/Apr/2014:09:08:31 -0500] "GET /manager/html HTTP/1.1" 404 975
+93.174.93.51 - - [11/Apr/2014:10:36:16 -0500] "GET /hello/check.txt HTTP/1.1" 404 981
+0:0:0:0:0:0:0:1%0 - - [11/Apr/2014:12:01:30 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+PLUG+at+7.19 HTTP/1.1" 200 179
+0:0:0:0:0:0:0:1%0 - - [11/Apr/2014:12:03:43 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=bought+10000+PLUG+at+7.19 HTTP/1.1" 200 159

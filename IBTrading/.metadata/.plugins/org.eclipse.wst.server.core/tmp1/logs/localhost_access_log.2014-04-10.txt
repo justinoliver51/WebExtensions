@@ -1,0 +1,10 @@
+127.0.0.1 - - [10/Apr/2014:00:04:46 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [10/Apr/2014:00:09:15 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
+0:0:0:0:0:0:0:1%0 - - [10/Apr/2014:00:12:08 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
+54.204.44.212 - - [10/Apr/2014:08:12:14 -0500] "HEAD / HTTP/1.0" 404 -
+23.228.245.166 - - [10/Apr/2014:11:54:58 -0500] "GET /fastenv HTTP/1.1" 404 965
+0:0:0:0:0:0:0:1%0 - - [10/Apr/2014:13:06:15 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+3000+HART+at+9.39 HTTP/1.1" 200 158
+0:0:0:0:0:0:0:1%0 - - [10/Apr/2014:13:11:02 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+3000+HART+at+9.39 HTTP/1.1" 200 115
+66.182.194.173 - - [10/Apr/2014:18:01:14 -0500] "GET /HNAP1/ HTTP/1.1" 404 963
+127.0.0.1 - - [10/Apr/2014:23:43:12 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [10/Apr/2014:23:43:50 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
