@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import thread
 
 import subprocess 
 
@@ -21,6 +22,8 @@ def setClipboardData(data):
 def monitorClipboard(clipboard_file):
   count = 0
   prev_data = ''
+  clipboard_file = "C:\Users\B40904\Documents\Personal\clipboard.txt"
+  print "os.path.isfile(clipboard_file) = ", os.path.isfile(clipboard_file)
 
   while (True):
     time.sleep(1)
@@ -36,8 +39,12 @@ def monitorClipboard(clipboard_file):
     except Exception, e:
       print e
       pass
-
-clipboard_file = "C:\Users\B40904\Documents\Personal\clipboard.txt"
+  
+def monitorChatroom():
+    
+    #while 
+    
+    return
       
 def main():
   usage = \
@@ -47,11 +54,12 @@ The filename should refer to a writeable exisiting file. The file
 should be on a shared location visible and (writeable) to all the
 shared clipboard instances on all machines.
 """
-
+  # Spawn a thread that listens to the clipboard for changes
   #clipboard_file = sys.argv[1]
-  print "os.path.isfile(clipboard_file) = ", os.path.isfile(clipboard_file)
-  monitorClipboard(clipboard_file)
+  #thread.start_new_thread( monitorClipboard, (clipboard_file) )
 
+  # Begin the infinite loop of looking for new data
+  monitorChatroom()
 if __name__=='__main__':
   main()
   
