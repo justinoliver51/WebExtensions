@@ -2,12 +2,12 @@ import os
 import sys
 import time
 import thread
+#from sikuli.Sikuli import *
 
 import subprocess 
 
 def getClipboardData(): 
   p = subprocess.Popen(['pbpaste'], stdout=subprocess.PIPE) 
-  print "blah"
   retcode = p.wait() 
   data = p.stdout.read() 
   
@@ -43,6 +43,7 @@ def monitorClipboard(clipboard_file):
 def monitorChatroom():
     
     #while 
+    click(None)
     
     return
       
