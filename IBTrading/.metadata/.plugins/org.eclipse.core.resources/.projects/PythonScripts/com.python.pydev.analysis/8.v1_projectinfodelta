@@ -1,0 +1,14 @@
+INSTUPtemp
+/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/temp.py
+INFOS:&&1|1|2|0&&2|3|2|1&&2|4|2|1&&2|5|2|1&&2|6|2|0&&2|7|2|0&&2|8|2|0&&2|9|2|0&&2|10|2|0&&2|11|2|0
+newAlert=7
+__init__=3
+getClipboardData=6
+getTradeData=8
+newAnnouncement=10
+getTrade=4
+temp=2
+sendTradeToServer=9
+JasonBondsParser=1
+parseTrade=5
+main=11

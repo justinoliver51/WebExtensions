@@ -29,7 +29,7 @@ JasonBondsParser|0|/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading
 13=Database.__init__
 -- END DICTIONARY
 -- START TREE 1
-48
+50
 api|1|api!11@
 bui|1|buildPlot!18@
 can|2|candlestickIntradayExample!26@candlestickExample!26@
@@ -49,12 +49,13 @@ get|15|getIntraData!58@getIntradataCandlestickFormat!58@get_files_in_folder!18@g
 gra|3|graphDataCandlestick!58@graphDataFancy!58@graphDataSimple!58@
 his|2|HISTORY_TIMESTAMP!51@HISTORY_TIMESTAMP!19@
 ind|1|index!43@
-ins|3|insertIntoDatabase!18@insertHistoricalData!50@insertTradeAlert!50@
+ini|0|
+ins|3|insertHistoricalData!50@insertIntoDatabase!18@insertTradeAlert!50@
 jas|5|JasonBondsParser!17@JasonBondsParser!41@JasonBondsParser!65@JasonBondsParser!49@JasonBondsParser!73@
 jus|2|JUSTINS_CELL!67@JUSTINS_CELL!43@
 las|1|lastReadSMS!67@
 lat|3|latestEmail!43@latestEmailTimestamp!43@latest_email_uid!43@
-mai|6|main!58@main!26@main!34@mail!43@main!18@main!50@
+mai|6|main!58@main!26@main!34@mail!43@main!50@main!18@
 mes|1|messageText!67@
 mon|1|monitorClipboard!34@
 mov|2|moving_average_convergence!58@moving_average!58@
@@ -68,6 +69,7 @@ raw|1|raw_email!43@
 rel|1|relative_strength!58@
 res|2|response!67@response!43@
 ret|3|retcode!35@retrieve_all_folders!18@retrieve_all_files!18@
+sen|0|
 ser|1|serverName!43@
 set|2|setClipboardData!34@setUpIntraData!58@
 sop|1|sophisticatedGraphingExample!26@

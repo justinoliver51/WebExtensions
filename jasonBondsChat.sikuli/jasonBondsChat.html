@@ -67,63 +67,249 @@
    </head>
 <body>
 <div class="info">
-<h2>jasonBondsChat.sikuli</h2> <a href="jasonBondsChat.zip">(Download this script)</a>
+<h2>ChatRoomMonitor.sikuli</h2> <a href="ChatRoomMonitor.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
 <span class="kw">from</span> datetime <span class="kw">import</span> datetime, date, timedelta
 <span class="kw">import</span> time
+<span class="kw">import</span> sys
+<span class="kw">import</span> subprocess
+<span class="kw">import</span> urllib2
+<span class="kw">import</span> urllib
+<span class="kw">import</span> string
 
-<span class="kw">def</span> newAlert():
-    <span class="kw">print</span> <span class="str">'new alert!'</span>
+<span class="kw">import</span> logging
+<span class="kw">import</span> os
 
-    <span class="cmt"># Copy the alert to the clipboard
-</span>    <span class="skw">click</span>(Pattern(<img src="1397192275376.png" />).targetOffset(-<span class="dig">83</span>,<span class="dig">19</span>))
-    <span class="skw">rightClick</span>(Pattern(<img src="1397192275376.png" />).targetOffset(-<span class="dig">83</span>,<span class="dig">19</span>))
-    <span class="skw">click</span>(<img src="SelectAll-1.png" />)
-    <span class="skw">rightClick</span>(Pattern(<img src="1397192275376.png" />).targetOffset(-<span class="dig">83</span>,<span class="dig">19</span>))
-    <span class="skw">click</span>(<img src="Copy.png" />)
 
-    <span class="cmt"># Exit the announcement
-</span>    <span class="skw">click</span>(<img src="1397191952703.png" />)
+<span class="kw">class</span> JasonBondsParser:
+    <span class="kw">def</span> __init__(self):
+        <span class="kw">return</span>
 
-<span class="cmt"># Make sure we are in the chat room
-</span><span class="skw">click</span>(<img src="1381195946550.png" />)
+    <span class="kw">def</span> getTrade(self, tradeBody, startingIndex):
+        spacesCount = <span class="dig">0</span>
+        index = startingIndex
 
-<span class="cmt"># Infinite loop looking at chat room
-</span>region = Region(<span class="dig">245</span>,<span class="dig">644</span>,<span class="dig">1372</span>,<span class="dig">256</span>)
+        <span class="cmt"># Find the end point
+</span>        <span class="kw">while</span> (index &lt; len(tradeBody)) <span class="kw">and</span> (spacesCount &lt; <span class="dig">5</span>) <span class="kw">and</span> (tradeBody[index] != <span class="str">'\n'</span>) <span class="kw">and</span> (tradeBody[index] != <span class="str">'\r'</span>) :
+            <span class="kw">if</span> tradeBody[index] == <span class="str">' '</span>:
+                spacesCount = spacesCount + <span class="dig">1</span>
+            index = index + <span class="dig">1</span>
 
-<span class="kw">print</span> datetime.now().time()
-<span class="kw">print</span> <span class="str">'a'</span>
-<span class="kw">while</span> datetime.now().strftime(<span class="str">'%H:%M'</span>) &lt; <span class="str">'20:00'</span>:
-    time.<span class="skw">sleep</span>(<span class="dig">1</span>)
+        index = index - <span class="dig">1</span>
+        exclude = set(string.punctuation)
+        tradeList = <span class="str">''</span>.join(ch <span class="kw">for</span> ch <span class="kw">in</span> tradeBody[startingIndex:index] <span class="kw">if</span> (ch == <span class="str">'.'</span>) <span class="kw">or</span> (ch == <span class="str">'$'</span>) <span class="kw">or</span> ((ch <span class="kw">not</span> <span class="kw">in</span> exclude) <span class="kw">and</span> (ch != <span class="str">'\r'</span>) <span class="kw">and</span> (ch != <span class="str">'\n'</span>)))  <span class="cmt"># FIXME: Need to leave in '.'</span>
 
+        <span class="kw">if</span>( (len(tradeList.split(<span class="str">' '</span>)) == <span class="dig">5</span>) <span class="kw">and</span> (tradeList.split(<span class="str">' '</span>)[<span class="dig">4</span>].<span class="skw">find</span>(<span class="str">'$'</span>) == <span class="dig">0</span>) ):
+            index = tradeList.<span class="skw">find</span>(<span class="str">'$'</span>)
+            price = <span class="str">''</span>.join(ch <span class="kw">for</span> ch <span class="kw">in</span> tradeList.split(<span class="str">' '</span>)[<span class="dig">4</span>] <span class="kw">if</span> (ch == <span class="str">'$'</span>) <span class="kw">or</span> (ch == <span class="str">'.'</span>) <span class="kw">or</span> (ch <span class="kw">in</span> string.digits))
+            tradeList = tradeList[:index] + price
+
+        <span class="kw">if</span> tradeList[-<span class="dig">1</span>] == <span class="str">'.'</span>:
+            tradeList = tradeList[:-<span class="dig">1</span>]
+
+        <span class="kw">return</span> tradeList
+
+    <span class="kw">def</span> parseTrade(self, tradeString = <span class="str">""</span>):
+        price = <span class="str">""</span>
+        article = <span class="str">""</span>
+        index = <span class="dig">0</span>
+
+        <span class="kw">if</span> tradeString.lower().<span class="skw">find</span>(<span class="str">'bought'</span>) &gt;= <span class="dig">0</span>:
+            index = tradeString.lower().<span class="skw">find</span>(<span class="str">'bought'</span>)
+        <span class="kw">elif</span> tradeString.lower().<span class="skw">find</span>(<span class="str">'added'</span>) &gt;= <span class="dig">0</span>:
+            index = tradeString.lower().<span class="skw">find</span>(<span class="str">'added'</span>)
+        <span class="kw">elif</span> tradeString.lower().<span class="skw">find</span>(<span class="str">'taking'</span>) &gt;= <span class="dig">0</span>:
+            index = tradeString.lower().<span class="skw">find</span>(<span class="str">'taking'</span>)
+        <span class="kw">else</span>:
+            <span class="kw">return</span> None
+
+        <span class="cmt"># Get the trade information
+</span>        trade = self.getTrade(tradeString, index)
+
+        <span class="kw">if</span>(len(trade.split(<span class="str">' '</span>)) == <span class="dig">5</span>):
+            price = trade.split(<span class="str">' '</span>)[<span class="dig">4</span>]
+            article = trade.split(<span class="str">' '</span>)[<span class="dig">3</span>]
+
+        <span class="kw">if</span>(price.<span class="skw">find</span>(<span class="str">'$'</span>) &gt;= <span class="dig">0</span> <span class="kw">and</span> article == <span class="str">'at'</span>):
+            trade = trade.replace(<span class="str">'$'</span>, <span class="str">''</span>)
+
+            <span class="cmt"># If this is a bond blow ups, inform the server
+</span>            <span class="kw">if</span>(tradeString.lower().<span class="skw">find</span>(<span class="str">'bond blow ups'</span>) &gt;= <span class="dig">0</span>):
+                trade = <span class="str">"Bond Blow Ups "</span> + trade
+
+            <span class="kw">return</span> trade
+        <span class="kw">return</span> None
+
+<span class="kw">def</span> initialize_logger(output_dir):
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+
+    <span class="cmt"># create console handler and set level to info
+</span>    handler = logging.StreamHandler()
+    handler.setLevel(logging.INFO)
+    formatter = logging.Formatter(<span class="str">"%(levelname)s - %(message)s"</span>)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+    <span class="cmt"># create error file handler and set level to error
+</span>    handler = logging.FileHandler(os.path.join(output_dir + <span class="str">"error.log"</span>), encoding=None)<span class="cmt">#, delay="true")</span>
+    handler.setLevel(logging.ERROR)
+    formatter = logging.Formatter(<span class="str">"%(levelname)s - %(message)s"</span>)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+    <span class="cmt"># create debug file handler and set level to debug
+</span>    handler = logging.FileHandler(os.path.join(output_dir + <span class="str">"all.log"</span>))
+    handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(<span class="str">"%(levelname)s - %(message)s"</span>)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+<span class="kw">def</span> debug():
     <span class="kw">try</span>:
-        <span class="cmt"># Make sure we're in 'omniTweet'
-</span>        <span class="cmt"># If an announcement has appeared
-</span>        <span class="kw">if</span> exists(<img src="1397191707592.png" />):
-            newAlert()
+        initialize_logger(<span class="str">'/Users/justinoliver/Desktop/Developer/WebExtensions/JasonBonds/'</span>)
 
-        <span class="cmt"># Look for the announcement not from Jason Bonds
-</span>        <span class="kw">if</span> exists(<img src="1397191952703.png" />):
-            <span class="cmt"># If this happens to be from Jason, call the alert 
-</span>            <span class="kw">if</span> exists(<img src="1397191707592.png" />):
-                newAlert()
-           <span class="cmt"># Otherwise, close the alert 
-</span>            <span class="kw">else</span>:
-               <span class="skw">click</span>(<img src="1397191952703.png" />)
+        logging.debug(<span class="str">"debug message"</span>)
+        logging.info(<span class="str">"info message"</span>)
+        logging.warning(<span class="str">"warning message"</span>)
+        logging.error(<span class="str">"error message"</span>)
+        logging.critical(<span class="str">"critical message"</span>)
+    <span class="kw">except</span> Exception, inst:
+        handleError(inst, <span class="str">'An error occurred during debug'</span>)
 
+<span class="kw">def</span> getClipboardData():
+    p = subprocess.Popen([<span class="str">'pbpaste'</span>], stdout=subprocess.PIPE)
+    retcode = p.<span class="skw">wait</span>()
+    data = p.stdout.read()
 
-<span class="cmt">#        if exists("1381358636912.png"):
-</span><span class="cmt">#            click(Pattern("1381358937054.png").targetOffset(0,35))
-</span><span class="cmt">#            rightClick(Pattern("1381358937054.png").targetOffset(0,35))
-</span><span class="cmt">#            click("SelectAll-1.png")
-</span><span class="cmt">#            rightClick(Pattern("1381358937054.png").targetOffset(0,35))
-</span><span class="cmt">#            click("Copy.png")
+    <span class="kw">return</span> data
+
+<span class="kw">def</span> newAlert(region, debugFlag):
+    logging.info(<span class="str">'New alert!'</span>)
+
+    <span class="cmt"># Get the data from the chatroom 
+</span>    tradeData = getTradeData(region)
+
+    <span class="cmt"># Parse the message for trade information
+</span>    parser = JasonBondsParser()
+    newTrade = parser.parseTrade(tradeData)
+
+    <span class="cmt"># If we succcessfully parsed a trade, send it to the server
+</span>    <span class="kw">if</span> newTrade != None:
+        sendTradeToServer(newTrade, debugFlag)
+
+<span class="kw">def</span> getTradeData(region):
+    <span class="cmt"># Copy the alert to the clipboard
+</span>    <span class="kw">if</span> region.exists(Pattern(<img src="JasonBondsAnnouncement.png" />)):
+        region.<span class="skw">doubleClick</span>(Pattern(<img src="JasonBondsAnnouncement.png" />).targetOffset(-<span class="dig">83</span>,<span class="dig">19</span>))
+        <span class="skw">type</span>(<span class="str">'a'</span>, KeyModifier.CMD)
+        <span class="skw">type</span>(<span class="str">'c'</span>, KeyModifier.CMD)
+    <span class="kw">else</span>:
+        <span class="kw">return</span> None
+
+    tradeData = getClipboardData() <span class="cmt">#Env.getClipboard()</span>
+    <span class="kw">return</span> tradeData
+
+<span class="kw">def</span> sendTradeToServer(newTrade, debugFlag):
+    <span class="kw">try</span>:
+        <span class="cmt"># Build the url
+</span>        paramDic = {<span class="str">'traderID'</span>:         <span class="str">'Jason Bond'</span>,
+                    <span class="str">'newTrade'</span>:         newTrade,
+                    <span class="str">'realTimeSystem'</span>:   <span class="str">'websiteMonitor'</span>
+                    }
+        url = <span class="str">"http://localhost:8080/IBTradingServer/RemoteProcedureCallsServlet?"</span>
+
+        <span class="kw">if</span> debugFlag == True:
+            paramDic[<span class="str">'traderID'</span>] = <span class="str">'Justin Oliver'</span>
+
+        encodedParams = urllib.urlencode(paramDic)
+        query = url + encodedParams
+
+        <span class="cmt"># Send the alert
+</span>        logging.debug(query)
+        response = urllib2.urlopen(query).read()
+    <span class="kw">except</span> Exception, inst:
+        handleError(inst, <span class="str">'An error occurred while trying to send data to the server'</span>)
+
+<span class="kw">def</span> handleError(inst, errorMessage):
+    logging.error(errorMessage + <span class="str">'\n'</span> + str(inst))
+    <span class="cmt">#print errorMessage
+</span>    <span class="cmt">#print type(inst)     # the exception instance
+</span>    <span class="cmt">#print inst           # __str__ allows args to printed directly 
 </span>
-<span class="cmt">#            print 'Clicked copy'
-</span>
-    <span class="kw">except</span>:
-        <span class="kw">print</span> <span class="str">'Error'</span>
+<span class="kw">def</span> newAnnouncement(region, debugFlag):
+    logging.info(<span class="str">'New announcement!'</span>)
+    <span class="kw">try</span>:
+        <span class="kw">if</span> region.exists(<img src="1397191952703.png" />) <span class="kw">or</span> region.right().exists(<img src="1397191952703.png" />):
+            theRegion = region
+        <span class="kw">elif</span> region.right().exists(<img src="1397191952703.png" />):
+            theRegion = region.right()
+        <span class="kw">else</span>:
+            <span class="kw">return</span>
+
+        <span class="cmt"># If this happens to be from Jason, call the alert 
+</span>        <span class="kw">if</span> theRegion.exists(<img src="JasonBondsAnnouncement.png" />):
+            newAlert(theRegion, debugFlag)
+
+        <span class="cmt"># Close the alert
+</span>        theRegion.<span class="skw">click</span>(<img src="1397191952703.png" />)
+        <span class="skw">sleep</span>(<span class="dig">1.0</span>)
+    <span class="kw">except</span> Exception, inst:
+        handleError(inst, <span class="str">'An error occurred while trying to close the announcement'</span>)
+
+<span class="cmt">### MAIN ###
+</span><span class="kw">def</span> main(args):
+    debugFlag = False
+    loopIndex = <span class="dig">0</span>
+
+    initialize_logger(<span class="str">'/Users/justinoliver/Desktop/Developer/WebExtensions/JasonBonds/'</span>)
+    logging.debug(<span class="str">'Script started!'</span>)
+
+    <span class="kw">if</span> debugFlag == True:
+        debugFunctionFlag = True
+
+        <span class="kw">if</span> debugFunctionFlag == True:
+            debug()
+            <span class="kw">print</span>
+            logging.debug(<span class="str">'Completed debug'</span>)
+
+            <span class="kw">return</span>
+
+    <span class="cmt"># Make sure we are in the chat room
+</span>    <span class="cmt"># Make sure we're in 'omniTweet'
+</span>    <span class="kw">if</span> exists(<img src="1381195946550.png" />):
+        <span class="skw">click</span>(<img src="1381195946550.png" />)
+        <span class="skw">click</span>(<img src="1397444289724.png" />)
+    <span class="kw">else</span>:
+        logging.error(<span class="str">"Jason Bonds Chatroom isn't running!"</span>)
+        <span class="kw">return</span>
+
+    <span class="cmt"># Infinite loop looking at chat room
+</span>    region = Region(<span class="dig">480</span>,<span class="dig">684</span>,<span class="dig">1067</span>,<span class="dig">202</span>)
+
+    <span class="kw">print</span> datetime.now().time()
+    <span class="kw">while</span> True:    <span class="cmt">#datetime.now().strftime('%H:%M') &lt; '18:00':     </span>
+        time.<span class="skw">sleep</span>(<span class="dig">0.1</span>)
+        loopIndex += <span class="dig">1</span>
+        <span class="kw">if</span> loopIndex == <span class="dig">5</span> <span class="kw">and</span> debugFlag == True:
+            <span class="kw">break</span>
+
+        <span class="kw">try</span>:
+            <span class="cmt"># Look for an announcement 
+</span>            <span class="kw">if</span> region.exists(<img src="1397191952703.png" />) <span class="kw">or</span> region.right().exists(<img src="1397191952703.png" />):
+                newAnnouncement(region, debugFlag)
+            <span class="kw">else</span>:
+                <span class="kw">print</span> <span class="str">'Nothing new...'</span>
+        <span class="kw">except</span> Exception, inst:
+            handleError(inst, <span class="str">'An error occurred in the main loop.'</span>)
+
+    <span class="kw">return</span>
+
+<span class="kw">if</span> __name__ == <span class="str">'__main__'</span>:
+    main(sys.argv)
+
+<span class="cmt"># vim: ts=8 et sw=4 sts=4 background=light</span>
 </pre>
 </body>
 </html>

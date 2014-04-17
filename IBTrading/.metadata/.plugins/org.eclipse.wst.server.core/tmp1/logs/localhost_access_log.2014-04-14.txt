@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1%0 - - [14/Apr/2014:08:48:02 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
+24.61.107.90 - - [14/Apr/2014:10:31:12 -0500] "GET /HNAP1/ HTTP/1.1" 404 963
+93.174.93.51 - - [14/Apr/2014:14:47:10 -0500] "GET /hello/check.txt HTTP/1.1" 404 981
+198.20.70.114 - - [14/Apr/2014:16:02:02 -0500] "GET / HTTP/1.1" 404 951
+198.20.70.114 - - [14/Apr/2014:16:02:02 -0500] "GET /robots.txt HTTP/1.1" 404 971
+0:0:0:0:0:0:0:1%0 - - [14/Apr/2014:22:07:28 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=websiteMonitor&traderID=Justin+Oliver&newTrade=Bought+1+abc+at+1.23 HTTP/1.1" 500 1524
+127.0.0.1 - - [14/Apr/2014:22:09:34 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [14/Apr/2014:23:02:52 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
