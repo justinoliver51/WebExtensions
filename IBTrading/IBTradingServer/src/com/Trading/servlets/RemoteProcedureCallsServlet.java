@@ -196,7 +196,8 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			
 			Gson gson = new Gson();
 			HistoricalDataCollector dataCollector = new HistoricalDataCollector(tradingAPI);
-			HashMap<String, Object> returnMap = dataCollector.collectHistoricalData(historicalDataSym, historicalDataTimestamp);
+			boolean formatData = true;
+			HashMap<String, Object> returnMap = dataCollector.getHistoricalDataOverLast30Minutes(historicalDataSym, historicalDataTimestamp, formatData);
 			out.println(gson.toJson(returnMap));
 			
 			return;
