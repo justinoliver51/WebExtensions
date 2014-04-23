@@ -1,0 +1,14 @@
+91.188.124.225 - - [21/Apr/2014:07:42:13 -0500] "GET /search?q=google HTTP/1.1" 404 963
+91.188.124.225 - - [21/Apr/2014:07:42:21 -0500] "GET /search?q=ostro%C5%82%C4%99ka HTTP/1.1" 404 963
+127.0.0.1 - - [21/Apr/2014:09:31:44 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=websiteMonitor&newTrade=Added+3000+HART+at+9.02&traderID=Jason+Bond HTTP/1.1" 500 1454
+127.0.0.1 - - [21/Apr/2014:09:59:40 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=websiteMonitor&newTrade=Added+5000+DGAZ+at+2.79&traderID=Jason+Bond HTTP/1.1" 200 166
+0:0:0:0:0:0:0:1%0 - - [21/Apr/2014:09:59:57 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Added+5000+DGAZ+at+2.79 HTTP/1.1" 200 157
+0:0:0:0:0:0:0:1%0 - - [21/Apr/2014:10:04:17 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Added+5000+DGAZ+at+2.79 HTTP/1.1" 200 114
+107.152.128.226 - - [21/Apr/2014:10:29:19 -0500] "GET /ippbx/index.php HTTP/1.1" 404 981
+0:0:0:0:0:0:0:1%0 - - [21/Apr/2014:11:03:22 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+3000+MOBI+at+7.25 HTTP/1.1" 200 153
+127.0.0.1 - - [21/Apr/2014:11:03:24 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=websiteMonitor&newTrade=Bought+3000+MOBI+at+7.25&traderID=Jason+Bond HTTP/1.1" 200 167
+0:0:0:0:0:0:0:1%0 - - [21/Apr/2014:11:08:17 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Bought+3000+MOBI+at+7.25 HTTP/1.1" 200 120
+91.188.124.225 - - [21/Apr/2014:13:43:21 -0500] "GET /search?q=wakacje HTTP/1.1" 404 963
+127.0.0.1 - - [21/Apr/2014:22:58:33 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [21/Apr/2014:23:00:05 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
+0:0:0:0:0:0:0:1%0 - - [21/Apr/2014:23:00:05 -0500] "GET /favicon.ico HTTP/1.1" 404 973
