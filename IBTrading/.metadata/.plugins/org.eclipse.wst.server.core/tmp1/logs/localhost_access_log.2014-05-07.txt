@@ -1,0 +1,4 @@
+93.174.93.51 - - [07/May/2014:04:44:29 -0500] "GET /hello/check.txt HTTP/1.1" 404 981
+127.0.0.1 - - [07/May/2014:11:38:24 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [07/May/2014:11:38:48 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
+0:0:0:0:0:0:0:1%0 - - [07/May/2014:14:05:19 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+5000+HDY+at+4.18 HTTP/1.1" 200 252

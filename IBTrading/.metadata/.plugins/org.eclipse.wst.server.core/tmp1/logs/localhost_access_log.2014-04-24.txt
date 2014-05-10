@@ -1,0 +1,10 @@
+93.174.93.51 - - [24/Apr/2014:02:30:52 -0500] "GET /hello/check.txt HTTP/1.1" 404 981
+127.0.0.1 - - [24/Apr/2014:08:53:18 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Added+10000+GEVO+at+1.11 HTTP/1.1" 500 1454
+127.0.0.1 - - [24/Apr/2014:08:53:20 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Added+10000+GEVO+at+1.11 HTTP/1.1" 200 153
+127.0.0.1 - - [24/Apr/2014:08:55:43 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason+Bond&newTrade=Added+10000+GEVO+at+1.11 HTTP/1.1" 200 158
+127.0.0.1 - - [24/Apr/2014:08:59:39 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=websiteMonitor&newTrade=Added+6000+YOD+at+3.22&traderID=Jason+Bond HTTP/1.1" 200 165
+127.0.0.1 - - [24/Apr/2014:09:00:20 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Added+6000+YOD+at+3.22 HTTP/1.1" 200 151
+127.0.0.1 - - [24/Apr/2014:09:43:41 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=websiteMonitor&newTrade=bought+15000+DGAZ+at+2.79&traderID=Jason+Bond HTTP/1.1" 500 1454
+111.73.45.204 - - [24/Apr/2014:11:16:36 -0500] "GET /proxy.txt HTTP/1.1" 404 969
+127.0.0.1 - - [24/Apr/2014:23:24:57 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [24/Apr/2014:23:25:03 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19

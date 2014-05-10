@@ -4,3 +4,8 @@ ERROR - An error occurred while trying to close the announcement
 'NoneType' object has no attribute 'lower'
 ERROR - An error occurred while trying to send data to the server
 
+ERROR - An error occurred while trying to send data to the server
+HTTP Error 500: Internal Server Error
+ERROR - An error occurred while trying to send data to the server
+
+ERROR - Jason Bonds Chatroom isn't running!
