@@ -233,6 +233,8 @@ class Database:
     def __del__(self):
         self.connection.close()
 
+
+################# FUNCTIONS #################
 def tradeExists(database, tradeAlert):
     query = ('''SELECT TradeID FROM TradeAlerts WHERE Time=%s AND Symbol=%s''', \
           (datetime.datetime.fromtimestamp(int(tradeAlert['Timestamp'])).strftime('%Y-%m-%d %H:%M:%S'), tradeAlert['Symbol']))

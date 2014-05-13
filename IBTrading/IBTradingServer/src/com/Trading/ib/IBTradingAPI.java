@@ -167,7 +167,8 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	connect();
         if( ((m_client.isConnected() == false) && (isSimulation == false)) || ((m_client_simulation.isConnected() == false) && (isSimulation == true)) )
         {
-        	System.out.println("Unable to connect to TWS...");
+        	if((m_client_simulation.isConnected() == false) && (isSimulation == true))
+        		System.out.println("Unable to connect to TWS...");
         	return null;
         }
         
@@ -208,8 +209,9 @@ public class IBTradingAPI extends JFrame implements EWrapper
 			newOrder = orderStatus;
 		}
 		
-		// Send text to let users know of order
-		(new Thread(new GoogleVoice(message))).start();
+		// Send text to let users know of order if this was a real order
+		if(isSimulation == false)
+			(new Thread(new GoogleVoice(message))).start();
 		
 		return newOrder;
     }
@@ -459,29 +461,36 @@ public class IBTradingAPI extends JFrame implements EWrapper
     }
     
 	@Override
-	public void error(Exception e) {
+	public void error(Exception e) 
+	{
+		System.out.println("Exception!");
 		System.out.println(EWrapperMsgGenerator.error(e));
 	}
 
 	@Override
-	public void error(String str) {
+	public void error(String str) 
+	{
+		System.out.println("Error, no exception!");
 		System.out.println(EWrapperMsgGenerator.error(str));
 	}
 
 	@Override
-	public void error(int id, int errorCode, String errorMsg) {
+	public void error(int id, int errorCode, String errorMsg) 
+	{
 		System.out.println(EWrapperMsgGenerator.error(id, errorCode, errorMsg));
 	}
 
 	@Override
-	public void connectionClosed() {
+	public void connectionClosed() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void tickPrice(int tickerId, int field, double price,
-			int canAutoExecute) {
+			int canAutoExecute) 
+	{
 		//System.out.println(EWrapperMsgGenerator.tickPrice(tickerId, field, price, canAutoExecute));
 		
 		String marketInfo = null;

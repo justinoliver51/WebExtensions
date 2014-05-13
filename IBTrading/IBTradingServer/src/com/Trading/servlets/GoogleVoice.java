@@ -46,6 +46,7 @@ public class GoogleVoice implements Runnable
 	
 	        // The exec() method executes strings of code
 	        interp.exec("from googlevoice import Voice");
+	        interp.exec("import time");
 	        
 	        interp.set("personalEmail", new PyString(personalEmail));
 	        interp.set("password", new PyString(password));
@@ -59,7 +60,9 @@ public class GoogleVoice implements Runnable
 	        
 	        interp.exec("voice.login(personalEmail, password)");
 	        interp.exec("voice.send_sms(JUSTINS_CELL, message)");
+	        interp.exec("time.sleep(1)");
 	        interp.exec("voice.send_sms(TYLERS_CELL, message)");
+	        interp.exec("time.sleep(1)");
 	        //interp.exec("voice.send_sms(DANS_CELL, message)");
 	        interp.exec("voice.logout()");
     	}
