@@ -1,0 +1,5 @@
+127.0.0.1 - - [02/Jun/2014:19:46:45 -0500] "GET / HTTP/1.1" 404 951
+192.168.1.26 - - [02/Jun/2014:19:46:56 -0500] "GET /TradingServer/RemoteProcedureCallsServlet?historicalDataSym=ALG&historicalDataTimestamp=1389717476000 HTTP/1.1" 404 1033
+192.168.1.26 - - [02/Jun/2014:19:46:56 -0500] "GET /favicon.ico HTTP/1.1" 404 973
+192.168.1.26 - - [02/Jun/2014:19:50:01 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?historicalDataSym=ALG&historicalDataTimestamp=1389717476000 HTTP/1.1" 500 1598
+192.168.1.26 - - [02/Jun/2014:19:52:35 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?historicalDataSym=ALG&historicalDataTimestamp=1389717476000 HTTP/1.1" 500 1598
