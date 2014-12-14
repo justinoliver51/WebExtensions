@@ -9,6 +9,7 @@ import calendar
 from email.parser import HeaderParser
 import datetime
 from dateutil import parser
+import argparse
 
 import httplib2
 import os
@@ -201,7 +202,7 @@ def getAlertHistory():
 
 ################# DATABASE #################
 class Database:
-    host        = '192.168.1.20' #'127.0.0.1'
+    host        = '192.168.1.20' #'75.27.131.78' #'127.0.0.1'
     user        = 'justinoliver51'
     password    = 'utredhead51'
     db          = 'IBTradingDB'
@@ -233,6 +234,40 @@ class Database:
     def __del__(self):
         self.connection.close()
 
+
+################# HISTORICAL_DATA #################
+def getHistoricalData(symbol, timestamp):
+    useFile = False
+    useYahoo = False
+    useServer = True
+    
+    if useFile == True:
+        theFile = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/Temp.txt', 'r')
+        historicalData = json.loads(theFile.read())
+        theFile.close()
+        quotes = convertToQuoteFormatList(historicalData['HistoricalData'])
+        quotes = historicalData['GoogleFormattedData']
+    
+    elif useYahoo == True:
+        quotes = quotes_historical_yahoo('INTC', date1, date2)
+    
+    elif useServer == True:
+        # Build the URL
+        url = 'http://localhost:8080/TradingServer/RemoteProcedureCallsServlet?'
+        paramDic = {
+                    'historicalDataSym':        symbol,
+                    'historicalDataTimestamp':  str(timestamp),
+                    }
+        
+        encodedParams = urllib.urlencode(paramDic)
+        query = url + encodedParams
+        
+        # Get the historical data by querying my server
+        print query
+        response = urllib2.urlopen(query).read()
+        quotes = convertToQuoteFormatTuple(json.loads(response))
+        
+    return quotes
 
 ################# FUNCTIONS #################
 def tradeExists(database, tradeAlert):
@@ -266,50 +301,76 @@ def insertHistoricalData(database, historicalData, tradeID):
     
     return
 
+################# COMMAND LINE ARGUMENTS #################
+
+myParser = argparse.ArgumentParser( )
+myParser.add_argument('--alerts', dest='alerts_method',
+                   help='file or email')
+myParser.add_argument('--quotesMethod', dest='quotesMethod', 
+                   help='options are file, yahoo, or server')
+myParser.add_argument('-historicalData', action='store_true',
+                   help='collects historical data on any trade alerts without data')
+myParser.add_argument('-verbose', action='store_true',
+                   help='if used, print more debug information')
+myParser.add_argument('-saveToFile', action='store_true',
+                   help='saves all information to a file')
+
 ################# MAIN FUNCTION #################
-def main():
-    # Search through emails. Get the following data for each Jason Bonds trade:
-    # - Date/Time
-    # - Number of shares 
-    # - Price
-    # - Symbol
-    #tradeAlertsHistory = getAlertHistory()
-    #print json.dumps(tradeAlertsHistory, indent=2)
+def main(argv):
+    flags = myParser.parse_args(argv[1:])
+    args = vars(flags)
     
-    #f = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt','w')
-    #f.write(json.dumps(tradeAlertsHistory, indent=2)) # python will convert \n to os.linesep
-    #f.close() # you can omit in most cases as the destructor will call if
-    
-    theFile = open('/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/Resources/AlertHistoryRemaining.txt', 'r')
-    tradeAlertsHistory =json.loads(theFile.read())
-    theFile.close()
-    
-    db = Database()
-    twentyMinutes = 60 * 20
-    
-    for tradeAlert in tradeAlertsHistory:
-        # If we have already entered this data, skip it
-        if tradeExists(db, tradeAlert):
-            continue
+    if ('alerts_method' in args):
+        if args['alerts_method'] == 'email':
+            # Search through emails. Get the following data for each Jason Bonds trade:
+            # - Date/Time
+            # - Number of shares 
+            # - Price
+            # - Symbol
+            tradeAlertsHistory = getAlertHistory()
+            
+            if args['verbose'] == True:
+                print json.dumps(tradeAlertsHistory, indent=2)
+                
+            if args['saveToFile'] == True:
+                f = open('/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt','w')
+                f.write(json.dumps(tradeAlertsHistory, indent=2)) 
+                f.close() 
         
-        # Build the URL
-        timestamp = (int(tradeAlert['Timestamp']) + twentyMinutes) * 1000
-        paramDic = {
-                    'historicalDataSym':        tradeAlert['Symbol'],
-                    'historicalDataTimestamp':  str(timestamp),
-                    }
+        if args['alerts_method'] == 'file':
+            theFileName = '/Users/justinoliver/Desktop/Developer/WebExtensions/IBTrading/PythonScripts/src/Resources/AlertHistoryRemaining.txt'
+            theFileName = '/Users/justinoliver/Desktop/Developer/Trading/TradingScripts/src/Resources/AlertHistory.txt'
+            theFile = open(theFileName, 'r')
+            tradeAlertsHistory =json.loads(theFile.read())
+            theFile.close()
     
-        encodedParams = urllib.urlencode(paramDic)
-        query = url + encodedParams
-    
-        # Get the historical data by querying my server
-        print query
-        response = urllib2.urlopen(query).read()
+    if args['historicalData'] == True:    
+        db = Database()
+        twentyMinutes = 60 * 20
         
-        tradeAlertID = insertTradeAlert(db, tradeAlert)
-        insertHistoricalData(db, json.loads(response), tradeAlertID)
+        for tradeAlert in tradeAlertsHistory:
+            # If we have already entered this data, skip it
+            if tradeExists(db, tradeAlert):
+                continue
+            
+            # Build the URL
+            timestamp = (int(tradeAlert['Timestamp']) + twentyMinutes) * 1000
+            paramDic = {
+                        'historicalDataSym':        tradeAlert['Symbol'],
+                        'historicalDataTimestamp':  str(timestamp),
+                        }
         
-        time.sleep(60)
+            encodedParams = urllib.urlencode(paramDic)
+            query = url + encodedParams
+        
+            # Get the historical data by querying my server
+            print query
+            response = urllib2.urlopen(query).read()
+            
+            tradeAlertID = insertTradeAlert(db, tradeAlert)
+            insertHistoricalData(db, json.loads(response), tradeAlertID)
+            
+            time.sleep(60)
     
 if __name__ == '__main__':
-  main()
+  main(sys.argv)

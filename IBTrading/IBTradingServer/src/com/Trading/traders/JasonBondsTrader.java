@@ -349,6 +349,10 @@ public class JasonBondsTrader extends Trader{
 			System.out.println( "awakened prematurely" );
 		}
 		
+		// Determine if we've already sold
+		//tradingAPI.requestOpenOrders();
+		//OrderStatus openOrderStatus = tradingAPI.LookForOpenOrder(symbol);
+		
 		// Sell the stocks
 		isSimulation = false;
 		if(simulationOnly == false)

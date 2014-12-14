@@ -1,8 +1,13 @@
 package com.Trading.tradeparsers;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class JasonBondsTradeParser {
+	// Public variables
+	public boolean verbose = true;
+	
 	// Passed parameters
 	private String tradeString;
 	
@@ -30,7 +35,8 @@ public class JasonBondsTradeParser {
 		// If we are given an invalid value, return
 		if(tradeString == null)
 		{
-			System.out.println("Null trade string");
+			if(verbose)
+				System.out.println("Null trade string");
 			return false;
 		}
 		
@@ -46,7 +52,7 @@ public class JasonBondsTradeParser {
 			
 			// Bought 10,000 DMD at $5.19
 			// Added 10,000 CRRS at $3.50
-			if(tokens.length == 5)
+			if(tokens.length >= 5)
 			{
 				parsedAction   = tokens[0];
 				parsedQuantity = tokens[1];
@@ -64,24 +70,8 @@ public class JasonBondsTradeParser {
 					return true;
 			}
 			
-			// Bought DMD
-			if(tokens.length > 1)
-			{
-				parsedAction = tokens[0];
-				parsedSymbol = tokens[1];
-				
-				parsedQuantity = "0";
-				parsedPrice = "0.00";
-				
-				validParameters = areParamatersValid(parsedAction, parsedQuantity, parsedSymbol, parsedPrice);
-
-				// If we successfully parsed the parameters, return true
-				if(validParameters == true)
-					return true;
-			}
-			
 			// Bond Blow Ups bought 5000 ZOOM at 5
-			if( (tokens.length == 8) && tokens[0].equalsIgnoreCase("Bond") && tokens[1].equalsIgnoreCase("Blow") && tokens[2].equalsIgnoreCase("Ups") )
+			if( (tokens.length >= 8) && tokens[0].equalsIgnoreCase("Bond") && tokens[1].equalsIgnoreCase("Blow") && tokens[2].equalsIgnoreCase("Ups") )
 			{
 				parsedAction   = tokens[3];
 				parsedQuantity = tokens[4];
@@ -103,7 +93,7 @@ public class JasonBondsTradeParser {
 			}
 			
 			// Bond Blow Ups bought NQ $13.37
-			if( (tokens.length >= 5) &&  tokens[0].equalsIgnoreCase("Bond") && tokens[1].equalsIgnoreCase("Blow") && tokens[2].equalsIgnoreCase("Ups"))
+			if( (tokens.length >= 5) && tokens[0].equalsIgnoreCase("Bond") && tokens[1].equalsIgnoreCase("Blow") && tokens[2].equalsIgnoreCase("Ups"))
 			{
 				parsedAction = tokens[3];
 				parsedSymbol = tokens[4];
@@ -121,18 +111,38 @@ public class JasonBondsTradeParser {
 				}
 			}
 			
+			// Bought DMD
+			if(tokens.length > 1)
+			{
+				parsedAction = tokens[0];
+				parsedSymbol = tokens[1];
+				
+				parsedQuantity = "0";
+				parsedPrice = "0.00";
+				
+				validParameters = areParamatersValid(parsedAction, parsedQuantity, parsedSymbol, parsedPrice);
+	
+				// If we successfully parsed the parameters, return true
+				if(validParameters == true)
+					return true;
+			}
+			
 			// If everything went well, set up the trade
-			System.out.println("Invalid Parameters - unable to parse " + tokens);
+			if(verbose)
+				System.out.println("Invalid Parameters - unable to parse " + tokens);
 			return false;
 		}catch(Exception e)
 		{
-			e.printStackTrace();
+			if(verbose)
+				e.printStackTrace();
 			return false;
 		}
 	}
 	
 	public boolean areParamatersValid(String parsedAction, String parsedQuantity, String parsedSymbol, String parsedPrice)
 	{	
+		NumberFormat nf = NumberFormat.getInstance(Locale.US); // Looks like a US format
+		
 		try
 		{
 			// If the action is not 'Bought'
@@ -140,46 +150,53 @@ public class JasonBondsTradeParser {
 					&& (parsedAction.equalsIgnoreCase("Added") == false) 
 					&& (parsedAction.equalsIgnoreCase("Taking") == false))
 			{
-				System.out.println("Invalid action, " + parsedAction + " does not match 'Bought' or 'Added'...");
+				if(verbose)
+					System.out.println("Invalid action, " + parsedAction + " does not match 'Bought' or 'Added'...");
 				return false;
 			}
 			
 			// If the totalQuant is not a valid number > 0
-			if(Integer.parseInt(parsedQuantity) < 0)
+			if(nf.parse(parsedQuantity).intValue() < 0)
 			{
-				System.out.println("Invalid quantity, " + parsedQuantity);
+				if(verbose)
+					System.out.println("Invalid quantity, " + parsedQuantity);
 				return false;
 			}
 			
 			// If the symbol is not valid
 			if(parsedSymbol.length() > 10)
 			{
-				System.out.println("Invalid symbol, " + parsedSymbol);
+				if(verbose)
+					System.out.println("Invalid symbol, " + parsedSymbol);
 				return false;
 			}
 			
 			// If the price is unreasonable
 			if(Double.parseDouble(parsedPrice) >= 100)
 			{
-				System.out.println("Invalid Price, " + parsedPrice);
+				if(verbose)
+					System.out.println("Invalid Price, " + parsedPrice);
 				return false;
 			}
+
+			// Update the globals
+			action = parsedAction;
+			quantity = nf.parse(parsedQuantity).intValue();
+			symbol = parsedSymbol;
+			price = parsedPrice;
+		
 		} catch(NumberFormatException e)
 		{
-			e.printStackTrace();
+			if(verbose)
+				e.printStackTrace();
 			return false;
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			if(verbose)
+				e.printStackTrace();
 			return false;
 		}
-		
-		// Update the globals
-		action = parsedAction;
-		quantity = Integer.parseInt(parsedQuantity);
-		symbol = parsedSymbol;
-		price = parsedPrice;
 			
 		// The parameters are valid
 		return true;

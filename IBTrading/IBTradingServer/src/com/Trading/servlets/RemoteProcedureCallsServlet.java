@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -17,9 +16,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-import com.Trading.ib.HistoricalData;
 import com.Trading.ib.HistoricalDataCollector;
 import com.Trading.ib.IBTradingAPI;
+import com.Trading.ib.MarketDepthCollector;
 import com.google.gson.Gson;
 
 /**
@@ -166,6 +165,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		String newTrade 				= request.getParameter("newTrade");
 		String debug 					= request.getParameter("debug");
 		String realTimeSystem 			= request.getParameter("realTimeSystem");
+		String marketDepthSym			= request.getParameter("marketDepthSym");
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
 		Date date = new Date();
@@ -176,7 +176,7 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 		if(debug != null)
 		{
 			System.out.println("Debug called!");
-			(new Thread(new GoogleVoice("This is a text from an asynchronous thread... It worked!  :)"))).start();
+			tradingAPI.requestOpenOrders();
 			
 			return;
 		}
@@ -198,6 +198,18 @@ public class RemoteProcedureCallsServlet extends HttpServlet
 			HistoricalDataCollector dataCollector = new HistoricalDataCollector(tradingAPI);
 			boolean formatData = true;
 			HashMap<String, Object> returnMap = dataCollector.getHistoricalDataOverLast30Minutes(historicalDataSym, historicalDataTimestamp, formatData);
+			out.println(gson.toJson(returnMap));
+			
+			return;
+		}
+		
+		if(marketDepthSym != null)
+		{
+			System.out.println("Market Depth data requested!");
+			
+			Gson gson = new Gson();
+			MarketDepthCollector dataCollector = new MarketDepthCollector(tradingAPI);
+			HashMap<String, Object> returnMap = dataCollector.collectMarketDepthForTenMin(marketDepthSym);
 			out.println(gson.toJson(returnMap));
 			
 			return;

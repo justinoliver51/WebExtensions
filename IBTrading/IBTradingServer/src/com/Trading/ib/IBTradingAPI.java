@@ -39,12 +39,15 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	private static HashMap<String,OrderStatus> orderStatusHashMap = new HashMap<String,OrderStatus>();
 	private static HashMap<Integer,HashMap<String,Object>> marketDataHashMap = new HashMap<Integer,HashMap<String,Object>>();
 	private static HashMap<Integer,ArrayList<HistoricalData>> historicalDataHashMap = new HashMap<Integer,ArrayList<HistoricalData>>();
+	private static HashMap<Integer,ArrayList<MarketDepthRow>> marketDepthHashMap = new HashMap<Integer,ArrayList<MarketDepthRow>>();
 	private static HashMap<Integer,HashMap<String,Object>> databaseHashMap = new HashMap<Integer,HashMap<String,Object>>();
 	private static HashMap<Integer,Boolean> finishedLoadingHistoricalData = new HashMap<Integer,Boolean>();
 	private static double totalCash = 0;
 	private static double totalCashSimulation = 0;
 	private static int dayTradesRemaining = -1;
 	private static boolean purchasingFlag = false;
+	private static ArrayList<IBError> errorsArray = new ArrayList<IBError>();
+	private static boolean errorFlag = false;
 	
 	// CONSTANT STRINGS
 	// Location of orderID.txt
@@ -346,34 +349,6 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	*/
     }
     
-    public synchronized int subscribeToMarketData(String symbol)
-    {
-    	Contract contract = new Contract();
-    	String genericTicklist = null;//"225";//null;
-    	boolean snapshot = true;//false;
-    	
-    	// Set up the contract
-    	setDefaultsContract(contract);
-    	contract.m_symbol = symbol;
-    	
-    	// Ensure we are connect to TWS
-    	connect();
-        if(m_client.isConnected() == false)
-        {
-        	System.out.println("Unable to connect to TWS...");
-        	return -1;
-        }
-    	
-    	// Request the market data
-    	m_client.reqMktData(tickerID, contract, genericTicklist, snapshot);
-    	
-    	// Add a new hash map to market data for this stock
-    	marketDataHashMap.put(tickerID, new HashMap<String,Object>());
-    	
-    	return tickerID++;
-    }
-    
-    // 
     public synchronized int subscribeToHistoricalData(String symbol, String endDateTime, String durationStr, String barSizeSetting, String whatToShow)
     {
     	Contract contract = new Contract();
@@ -404,12 +379,85 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	return tickerID++;
     }
     
+    public synchronized int subscribeToMarketData(String symbol)
+    {
+    	Contract contract 		= new Contract();
+    	String genericTicklist 	= null;
+    	boolean snapshot 		= true;
+    	
+    	// Set up the contract
+    	setDefaultsContract(contract);
+    	contract.m_symbol 		= symbol;
+    	
+    	// Ensure we are connect to TWS
+    	connect();
+        if(m_client.isConnected() == false)
+        {
+        	System.out.println("Unable to connect to TWS...");
+        	return -1;
+        }
+    	
+    	// Request the market data
+    	m_client.reqMktData(tickerID, contract, genericTicklist, snapshot);
+    	
+    	// Add a new hash map to market data for this stock
+    	marketDataHashMap.put(tickerID, new HashMap<String,Object>());
+    	
+    	return tickerID++;
+    }
+    
+    public synchronized int subscribeToMarketDepth(String symbol, int numRows)
+    {
+    	Contract contract 		= new Contract();
+    	setDefaultsContract(contract);
+    	contract.m_symbol 		= symbol;
+    	contract.m_primaryExch  = "";
+    	contract.m_exchange		= "ISLAND";
+    	
+    	System.out.println(EWrapperMsgGenerator.contractMsg(contract));
+    	
+    	// Request the market depth
+    	m_client.reqMktDepth(tickerID, contract, numRows);
+    	
+    	// Add a new hash map to market depth for this stock
+    	marketDepthHashMap.put(tickerID, new ArrayList<MarketDepthRow>());
+    	
+    	return tickerID++;
+    }
+        
+    public boolean errorOccurred()
+    {	
+    	return errorFlag;
+    }
+    
     public double getAvailableFunds(boolean isSimulation)
     {
     	if(isSimulation)
     		return totalCashSimulation;
     	else
     		return totalCash;
+    }
+    
+    public synchronized ArrayList<IBError> getErrors()
+    {
+    	if(errorFlag == true)
+    	{
+    		ArrayList<IBError> errors = new ArrayList<IBError>();
+    		
+    		// Deep copy of errors
+    		for(IBError error : errorsArray) 
+    		{
+    			errors.add(error.clone());
+    		}
+    		
+    		// Acknowledge error and remove elements
+    		errorFlag = false;
+    		errorsArray.clear();
+    		
+    		return errors;
+    	}
+    	
+    	return null;
     }
     
     public int getNumberOfDayTrades()
@@ -438,6 +486,19 @@ public class IBTradingAPI extends JFrame implements EWrapper
     		return historicalDataHashMap.get(tickerId);
     }
     
+    public ArrayList<MarketDepthRow> getMarketDepth(int tickerId)
+    {	
+    	if(marketDepthHashMap.get(tickerId) == null)
+    		return null;
+    	else
+    		return marketDepthHashMap.get(tickerId);
+    }
+    
+    public void getOpenOrders()
+    {
+    	return;
+    }
+    
     public HashMap<String,Object> initializeTradeInfo(int orderID)
     {
     	HashMap<String,Object> tradeInfo = databaseHashMap.get(orderID);
@@ -460,6 +521,11 @@ public class IBTradingAPI extends JFrame implements EWrapper
     	return purchasingFlag;
     }
     
+    public void requestOpenOrders()
+    {
+    	m_client.reqAllOpenOrders();
+    }
+    
 	@Override
 	public void error(Exception e) 
 	{
@@ -478,6 +544,8 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	public void error(int id, int errorCode, String errorMsg) 
 	{
 		System.out.println(EWrapperMsgGenerator.error(id, errorCode, errorMsg));
+		errorFlag = true;
+		errorsArray.add(new IBError(id, errorCode, errorMsg));
 	}
 
 	@Override
@@ -665,7 +733,7 @@ public class IBTradingAPI extends JFrame implements EWrapper
 	@Override
 	public void openOrder(int orderId, Contract contract, Order order,
 			OrderState orderState) {
-		//System.out.println(EWrapperMsgGenerator.openOrder(orderId, contract, order, orderState));
+		System.out.println(EWrapperMsgGenerator.openOrder(orderId, contract, order, orderState));
 	}
 
 	@Override
@@ -778,6 +846,20 @@ public class IBTradingAPI extends JFrame implements EWrapper
 		// TODO Auto-generated method stub
 		System.out.println("updateMktDepth " + EWrapperMsgGenerator.updateMktDepth(tickerId, position, operation, side, price, size));
 		// At this time, what is the price going for, 2 numbers
+		
+		/*
+		ArrayList<HistoricalData> historicalDataArray = historicalDataHashMap.get(reqId);
+		
+		// If this is the last entry and null, return
+		if(WAP == -1.0)
+		{
+			finishedLoadingHistoricalData.put(reqId, true);
+			return;
+		}
+		else
+		{
+			historicalDataArray.add(new HistoricalData(reqId, date, open, high, low, close, volume, count, WAP, hasGaps));
+		}*/
 	}
 
 	@Override
