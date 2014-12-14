@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1%0 - - [09/May/2014:08:54:26 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+PLUG+at+3.85 HTTP/1.1" 500 1534
+0:0:0:0:0:0:0:1%0 - - [09/May/2014:08:54:29 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+10000+PLUG+at+3.85 HTTP/1.1" 200 154
+58.221.64.51 - - [09/May/2014:13:11:13 -0500] "GET /fastenv HTTP/1.1" 404 965
+68.184.44.226 - - [09/May/2014:13:18:43 -0500] "GET /HNAP1/ HTTP/1.1" 404 963
+121.101.210.102 - - [09/May/2014:13:38:30 -0500] "GET /manager/html HTTP/1.1" 404 975
+183.60.48.25 - - [09/May/2014:13:39:15 -0500] "GET / HTTP/1.1" 404 951

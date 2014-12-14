@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1%0 - - [02/May/2014:08:50:50 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?realTimeSystem=email&traderID=Jason&newTrade=Bought+7000+LIVE+at+4.67 HTTP/1.1" 200 251
+71.6.165.200 - - [02/May/2014:12:55:10 -0500] "GET / HTTP/1.1" 404 951
+71.6.165.200 - - [02/May/2014:12:55:10 -0500] "GET /robots.txt HTTP/1.1" 404 971
+58.221.64.51 - - [02/May/2014:18:46:52 -0500] "GET /fastenv HTTP/1.1" 404 965

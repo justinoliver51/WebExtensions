@@ -1,0 +1,2 @@
+127.0.0.1 - - [04/May/2014:22:33:59 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1%0 - - [04/May/2014:22:36:17 -0500] "GET /IBTradingServer/RemoteProcedureCallsServlet?startUp=true HTTP/1.1" 200 19
